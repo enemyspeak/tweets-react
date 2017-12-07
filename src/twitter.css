@@ -107,7 +107,6 @@ html {
         opacity: 0; }
   .twitter-app .view-header-label {
     text-align: center;
-    width: 100%;
     display: block;
     padding: 7px 0 7px 7px;
     border-bottom: 1px solid #424242;
@@ -152,7 +151,9 @@ html {
     border-bottom: 1px solid #424242; }
   .twitter-app .tweet-text {
     margin-top: 2px;
-    display: block; }
+    display: block;
+    left: 60px;
+    position: relative; }
   .twitter-app .user-link, .twitter-app .link {
     color: #4FC3F7;
     cursor: pointer;
@@ -183,7 +184,9 @@ html {
     .twitter-app .tweet-user span {
       vertical-align: bottom;
       display: inline-block;
-      height: 16px; }
+      height: 16px;
+      left: 60px;
+      position: relative; }
     .twitter-app .tweet-user svg {
       width: 14px;
       height: 14px;

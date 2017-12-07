@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
 import './twitter.css';
 
-function Avatar(user) {
+function Avatar(props) {
 	return (
 		<img className="Avatar"
-  			src={user.profile_image_url_https}
-  			alt={user.screen_name}
+  			src={props.user.profile_image_url_https}
+  			alt={props.user.screen_name}
 		/>
 	);
 }
 
  
-function UserInfo(user){
+function UserInfo(props){
+	console.log(props);
 	return(
 		<div className="tweet-user">
 			<div className="user-avatar">
-		        <Avatar user={user} />
+		        <Avatar user={props.user} />
 		    </div>
 
-			<span className="name">{user.name}</span>
-			<span className="screenName">@{user.screen_name}</span>
+			<span className="name">{props.user.name}</span>
+			<span className="screenName">@{props.user.screen_name}</span>
 			<div className="status-contain">
 				<span className="favorited">
 					favorited icon
 				</span>
 				<span className="retweeted">
 					retweeted icon
-				</span>
+				</span> 
 			</div>
 			
 		</div>
