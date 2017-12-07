@@ -4,10 +4,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './twitter.css';
 
-// import App from './App';
-import Timeline from './timeline'
+import Root from './root';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<Timeline />, document.getElementById('root'));
+ReactDOM.render(<Root />, document.getElementById('root'));
 
 registerServiceWorker();

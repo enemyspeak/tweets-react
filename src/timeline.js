@@ -3,13 +3,21 @@ import Tweet from './tweet'
 import './twitter.css';
 
 class Timeline extends Component {
+	constructor(props) {
+    	super(props);
+
+    	this.state = {selectedTweet: false};
+    }
+    setSelectedTweet(id,e) {
+    	console.log(id);
+    	this.setState({selectedTweet:id});
+    }
 	renderTweet(props){
-	    return <Tweet data={props} />;
+		return <Tweet data={props} onClick={()=>this.setSelectedTweet(props.data.id_str)} />;
 	}
 	render() {
 		return (
 		    <div className="twitter-app">
-
 	        	<div className="view-header-label">Timeline</div>
 	        	<div className="timeline-contain">
 	        		{this.renderTweet(data[0])}

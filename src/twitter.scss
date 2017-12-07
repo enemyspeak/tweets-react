@@ -5,10 +5,42 @@ html{
     background: $black80
 }
 
-.twitter-app {
-    width: 100%;
-    height: 100%;
+.HeaderRow {
+    text-align: center;
+    display: block;
+    padding: 7px 0 7px 7px;
+    border-bottom: 1px solid #424242;
+    color: #fff; 
+    font-size: 22px;
+    height: 36px;
+    line-height: 36px;
+}
+.nagivation{
+    height: calc( 100% - 51px );
+    position: absolute;
+    left: 0px;
+    width: 60px;
+    border-right: 1px solid $gray28;
+    top: 51px;
+    .navigation-item  {
+        width: 60px;
+        height: 60px;
+        text-align: center;
 
+        &.active {
+            background: $gray28;
+        }
+    }   
+}
+
+.twitter-app {
+    /* position: absolute; */  
+    left: 60px;
+    /* top: 51px; */
+    width: calc( 100% - 60px);
+    height: 100%;
+    display: block;
+    position: relative;
     @include webkitScrollbar();
     &.small {
         .event-filter{
