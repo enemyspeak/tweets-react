@@ -1,7 +1,15 @@
-@import "../../../public/css/scss/mixins";
-@import "../../../public/css/scss/colors";
+@import "./mixins.scss";
+@import "./colors.scss";
+
+html{
+    background: $black80
+}
 
 .twitter-app {
+    width: 100%;
+    height: 100%;
+
+
     @include webkitScrollbar();
     &.small {
         .event-filter{
@@ -113,6 +121,7 @@
         display: block;
         padding:7px 0 7px 7px;
         border-bottom:1px solid $gray28;
+        color: $white;
     }
 
     .app-views-contain {
@@ -138,6 +147,7 @@
     .timeline-contain {
         width: 100%;
         height: calc( 100% - 30px );
+        color: $white;
     }
 
     .tweet-contain {
@@ -160,10 +170,10 @@
 
     .tweet-body {
         position: relative;
-        left: 60px;
+        left: 0px;// 60px;
         padding: 10px 10px 10px 0px;
         min-height: 60px;
-        width: calc( 100% - 60px );
+        width: 100%;//calc( 100% - 60px );
         border-bottom: 1px solid $gray28;
     }
     .tweet-text {
