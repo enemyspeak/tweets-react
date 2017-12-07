@@ -1,0 +1,85 @@
+<div class="tweet-contain" data-id="{{id}}" data-userid="{{user.id}}">
+	<div class="user-avatar">
+		<img src="{{user.profile_image_url_https}}">
+	</div>
+	<div class="tweet-body">
+		<div class="tweet-user">
+			<span class="name">{{user.name}}</span>
+			<span class="screenName">@{{user.screen_name}}</span>
+			<div class="status-contain">
+				<span class="favorited {{#unless favorited}}hidden{{/unless}}">
+					<svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-like"></use></svg>
+				</span>
+				<span class="retweeted {{#unless retweeted}}hidden{{/unless}}">
+					<svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-retweet"></use></svg>
+				</span>
+			</div>
+			<span class="tweet-date">{{relativeTime}}</span>
+		</div>
+
+		<span class="tweet-text">{{escapeHtml text}}</span>
+
+		{{#if quoted_status}}
+			<div class="quoted-tweet" data-id="{{quoted_status.id}}" data-userid="{{quoted_status.user.id}}">
+				<div class="quoted-user-avatar">
+					<img src="{{quoted_status.user.profile_image_url_https}}">
+				</div>
+				<div class="quoted-tweet-body">
+					<div class="tweet-user" ">
+						<span class="name">{{quoted_status.user.name}}</span>
+						<span class="screenName">@{{quoted_status.user.screen_name}}</span>
+						<span class="tweet-date">{{quoted_status.relativeTime}}</span>
+					</div>
+					<span class="tweet-text">{{escapeHtml quoted_status.text}}</span>
+
+					{{#if quoted_status.entities.media}} <!-- this is images -->
+						<div class="media-contain">
+						{{#each quoted_status.entities.media}} 
+							<div class="media-box image{{@index}}">
+								<img src="{{this.media_url_https}}:thumb">	
+							</div>
+						{{/each}}
+						</div>
+					{{/if}}
+				</div>
+			</div>
+		{{/if}}
+
+		{{#if entities.media}} <!-- this is images -->
+			<div class="media-contain">
+			{{#each entities.media}} 
+				<div class="media-box image{{@index}}">
+					<img src="{{this.media_url_https}}:small">	
+				</div>
+			{{/each}}
+			</div>
+		{{/if}}
+
+		{{#if originalUser}} <!-- this is a retweet -->
+			<div class="show-retweet" data-userid="{{originalUser.id}}">
+				<span>
+					<svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-retweet"></use></svg>
+				</span>
+				<div class="retweet-user-avatar">
+					<img src="{{originalUser.profile_image_url_https}}">
+				</div>
+				<span>{{originalUser.name}}</span>
+			</div>
+		{{/if}}
+	</div>
+
+	<div class="tweet-controls">
+		<span class="{{#if replied}}active{{/if}}" data-action="reply">
+			<svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-reply"></use></svg>
+		</span>
+		<span class="{{#if favorited}}active{{/if}}" data-action="favorite">
+			<svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-like"></use></svg>
+		</span>
+		<span class="{{#if retweeted}}active{{/if}}" data-action="retweet">
+			<svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-retweet"></use></svg>
+		</span>
+		<span data-action="details">
+			<svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-details"></use></svg>
+		</span>
+	</div>
+</div>

@@ -1,0 +1,79 @@
+<div class="content-wrapper">
+	<div class="twitter-login">
+	    <div>
+	        <span>Welcome to the Twitter app</span>
+	        <p>To use this feature of Level Trading Field, please connect a twitter account.</p>
+	        <button><div class="dataLoader connectLoader inactive"></div>Connect Account</button>   
+            <p class="popupMessage hidden">Make sure to allow popup windows.</p>
+	    </div>
+	</div>
+
+    <div class="app-views-contain">
+        <div class="app-view timeline-view active">
+	            <div class="view-header-label">Timeline</div>
+
+	            <div class="dataLoader"></div>
+
+        	<div class="timeline-contain">
+        		<div class="tweets-contain">
+        			<!-- streaming tweets here -->
+        		</div>
+        	</div>
+
+        </div>
+        <div class="app-view details-view">
+	            <div class="view-header-label">Detail</div>
+
+            <div class="dataLoader"></div>
+
+            <div class="detail-contain">
+            	<!-- tweet detail here -->
+            </div>
+        </div>
+        <div class="app-view activity-view">
+	            <div class="view-header-label">Activity</div>
+
+            <div class="dataLoader"></div>
+
+            <div class="activity-contain">
+            	<!-- twitter activity here -->
+            </div>
+        </div>
+        <div class="app-view search-view">
+	            <div class="view-header-label">Search</div>
+
+			<input type="text" class="search-input" name="search" maxlength="40" placeholder="Search">
+
+	            <div class="search-filters">
+	            	<div class="radio-button-contain active" data-value="tweets">
+					<span class="radio-circle"></span>
+					<span class="radio-text">Search Tweets</span>
+				</div>
+				<div class="radio-button-contain" data-value="users">
+					<span class="radio-circle"></span>
+					<span class="radio-text">Search Users</span>
+				</div>
+	            </div>
+
+            <div class="dataLoader inactive"></div>
+
+	            <div class="search-contain">
+	            	<!-- search results here -->
+	            </div>
+        </div>
+        <div class="app-view profile-view">
+	            <div class="profile-label view-header-label">Profile</div>
+            <div class="dataLoader"></div>
+
+	            <div class="profile-contain">
+	            	<!-- profile here -->
+	            </div>
+        </div>
+    </div>
+    <div class="navigation-buttons">
+    	<div class="button-scale-effect">Timeline</div>
+    	<div class="button-scale-effect">Activity</div>
+    	<div class="button-scale-effect">Search</div>
+    	<div class="button-scale-effect">Profile</div>
+    </div>
+</div>
