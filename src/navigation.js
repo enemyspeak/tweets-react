@@ -22,7 +22,7 @@ class Navigation extends Component {
 	        	<nav>
     		        {navItems.map(obj => {
 			          	return (
-			            	<div className={"navigation-item " + (this.state.selectedTab == obj ? 'active' : '')} id={obj} onClick={(e) => this.handleClick(obj, e)}>
+			            	<div className={"navigation-item " + (this.state.selectedTab === obj ? 'active' : '')} id={obj} onClick={(e) => this.handleClick(obj, e)}>
 				            	<div className="icon-contain">
 				            		icon
 				              	</div>

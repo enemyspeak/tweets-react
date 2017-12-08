@@ -8,12 +8,18 @@ class Timeline extends Component {
 
     	this.state = {selectedTweet: false};
     }
-    setSelectedTweet(id,e) {
+    setSelectedTweet(id) {
     	console.log(id);
     	this.setState({selectedTweet:id});
     }
 	renderTweet(props){
-		return <Tweet data={props} onClick={()=>this.setSelectedTweet(props.data.id_str)} />;
+		console.log(props);
+		props.selected = ( props.id_str === this.state.selectedTweet ? 'selected' : '' );
+		return <Tweet 
+			data={props} 
+			onClick={()=>this.setSelectedTweet(props.id_str)} 
+		/>;
+									//onClick={(e) => this.handleClick(obj, e)}
 	}
 	render() {
 		return (

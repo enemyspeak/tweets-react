@@ -131,7 +131,7 @@ class Tweet extends Component {
 		console.log(this.props.data);
 		console.log(this.props.data.user);
 		return (
-			<div className="tweet-contain" id={this.props.data.id_str} userid={this.props.data.user.id_str}>
+			<div className={"tweet-contain " + this.props.data.selected} id={this.props.data.id_str} userid={this.props.data.user.id_str} onClick={() => this.props.onClick()}>
 				<div className="tweet-body">
 				    <UserInfo user={this.props.data.user} />
 					<span className="tweet-text">{this.props.data.text}</span>
