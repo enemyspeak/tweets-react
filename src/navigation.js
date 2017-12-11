@@ -25,17 +25,12 @@ const navItems = [
 	}
 ]; // ok
 
-
 class Navigation extends Component {
 	constructor(props) {
     	super(props);
     }
 	handleClick(obj,e) {
-		console.log(obj);
-		console.log('this is:', this);
-		// this.setState({
-		// 	selectedTab: obj
-		// });				
+		this.props.handleClick(obj);
 	}
 	render() {
 		return (

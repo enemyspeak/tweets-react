@@ -1,43 +1,19 @@
 import React, { Component } from 'react';
 
-// import Navigation from './navigation'
+import Navigation from './navigation'
 import Timeline from './timeline'
 import Mentions from './mentions' // do we even need another class for this?
 import Profile from './profile'
 import DirectMessages from './directMessages'
 import Search from './search'
 
-const navItems = [  
-	{
-	"name": "timeline",
-	"icon":"fi-home"
-	},
-	{
-	"name": "mentions",
-	"icon":"fi-comment"
-	},
-	{
-	"name": "direct-messages",
-	"icon":"fi-mail"
-	},
-	{
-	"name": "search",
-	"icon":"fi-magnifying-glass"
-	},
-	{
-	"name": "profile",
-	"icon":"fi-torso"
-	}
-];
-
 class Root extends Component {
 	constructor(props) {
     	super(props);
     	this.state = {selectedTab: 'timeline'};
+	    this.handleClick = this.handleClick.bind(this);
     }
 	handleClick(obj,e) {
-		// console.log(obj);
-		// console.log('this is:', this);
 		this.setState({
 			selectedTab: obj
 		});				
@@ -50,15 +26,7 @@ class Root extends Component {
 				</div>
 				<div className="navigation-contain">
 				    <div className="nagivation">
-			        	<nav>
-		    		        {navItems.map(obj => {
-					          	return (
-					            	<div alt={obj.name} className={"navigation-item " + (this.state.selectedTab === obj.name ? 'active' : '')} key={obj.name} id={obj.name} onClick={(e) => this.handleClick(obj.name, e)}>
-						            	<div className={"icon-contain " + obj.icon}></div>
-									</div>
-					          	);
-					        })}
-			        	</nav>
+			        	<Navigation handleClick={this.handleClick} selectedTab={this.state.selectedTab} />
 			        </div>
 				</div>
 				<div className="app-contain">
