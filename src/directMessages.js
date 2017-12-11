@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Tweet from './tweet'
 
-class Timeline extends Component {
+class DirectMessages extends Component {
 	constructor(props) {
     	super(props);
 
@@ -22,8 +22,8 @@ class Timeline extends Component {
 	}
 	render() {
 		return (
-		    <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
-	        	<div className="view-header-label">Timeline</div>
+        <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
+	        	<div className="view-header-label">Direct Messages</div>
 	        	<div className="timeline-contain">
 	        		{this.renderTweet(data[0])}
 	        		{this.renderTweet(data[1])}
@@ -33,7 +33,7 @@ class Timeline extends Component {
 	}
 }
 
-export default Timeline;
+export default DirectMessages;
 
 var data =  [
   {

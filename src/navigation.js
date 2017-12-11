@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
 // import Tweet from './tweet'
-import './twitter.css';
+// import './twitter.css';
 
 const navItems = [  
 	{
-	"name": "Timeline",
+	"name": "timeline",
 	"icon":"fi-home"
 	},
 	{
-	"name": "Mentions",
+	"name": "mentions",
 	"icon":"fi-comment"
 	},
 	{
-	"name": "Direct Messages",
+	"name": "direct-messages",
 	"icon":"fi-mail"
 	},
 	{
-	"name": "Search",
+	"name": "search",
 	"icon":"fi-magnifying-glass"
 	},
 	{
-	"name": "Profile",
+	"name": "profile",
 	"icon":"fi-torso"
 	}
 ]; // ok
@@ -29,14 +29,13 @@ const navItems = [
 class Navigation extends Component {
 	constructor(props) {
     	super(props);
-    	this.state = {selectedTab: 'Timeline'};
     }
 	handleClick(obj,e) {
 		console.log(obj);
-		// console.log('this is:', this);
-		this.setState({
-			selectedTab: obj
-		});				
+		console.log('this is:', this);
+		// this.setState({
+		// 	selectedTab: obj
+		// });				
 	}
 	render() {
 		return (
@@ -44,7 +43,7 @@ class Navigation extends Component {
 	        	<nav>
     		        {navItems.map(obj => {
 			          	return (
-			            	<div alt={obj.name} className={"navigation-item " + (this.state.selectedTab === obj.name ? 'active' : '')} key={obj.name} id={obj.name} onClick={(e) => this.handleClick(obj.name, e)}>
+			            	<div alt={obj.name} className={"navigation-item " + (this.props.selectedTab === obj.name ? 'active' : '')} key={obj.name} id={obj.name} onClick={(e) => this.handleClick(obj.name, e)}>
 				            	<div className={"icon-contain " + obj.icon}></div>
 							</div>
 			          	);

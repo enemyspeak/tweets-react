@@ -13,12 +13,12 @@
 html {
   background: rgba(0, 0, 0, 0.8); }
 
-body {
-  margin: 0;
-  padding: 0;
+#root {
+  width: 100%;
+  height: 100%;
   font-family: sans-serif; }
 
-.HeaderRow {
+.header-row {
   text-align: center;
   display: block;
   padding: 7px 0 7px 7px;
@@ -49,14 +49,19 @@ body {
     font-size: 32px;
     box-sizing: border-box; }
 
-.twitter-app {
-  /* position: absolute; */
+.app-contain {
+  position: relative;
   left: 60px;
-  /* top: 51px; */
   width: calc( 100% - 60px);
-  height: 100%;
+  height: 100%; }
+
+.twitter-app {
+  position: absolute;
+  top: 0px;
+  left: 0px;
   display: block;
-  position: relative; }
+  width: 100%;
+  height: 100%; }
   .twitter-app ::-webkit-scrollbar {
     width: 10px; }
   .twitter-app ::-webkit-scrollbar:horizontal {
@@ -73,20 +78,8 @@ body {
     background-color: #aaa; }
   .twitter-app ::-webkit-scrollbar-corner {
     background: #eaeaea; }
-  .twitter-app.small .event-filter {
-    display: block;
-    width: calc(100% - 20px); }
-  .twitter-app.large .event-filter {
-    display: block;
-    width: calc(100% / 3 - 20px); }
-  .twitter-app.window_full .ui-resizable-handle {
-    visibility: hidden; }
-  .twitter-app.window_full .window_content {
-    background: rgba(0, 0, 0, 0.8);
-    bottom: 2px;
-    width: 100%; }
-  .twitter-app.window_full .window-top {
-    background: linear-gradient(to right, #03a9f4 0%, rgba(0, 0, 0, 0.6) 100%); }
+  .twitter-app.inactive {
+    display: none; }
   .twitter-app .dataLoader {
     position: absolute;
     top: 40%; }
@@ -189,13 +182,13 @@ body {
     left: 0px;
     padding: 10px 10px 10px 0px;
     min-height: 60px;
-    width: 100%;
     border-bottom: 1px solid #424242; }
   .twitter-app .tweet-text {
     margin-top: 2px;
     display: block;
     left: 60px;
-    position: relative; }
+    position: relative;
+    width: calc( 100% - 60px); }
   .twitter-app .user-link, .twitter-app .link {
     color: #4FC3F7;
     cursor: pointer;
