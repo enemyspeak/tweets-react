@@ -20,18 +20,16 @@ function UserInfo(props){
 
 			<span className="name">{props.user.name}</span>
 			<span className="screenName">@{props.user.screen_name}</span>
+
 			<div className="status-contain">
-				<span className="favorited">
-					favorited icon
-				</span>
-				<span className="retweeted">
-					retweeted icon
-				</span> 
+				<div className="fi-star"></div>
+				<div className="fi-quote"></div>
 			</div>
-			
+
+			<span className="tweet-date">relativeTime</span>
 		</div>
 	);
-}// <span className="tweet-date">{relativeTime}</span>
+}
 
 function OiginalUser(props) { // this is a retweet
 	return (
@@ -97,16 +95,16 @@ class TweetControls extends Component {
 		return (
 			<div className="tweet-controls">
 				<button className="reply" onClick={this.handleClick}>
-					reply
+					<div className="fi-comment"></div>
 				</button>
 				<button className="favorite" onClick={this.handleClick}>
-					favorite
+					<div className="fi-star"></div>
 				</button>
 				<button className="retweet" onClick={this.handleClick}>
-					retweet
+					<div className="fi-star"></div>
 				</button>
 				<button className="details" onClick={this.handleClick}>
-					details
+					<div className="fi-magnifying-glass"></div>
 				</button>
 			</div>
 		)

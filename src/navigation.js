@@ -2,7 +2,29 @@ import React, { Component } from 'react';
 // import Tweet from './tweet'
 import './twitter.css';
 
-const navItems = [ "Timeline","Mentions","Direct Messages","Search","Profile" ]
+const navItems = [  
+	{
+	"name": "Timeline",
+	"icon":"fi-home"
+	},
+	{
+	"name": "Mentions",
+	"icon":"fi-comment"
+	},
+	{
+	"name": "Direct Messages",
+	"icon":"fi-mail"
+	},
+	{
+	"name": "Search",
+	"icon":"fi-magnifying-glass"
+	},
+	{
+	"name": "Profile",
+	"icon":"fi-torso"
+	}
+]; // ok
+
 
 class Navigation extends Component {
 	constructor(props) {
@@ -14,7 +36,7 @@ class Navigation extends Component {
 		// console.log('this is:', this);
 		this.setState({
 			selectedTab: obj
-		});
+		});				
 	}
 	render() {
 		return (
@@ -22,10 +44,8 @@ class Navigation extends Component {
 	        	<nav>
     		        {navItems.map(obj => {
 			          	return (
-			            	<div className={"navigation-item " + (this.state.selectedTab === obj ? 'active' : '')} id={obj} onClick={(e) => this.handleClick(obj, e)}>
-				            	<div className="icon-contain">
-				            		icon
-				              	</div>
+			            	<div alt={obj.name} className={"navigation-item " + (this.state.selectedTab === obj.name ? 'active' : '')} key={obj.name} id={obj.name} onClick={(e) => this.handleClick(obj.name, e)}>
+				            	<div className={"icon-contain " + obj.icon}></div>
 							</div>
 			          	);
 			        })}
@@ -34,5 +54,8 @@ class Navigation extends Component {
         ); // <div className="unread"></div>
 	}
 }
-
+	
 export default Navigation;
+
+
+
