@@ -5,9 +5,8 @@ import './reset.css';
 import './foundation-icons.css';
 import './twitter.css';
 
-import Root from './root';
 import registerServiceWorker from './registerServiceWorker';
+import Root from './root';
 
 ReactDOM.render(<Root />, document.getElementById('root'));
-
 registerServiceWorker();

@@ -9,7 +9,7 @@ const navItems = [
 	},
 	{
 	"name": "mentions",
-	"icon":"fi-comment"
+	"icon":"fi-at-sign"
 	},
 	{
 	"name": "direct-messages",
@@ -26,9 +26,6 @@ const navItems = [
 ]; // ok
 
 class Navigation extends Component {
-	constructor(props) {
-    	super(props);
-    }
 	handleClick(obj,e) {
 		this.props.handleClick(obj);
 	}

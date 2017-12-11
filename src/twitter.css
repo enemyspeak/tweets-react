@@ -28,6 +28,29 @@ html {
   height: 36px;
   line-height: 36px; }
 
+.compose-tweet {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  display: block;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: #aaa;
+  transition: color 0.3s ease;
+  z-index: 2;
+  border-left: 1px solid #424242; }
+  .compose-tweet:hover {
+    color: #fff; }
+  .compose-tweet .fi-pencil {
+    width: 100%;
+    height: 100%;
+    font-size: 32px;
+    top: 8px;
+    position: relative;
+    font-size: 32px;
+    box-sizing: border-box; }
+
 .nagivation {
   height: calc( 100% - 51px);
   position: absolute;
@@ -172,10 +195,13 @@ html {
       .twitter-app .tweet-contain.borderFix .tweet-body {
         border-bottom: none; }
     .twitter-app .tweet-contain.selected, .twitter-app .tweet-contain:hover {
-      background: #000; }
+      background: #303030; }
       .twitter-app .tweet-contain.selected .tweet-controls, .twitter-app .tweet-contain:hover .tweet-controls {
         pointer-events: initial;
         opacity: 1; }
+      .twitter-app .tweet-contain.selected .status-contain, .twitter-app .tweet-contain:hover .status-contain {
+        opacity: 0;
+        pointer-events: none; }
   .twitter-app .tweet-body {
     position: relative;
     left: 0px;
@@ -234,22 +260,40 @@ html {
       color: #AFAFAF;
       top: 1px;
       position: relative; }
-    .twitter-app .tweet-user .tweet-date {
-      font-size: 14px;
-      position: absolute;
-      right: 0px;
-      color: #AFAFAF; }
-    .twitter-app .tweet-user .status-contain {
-      position: absolute;
-      right: 20px;
-      top: 0px; }
-      .twitter-app .tweet-user .status-contain .retweeted {
-        margin-left: 5px;
-        color: #03A9F4; }
-        .twitter-app .tweet-user .status-contain .retweeted.hidden {
-          margin-left: 0px; }
-      .twitter-app .tweet-user .status-contain .favorited {
-        color: #03A9F4; }
+  .twitter-app .status-contain {
+    position: absolute;
+    right: 50px;
+    top: 0px;
+    width: 120px;
+    text-align: right;
+    transition: opacity 0.3s ease; }
+    .twitter-app .status-contain div {
+      border: transparent;
+      background: transparent;
+      float: right;
+      width: calc( (100% / 2) - 30px);
+      text-align: center;
+      height: 100%;
+      line-height: 30px;
+      cursor: pointer;
+      position: relative;
+      color: #b1b1b1; }
+    .twitter-app .status-contain .fi-quote {
+      color: #8BC34A; }
+    .twitter-app .status-contain .fi-star {
+      color: #FFC107; }
+  .twitter-app .tweet-date {
+    position: relative;
+    float: right;
+    right: 5px;
+    top: 0px;
+    width: 50px;
+    text-align: right;
+    transition: opacity 0.3s ease;
+    font-size: 14px;
+    color: #AFAFAF;
+    height: 30px;
+    line-height: 30px; }
   .twitter-app .media-contain {
     margin-top: 10px; }
     .twitter-app .media-contain .media-box {
@@ -318,32 +362,29 @@ html {
       width: 100%;
       height: 100%; }
   .twitter-app .tweet-controls {
-    background: #424242;
     overflow: hidden;
     transition: opacity 0.3s ease;
     position: absolute;
     top: 0px;
-    right: 0px;
+    right: 10px;
     pointer-events: none;
-    opacity: 0; }
-    .twitter-app .tweet-controls span {
+    opacity: 0;
+    padding-top: 10px;
+    background: transparent; }
+    .twitter-app .tweet-controls button {
+      border: transparent;
+      background: transparent;
       float: left;
       width: calc( 100% / 4);
       text-align: center;
       height: 100%;
       line-height: 30px;
       cursor: pointer;
-      position: relative; }
-      .twitter-app .tweet-controls span:hover svg, .twitter-app .tweet-controls span.active svg {
-        color: #03A9F4; }
-      .twitter-app .tweet-controls span svg {
-        transition: color 0.3s ease;
-        color: #fff;
-        height: 14px;
-        width: 14px;
-        position: absolute;
-        left: calc( 50% - 14px);
-        top: 8px; }
+      position: relative;
+      color: #b1b1b1;
+      transition: color 0.3s ease; }
+      .twitter-app .tweet-controls button:hover, .twitter-app .tweet-controls button.active {
+        color: #fff; }
   .twitter-app .profile-contain {
     position: relative;
     height: calc( 100% - 30px);

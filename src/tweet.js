@@ -19,13 +19,6 @@ function UserInfo(props){
 
 			<span className="name">{props.user.name}</span>
 			<span className="screenName">@{props.user.screen_name}</span>
-
-			<div className="status-contain">
-				<div className="fi-star"></div>
-				<div className="fi-quote"></div>
-			</div>
-
-			<span className="tweet-date">relativeTime</span>
 		</div>
 	);
 }
@@ -76,6 +69,54 @@ function QuotedStatus(user) {
 	// 	</div>
 	// );
 }
+
+class RelativeTime extends Component {
+	relativeTime() {
+		// console.log(this.props);
+		let time = this.props.created_at;
+
+	 	if (!time) return;
+
+	    let day,month,year;
+	    let date = new Date(time),
+	        diff = ( (( new Date().getTime() ) - date.getTime()) / 1000),
+	        // day_diff = ( new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()).getTime() - new Date(date.getFullYear(),date.getMonth(),date.getDate()).getTime() ) / 1000 / 86400, //
+	        day_diff = Math.floor(diff / 86400);
+	    
+	    if (isNaN(day_diff) || diff <= 0)
+	        return (
+	            year.toString()+'-'+
+	            ((month<10) ? '0'+month.toString() : month.toString())+'-'+
+	            ((day<10) ? '0'+day.toString() : day.toString())
+	        );
+	    
+	    var r = (
+	        diff > 0 &&
+	        (
+	            day_diff === 0 &&
+	            (
+	                (
+	                    (diff < 60 && Math.ceil(diff) + "s") ||
+	                    (diff < 3600 && Math.ceil(diff / 60)  + "m") ||
+	                    (diff < 7200 && "1h") ||
+	                    (diff < 86400 && Math.floor(diff / 3600) + "h")
+	                )
+	            ) ||
+	            (day_diff === 1 && "1d") ||
+	            (Math.ceil(day_diff) + "d")
+	        )
+	    );
+	    // console.log(r);
+	    return r;
+	}
+   	render() {
+   		// console.log(this);
+		return (
+			<span className="tweet-date">{this.relativeTime()}</span>
+		) // 
+   	}
+}
+
 class TweetControls extends Component {
   	constructor(props) {
     	super(props);
@@ -90,7 +131,7 @@ class TweetControls extends Component {
     	}));
   	}
 	render() {
-		console.log(this.props);
+		// console.log(this.props);
 		return (
 			<div className="tweet-controls">
 				<button className="reply" onClick={this.handleClick}>
@@ -125,13 +166,20 @@ class Tweet extends Component {
   	// }
 
 	render() {
-		console.log(this.props.data);
-		console.log(this.props.data.user);
+		// console.log(this.props.data);
+		// console.log(this.props.data.user);
 		return (
 			<div className={"tweet-contain " + this.props.data.selected} id={this.props.data.id_str} userid={this.props.data.user.id_str} onClick={() => this.props.onClick()}>
 				<div className="tweet-body">
 				    <UserInfo user={this.props.data.user} />
+
 					<span className="tweet-text">{this.props.data.text}</span>
+
+					<div className="status-contain">
+						<RelativeTime created_at={this.props.data.created_at} />
+						<div className="fi-star"></div>
+						<div className="fi-quote"></div>						
+					</div>
 				</div>
 
 				<TweetControls props={this.props.data} />

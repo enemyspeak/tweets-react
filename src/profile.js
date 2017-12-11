@@ -8,11 +8,11 @@ class Profile extends Component {
     	this.state = {selectedTweet: false};
     }
     setSelectedTweet(id) {
-    	console.log(id);
+    	// console.log(id);
     	this.setState({selectedTweet:id});
     }
 	renderTweet(props){
-		console.log(props);
+		// console.log(props);
 		props.selected = ( props.id_str === this.state.selectedTweet ? 'selected' : '' );
 		return <Tweet 
 			data={props} 

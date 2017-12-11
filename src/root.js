@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Navigation from './navigation'
 import Timeline from './timeline'
-import Mentions from './mentions' // do we even need another class for this?
+// import Mentions from './mentions' // do we even need another class for this?
 import Profile from './profile'
 import DirectMessages from './directMessages'
 import Search from './search'
@@ -24,17 +24,20 @@ class Root extends Component {
 				<div className="header-row">
 					React.js Twitter App
 				</div>
+				<div className="compose-tweet" alt="Compose">
+					<span className="fi-pencil"></span>
+				</div>
 				<div className="navigation-contain">
 				    <div className="nagivation">
 			        	<Navigation handleClick={this.handleClick} selectedTab={this.state.selectedTab} />
 			        </div>
 				</div>
 				<div className="app-contain">
-					<Timeline activeTab={this.state.selectedTab == 'timeline' ? true : false} />
-					<Mentions activeTab={this.state.selectedTab == 'mentions' ? true : false} /> 
-					<Search activeTab={this.state.selectedTab == 'search' ? true : false} />
-					<DirectMessages activeTab={this.state.selectedTab == 'direct-messages' ? true : false} />
-					<Profile activeTab={this.state.selectedTab == 'profile' ? true : false} /> 
+					<Timeline timelineName={"Timeline"} activeTab={this.state.selectedTab === 'timeline' ? true : false} /> {/* dataSource={}*/}
+					<Timeline timelineName={"Mentions"} activeTab={this.state.selectedTab === 'mentions' ? true : false} /> {/* dataSource={}*/}
+					<Search activeTab={this.state.selectedTab === 'search' ? true : false} />
+					<DirectMessages activeTab={this.state.selectedTab === 'direct-messages' ? true : false} />
+					<Profile activeTab={this.state.selectedTab === 'profile' ? true : false} /> 
 				</div>
 			</div>
         );
