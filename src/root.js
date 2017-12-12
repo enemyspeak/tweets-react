@@ -22,7 +22,8 @@ class Root extends Component {
 		return (
 			<div className="app-wrapper">
 				<div className="header-row">
-					React.js Twitter App
+					<div className="fi-social-twitter"></div>
+					<div>Squawk Box</div>
 				</div>
 				<div className="compose-tweet" alt="Compose">
 					<span className="fi-pencil"></span>
@@ -34,10 +35,10 @@ class Root extends Component {
 				</div>
 				<div className="app-contain">
 					<Timeline timelineName={"Timeline"} activeTab={this.state.selectedTab === 'timeline' ? true : false} /> 
-					{/*<Timeline timelineName={"Mentions"} activeTab={this.state.selectedTab === 'mentions' ? true : false} />
+					<Timeline timelineName={"Mentions"} activeTab={this.state.selectedTab === 'mentions' ? true : false} />
 					<Search activeTab={this.state.selectedTab === 'search' ? true : false} />
 					<DirectMessages activeTab={this.state.selectedTab === 'direct-messages' ? true : false} />
-					<Profile activeTab={this.state.selectedTab === 'profile' ? true : false} />  */}
+					<Profile activeTab={this.state.selectedTab === 'profile' ? true : false} />
 				</div>
 			</div>
         );

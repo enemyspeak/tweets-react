@@ -21,7 +21,7 @@ class Timeline extends Component {
     const timeline = this.state.timeline;
     return (
       <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
-        <div className="view-header-label">{this.props.timelineName}</div>
+        {/*<div className="view-header-label">{this.props.timelineName}</div>*/}
         <div className="timeline-contain">
           {timeline.map((obj) => {
             obj.selected = ( obj.id_str === this.state.selectedTweet ? 'selected' : '' );

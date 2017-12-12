@@ -27,6 +27,12 @@ html {
   font-size: 22px;
   height: 36px;
   line-height: 36px; }
+  .header-row div {
+    display: inline;
+    color: #4FC3F7; }
+  .header-row .fi-social-twitter {
+    padding-right: 10px;
+    font-size: 24px; }
 
 .compose-tweet {
   position: absolute;
@@ -54,9 +60,11 @@ html {
 .nagivation {
   height: calc( 100% - 51px);
   position: absolute;
+  /* top: 0px; */
   left: 0px;
   width: 60px;
-  border-right: 1px solid #424242; }
+  border-right: 1px solid #424242;
+  z-index: 3; }
   .nagivation .navigation-item {
     width: 60px;
     height: 60px;
@@ -75,7 +83,11 @@ html {
   position: relative;
   left: 60px;
   width: calc( 100% - 60px);
-  height: 100%; }
+  height: 100%;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: calc( 100vh - 51px); }
 
 .twitter-app {
   position: absolute;
@@ -309,14 +321,15 @@ html {
         width: 100%;
         height: 100%; }
   .twitter-app .quoted-tweet {
-    width: calc( 100% - 20px);
-    margin: 20px 10px 0px 10px;
+    width: calc( 100% - 70px);
+    margin: 20px 10px 0px 0px;
     padding: 10px 10px 10px 0px;
     min-height: 42px;
     border: 1px solid #424242;
     background: #212121;
     border-radius: 10px;
-    position: relative; }
+    position: relative;
+    left: 60px; }
     .twitter-app .quoted-tweet .name {
       font-size: 14px; }
     .twitter-app .quoted-tweet .quoted-user-avatar {
