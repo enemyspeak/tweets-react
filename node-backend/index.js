@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var twitter = require('ntwitter');
 var credentials = require('./twittercredentials.json');
 
-var port = 3000;
+var port = 4000;
 
 start( port );
 
@@ -47,154 +47,169 @@ function start( port ){
         return data;
     }
 
-    // app.get('/twitter',function(req,res){ // twitter oauth callback uri - used in getting an oauth_token
-    //     console.log('twitter req',req);
-    //     console.log('twitter res',res)
-    //     console.log('twitter cookie',req.headers.cookie);
-    //     // console.log(req.headers);
-    //     // console.log(req.headers.cookie);
+    app.all('*', function( req, res, next ){
+        console.log(req.url);
+        res.type( 'application/json' );
+        console.log( req.method, req.url );
+        next();
+    });
 
-    //     if (req.query.error) {
-    //         console.log('twitter error found!',req.query);
 
-    //         // display error in pop up window
-    //         res.status( 400 );
-    //         res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');            
-    //         return;
-    //     }
+    app.get('/twitter',function(req,res){ // twitter oauth callback uri - used in getting an oauth_token
+        console.log('twitter req',req);
+        console.log('twitter res',res)
+        console.log('twitter cookie',req.headers.cookie);
+        // console.log(req.headers);
+        // console.log(req.headers.cookie);
 
-    //     var data = req.query; //parseTwitterResponse(req.query);
-    //     console.log(data);
-    //     // get the user token from the cookie.
-    //     var token;
-    //     if (req && req.headers && req.headers && req.headers.cookie) {
-    //         var str = req.headers.cookie;
-    //         str = cookie.parse(str); // parse cookie.
-    //         token = str.loginInfo
-    //         console.log('cookie token',token);
-    //     } else {
-    //         console.log('twitter err: no cookie found?');
+        if (req.query.error) {
+            console.log('twitter error found!',req.query);
 
-    //         // display error in pop up window
-    //         res.status( 400 );
-    //         res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
-    //         return;
-    //     }
-    //     if (!token) {
-    //         console.log('twitter err: no user token');
+            // display error in pop up window
+            res.status( 400 );
+            res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');            
+            return;
+        }
 
-    //         // display error
-    //         res.status( 400 );
-    //         res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
-    //         return;
-    //     }
+        var data = req.query; //parseTwitterResponse(req.query);
+        console.log(data);
+        // get the user token from the cookie.
+        var token;
+        if (req && req.headers && req.headers && req.headers.cookie) {
+            var str = req.headers.cookie;
+            str = cookie.parse(str); // parse cookie.
+            token = str.loginInfo
+            console.log('cookie token',token);
+        } else {
+            console.log('twitter err: no cookie found?');
 
-    //     console.log('header ip',req.headers['x-forwarded-for']);
+            // display error in pop up window
+            res.status( 400 );
+            res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
+            return;
+        }
+        if (!token) {
+            console.log('twitter err: no user token');
 
-    //     // look up the user -
-    //     postgres.checkToken(token,req.headers['x-forwarded-for']).then(function(fetchedUserData){
-    //         console.log("twitter got user data",fetchedUserData.id);//,fetchedUserData);
-    //         var userData = fetchedUserData; // save user data per socket session
+            // display error
+            res.status( 400 );
+            res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
+            return;
+        }
 
-    //         var oauth_token = data.oauth_token;
-    //         var oauth_verifier = data.oauth_verifier;
+        console.log('header ip',req.headers['x-forwarded-for']);
 
-    //         // test if oauth_token or oauth_verifier exist.
-    //         console.log(oauth_token,oauth_verifier);
+        // look up the user -
+        postgres.checkToken(token,req.headers['x-forwarded-for']).then(function(fetchedUserData){
+            console.log("twitter got user data",fetchedUserData.id);//,fetchedUserData);
+            var userData = fetchedUserData; // save user data per socket session
 
-    //         function s4() {
-    //             return Math.floor((1 + Math.random()) * 0x10000)
-    //                 .toString(16)
-    //                 .substring(1);
-    //         }
+            var oauth_token = data.oauth_token;
+            var oauth_verifier = data.oauth_verifier;
 
-    //         var nonce = s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4();
-    //         nonce = new Buffer( nonce ).toString('base64');
-    //         var timestamp = Math.round((new Date()).getTime() / 1000.0);//new Date().getTime();
-    //         var parameters =
-    //             'oauth_consumer_key='+percentEncode('PrJGzvLX1SDOxB9HNSvNQ4K76')+
-    //             '&oauth_nonce='+percentEncode(nonce)+
-    //             '&oauth_signature_method='+percentEncode('HMAC-SHA1')+
-    //             '&oauth_timestamp='+percentEncode(timestamp)+
-    //             '&oauth_token='+percentEncode(oauth_token)+
-    //             '&oauth_version='+percentEncode('1.0');
-    //         var base = 'POST'+'&'+percentEncode('https://api.twitter.com/oauth/access_token')+'&'+percentEncode(parameters);
-    //         var signingKey = percentEncode('OffSwViWCYVrbdanhSNmQgp2F3i9Mi2pVGpwzBFyyGBcWEkIxp')+'&';//+percentEncode(OAuth token secret);
-    //         var signiture = CryptoJS.HmacSHA1(base, signingKey);
-    //         signiture = CryptoJS.enc.Base64.stringify(signiture);
+            // test if oauth_token or oauth_verifier exist.
+            console.log(oauth_token,oauth_verifier);
 
-    //         // console.log('twitter header',base,signingKey,signiture);
-    //         // console.log('twitter signiture',percentEncode(signiture));
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
 
-    //         request.post({
-    //             headers: {
-    //                 'Content-Type': 'application/x-www-form-urlencoded',
-    //                 'Authorization': 'OAuth ' + 
-    //                                             'oauth_consumer_key="'+percentEncode('PrJGzvLX1SDOxB9HNSvNQ4K76')+'", '+
-    //                                             'oauth_nonce="'+percentEncode(nonce)+'", '+
-    //                                             'oauth_signature="'+percentEncode(signiture)+'", '+
-    //                                             'oauth_signature_method="'+percentEncode('HMAC-SHA1')+'", '+
-    //                                             'oauth_timestamp="'+percentEncode(timestamp)+'", '+
-    //                                             'oauth_token='+percentEncode(oauth_token)+'", '+
-    //                                             'oauth_version="'+percentEncode('1.0')+'"'
-    //             },
-    //             url: 'https://api.twitter.com/oauth/access_token',
-    //             form:  {
-    //                 oauth_verifier: oauth_verifier
-    //             },
-    //             method: 'POST'
-    //         },function(error, response, body){
-    //             // console.log(error,response,body);
-    //             // return;
-    //             var data = body;
-    //             // try {
-    //             //     data = JSON.parse(body)
-    //             // } catch (e) {
-    //             //     // console.log('twitter parse error',e);
-    //             //     // if (cb) cb('error');
-    //             // }
-    //             // console.log(data);
-    //             // var data = JSON.parse(body);
-    //             if(error || (data && data.errors)) { 
-    //                 // console.log(parameters,signiture);
-    //                 console.log('twitter access token err',data,error);//,response);
-    //                 // if (cb) cb('error',data);
-    //                 res.status( 400 );
-    //                 res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
-    //             } else { 
-    //                 console.log('success! twitter access token',data);
-    //                 // socket.emit('twitter token',data);
-    //                 data = parseTwitterResponse(data);
+            var nonce = s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4();
+            nonce = new Buffer( nonce ).toString('base64');
+            var timestamp = Math.round((new Date()).getTime() / 1000.0);//new Date().getTime();
+            var parameters =
+                'oauth_consumer_key='+percentEncode('PrJGzvLX1SDOxB9HNSvNQ4K76')+
+                '&oauth_nonce='+percentEncode(nonce)+
+                '&oauth_signature_method='+percentEncode('HMAC-SHA1')+
+                '&oauth_timestamp='+percentEncode(timestamp)+
+                '&oauth_token='+percentEncode(oauth_token)+
+                '&oauth_version='+percentEncode('1.0');
+            var base = 'POST'+'&'+percentEncode('https://api.twitter.com/oauth/access_token')+'&'+percentEncode(parameters);
+            var signingKey = percentEncode('OffSwViWCYVrbdanhSNmQgp2F3i9Mi2pVGpwzBFyyGBcWEkIxp')+'&';//+percentEncode(OAuth token secret);
+            var signiture = CryptoJS.HmacSHA1(base, signingKey);
+            signiture = CryptoJS.enc.Base64.stringify(signiture);
 
-    //                 userData.twitterToken = data.oauth_token;
-    //                 userData.twitterTokenSecret = data.oauth_token_secret;
+            // console.log('twitter header',base,signingKey,signiture);
+            // console.log('twitter signiture',percentEncode(signiture));
 
-    //                 postgres.saveTwitterCredentials(userData.id,data.oauth_token,data.oauth_token_secret).then(function() {
-    //                     res.status( 200 );
-    //                     res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection success.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
-    //                     io.to(userData.id,'twitter token',{}); // tell the front end we got one.
-    //                 },function(err){
-    //                     console.log('saving twitter token failed',err); 
-    //                     // we can still send success this time- they'll have to authorize again later.
+            request.post({
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': 'OAuth ' + 
+                                                'oauth_consumer_key="'+percentEncode('PrJGzvLX1SDOxB9HNSvNQ4K76')+'", '+
+                                                'oauth_nonce="'+percentEncode(nonce)+'", '+
+                                                'oauth_signature="'+percentEncode(signiture)+'", '+
+                                                'oauth_signature_method="'+percentEncode('HMAC-SHA1')+'", '+
+                                                'oauth_timestamp="'+percentEncode(timestamp)+'", '+
+                                                'oauth_token='+percentEncode(oauth_token)+'", '+
+                                                'oauth_version="'+percentEncode('1.0')+'"'
+                },
+                url: 'https://api.twitter.com/oauth/access_token',
+                form:  {
+                    oauth_verifier: oauth_verifier
+                },
+                method: 'POST'
+            },function(error, response, body){
+                // console.log(error,response,body);
+                // return;
+                var data = body;
+                // try {
+                //     data = JSON.parse(body)
+                // } catch (e) {
+                //     // console.log('twitter parse error',e);
+                //     // if (cb) cb('error');
+                // }
+                // console.log(data);
+                // var data = JSON.parse(body);
+                if(error || (data && data.errors)) { 
+                    // console.log(parameters,signiture);
+                    console.log('twitter access token err',data,error);//,response);
+                    // if (cb) cb('error',data);
+                    res.status( 400 );
+                    res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
+                } else { 
+                    console.log('success! twitter access token',data);
+                    // socket.emit('twitter token',data);
+                    data = parseTwitterResponse(data);
+
+                    userData.twitterToken = data.oauth_token;
+                    userData.twitterTokenSecret = data.oauth_token_secret;
+
+                    postgres.saveTwitterCredentials(userData.id,data.oauth_token,data.oauth_token_secret).then(function() {
+                        res.status( 200 );
+                        res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection success.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
+                        io.to(userData.id,'twitter token',{}); // tell the front end we got one.
+                    },function(err){
+                        console.log('saving twitter token failed',err); 
+                        // we can still send success this time- they'll have to authorize again later.
                         
-    //                     res.status( 200 );
-    //                     res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection success.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
-    //                     io.to(userData.id,'twitter token',{}); // tell the front end we got one.
-    //                 });
-    //             }
-    //         });
-    //     },function(err) { // bad token
-    //         console.log('twitter err: bad user token',err);
+                        res.status( 200 );
+                        res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection success.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
+                        io.to(userData.id,'twitter token',{}); // tell the front end we got one.
+                    });
+                }
+            });
+        },function(err) { // bad token
+            console.log('twitter err: bad user token',err);
 
-    //         // display error
-    //         res.status( 400 );
-    //         res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
-    //     });
-    // });
+            // display error
+            res.status( 400 );
+            res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
+        });
+    });
 
     /********************************************************************************/
     /*********************************** SOCKETIO ***********************************/
     /********************************************************************************/
+
+    var twit = new twitter({
+        consumer_key: credentials.consumer_key,           
+        consumer_secret: credentials.consumer_secret,        
+        access_token_key: credentials.access_token_key,       
+        access_token_secret: credentials.access_token_secret     
+    });
 
     var usersConnected = 0;
     io.on( 'connection', function( socket ){
@@ -210,5 +225,96 @@ function start( port ){
                 userData = {}; // clear user data, might not be necessary, closure should take care of it
             }
         });
-   });
+
+        socket.on('update status',function(data,cb){
+            twit.updateStatus('Test tweet from ntwitter/' + twitter.VERSION,
+                function (err, result) {
+                    console.log(result);
+                    if (cb) cb(result);
+                }
+            );
+        });
+
+        socket.on('get twitter home timeline',function(data,cb){
+            twit.getHomeTimeline({},function(result) {
+                console.log('get twitter timeline result',result);
+                if (cb) cb(result);
+            });
+        });
+
+        socket.on('get my mentions', function(data,cb) { // load profile by id
+            twit.getMentions ({},function(result) {
+                console.log('get twitter timeline result',result);
+                if (cb) cb(result);
+            });
+            // twitter.get('statuses/mentions_timeline',function(error, tweets, response) {
+            //     if (error) {
+            //         if(cb) cb({error:error});
+            //         return;
+            //     }
+            //     if(cb) cb(error,tweets);
+            // });
+        });   
+        socket.on('get tweet details', function(data,cb) { // loads replies and stuff to a tweet
+            if (!data.id) {
+                if(cb) cb({error:'error'});
+                return;
+            }
+            twit.showStatus(data.id,function(error, tweet) {
+                if (error) {
+                    if(cb) cb({error:error});
+                    return;
+                }
+                if(cb) cb(tweet);
+            });
+        });
+
+        // socket.on('get my twitter user', function(cb) { // for loading your profile
+        // });
+
+        socket.on('get twitter user', function(data,cb) { // load profile by id
+            if (!data.id) {
+                if(cb) cb({error:'error'});
+                return;
+            }
+            twitter.showUser (data.id,function(error, user, response) {
+                if (error) {
+                    if(cb) cb({error:error});
+                    return;
+                }
+                twitter.get('statuses/user_timeline',{user_id: data.id},function(error, tweets, response) {
+                    if (error) {
+                        if(cb) cb({error:error});
+                        return;
+                    }
+                    if(cb) cb(error,user,tweets);
+                });
+            });
+
+            // twit.stream('user', {track:'nodejs'}, function(stream) {
+            //   stream.on('data', function (data) {
+            //     console.log(data);
+            //   });
+            //   stream.on('end', function (response) {
+            //     // Handle a disconnection 
+            //   });
+            //   stream.on('destroy', function (response) {
+            //     // Handle a 'silent' disconnection from Twitter, no end/error event fired 
+            //   });
+            //   // Disconnect stream after five seconds 
+            //   setTimeout(stream.destroy, 5000);
+            // });
+        });
+        socket.on('search twitter', function(data,cb) { // search tweets & users
+            if (!data || !data.search) return;
+            twit.search(data.search, {}, function(err, result) {
+                console.log(result);
+                if (cb) cb(result);
+            });
+        });
+    });
+
+    http.listen(port, function(){
+        console.log('listening on *:', port);
+    });
 }
