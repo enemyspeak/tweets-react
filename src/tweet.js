@@ -37,12 +37,16 @@ function OiginalUser(props) { // this is a retweet
 }
 
 function Media(props) {
+	console.log(props.media);
+	console.log(props.media);
 	return (
 		<div className="media-contain">
 	        {props.media.map(obj => {
-            	<div className="media-box image{{@index}}">
-					<img src="{{obj.media_url_https}}:small" />	
-				</div>
+            	return (
+            		<div className="media-box" key={obj.id_str}>
+						<img src={obj.media_url_https + ":small"} />	
+					</div>
+				);
 	        })}
 		</div>
 	);
@@ -51,11 +55,11 @@ function Media(props) {
 function QuotedStatus(props) {
 	return(
 		<div className="quoted-tweet" data-id="{props.id}" data-userid="{props.user.id}">
-			<UserInfo user={props.retweeted_status.user} />
-			<span className="tweet-date">{props.retweeted_status.relativeTime}</span>
-			<span className="tweet-text">{props.retweeted_status.text}</span>
-			{(props.retweeted_status.entities.media) &&
-				<Media media={props.retweeted_status.entities.media} />
+			<UserInfo user={props.quoted_status.user} />
+			<span className="tweet-date">{props.quoted_status.relativeTime}</span>
+			<span className="tweet-text">{props.quoted_status.text}</span>
+			{(props.quoted_status.entities.media) &&
+				<Media media={props.quoted_status.entities.media} />
 			}
 		</div>
 	);
@@ -122,7 +126,7 @@ class TweetControls extends Component {
     	}));
   	}
 	render() {
-		console.log(this.props);
+		// console.log(this.props);
 		return (
 			<div className="tweet-controls">
 				<button className="reply" onClick={this.handleClick}>
@@ -144,26 +148,39 @@ class TweetControls extends Component {
 
 class Tweet extends Component {
 	render() {
-		// console.log(this.props);
-		// console.log(this.props.data);
-		// console.log(this.props.data.user);
-		return (
-			<div className={"tweet-contain " + this.props.data.selected} id={this.props.data.id_str} userid={this.props.data.user.id_str} onClick={() => this.props.onClick()}>
-				<div className="tweet-body">
-				    <UserInfo user={this.props.data.user} />
+		console.log(this.props.data);
+		let tweet = this.props.data;
 
-					<span className="tweet-text">{this.props.data.text}</span>
+		if (this.props.data.retweeted_status) {
+			tweet = this.props.data.retweeted_status;
+			tweet.retweeteduser = this.props.data.user;
+		}
+		return (
+			<div className={"tweet-contain " + tweet.selected} id={tweet.id_str} userid={tweet.user.id_str} onClick={() => this.props.onClick()}>
+				<div className="tweet-body">
+				    <UserInfo user={tweet.user} />
+
+					<span className="tweet-text">{tweet.text}</span>
 
 					<div className="status-contain">
-						<RelativeTime created_at={this.props.data.created_at} />
-						<div className={"fi-star " + (this.props.data.favorited ? "active" : "")}></div>
-						<div className={"fi-loop " + (this.props.data.retweeted ? "active" : "")}></div>						
+						<RelativeTime created_at={tweet.created_at} />
+						<div className={"fi-star " + (tweet.favorited ? "active" : "")}></div>
+						<div className={"fi-loop " + (tweet.retweeted ? "active" : "")}></div>						
 					</div>
 
-					{ this.props.data.entities.media && <Media media={this.props.data.entities.media} /> }
-					{ this.props.data.retweeted_status && <QuotedStatus retweeted_status={this.props.data.retweeted_status} />}
+					{ tweet.extended_entities && <Media media={tweet.extended_entities.media} /> }
+					{ tweet.quoted_status && <QuotedStatus quoted_status={tweet.quoted_status} />}
+					{ tweet.retweeteduser && (
+						<div className="retweeted-by-contain">
+							<span className="fi-loop"></span>
+							<div className="retweet-user-avatar">
+						        <Avatar user={tweet.retweeteduser} />
+						    </div>
+							<span className="retweet-user">{tweet.retweeteduser.name}</span>
+						</div>
+					)}
 				</div>
-				<TweetControls props={this.props.data} />
+				<TweetControls props={tweet} />
 			</div>
 		);
 	}

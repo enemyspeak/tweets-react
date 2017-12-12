@@ -297,10 +297,12 @@ html {
     height: 30px;
     line-height: 30px; }
   .twitter-app .media-contain {
-    margin-top: 10px; }
+    margin-top: 10px;
+    left: 60px;
+    position: relative;
+    width: calc( 100% - 60px); }
     .twitter-app .media-contain .media-box {
-      max-width: 100%;
-      max-height: 200px;
+      max-width: 400px;
       border-radius: 6px;
       overflow: hidden; }
       .twitter-app .media-contain .media-box img {
@@ -337,24 +339,28 @@ html {
     .twitter-app .quoted-tweet .media-box {
       max-width: 50%;
       max-height: 100px; }
-  .twitter-app .show-retweet {
+  .twitter-app .retweeted-by-contain {
     position: relative;
-    margin-top: 10px; }
-    .twitter-app .show-retweet span {
+    margin-top: 10px;
+    left: 60px;
+    width: calc( 100% - 60px); }
+    .twitter-app .retweeted-by-contain span {
       vertical-align: bottom;
       display: inline-block;
-      height: 16px;
+      height: 20px;
       font-weight: bold;
       font-size: 14px;
-      color: #AFAFAF; }
-    .twitter-app .show-retweet svg {
-      width: 14px;
-      height: 14px;
-      margin-right: 5px;
-      color: #AFAFAF; }
+      color: #AFAFAF;
+      margin-right: 10px;
+      line-height: 20px; }
+    .twitter-app .retweeted-by-contain .fi-loop {
+      color: #8BC34A;
+      font-size: 18px;
+      padding-top: 1px;
+      box-sizing: border-box; }
   .twitter-app .retweet-user-avatar {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border-radius: 4px;
     overflow: hidden;
     border: 1px solid #000;
