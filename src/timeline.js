@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Tweet from './tweet'
-import { fetchHomeTimeline } from './api';
 
 class Timeline extends Component {
 	constructor(props) {
   	super(props);
-    fetchHomeTimeline((err, timeline) => this.setState({ 
+    this.props.dataSource((err, timeline) => this.setState({ 
       timeline 
     }));
   }

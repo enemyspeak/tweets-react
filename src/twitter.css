@@ -194,7 +194,7 @@ html {
       transition: left 0.3s ease; }
       .twitter-app .app-views-contain .app-view.active {
         left: 0; }
-  .twitter-app .timeline-contain {
+  .twitter-app .timeline-contain, .twitter-app .recent-timeline-contain {
     width: 100%;
     height: calc( 100% - 30px);
     color: #fff; }
@@ -435,8 +435,9 @@ html {
     top: 90px;
     width: 100%;
     height: 214px;
-    border-bottom: 1px solid #424242; }
-    .twitter-app .profile-details .name, .twitter-app .profile-details .screenName, .twitter-app .profile-details .description, .twitter-app .profile-details .location, .twitter-app .profile-details .url {
+    border-bottom: 1px solid #424242;
+    color: #fff; }
+    .twitter-app .profile-details .name, .twitter-app .profile-details .screen-name, .twitter-app .profile-details .description, .twitter-app .profile-details .location, .twitter-app .profile-details .url {
       display: block;
       text-align: center;
       margin: 10px auto;
@@ -446,9 +447,10 @@ html {
       font-weight: bold;
       font-size: 18px;
       margin-bottom: 2px; }
-    .twitter-app .profile-details .screenName {
+    .twitter-app .profile-details .screen-name {
       margin-top: 2px;
-      font-size: 16px; }
+      font-size: 16px;
+      color: #03A9F4; }
     .twitter-app .profile-details .location {
       color: #b1b1b1; }
   .twitter-app .stat-contain {

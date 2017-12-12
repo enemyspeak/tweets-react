@@ -2,7 +2,7 @@ var request = require('request');
 var express = require('express');
 var Promise  = require('promise');
 var bodyParser = require('body-parser');
-var twitter = require('ntwitter');
+var Twitter = require('twitter');
 var credentials = require('./twittercredentials.json');
 var cacheMaker = require("./cacheMaker");
 
@@ -206,7 +206,7 @@ function start( port ){
     /********************************************************************************/
 
     // console.log('twitcreds',credentials);
-    var twit = new twitter({
+    var twit = new Twitter({
         consumer_key: credentials.twitter.consumer_key,           
         consumer_secret: credentials.twitter.consumer_secret,        
         access_token_key: credentials.twitter.access_token_key,       
@@ -214,14 +214,56 @@ function start( port ){
     });
 
         var timelinecache;
-        twit.getHomeTimeline({},function(err,result) {
+        twit.get('statuses/home_timeline',{},function(err,result) {
             if (err) {
                 console.log(err);
                 return;
             }
-            console.log('twitter timeline result');
+            console.log('timeline result');
             timelinecache = result;
             // if (cb) cb(result);
+        });
+
+        var mentionscache;
+        twit.get('statuses/mentions_timeline', {}, function(error, tweets, response) {
+            // if (cb) cb(result);
+            if (error) {
+                console.log(error);
+                return;
+            }
+            console.log('mentions result');
+            mentionscache = tweets;
+        });
+
+        var directmessagescache;
+        // direct_messages
+        twit.get('direct_messages', {}, function(error, tweets, response) {
+            // if (cb) cb(result);
+            if (error) {
+                console.log(error);
+                return;
+            }
+            console.log('mentions result');
+            mentionscache = tweets;
+        });
+
+        var profilecache;
+         twit.get('users/show', {screen_name: '@hannufluff'},function(error,  response) {
+            if (error) {
+                console.log(error);
+                return;
+            }
+            console.log('profile result');
+            profilecache = response;
+            twit.get('statuses/user_timeline', {screen_name: '@hannufluff'}, function(error, tweets) {
+                // if (cb) cb(result);
+                if (error) {
+                    console.log(error);
+                    return;
+                }
+                console.log('home user timeline result');
+                profilecache.timeline = tweets;
+            });
         });
 
     var usersConnected = 0;
@@ -248,8 +290,6 @@ function start( port ){
             );
         });
 
-
-
         socket.on('gethometimeline',function(data,cb){
             // console.log(timelinecache);
             // if (timelinecache && timelinecache.length) {
@@ -257,14 +297,10 @@ function start( port ){
                 if (cb) cb(timelinecache);
                 // return;
             // }
-            
         });
 
         socket.on('getmentions', function(data,cb) { // load profile by id
-            twit.getMentions ({},function(err,result) {
-                console.log('get twitter timeline result',result);
-                if (cb) cb(result);
-            });
+           if (cb) cb(mentionscache);
             // twitter.get('statuses/mentions_timeline',function(error, tweets, response) {
             //     if (error) {
             //         if(cb) cb({error:error});
@@ -273,6 +309,11 @@ function start( port ){
             //     if(cb) cb(error,tweets);
             // });
         });   
+
+        socket.on('getdirectmessages',function(data,cb) {
+            if (cb) cb(directmessagescache);
+        })
+
         socket.on('getdetails', function(data,cb) { // loads replies and stuff to a tweet
             if (!data.id) {
                 if(cb) cb({error:'error'});
@@ -290,17 +331,36 @@ function start( port ){
         // socket.on('get my twitter user', function(cb) { // for loading your profile
         // });
 
+
+
+        socket.on('gethomeuser', function(data,cb) { // load profile by id
+            // if (!data.id) {
+            //     if(cb) cb({error:'error'});
+            //     return;
+            // }
+           if(cb) cb(profilecache)
+        });
+
+        socket.on('gethomeusertimeline', function(data,cb) { // load profile by id
+            // if (!data.id) {
+            //     if(cb) cb({error:'error'});
+            //     return;
+            // }
+           if(cb) cb(homeusertimelinecache)
+        });
+
+
         socket.on('getuser', function(data,cb) { // load profile by id
             if (!data.id) {
                 if(cb) cb({error:'error'});
                 return;
             }
-            twitter.showUser (data.id,function(error,  response) {
+            twit.get('users/show', {screen_name: data.screen_name},function(error,  response) {
                 if (error) {
                     if(cb) cb({error:error});
                     return;
                 }
-                twitter.get('statuses/user_timeline',{user_id: data.id},function(error, tweets, response) {
+                twit.get('statuses/user_timeline',{user_id: data.id},function(error, tweets, response) {
                     if (error) {
                         if(cb) cb({error:error});
                         return;
@@ -308,20 +368,6 @@ function start( port ){
                     if(cb) cb(error,user,tweets);
                 });
             });
-
-            // twit.stream('user', {track:'nodejs'}, function(stream) {
-            //   stream.on('data', function (data) {
-            //     console.log(data);
-            //   });
-            //   stream.on('end', function (response) {
-            //     // Handle a disconnection 
-            //   });
-            //   stream.on('destroy', function (response) {
-            //     // Handle a 'silent' disconnection from Twitter, no end/error event fired 
-            //   });
-            //   // Disconnect stream after five seconds 
-            //   setTimeout(stream.destroy, 5000);
-            // });
         });
         socket.on('searchtwitter', function(data,cb) { // search tweets & users
             if (!data || !data.search) return;
