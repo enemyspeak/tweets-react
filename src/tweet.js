@@ -58,8 +58,18 @@ function QuotedStatus(props) {
 			{(props.quoted_status.entities.media) &&
 				<Media media={props.quoted_status.entities.media} />
 			}
+			{/* <TweetStatistics favorite_count={props.quoted_status.favorite_count} retweet_count={props.quoted_status.retweet_count} /> */}
 		</div>
 	);
+}
+
+function TweetStatistics(props) {
+	return (
+		<div className="tweet-statistics">
+			<div className="fi-star">{props.favorite_count}</div>
+			<div className="fi-loop">{props.retweet_count}</div>	
+		</div>
+	)
 }
 
 class RelativeTime extends Component {
@@ -129,11 +139,11 @@ class TweetControls extends Component {
 				<button className="reply" onClick={this.handleClick}>
 					<div className="fi-comment-quotes"></div>
 				</button>
-				<button className="favorite" onClick={this.handleClick}>
-					<div className="fi-star"></div>
-				</button>
 				<button className="retweet" onClick={this.handleClick}>
 					<div className="fi-loop"></div>
+				</button>
+				<button className="favorite" onClick={this.handleClick}>
+					<div className="fi-star"></div>
 				</button>
 				<button className="details" onClick={this.handleClick}>
 					<div className="fi-magnifying-glass"></div>
@@ -170,8 +180,11 @@ class Tweet extends Component {
 					{ tweet.retweeteduser && (
 						<OiginalUser user={tweet.retweeteduser} />
 					)}
+					
+					{/* <TweetStatistics favorite_count={tweet.favorite_count} retweet_count={tweet.retweet_count} /> */}
 				</div>
 				<TweetControls props={tweet} />
+				
 			</div>
 		);
 	}

@@ -51,7 +51,7 @@ class Profile extends Component {
               <span className="profile-stat following">{profile.friends_count} Following</span>
             </div>
           </div>
-          <div class="recent-timeline-contain">
+          <div className="recent-timeline-contain">
             {profile.timeline.map((obj) => {
               obj.selected = ( obj.id_str === this.state.selectedTweet ? 'selected' : '' );
               return (
