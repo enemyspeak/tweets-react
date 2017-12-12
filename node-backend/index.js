@@ -4,6 +4,7 @@ var Promise  = require('promise');
 var bodyParser = require('body-parser');
 var twitter = require('ntwitter');
 var credentials = require('./twittercredentials.json');
+var cacheMaker = require("./cacheMaker");
 
 var port = 4000;
 
@@ -204,12 +205,24 @@ function start( port ){
     /*********************************** SOCKETIO ***********************************/
     /********************************************************************************/
 
+    // console.log('twitcreds',credentials);
     var twit = new twitter({
-        consumer_key: credentials.consumer_key,           
-        consumer_secret: credentials.consumer_secret,        
-        access_token_key: credentials.access_token_key,       
-        access_token_secret: credentials.access_token_secret     
+        consumer_key: credentials.twitter.consumer_key,           
+        consumer_secret: credentials.twitter.consumer_secret,        
+        access_token_key: credentials.twitter.access_token_key,       
+        access_token_secret: credentials.twitter.access_token_secret     
     });
+
+        var timelinecache;
+        twit.getHomeTimeline({},function(err,result) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log('twitter timeline result');
+            timelinecache = result;
+            // if (cb) cb(result);
+        });
 
     var usersConnected = 0;
     io.on( 'connection', function( socket ){
@@ -226,7 +239,7 @@ function start( port ){
             }
         });
 
-        socket.on('update status',function(data,cb){
+        socket.on('updatestatus',function(data,cb){
             twit.updateStatus('Test tweet from ntwitter/' + twitter.VERSION,
                 function (err, result) {
                     console.log(result);
@@ -235,15 +248,20 @@ function start( port ){
             );
         });
 
-        socket.on('get twitter home timeline',function(data,cb){
-            twit.getHomeTimeline({},function(result) {
-                console.log('get twitter timeline result',result);
-                if (cb) cb(result);
-            });
+
+
+        socket.on('gethometimeline',function(data,cb){
+            // console.log(timelinecache);
+            // if (timelinecache && timelinecache.length) {
+                console.log('return cache');
+                if (cb) cb(timelinecache);
+                // return;
+            // }
+            
         });
 
-        socket.on('get my mentions', function(data,cb) { // load profile by id
-            twit.getMentions ({},function(result) {
+        socket.on('getmentions', function(data,cb) { // load profile by id
+            twit.getMentions ({},function(err,result) {
                 console.log('get twitter timeline result',result);
                 if (cb) cb(result);
             });
@@ -255,7 +273,7 @@ function start( port ){
             //     if(cb) cb(error,tweets);
             // });
         });   
-        socket.on('get tweet details', function(data,cb) { // loads replies and stuff to a tweet
+        socket.on('getdetails', function(data,cb) { // loads replies and stuff to a tweet
             if (!data.id) {
                 if(cb) cb({error:'error'});
                 return;
@@ -272,12 +290,12 @@ function start( port ){
         // socket.on('get my twitter user', function(cb) { // for loading your profile
         // });
 
-        socket.on('get twitter user', function(data,cb) { // load profile by id
+        socket.on('getuser', function(data,cb) { // load profile by id
             if (!data.id) {
                 if(cb) cb({error:'error'});
                 return;
             }
-            twitter.showUser (data.id,function(error, user, response) {
+            twitter.showUser (data.id,function(error,  response) {
                 if (error) {
                     if(cb) cb({error:error});
                     return;
@@ -305,7 +323,7 @@ function start( port ){
             //   setTimeout(stream.destroy, 5000);
             // });
         });
-        socket.on('search twitter', function(data,cb) { // search tweets & users
+        socket.on('searchtwitter', function(data,cb) { // search tweets & users
             if (!data || !data.search) return;
             twit.search(data.search, {}, function(err, result) {
                 console.log(result);

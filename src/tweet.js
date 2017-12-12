@@ -122,7 +122,7 @@ class TweetControls extends Component {
     	}));
   	}
 	render() {
-		// console.log(this.props);
+		console.log(this.props);
 		return (
 			<div className="tweet-controls">
 				<button className="reply" onClick={this.handleClick}>
@@ -143,20 +143,8 @@ class TweetControls extends Component {
 }
 
 class Tweet extends Component {
-  	// constructor(props) {
-   //  	super(props);
-   //  	// this.state = {showButtons: false};
-
-   //  	// This binding is necessary to make `this` work in the callback
-   //  	this.handleClick = this.handleClick.bind(this);
-  	// }
-  	// handleClick() {
-   //  	this.setState(prevState => ({
-   //    		isToggleOn: !prevState.isToggleOn
-   //  	}));
-  	// }
-
 	render() {
+		// console.log(this.props);
 		// console.log(this.props.data);
 		// console.log(this.props.data.user);
 		return (
@@ -177,7 +165,7 @@ class Tweet extends Component {
 				</div>
 				<TweetControls props={this.props.data} />
 			</div>
-		)
+		);
 	}
 }
 

@@ -33,11 +33,11 @@ class Root extends Component {
 			        </div>
 				</div>
 				<div className="app-contain">
-					<Timeline timelineName={"Timeline"} activeTab={this.state.selectedTab === 'timeline' ? true : false} /> {/* dataSource={}*/}
-					<Timeline timelineName={"Mentions"} activeTab={this.state.selectedTab === 'mentions' ? true : false} /> {/* dataSource={}*/}
+					<Timeline timelineName={"Timeline"} activeTab={this.state.selectedTab === 'timeline' ? true : false} /> 
+					{/*<Timeline timelineName={"Mentions"} activeTab={this.state.selectedTab === 'mentions' ? true : false} />
 					<Search activeTab={this.state.selectedTab === 'search' ? true : false} />
 					<DirectMessages activeTab={this.state.selectedTab === 'direct-messages' ? true : false} />
-					<Profile activeTab={this.state.selectedTab === 'profile' ? true : false} /> 
+					<Profile activeTab={this.state.selectedTab === 'profile' ? true : false} />  */}
 				</div>
 			</div>
         );
