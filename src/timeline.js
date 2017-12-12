@@ -14,7 +14,7 @@ class Timeline extends Component {
     timeline: []
   };
   setSelectedTweet(id) {
-  	// console.log(id);
+  	console.log(id);
   	this.setState({selectedTweet:id});
   }
   render() {

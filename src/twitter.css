@@ -221,11 +221,12 @@ html {
     min-height: 60px;
     border-bottom: 1px solid #424242; }
   .twitter-app .tweet-text {
-    margin-top: 10px;
+    margin-top: 2px;
     display: block;
     left: 60px;
     position: relative;
-    width: calc( 100% - 60px); }
+    width: calc( 100% - 60px);
+    line-height: 25px; }
   .twitter-app .user-link, .twitter-app .link {
     color: #4FC3F7;
     cursor: pointer;
@@ -264,12 +265,13 @@ html {
       display: block;
       position: relative; }
     .twitter-app .tweet-user .name {
-      padding-right: 3px;
-      font-weight: bold; }
+      padding-right: 6px;
+      font-weight: bold;
+      top: 1px; }
     .twitter-app .tweet-user .screenName {
-      font-size: 14px;
+      font-size: 12px;
       color: #AFAFAF;
-      top: 1px;
+      top: 4px;
       position: relative; }
   .twitter-app .status-contain {
     position: absolute;

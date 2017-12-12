@@ -265,11 +265,12 @@ html{
         border-bottom: 1px solid $gray28;
     }
     .tweet-text {
-        margin-top: 10px;
+        margin-top: 2px;
         display: block;
         left: 60px;
         position: relative;
         width: calc( 100% - 60px );
+        line-height: 25px;
     }
     .user-link,.link {
         color: $lightBlue300;
@@ -320,13 +321,14 @@ html{
             position: relative;
         }
         .name {
-            padding-right: 3px;
+            padding-right: 6px;
             font-weight: bold;
+            top: 1px;
         }
         .screenName {
-            font-size: 14px;
+            font-size: 12px;
             color: $gray50;
-            top: 1px;
+            top: 4px;
             position: relative;
         }  
     }

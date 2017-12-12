@@ -25,26 +25,23 @@ function UserInfo(props){
 
 function OiginalUser(props) { // this is a retweet
 	return (
-		<div className="show-retweet" data-userid="{props.originalUser.id}">
-			<div className="fi-loop"></div>
-
+		<div className="retweeted-by-contain">
+			<span className="fi-loop"></span>
 			<div className="retweet-user-avatar">
-		        <Avatar user={props.originalUser} />
-			</div>
-			<span>{props.originalUser.name}</span>
+		        <Avatar user={props.user} />
+		    </div>
+			<span className="retweet-user">{props.user.name}</span>
 		</div>
 	)
 }
 
 function Media(props) {
-	console.log(props.media);
-	console.log(props.media);
 	return (
 		<div className="media-contain">
 	        {props.media.map(obj => {
             	return (
             		<div className="media-box" key={obj.id_str}>
-						<img src={obj.media_url_https + ":small"} />	
+						<img src={obj.media_url_https + ":small"} alt={obj.display_url} />	
 					</div>
 				);
 	        })}
@@ -148,7 +145,7 @@ class TweetControls extends Component {
 
 class Tweet extends Component {
 	render() {
-		console.log(this.props.data);
+		// console.log(this.props.data);
 		let tweet = this.props.data;
 
 		if (this.props.data.retweeted_status) {
@@ -171,13 +168,7 @@ class Tweet extends Component {
 					{ tweet.extended_entities && <Media media={tweet.extended_entities.media} /> }
 					{ tweet.quoted_status && <QuotedStatus quoted_status={tweet.quoted_status} />}
 					{ tweet.retweeteduser && (
-						<div className="retweeted-by-contain">
-							<span className="fi-loop"></span>
-							<div className="retweet-user-avatar">
-						        <Avatar user={tweet.retweeteduser} />
-						    </div>
-							<span className="retweet-user">{tweet.retweeteduser.name}</span>
-						</div>
+						<OiginalUser user={tweet.retweeteduser} />
 					)}
 				</div>
 				<TweetControls props={tweet} />
