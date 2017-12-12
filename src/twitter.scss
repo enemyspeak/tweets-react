@@ -246,7 +246,7 @@ html{
         border-bottom: 1px solid $gray28;
     }
     .tweet-text {
-        margin-top: 2px;
+        margin-top: 10px;
         display: block;
         left: 60px;
         position: relative;
@@ -271,7 +271,7 @@ html{
     .user-avatar {
         position: absolute;
         left: 10px;
-        top: 10px;
+        // top: 10px;
         width: 40px;
         height: 40px;
         border-radius: 6px;
@@ -330,8 +330,12 @@ html{
             cursor: pointer;
             position: relative;
             color: #b1b1b1;
+            display: none;
+            &.active {
+                display: block;
+            }
         }
-        .fi-quote {
+        .fi-loop {
             color: $lightGreen;
         }
         .fi-star {
@@ -367,9 +371,12 @@ html{
         }
     }
     .quoted-tweet {
-        width: 100%;
-        margin-right: 10px;
-        margin-top: 10px;
+        width: calc( 100% - 20px ); 
+        // margin-right: 10px;
+        // margin-top: 10px;
+        margin: 20px 10px 0px 10px;
+        padding: 10px 10px 10px 0px;
+        min-height: 42px;
         border: 1px solid $gray28;
         background: $gray13;
         border-radius: 10px;

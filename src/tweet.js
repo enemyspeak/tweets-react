@@ -26,9 +26,8 @@ function UserInfo(props){
 function OiginalUser(props) { // this is a retweet
 	return (
 		<div className="show-retweet" data-userid="{props.originalUser.id}">
-			<span>
-				icon
-			</span>
+			<div className="fi-loop"></div>
+
 			<div className="retweet-user-avatar">
 		        <Avatar user={props.originalUser} />
 			</div>
@@ -37,37 +36,29 @@ function OiginalUser(props) { // this is a retweet
 	)
 }
 
-function Media(media) {
-	// return (
-	// 	<div className="media-contain">
-	// 		{{#each entities.media}} 
-	// 			<div className="media-box image{{@index}}">
-	// 				<img src="{{this.media_url_https}}:small">	
-	// 			</div>
-	// 		{{/each}}
-	// 	</div>
-	// );
+function Media(props) {
+	return (
+		<div className="media-contain">
+	        {props.media.map(obj => {
+            	<div className="media-box image{{@index}}">
+					<img src="{{obj.media_url_https}}:small" />	
+				</div>
+	        })}
+		</div>
+	);
 }
 
-function QuotedStatus(user) {
-	// return(
-	// 	<div className="quoted-tweet" data-id="{{quoted_status.id}}" data-userid="{{quoted_status.user.id}}">
-	// 		<div className="quoted-user-avatar">
-	// 	        <Avatar user={quoted_status.user} />
-	// 		</div>
-	// 		<div className="quoted-tweet-body">
-	// 			<div className="tweet-user">
-	// 				<span className="name">{{quoted_status.user.name}}</span>
-	// 				<span className="screenName">@{{quoted_status.user.screen_name}}</span>
-	// 				<span className="tweet-date">{{quoted_status.relativeTime}}</span>
-	// 			</div>
-	// 			<span className="tweet-text">{{escapeHtml quoted_status.text}}</span>
-	// 			{{#if quoted_status.entities.media}} <!-- this is images -->
-	// 				<Media media={media} />
-	// 			{{/if}}
-	// 		</div>
-	// 	</div>
-	// );
+function QuotedStatus(props) {
+	return(
+		<div className="quoted-tweet" data-id="{props.id}" data-userid="{props.user.id}">
+			<UserInfo user={props.retweeted_status.user} />
+			<span className="tweet-date">{props.retweeted_status.relativeTime}</span>
+			<span className="tweet-text">{props.retweeted_status.text}</span>
+			{(props.retweeted_status.entities.media) &&
+				<Media media={props.retweeted_status.entities.media} />
+			}
+		</div>
+	);
 }
 
 class RelativeTime extends Component {
@@ -135,13 +126,13 @@ class TweetControls extends Component {
 		return (
 			<div className="tweet-controls">
 				<button className="reply" onClick={this.handleClick}>
-					<div className="fi-comment"></div>
+					<div className="fi-comment-quotes"></div>
 				</button>
 				<button className="favorite" onClick={this.handleClick}>
 					<div className="fi-star"></div>
 				</button>
 				<button className="retweet" onClick={this.handleClick}>
-					<div className="fi-star"></div>
+					<div className="fi-loop"></div>
 				</button>
 				<button className="details" onClick={this.handleClick}>
 					<div className="fi-magnifying-glass"></div>
@@ -177,11 +168,13 @@ class Tweet extends Component {
 
 					<div className="status-contain">
 						<RelativeTime created_at={this.props.data.created_at} />
-						<div className="fi-star"></div>
-						<div className="fi-quote"></div>						
+						<div className={"fi-star " + (this.props.data.favorited ? "active" : "")}></div>
+						<div className={"fi-loop " + (this.props.data.retweeted ? "active" : "")}></div>						
 					</div>
-				</div>
 
+					{ this.props.data.entities.media && <Media media={this.props.data.entities.media} /> }
+					{ this.props.data.retweeted_status && <QuotedStatus retweeted_status={this.props.data.retweeted_status} />}
+				</div>
 				<TweetControls props={this.props.data} />
 			</div>
 		)

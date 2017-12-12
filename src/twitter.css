@@ -209,7 +209,7 @@ html {
     min-height: 60px;
     border-bottom: 1px solid #424242; }
   .twitter-app .tweet-text {
-    margin-top: 2px;
+    margin-top: 10px;
     display: block;
     left: 60px;
     position: relative;
@@ -229,7 +229,6 @@ html {
   .twitter-app .user-avatar {
     position: absolute;
     left: 10px;
-    top: 10px;
     width: 40px;
     height: 40px;
     border-radius: 6px;
@@ -277,8 +276,11 @@ html {
       line-height: 30px;
       cursor: pointer;
       position: relative;
-      color: #b1b1b1; }
-    .twitter-app .status-contain .fi-quote {
+      color: #b1b1b1;
+      display: none; }
+      .twitter-app .status-contain div.active {
+        display: block; }
+    .twitter-app .status-contain .fi-loop {
       color: #8BC34A; }
     .twitter-app .status-contain .fi-star {
       color: #FFC107; }
@@ -305,9 +307,10 @@ html {
         width: 100%;
         height: 100%; }
   .twitter-app .quoted-tweet {
-    width: 100%;
-    margin-right: 10px;
-    margin-top: 10px;
+    width: calc( 100% - 20px);
+    margin: 20px 10px 0px 10px;
+    padding: 10px 10px 10px 0px;
+    min-height: 42px;
     border: 1px solid #424242;
     background: #212121;
     border-radius: 10px;
