@@ -434,6 +434,8 @@ html {
     position: relative; }
     .twitter-app .timeline-contain.inactive, .twitter-app .recent-timeline-contain.inactive {
       display: none; }
+  .twitter-app .recent-timeline-contain {
+    background: #333; }
   .twitter-app .tweet-contain {
     position: relative;
     background: transparent;
