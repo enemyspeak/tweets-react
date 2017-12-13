@@ -12,7 +12,7 @@ function Avatar(props) {
 function UserInfo(props){
 	// console.log(props);
 	return(
-		<div className="tweet-user">
+		<div className="tweet-user" onClick={() => props.onClick(props.user.screen_name)}>
 			<div className="user-avatar">
 		        <Avatar user={props.user} />
 		    </div>
@@ -25,7 +25,7 @@ function UserInfo(props){
 
 function OiginalUser(props) { // this is a retweet
 	return (
-		<div className="retweeted-by-contain">
+		<div className="retweeted-by-contain" onClick={() => props.onClick(props.user.screen_name)}>
 			<span className="fi-loop"></span>
 			<div className="retweet-user-avatar">
 		        <Avatar user={props.user} />
@@ -185,9 +185,9 @@ class Tweet extends Component {
 			tweet.retweeteduser = this.props.data.user;
 		}
 		return (
-			<div className={"tweet-contain " + tweet.selected} id={tweet.id_str} userid={tweet.user.id_str} onClick={() => this.props.onClick()}>
+			<div className={"tweet-contain " + this.props.data.selected} id={tweet.id_str} userid={tweet.user.id_str} onClick={() => this.props.onClick()}>
 				<div className="tweet-body">
-				    <UserInfo user={tweet.user} />
+				    <UserInfo user={tweet.user} onClick={this.props.mentionHandler} />
 
 					<p className="tweet-text" dangerouslySetInnerHTML={createMarkup(tweet,this.props.mentionHandler)}></p>
 
@@ -200,7 +200,7 @@ class Tweet extends Component {
 					{ tweet.extended_entities && <Media media={tweet.extended_entities.media} /> }
 					{ tweet.quoted_status && <QuotedStatus quoted_status={tweet.quoted_status} />}
 					{ tweet.retweeteduser && (
-						<OiginalUser user={tweet.retweeteduser} />
+						<OiginalUser user={tweet.retweeteduser} onClick={this.props.mentionHandler} />
 					)}
 					
 					{/* <TweetStatistics favorite_count={tweet.favorite_count} retweet_count={tweet.retweet_count} /> */}

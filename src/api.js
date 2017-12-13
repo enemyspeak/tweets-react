@@ -74,10 +74,15 @@ function fetchuser(id,cb) {
 }
 
 function fetchUserByName(screen_name,cb) {
+	console.log(screen_name);
+	if (!screen_name){ 
+		cb(null, undefined);
+		return
+	};
 	socket.emit('getuser',{screen_name:screen_name},function(data) {
   		console.log(data);
   		if (!data) {
-			cb(null, []);
+			cb(null, undefined);
   			return;
   		}
   		// return data;

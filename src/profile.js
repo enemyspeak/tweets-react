@@ -5,25 +5,27 @@ import { fetchUserByName } from './api';
 class Profile extends Component {
 	constructor(props) {
   	super(props);
-  	this.state = {selectedUser: this.props.selectedUser};
 
-    fetchUserByName(this.state.selectedUser,(err, profile) => this.setState({ 
-      profile 
-    }));
+    console.log(props);
   }
   state = {
     selectedTweet: false,
     selectedUser: false,
-    profile: {
-      'timeline':[]
-    },
   };
+  componentWillReceiveProps() {
+    // console.log(this.props.selectedUser);
+    this.setState({selectedUser:this.props.selectedUser});
+    // console.log(this.state.selectedUser);
+    fetchUserByName(this.props.selectedUser,(err, profile) => this.setState({ 
+      profile 
+    }));
+  }
   setSelectedUser(id) {
-    console.log(id);
+    // console.log(id);
   	this.setState({selectedUser:id});
   }
   setSelectedTweet(id) {
-    console.log(id);
+    // console.log(id);
     this.setState({selectedTweet:id});
   }
 	render() {
@@ -32,7 +34,10 @@ class Profile extends Component {
     if (!profile) {
       return (
         <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
-          <div className="profile-contain"></div>
+          <div className="profile-contain">
+            {this.props.showBackButton && ( <div className="back-button" onClick={()=>this.props.clearSelectedUser()}><div className="fi-arrow-left"></div></div>)}
+            <div className="dataLoader"></div>
+          </div>
         </div>
       );
     }
@@ -44,11 +49,12 @@ class Profile extends Component {
     return (
       <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
       	<div className="profile-contain">
+          {this.props.showBackButton && ( <div className="back-button" onClick={()=>this.props.clearSelectedUser()}><div className="fi-arrow-left"></div></div>)}
           <div className="user-banner" style={bannerStyle}></div>
           <div className="user-avatar profile-avatar">
             <img src={profile.profile_image_url_https} alt={profile.screen_name} />
           </div>
-          {profile.verified && ( <div className="verified"></div> )}
+          {profile.verified && ( <div className="profile-verified"></div> )}
 
           {profile.following ? (<span className="follow-button following">Following</span>) : (<span className="follow-button">Follow</span>)}
           <div className="profile-details">

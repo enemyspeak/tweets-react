@@ -40,7 +40,7 @@ class Root extends Component {
 					<Timeline dataSource={fetchMentions} activeTab={this.state.selectedTab === 'mentions' ? true : false} />
 					<Search activeTab={this.state.selectedTab === 'search' ? true : false} />
 					<DirectMessages activeTab={this.state.selectedTab === 'direct-messages' ? true : false} />
-					<Profile selectedUser="@hannufluff" activeTab={this.state.selectedTab === 'profile' ? true : false} />
+					<Profile selectedUser={"@hannufluff"} activeTab={this.state.selectedTab === 'profile' ? true : false} />
 				</div>
 			</div>
         );

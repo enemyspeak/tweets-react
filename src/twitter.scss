@@ -60,7 +60,6 @@ html{
 }
 
 .nagivation{
-    
     height: calc( 100% - 51px); 
     // height: 100%;
     position: absolute;
@@ -103,6 +102,158 @@ html{
     overflow-x: hidden;
     overflow-y: scroll;
     height: calc( 100vh - 51px );
+}
+
+@include keyframes(rotateLoader) {
+    0% { transform: rotate(-45deg); }
+    100% { transform: rotate(315deg); }
+}
+@include keyframes(animateLoaderInner) {
+    0% {
+    //     -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+    //             clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+    40% {
+        // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+        //         clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+    // 40% { 
+    //     // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 25%, 50% 50%);
+    //     //         clip-path: polygon(50% 0%, 100% 0%, 100% 25%, 50% 50%);
+    //         -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    //             clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    // }
+    60% { 
+        // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 25%, 50% 50%);
+        //         clip-path: polygon(50% 0%, 100% 0%, 100% 25%, 50% 50%);
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    }
+    80% {
+        // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+        //         clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+    100% {
+        // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+        //         clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+}
+@include keyframes(animateLoaderEdge) {
+    0% {
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+    40% {
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+    // 40% { 
+
+    // }
+    60% { 
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    }
+    80% {
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+    100% {
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+}
+
+.dataLoader {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -webkit-animation: rotateLoader linear infinite;
+    animation: rotateLoader linear infinite;
+    -webkit-animation-duration: 0.6s;
+    animation-duration: 0.6s;
+    width: 60px;
+    height: 60px;
+    margin-left: -30px;
+    margin-right: -30px;
+
+    &::before,
+    &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        -webkit-animation: animateLoaderInner linear infinite;
+        animation: animateLoaderInner linear infinite;
+        -webkit-animation-duration: 4.8s;
+        animation-duration: 4.8s;
+        content: '';
+        border-radius: 50%;
+        -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%);
+        clip-path: polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%);
+        background:none;
+    }
+
+    &::after {
+        box-shadow: inset 0 0 1px 2px #fff;
+    }
+
+    &.inactive {
+        display: none;
+        -webkit-animation: none;
+        animation: none;
+    }   
+}    
+@supports (-ms-ime-align:auto) {
+    .dataLoader {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        -webkit-animation: rotateLoader linear infinite;
+        animation: rotateLoader linear infinite;
+        -webkit-animation-duration: 0.6s;
+        animation-duration: 0.6s;
+        width: 60px;
+        height: 60px;
+        margin-left: -30px;
+        margin-right: -30px;
+
+        &::before,
+        &::after {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            content: '';
+
+            width: 60px;
+            height: 60px;
+            border-right: 3px solid white;
+            border-top: 5px solid transparent;
+            border-left: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-radius:50%;
+        }
+
+        &::after {
+            box-shadow:none;
+        }
+
+        &.inactive {
+            display: none;
+            -webkit-animation: none;
+            animation: none;
+        }   
+    }
 }
 
 .twitter-app {
@@ -225,10 +376,27 @@ html{
         }
     }
 
+    .profile-contain {
+        width: 100%;
+        height: calc( 100% - 30px );
+        color: $white;
+        position: relative;
+        &.inactive {
+            display: none;
+        }   
+    }
+
     .timeline-contain,.recent-timeline-contain {
         width: 100%;
         height: calc( 100% - 30px );
         color: $white;
+        // left: 0px;
+        position: relative;
+        // transition: left 0.3s ease;
+        &.inactive {
+            display: none;
+            // left: -100%;
+        }
     }
 
     .tweet-contain {
@@ -363,7 +531,7 @@ html{
         top: -3px;
         left: 43px;
     }
- 
+
     .status-contain {
         position: absolute;
         right: 10px;
@@ -434,7 +602,7 @@ html{
         width: calc( 100% - 70px ); 
         // margin-right: 10px;
         // margin-top: 10px;
-        margin: 20px 10px 0px 0px;
+        margin: 10px 10px 0px 0px;
         padding: 10px 10px 10px 0px;
         min-height: 42px;
         border: 1px solid $gray28;
@@ -573,6 +741,42 @@ html{
         height: calc( 100% - 30px );
         width: 100%;        
         display: block;
+        .back-button {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: 0px;
+            left: 0px;
+            z-index: 3;
+            text-align: center;
+            // border-right: 1px solid $white;
+            // border-bottom: 1px solid $white;
+            cursor: pointer;
+        }
+        .fi-arrow-left {
+            width: 100%;
+            height: 100%;
+            font-size: 20px;
+            color: $white;
+            transition: color 0.3s ease;
+            // top: 5px;
+            position: relative;
+            padding-top: 5px;
+            box-sizing: border-box;
+            &:hover {
+                color: $darkestwhite;
+            }
+        }
+        .profile-verified {
+            width: 20px;
+            height: 20px;
+            border-radius: 12px;
+            position: absolute;
+            background: $lightBlue;
+            z-index: 3;
+            top: 22px;
+            left: calc( 50% + 20px);
+        }
     }
     .user-banner {
         width: 100%;
@@ -605,17 +809,19 @@ html{
         .name,.screen-name,.description,.location,.url {
             display: block;
             text-align: center;
-            margin: 10px auto;
+            margin: 0px auto;
             width: 80%;
-            max-width: 400px;            
+            max-width: 400px;   
+            line-height: 25px;      
         }
         .name {
             font-weight: bold;
             font-size: 18px;
-            margin-bottom: 2px;
+            // margin-bottom: 0px;
+            margin-top: 10px;
         }
         .screen-name {
-            margin-top: 2px;
+            // margin-top: 0px;
             font-size: 16px;
             color: $lightBlue;
         }
@@ -628,7 +834,7 @@ html{
         width: 100%;
         max-width: 400px;
         margin: 0 auto;
-
+        line-height: 25px;      
         span {
             width: 50%;
             display: inline-block;
@@ -639,7 +845,7 @@ html{
     .follow-button {
         position: absolute;
         display: block;
-        top: 38px;
+        top: 41px;
         left: 67.5%;
         padding: 6px 12px;
         border: 1px solid $lightBlue300;
@@ -649,7 +855,7 @@ html{
         transition: color 0.3s ease, background 0.3s ease;
         cursor: pointer;
 
-        &:hover,&.inactive {
+        &.following,&:hover,&.inactive {
             color: $white;
             background: $lightBlue300;
         }
@@ -722,18 +928,6 @@ html{
         &:hover,
         &:active {
             border-left: 30px solid $lightBlue300;
-        }
-    }
-}
-
-
-/* --------- MOBILE STYLES --------- */
-
-.mobile{
-    .twitter-app {
-        .window_content {
-            bottom:1px;
-            width: 100%;
         }
     }
 }
