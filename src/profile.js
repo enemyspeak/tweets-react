@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import Tweet from './tweet'
 import { fetchUserByName } from './api';
 
-
 class Profile extends Component {
 	constructor(props) {
   	super(props);
-  	this.state = {selectedUser: '@hannufluff'};
+  	this.state = {selectedUser: this.props.selectedUser};
 
     fetchUserByName(this.state.selectedUser,(err, profile) => this.setState({ 
       profile 
@@ -49,6 +48,8 @@ class Profile extends Component {
           <div className="user-avatar profile-avatar">
             <img src={profile.profile_image_url_https} alt={profile.screen_name} />
           </div>
+          {profile.verified && ( <div className="verified"></div> )}
+
           {profile.following ? (<span className="follow-button following">Following</span>) : (<span className="follow-button">Follow</span>)}
           <div className="profile-details">
             <span className="name">{profile.name}</span>

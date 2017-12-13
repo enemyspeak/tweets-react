@@ -80,7 +80,7 @@ class RelativeTime extends Component {
 
 	 	if (!time) return;
 
-	    let day,month,year;
+	    // let day,month,year;
 	    let date = new Date(time),
 	        diff = ( (( new Date().getTime() ) - date.getTime()) / 1000),
 	        // day_diff = ( new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()).getTime() - new Date(date.getFullYear(),date.getMonth(),date.getDate()).getTime() ) / 1000 / 86400, //
@@ -165,7 +165,8 @@ function createMarkup(tweet,mentionHandler) {
 	let text = tweet.text;
 	text = parseURL(text);
 	for (let i = tweet.entities.hashtags.length - 1; i >= 0; i--) {
-		text.replace('#'+tweet.entities.hashtags[i],'<span class="hashtag">#'+tweet.entities.hashtags[i]+'</span>');
+		// console.log(tweet.entities.hashtags[i].text);
+		text = text.replace("#"+tweet.entities.hashtags[i].text,'<span class="hashtag">#'+tweet.entities.hashtags[i].text+'</span>');
 	}
 	for (let i = tweet.entities.user_mentions.length - 1; i >= 0; i--) {
 		// console.log(tweet.entities.user_mentions[i].screen_name);
@@ -206,7 +207,6 @@ class Tweet extends Component {
 					{/* <TweetStatistics favorite_count={tweet.favorite_count} retweet_count={tweet.retweet_count} /> */}
 				</div>
 				<TweetControls props={tweet} />
-				
 			</div>
 		);
 	}
