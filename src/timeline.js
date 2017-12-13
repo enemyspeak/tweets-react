@@ -27,7 +27,7 @@ class Timeline extends Component {
     timeline: []
   };
   setSelectedUser(id) {
-    // console.log(id);
+    console.log(id);
     this.setState({selectedUser:id});
   }
   clearSelectedUser() {

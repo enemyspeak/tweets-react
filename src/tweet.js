@@ -50,11 +50,13 @@ function Media(props) {
 }
 
 function QuotedStatus(props) {
+	// console.log(props.mentionHandler);
 	return(
 		<div className="quoted-tweet" data-id="{props.id}" data-userid="{props.user.id}">
-			<UserInfo user={props.quoted_status.user} />
+			<UserInfo user={props.quoted_status.user} onClick={props.onClick} />
 			<span className="tweet-date">{props.quoted_status.relativeTime}</span>
-			<p className="tweet-text" dangerouslySetInnerHTML={createMarkup(props.quoted_status)}></p>
+
+		    <TweetBody tweet={props.quoted_status} onClick={props.onClick} />
 
 			{(props.quoted_status.entities.media) &&
 				<Media media={props.quoted_status.entities.media} />
@@ -154,25 +156,35 @@ class TweetControls extends Component {
 		)
 	}
 }
-
-function parseURL(str) {
-	return str.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g, function(url) {
-		return url.link(url);
-	});
-};
-
-function createMarkup(tweet,mentionHandler) {
-	let text = tweet.text;
-	text = parseURL(text);
-	for (let i = tweet.entities.hashtags.length - 1; i >= 0; i--) {
-		text = text.replace("#"+tweet.entities.hashtags[i].text,'<span class="hashtag">#'+tweet.entities.hashtags[i].text+'</span>');
+class TweetBody extends Component {
+	parseURL(str) {
+		return str.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g, function(url) {
+			return url.link(url);
+		});
 	}
-	for (let i = tweet.entities.user_mentions.length - 1; i >= 0; i--) {
-		// console.log(tweet.entities.user_mentions[i].screen_name);
-		text = text.replace('@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention">@'+tweet.entities.user_mentions[i].screen_name+'</span>');
+	createMarkup(html) { 
+		return {__html: html}; 
 	}
+	render() {
+		// console.log(this.props.onClick);
 
-  	return {__html: text};
+		const tweet = this.props.tweet;
+		
+		let text = tweet.text;
+		text = this.parseURL(text);
+
+		for (let i = tweet.entities.hashtags.length - 1; i >= 0; i--) {
+			text = text.replace("#"+tweet.entities.hashtags[i].text,'<span class="hashtag">#'+tweet.entities.hashtags[i].text+'</span>');
+		}
+		for (let i = tweet.entities.user_mentions.length - 1; i >= 0; i--) {
+			// console.log(tweet.entities.user_mentions[i].screen_name);
+			text = text.replace('@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(tweet.user.screen_name)}">@' + tweet.entities.user_mentions[i].screen_name+'</span>');
+		}
+
+	  	return (
+			<p className="tweet-text" dangerouslySetInnerHTML={this.createMarkup(text)}></p>
+		);
+	}
 }
 
 class Tweet extends Component {
@@ -189,7 +201,7 @@ class Tweet extends Component {
 				<div className="tweet-body">
 				    <UserInfo user={tweet.user} onClick={this.props.mentionHandler} />
 
-					<p className="tweet-text" dangerouslySetInnerHTML={createMarkup(tweet,this.props.mentionHandler)}></p>
+				    <TweetBody tweet={tweet} onClick={this.props.mentionHandler} />
 
 					<div className="status-contain">
 						<RelativeTime created_at={tweet.created_at} />
@@ -198,7 +210,7 @@ class Tweet extends Component {
 					</div>
 
 					{ tweet.extended_entities && <Media media={tweet.extended_entities.media} /> }
-					{ tweet.quoted_status && <QuotedStatus quoted_status={tweet.quoted_status} />}
+					{ tweet.quoted_status && <QuotedStatus quoted_status={tweet.quoted_status} onClick={this.props.mentionHandler} />}
 					{ tweet.retweeteduser && (
 						<OiginalUser user={tweet.retweeteduser} onClick={this.props.mentionHandler} />
 					)}

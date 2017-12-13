@@ -611,9 +611,6 @@ html {
       left: 50px;
       padding: 10px 0px;
       width: calc( 100% - 60px); }
-    .twitter-app .quoted-tweet .media-box {
-      max-width: 50%;
-      max-height: 100px; }
   .twitter-app .retweeted-by-contain {
     position: relative;
     margin-top: 10px;
