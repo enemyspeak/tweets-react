@@ -165,7 +165,6 @@ function createMarkup(tweet,mentionHandler) {
 	let text = tweet.text;
 	text = parseURL(text);
 	for (let i = tweet.entities.hashtags.length - 1; i >= 0; i--) {
-		// console.log(tweet.entities.hashtags[i].text);
 		text = text.replace("#"+tweet.entities.hashtags[i].text,'<span class="hashtag">#'+tweet.entities.hashtags[i].text+'</span>');
 	}
 	for (let i = tweet.entities.user_mentions.length - 1; i >= 0; i--) {
