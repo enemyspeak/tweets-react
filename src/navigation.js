@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import Tweet from './tweet'
-// import './twitter.css';
 
 const navItems = [  
 	{
@@ -46,6 +44,3 @@ class Navigation extends Component {
 }
 	
 export default Navigation;
-
-
-

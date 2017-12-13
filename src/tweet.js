@@ -16,7 +16,7 @@ function UserInfo(props){
 			<div className="user-avatar">
 		        <Avatar user={props.user} />
 		    </div>
-
+		    {props.user.verified && ( <div className="verified"></div> )}
 			<span className="name">{props.user.name}</span>
 			<span className="screenName">@{props.user.screen_name}</span>
 		</div>

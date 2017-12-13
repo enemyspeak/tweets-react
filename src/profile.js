@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import Tweet from './tweet'
+import { fetchHomeUser } from './api';
+
 
 class Profile extends Component {
 	constructor(props) {
   	super(props);
   	this.state = {selectedUser: false};
-    this.props.dataSource((err, profile) => this.setState({ 
+    // this.props.dataSource((err, profile) => this.setState({ 
+    //   profile 
+    // }));
+    fetchHomeUser((err, profile) => this.setState({ 
       profile 
     }));
-
   }
   state = {
     selectedUser: false,
@@ -16,6 +20,9 @@ class Profile extends Component {
   };
   setSelectedTweet(id) {
   	this.setState({selectedUser:id});
+  }
+  showProfile() {
+
   }
 	render() {
     const profile = this.state.profile;
@@ -58,6 +65,7 @@ class Profile extends Component {
                   key={obj.id_str}
                   data={obj} 
                   onClick={()=>this.setSelectedTweet(obj.id_str)} 
+                  mentionHandler={()=>this.setSelectedTweet(obj.id_str)} 
                 />
               )
             })}

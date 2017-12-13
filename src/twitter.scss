@@ -321,6 +321,7 @@ html{
             width: 100%;
             height: 100%;
         }
+       
     }
     .tweet-user {
         height: 16px;
@@ -350,6 +351,16 @@ html{
             top: 4px;
             position: relative;
         }  
+        .verified {
+            width: 12px;
+            height: 12px;
+            border-radius: 12px;
+            position: absolute;
+            background: $lightBlue;
+            z-index: 3;
+            top: -3px;
+            left: 43px;
+        }
     }
  
     .status-contain {

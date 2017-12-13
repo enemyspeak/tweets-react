@@ -60,9 +60,21 @@ function fetchHomeUser(cb) {
 //   	});
 // }
 
-// returns details & timeline of user in screen_name or user_id
-function fetchuser(cb) {
-  	socket.emit('getuser',{},function(data) {
+// returns details & timeline of user in user_id
+function fetchuser(id,cb) {
+  	socket.emit('getuser',{user_id: id},function(data) {
+  		// console.log(data);
+  		if (!data) {
+			cb(null, []);
+  			return;
+  		}
+  		// return data;
+  		cb(null, data);
+  	});
+}
+
+function fetchuserbyname(screen_name,cb) {
+	socket.emit('getuser',{},function(data) {
   		// console.log(data);
   		if (!data) {
 			cb(null, []);
