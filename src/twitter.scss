@@ -351,16 +351,17 @@ html{
             top: 4px;
             position: relative;
         }  
-        .verified {
-            width: 12px;
-            height: 12px;
-            border-radius: 12px;
-            position: absolute;
-            background: $lightBlue;
-            z-index: 3;
-            top: -3px;
-            left: 43px;
-        }
+    }
+ 
+    .verified {
+        width: 12px;
+        height: 12px;
+        border-radius: 12px;
+        position: absolute;
+        background: $lightBlue;
+        z-index: 3;
+        top: -3px;
+        left: 43px;
     }
  
     .status-contain {
@@ -489,7 +490,8 @@ html{
             line-height: 20px;
         }
         .fi-loop {
-            color: $lightGreen;
+            // color: $lightGreen;
+            color: $gray50;
             font-size: 18px;
             padding-top: 1px;
             box-sizing: border-box;

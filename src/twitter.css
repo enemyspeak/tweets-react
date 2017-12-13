@@ -287,15 +287,15 @@ html {
       color: #AFAFAF;
       top: 4px;
       position: relative; }
-    .twitter-app .tweet-user .verified {
-      width: 12px;
-      height: 12px;
-      border-radius: 12px;
-      position: absolute;
-      background: #03A9F4;
-      z-index: 3;
-      top: -3px;
-      left: 43px; }
+  .twitter-app .verified {
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+    position: absolute;
+    background: #03A9F4;
+    z-index: 3;
+    top: -3px;
+    left: 43px; }
   .twitter-app .status-contain {
     position: absolute;
     right: 10px;
@@ -392,7 +392,7 @@ html {
       margin-right: 10px;
       line-height: 20px; }
     .twitter-app .retweeted-by-contain .fi-loop {
-      color: #8BC34A;
+      color: #AFAFAF;
       font-size: 18px;
       padding-top: 1px;
       box-sizing: border-box; }
