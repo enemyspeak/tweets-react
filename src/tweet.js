@@ -169,7 +169,7 @@ function createMarkup(tweet,mentionHandler) {
 	}
 	for (let i = tweet.entities.user_mentions.length - 1; i >= 0; i--) {
 		// console.log(tweet.entities.user_mentions[i].screen_name);
-		text = text.replace('@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick={mentionHandler}>@'+tweet.entities.user_mentions[i].screen_name+'</span>');
+		text = text.replace('@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention">@'+tweet.entities.user_mentions[i].screen_name+'</span>');
 	}
 
   	return {__html: text};
