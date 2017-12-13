@@ -721,7 +721,7 @@ html {
     height: 303px;
     top: 0;
     overflow: hidden;
-    opacity: 0.8;
+    opacity: 0.5;
     filter: blur(3px); }
   .twitter-app .profile-avatar {
     left: calc( 50% - 25px);
