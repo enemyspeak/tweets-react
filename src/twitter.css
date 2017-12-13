@@ -502,7 +502,8 @@ html {
       height: 100%; }
   .twitter-app .tweet-user {
     height: 16px;
-    position: relative; }
+    position: relative;
+    cursor: pointer; }
     .twitter-app .tweet-user span {
       vertical-align: bottom;
       display: inline-block;
@@ -617,14 +618,17 @@ html {
     position: relative;
     margin-top: 10px;
     left: 60px;
-    width: calc( 100% - 60px); }
+    width: calc( 100% - 60px);
+    cursor: pointer;
+    color: #AFAFAF;
+    transition: color 0.3s ease; }
+    .twitter-app .retweeted-by-contain:hover {
+      color: #fff; }
     .twitter-app .retweeted-by-contain span {
       vertical-align: bottom;
       display: inline-block;
       height: 20px;
-      font-weight: bold;
       font-size: 14px;
-      color: #AFAFAF;
       margin-right: 10px;
       line-height: 20px; }
     .twitter-app .retweeted-by-contain .fi-loop {
