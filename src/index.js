@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './reset.css';
-import './foundation-icons.css';
-import './twitter.css';
+import './css/reset.css';
+import './css/foundation-icons.css';
+import './css/twitter.css';
 
-import registerServiceWorker from './registerServiceWorker';
-import Root from './root';
+import registerServiceWorker from './js/registerServiceWorker';
+import Root from './js/root';
 
 ReactDOM.render(<Root />, document.getElementById('root'));
 registerServiceWorker();
