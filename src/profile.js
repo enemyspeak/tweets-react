@@ -31,7 +31,6 @@ class Profile extends Component {
     let bannerStyle = {
       background: 'url(' +  (profile.profile_use_background_image ? profile.profile_background_image_url_https : profile.profile_banner_url) + ') no-repeat 50% 50% / cover',
     };
-		
 
     return (
       <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>

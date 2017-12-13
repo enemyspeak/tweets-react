@@ -226,7 +226,21 @@ html {
     left: 60px;
     position: relative;
     width: calc( 100% - 60px);
-    line-height: 25px; }
+    line-height: 25px;
+    white-space: pre-wrap; }
+    .twitter-app .tweet-text .url, .twitter-app .tweet-text a, .twitter-app .tweet-text .hashtag {
+      text-decoration: none;
+      color: #AFAFAF;
+      transition: color 0.3s ease;
+      cursor: pointer; }
+      .twitter-app .tweet-text .url:hover, .twitter-app .tweet-text a:hover, .twitter-app .tweet-text .hashtag:hover {
+        color: #eee; }
+    .twitter-app .tweet-text .user-mention {
+      color: #03A9F4;
+      transition: color 0.3s ease;
+      cursor: pointer; }
+      .twitter-app .tweet-text .user-mention:hover {
+        color: #4FC3F7; }
   .twitter-app .user-link, .twitter-app .link {
     color: #4FC3F7;
     cursor: pointer;

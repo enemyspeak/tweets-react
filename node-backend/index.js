@@ -266,6 +266,14 @@ function start( port ){
             });
         });
 
+         var userStream;
+        twit.stream('user', {}, function(stream) {
+            userStream = stream;
+        });
+        userStream.on('error', function(error) {
+            throw error;
+        });
+
     var usersConnected = 0;
     io.on( 'connection', function( socket ){
         usersConnected++;
@@ -273,14 +281,27 @@ function start( port ){
 
         console.log('a user connected', usersConnected, 'This process is pid', process.pid );
 
+        function streamfunction(event) {
+            socket.emit('hometweet',event);
+            timelinecache.unshift(event); // add this to the cache.
+            console.log(event && event.text);
+            streamfunction = this;
+        };
+
         socket.on( 'disconnect', function(){
             usersConnected--;
             console.log('user disconnected', usersConnected);
             if(userData.id){
                 userData = {}; // clear user data, might not be necessary, closure should take care of it
             }
+            // if(streamfunction) {
+            //     userStream.removeListener('data',streamfunction);
+            // }
+            userStream.removeAllListeners('data');
         });
 
+        userStream.on('data', streamfunction);
+     
         socket.on('updatestatus',function(data,cb){
             twit.updateStatus('Test tweet from ntwitter/' + twitter.VERSION,
                 function (err, result) {

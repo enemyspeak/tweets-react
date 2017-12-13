@@ -7,6 +7,17 @@ class Timeline extends Component {
     this.props.dataSource((err, timeline) => this.setState({ 
       timeline 
     }));
+    if (this.props.stream) {
+      this.props.stream((err, tweet) => {
+          console.log(tweet);
+          let timeline = this.state.timeline;
+          timeline.unshift(tweet);
+          this.setState({ 
+            timeline
+          })
+        }
+      );
+    }
   }
   state = {
     selectedTweet: false,

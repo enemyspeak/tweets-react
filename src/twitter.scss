@@ -271,6 +271,25 @@ html{
         position: relative;
         width: calc( 100% - 60px );
         line-height: 25px;
+        white-space: pre-wrap;
+
+        .url,a,.hashtag {
+            text-decoration: none;
+            color: $gray50;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            &:hover {
+                color: $darkerWhite;
+            }
+        }
+        .user-mention {
+            color: $lightBlue;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            &:hover {
+                color: $lightBlue300;
+            }
+        }
     }
     .user-link,.link {
         color: $lightBlue300;

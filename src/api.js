@@ -1,5 +1,5 @@
 import openSocket from 'socket.io-client';
-const  socket = openSocket('http://localhost:4000');
+const socket = openSocket('http://localhost:4000');
 
 function fetchHomeTimeline(cb) {
   	socket.emit('gethometimeline',{},function(data) {
@@ -11,6 +11,17 @@ function fetchHomeTimeline(cb) {
   		// return data;
   		cb(null, data);
   	});
+}
+
+function subscribeToHomeTimeline(cb) {
+	socket.on('hometweet',function(data){
+		if (!data) {
+			cb(null, []);
+  			return;
+  		}
+  		// return data;
+  		cb(null, data);
+	})
 }
 
 function fetchMentions(cb) {
@@ -63,4 +74,4 @@ function fetchuser(cb) {
 }
 
 
-export { fetchHomeTimeline, fetchMentions, fetchHomeUser };
+export { fetchHomeTimeline, fetchMentions, fetchHomeUser,subscribeToHomeTimeline };

@@ -12,10 +12,6 @@ const navItems = [
 	"icon":"fi-at-sign"
 	},
 	{
-	"name": "direct-messages",
-	"icon":"fi-mail"
-	},
-	{
 	"name": "search",
 	"icon":"fi-magnifying-glass"
 	},
@@ -23,7 +19,10 @@ const navItems = [
 	"name": "profile",
 	"icon":"fi-torso"
 	}
-]; // ok
+]; // 	{ // can't access direct messages without oauth
+	// "name": "direct-messages",
+	// "icon":"fi-mail"
+	// },
 
 class Navigation extends Component {
 	handleClick(obj,e) {

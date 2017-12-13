@@ -7,7 +7,7 @@ import Profile from './profile'
 import DirectMessages from './directMessages'
 import Search from './search'
 
-import { fetchHomeTimeline, fetchMentions, fetchHomeUser } from './api';
+import { fetchHomeTimeline, fetchMentions, fetchHomeUser,subscribeToHomeTimeline } from './api';
 
 class Root extends Component {
 	constructor(props) {
@@ -36,7 +36,7 @@ class Root extends Component {
 			        </div>
 				</div>
 				<div className="app-contain">
-					<Timeline dataSource={fetchHomeTimeline} activeTab={this.state.selectedTab === 'timeline' ? true : false} /> 
+					<Timeline dataSource={fetchHomeTimeline} stream={subscribeToHomeTimeline} activeTab={this.state.selectedTab === 'timeline' ? true : false} /> 
 					<Timeline dataSource={fetchMentions} activeTab={this.state.selectedTab === 'mentions' ? true : false} />
 					<Search activeTab={this.state.selectedTab === 'search' ? true : false} />
 					<DirectMessages activeTab={this.state.selectedTab === 'direct-messages' ? true : false} />
