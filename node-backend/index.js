@@ -371,22 +371,27 @@ function start( port ){
         });
 
 
-        socket.on('getuser', function(data,cb) { // load profile by id
-            if (!data.id) {
+        socket.on('getuser', function(data,cb) { // load profile by screen_name
+            console.log('getuser',data);
+            if (!data.screen_name) {
                 if(cb) cb({error:'error'});
                 return;
             }
+
+            let user;
             twit.get('users/show', {screen_name: data.screen_name},function(error,  response) {
                 if (error) {
                     if(cb) cb({error:error});
                     return;
                 }
-                twit.get('statuses/user_timeline',{user_id: data.id},function(error, tweets, response) {
+                user = response
+                twit.get('statuses/user_timeline',{screen_name: data.screen_name},function(error, tweets) {
                     if (error) {
                         if(cb) cb({error:error});
                         return;
                     }
-                    if(cb) cb(error,user,tweets);
+                    user.timeline = tweets;
+                    if(cb) cb(user);
                 });
             });
         });

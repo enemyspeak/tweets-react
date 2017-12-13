@@ -161,24 +161,15 @@ function parseURL(str) {
 	});
 };
 
-function createMarkup(tweet) {
+function createMarkup(tweet,mentionHandler) {
 	let text = tweet.text;
-
-	// for (let i = tweet.entities.urls.length - 1; i >= 0; i--) {
-	// 	// console.log(tweet.entities.urls[i].url);
-	// 	// console.log(tweet.entities);
-	// 	// console.log(text);
-	// 	// text.substr(tweet.entities.urls[i].index[0],)
-	// 	text = text.replace(tweet.entities.urls[i].url,'<a href="'+ tweet.entities.urls[i].url +'" class="url">'+tweet.entities.urls[i].url+'</a>');
-	// }
 	text = parseURL(text);
-
 	for (let i = tweet.entities.hashtags.length - 1; i >= 0; i--) {
 		text.replace('#'+tweet.entities.hashtags[i],'<span class="hashtag">#'+tweet.entities.hashtags[i]+'</span>');
 	}
 	for (let i = tweet.entities.user_mentions.length - 1; i >= 0; i--) {
 		// console.log(tweet.entities.user_mentions[i].screen_name);
-		text = text.replace('@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention">@'+tweet.entities.user_mentions[i].screen_name+'</span>');
+		text = text.replace('@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick={mentionHandler}>@'+tweet.entities.user_mentions[i].screen_name+'</span>');
 	}
 
   	return {__html: text};
@@ -198,7 +189,7 @@ class Tweet extends Component {
 				<div className="tweet-body">
 				    <UserInfo user={tweet.user} />
 
-					<p className="tweet-text" dangerouslySetInnerHTML={createMarkup(tweet)}></p>
+					<p className="tweet-text" dangerouslySetInnerHTML={createMarkup(tweet,this.props.mentionHandler)}></p>
 
 					<div className="status-contain">
 						<RelativeTime created_at={tweet.created_at} />

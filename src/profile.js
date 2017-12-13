@@ -1,28 +1,31 @@
 import React, { Component } from 'react';
 import Tweet from './tweet'
-import { fetchHomeUser } from './api';
+import { fetchUserByName } from './api';
 
 
 class Profile extends Component {
 	constructor(props) {
   	super(props);
-  	this.state = {selectedUser: false};
-    // this.props.dataSource((err, profile) => this.setState({ 
-    //   profile 
-    // }));
-    fetchHomeUser((err, profile) => this.setState({ 
+  	this.state = {selectedUser: '@hannufluff'};
+
+    fetchUserByName(this.state.selectedUser,(err, profile) => this.setState({ 
       profile 
     }));
   }
   state = {
+    selectedTweet: false,
     selectedUser: false,
-    profile: [],
+    profile: {
+      'timeline':[]
+    },
   };
-  setSelectedTweet(id) {
+  setSelectedUser(id) {
+    console.log(id);
   	this.setState({selectedUser:id});
   }
-  showProfile() {
-
+  setSelectedTweet(id) {
+    console.log(id);
+    this.setState({selectedTweet:id});
   }
 	render() {
     const profile = this.state.profile;
@@ -58,17 +61,17 @@ class Profile extends Component {
             </div>
           </div>
           <div className="recent-timeline-contain">
-            {profile.timeline.map((obj) => {
+            {profile.timeline && (profile.timeline.map((obj) => {
               obj.selected = ( obj.id_str === this.state.selectedTweet ? 'selected' : '' );
               return (
                 <Tweet 
                   key={obj.id_str}
                   data={obj} 
                   onClick={()=>this.setSelectedTweet(obj.id_str)} 
-                  mentionHandler={()=>this.setSelectedTweet(obj.id_str)} 
+                  mentionHandler={()=>this.setSelectedUser(obj.user.screen_name)} 
                 />
               )
-            })}
+            }))}
           </div>
       	</div>
       </div>

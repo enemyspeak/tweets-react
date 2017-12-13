@@ -73,9 +73,9 @@ function fetchuser(id,cb) {
   	});
 }
 
-function fetchuserbyname(screen_name,cb) {
-	socket.emit('getuser',{},function(data) {
-  		// console.log(data);
+function fetchUserByName(screen_name,cb) {
+	socket.emit('getuser',{screen_name:screen_name},function(data) {
+  		console.log(data);
   		if (!data) {
 			cb(null, []);
   			return;
@@ -86,4 +86,4 @@ function fetchuserbyname(screen_name,cb) {
 }
 
 
-export { fetchHomeTimeline, fetchMentions, fetchHomeUser,subscribeToHomeTimeline };
+export { fetchHomeTimeline, fetchMentions, fetchHomeUser,subscribeToHomeTimeline,fetchUserByName };
