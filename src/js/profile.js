@@ -5,8 +5,7 @@ import { fetchUserByName } from './api';
 class Profile extends Component {
 	constructor(props) {
   	super(props);
-
-    console.log(props);
+    // console.log(props);
   }
   state = {
     selectedTweet: false,
@@ -16,9 +15,11 @@ class Profile extends Component {
     // console.log(this.props.selectedUser);
     this.setState({selectedUser:this.props.selectedUser});
     // console.log(this.state.selectedUser);
-    fetchUserByName(this.props.selectedUser,(err, profile) => this.setState({ 
-      profile 
-    }));
+    if (this.props.activeTab) {
+      fetchUserByName(this.props.selectedUser,(err, profile) => this.setState({ 
+        profile 
+      }));
+    }
   }
   setSelectedUser(id) {
     // console.log(id);
@@ -55,6 +56,7 @@ class Profile extends Component {
             <img src={profile.profile_image_url_https} alt={profile.screen_name} />
           </div>
           {profile.verified && ( <div className="profile-verified"></div> )}
+          {profile.protected && ( <div className="profile-protected"><div className="fi-lock"></div></div> )}
 
           {profile.following ? (<span className="follow-button following">Following</span>) : (<span className="follow-button">Follow</span>)}
           <div className="profile-details">

@@ -166,11 +166,17 @@ class TweetBody extends Component {
 		return {__html: html}; 
 	}
 	render() {
-		// console.log(this.props.onClick);
-
 		const tweet = this.props.tweet;
-		
-		let text = tweet.text;
+		// console.log(tweet);
+
+		var text;
+		if (tweet.extended_tweet) {
+			text = tweet.extended_tweet.full_text;
+		} else if (tweet.full_text) {
+			text = tweet.full_text;
+		} else {
+			text = tweet.text;
+		}
 		text = this.parseURL(text);
 
 		for (let i = tweet.entities.hashtags.length - 1; i >= 0; i--) {

@@ -214,7 +214,7 @@ function start( port ){
     });
 
         var timelinecache;
-        twit.get('statuses/home_timeline',{},function(err,result) {
+        twit.get('statuses/home_timeline',{tweet_mode:'extended'},function(err,result) {
             if (err) {
                 console.log(err);
                 return;
@@ -266,13 +266,16 @@ function start( port ){
             });
         });
 
-         var userStream;
-        twit.stream('user', {}, function(stream) {
+        var userStream;
+        twit.stream('user', {tweet_mode:'extended'}, function(stream) {
             userStream = stream;
         });
         userStream.on('error', function(error) {
             throw error;
         });
+
+        var usersCache;
+
 
     var usersConnected = 0;
     io.on( 'connection', function( socket ){

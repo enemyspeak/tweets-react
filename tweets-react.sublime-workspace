@@ -211,6 +211,23 @@
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"file": "package.json",
+			"settings":
+			{
+				"buffer_size": 744,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "build/manifest.json",
+			"settings":
+			{
+				"buffer_size": 317,
+				"line_ending": "Unix"
+			}
 		}
 	],
 	"build_system": "",
@@ -285,6 +302,7 @@
 	],
 	"file_history":
 	[
+		"/C/Users/user/Documents/tweets-react/build/static/js/main.0b1f4bdf.js",
 		"/C/Users/user/Documents/tweets-react/src/profile.js",
 		"/C/Users/user/Documents/tweets-react/src/timeline.js",
 		"/C/Users/user/Documents/tweets-react/src/tweet.js",
@@ -382,7 +400,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -459,7 +477,7 @@
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -475,8 +493,8 @@
 						"selection":
 						[
 							[
-								10936,
-								10936
+								10621,
+								10621
 							]
 						],
 						"settings":
@@ -487,6 +505,64 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 5203.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 744,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								115,
+								115
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "build/manifest.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 317,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -523,7 +599,7 @@
 		"cols":
 		[
 			0.0,
-			0.346255087805,
+			0.448522952589,
 			1.0
 		],
 		"rows":
@@ -549,7 +625,7 @@
 	"project": "tweets-react.sublime-project",
 	"replace":
 	{
-		"height": 72.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":

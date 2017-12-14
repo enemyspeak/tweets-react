@@ -399,6 +399,7 @@ html{
         }
     }
     .recent-timeline-contain {
+        border-top: 1px solid $gray28;
         background: #333;
     }
 
@@ -431,7 +432,7 @@ html{
         position: relative;
         left: 0px;// 60px;
         padding: 10px 10px 10px 0px;
-        min-height: 60px;
+        // min-height: 43px;
         // width: 100%;//calc( 100% - 60px );
         border-bottom: 1px solid $gray28;
     }
@@ -443,7 +444,8 @@ html{
         width: calc( 100% - 60px );
         line-height: 25px;
         white-space: pre-wrap;
-
+        cursor: default;
+        
         .url,a,.hashtag {
             text-decoration: none;
             color: $gray50;
@@ -533,6 +535,9 @@ html{
         z-index: 3;
         top: -3px;
         left: 43px;
+        border: 1px solid black;
+        text-align: center;
+        box-sizing: border-box;
     }
 
     .status-contain {
@@ -784,6 +789,27 @@ html{
             z-index: 3;
             top: 22px;
             left: calc( 50% + 20px);
+            border: 3px solid white;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .profile-protected {
+            width: 20px;
+            height: 20px;
+            border-radius: 12px;
+            position: absolute;
+            z-index: 3;
+            top: 74px;
+            left: calc( 50% + 20px);
+            /* background: #000; */
+            border: 3px solid white;
+            text-align: center;
+            box-sizing: border-box;
+            .fi-lock {
+                position: relative;
+                top: 1px;
+                font-size: 12px;
+            }
         }
     }
     .user-banner {
