@@ -186,7 +186,7 @@ class TweetBody extends Component {
 		}
 		for (let i = tweet.entities.user_mentions.length - 1; i >= 0; i--) {
 			// console.log(tweet.entities.user_mentions[i].screen_name);
-			text = this.replaceAll(text,'@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(tweet.user.screen_name)}">@' + tweet.entities.user_mentions[i].screen_name+'</span>');
+			text = this.replaceAll(text,'@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(\''+tweet.user.screen_name+'\')}">@' + tweet.entities.user_mentions[i].screen_name+'</span>');
 		}
 
 	  	return (

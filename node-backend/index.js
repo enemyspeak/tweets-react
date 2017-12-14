@@ -388,7 +388,7 @@ function start( port ){
                     return;
                 }
                 user = response
-                twit.get('statuses/user_timeline',{screen_name: data.screen_name},function(error, tweets) {
+                twit.get('statuses/user_timeline',{screen_name: data.screen_name,tweet_mode:'extended'},function(error, tweets) {
                     if (error) {
                         if(cb) cb({error:error});
                         return;
