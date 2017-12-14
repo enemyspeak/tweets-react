@@ -343,7 +343,7 @@ function start( port ){
                 if(cb) cb({error:'error'});
                 return;
             }
-            twit.showStatus(data.id,function(error, tweet) {
+            twit.get('statuses/show/:id',data.id,function(error, tweet) {
                 if (error) {
                     if(cb) cb({error:error});
                     return;

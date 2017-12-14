@@ -445,7 +445,7 @@ html{
         line-height: 25px;
         white-space: pre-wrap;
         cursor: default;
-        
+
         .url,a,.hashtag {
             text-decoration: none;
             color: $gray50;
@@ -743,8 +743,16 @@ html{
             color: $darkestwhite;
             transition:color 0.3s ease;
 
-            &:hover,&.active {
+            &:hover {
                 color: $white;
+            }
+            &.active {
+                .fi-loop {
+                    color: $lightGreen;
+                }
+                .fi-star {
+                    color: $yellow;
+                }
             }
         }
     }

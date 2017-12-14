@@ -143,10 +143,10 @@ class TweetControls extends Component {
 				<button className="reply" onClick={this.handleClick}>
 					<div className="fi-comment-quotes"></div>
 				</button>
-				<button className="retweet" onClick={this.handleClick}>
+				<button className={"retweet " + (this.props.props.retweeted ? "active" : "")} onClick={this.handleClick}>
 					<div className="fi-loop"></div>
 				</button>
-				<button className="favorite" onClick={this.handleClick}>
+				<button className={"favorite " + (this.props.props.favorited ? "active" : "")} onClick={this.handleClick}>
 					<div className="fi-star"></div>
 				</button>
 				<button className="details" onClick={this.handleClick}>

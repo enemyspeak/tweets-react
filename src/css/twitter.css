@@ -686,8 +686,12 @@ html {
       position: relative;
       color: #b1b1b1;
       transition: color 0.3s ease; }
-      .twitter-app .tweet-controls button:hover, .twitter-app .tweet-controls button.active {
+      .twitter-app .tweet-controls button:hover {
         color: #fff; }
+      .twitter-app .tweet-controls button.active .fi-loop {
+        color: #8BC34A; }
+      .twitter-app .tweet-controls button.active .fi-star {
+        color: #FFC107; }
   .twitter-app .profile-contain {
     position: relative;
     height: calc( 100% - 30px);
