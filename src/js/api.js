@@ -90,5 +90,22 @@ function fetchUserByName(screen_name,cb) {
   	});
 }
 
+function favoriteTweet(id,cb) {
+  console.log(id);
+  if (!id){ 
+    cb(null, undefined);
+    return
+  };
+  socket.emit('favoritetweet',{id:id},function(data) {
+      console.log(data);
+      if (!data) {
+      cb(null, undefined);
+        return;
+      }
+      // return data;
+      cb(null, data);
+    });
+}
 
-export { fetchHomeTimeline, fetchMentions, fetchHomeUser,subscribeToHomeTimeline,fetchUserByName };
+
+export { fetchHomeTimeline, fetchMentions, fetchHomeUser,subscribeToHomeTimeline,fetchUserByName,favoriteTweet };

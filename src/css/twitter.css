@@ -582,7 +582,6 @@ html {
     position: relative;
     width: calc( 100% - 60px); }
     .twitter-app .media-contain .media-box {
-      max-width: 400px;
       border-radius: 6px;
       overflow: hidden; }
       .twitter-app .media-contain .media-box img {
@@ -685,7 +684,8 @@ html {
       cursor: pointer;
       position: relative;
       color: #b1b1b1;
-      transition: color 0.3s ease; }
+      transition: color 0.3s ease;
+      outline: none; }
       .twitter-app .tweet-controls button:hover {
         color: #fff; }
       .twitter-app .tweet-controls button.active .fi-loop {

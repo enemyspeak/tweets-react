@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { favoriteTweet } from './api'; 
+
 function Avatar(props) {
 	return (
 		<img className="Avatar"
@@ -124,32 +126,26 @@ class RelativeTime extends Component {
 }
 
 class TweetControls extends Component {
-  	constructor(props) {
-    	super(props);
-    	// this.state = {showButtons: false};
-
-    	// This binding is necessary to make `this` work in the callback
-    	this.handleClick = this.handleClick.bind(this);
+  	createReply() {
+		// TODO
   	}
-  	handleClick() {
-    	this.setState(prevState => ({
-      		isToggleOn: !prevState.isToggleOn
-    	}));
+  	showDetails() {
+		// TODO
   	}
 	render() {
 		// console.log(this.props);
 		return (
 			<div className="tweet-controls">
-				<button className="reply" onClick={this.handleClick}>
+				<button className="reply" onClick={this.createReply}>
 					<div className="fi-comment-quotes"></div>
 				</button>
-				<button className={"retweet " + (this.props.props.retweeted ? "active" : "")} onClick={this.handleClick}>
+				<button className={"retweet " + (this.props.retweeted ? "active" : "")} onClick={() => this.props.handleRetweetTweet()}>
 					<div className="fi-loop"></div>
 				</button>
-				<button className={"favorite " + (this.props.props.favorited ? "active" : "")} onClick={this.handleClick}>
+				<button className={"favorite " + (this.props.favorited ? "active" : "")} onClick={() => this.props.handleFavoriteTweet()}>
 					<div className="fi-star"></div>
 				</button>
-				<button className="details" onClick={this.handleClick}>
+				<button className="details" onClick={this.showDetails}>
 					<div className="fi-magnifying-glass"></div>
 				</button>
 			</div>
@@ -164,6 +160,12 @@ class TweetBody extends Component {
 	}
 	createMarkup(html) { 
 		return {__html: html}; 
+	}
+	replaceAll(str,strReplace, strWith) {
+	    // See http://stackoverflow.com/a/3561711/556609
+	    var esc = strReplace.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+	    var reg = new RegExp(esc, 'ig');
+	    return str.replace(reg, strWith);
 	}
 	render() {
 		const tweet = this.props.tweet;
@@ -180,11 +182,11 @@ class TweetBody extends Component {
 		text = this.parseURL(text);
 
 		for (let i = tweet.entities.hashtags.length - 1; i >= 0; i--) {
-			text = text.replace("#"+tweet.entities.hashtags[i].text,'<span class="hashtag">#'+tweet.entities.hashtags[i].text+'</span>');
+			text = this.replaceAll(text,"#"+tweet.entities.hashtags[i].text,'<span class="hashtag">#'+tweet.entities.hashtags[i].text+'</span>');
 		}
 		for (let i = tweet.entities.user_mentions.length - 1; i >= 0; i--) {
 			// console.log(tweet.entities.user_mentions[i].screen_name);
-			text = text.replace('@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(tweet.user.screen_name)}">@' + tweet.entities.user_mentions[i].screen_name+'</span>');
+			text = this.replaceAll(text,'@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(tweet.user.screen_name)}">@' + tweet.entities.user_mentions[i].screen_name+'</span>');
 		}
 
 	  	return (
@@ -194,6 +196,19 @@ class TweetBody extends Component {
 }
 
 class Tweet extends Component {
+  	constructor(props) {
+    	super(props);
+    	this.state = {
+    		retweeted: this.props.data.retweeted,
+    		favorited: this.props.data.favorited
+    	};
+  	}
+	handleFavoriteTweet() { // this can just call to the api and update this icon.
+  		this.setState({favorited: !this.state.favorited});
+  	}
+  	handleRetweetTweet() { // this can just call to the api and update this icon.
+  		this.setState({retweeted: !this.state.retweeted});
+  	}
 	render() {
 		// console.log(this.props.data);
 		let tweet = this.props.data;
@@ -211,10 +226,11 @@ class Tweet extends Component {
 
 					<div className="status-contain">
 						<RelativeTime created_at={tweet.created_at} />
-						<div className={"fi-star " + (tweet.favorited ? "active" : "")}></div>
-						<div className={"fi-loop " + (tweet.retweeted ? "active" : "")}></div>						
+						<div className={"fi-star " + (this.state.favorited ? "active" : "")}></div>
+						<div className={"fi-loop " + (this.state.retweeted ? "active" : "")}></div>						
 					</div>
 
+					{ (tweet.extended_tweet && tweet.extended_tweet.extended_entities) && <Media media={tweet.extended_tweet.extended_entities.media} /> }
 					{ tweet.extended_entities && <Media media={tweet.extended_entities.media} /> }
 					{ tweet.quoted_status && <QuotedStatus quoted_status={tweet.quoted_status} onClick={this.props.mentionHandler} />}
 					{ tweet.retweeteduser && (
@@ -223,7 +239,12 @@ class Tweet extends Component {
 					
 					{/* <TweetStatistics favorite_count={tweet.favorite_count} retweet_count={tweet.retweet_count} /> */}
 				</div>
-				<TweetControls props={tweet} />
+				<TweetControls 
+					retweeted={this.state.retweeted}
+					favorited={this.state.favorited}
+					handleFavoriteTweet={()=>this.handleFavoriteTweet()}
+					handleRetweetTweet={()=>this.handleRetweetTweet()}
+				/>
 			</div>
 		);
 	}
