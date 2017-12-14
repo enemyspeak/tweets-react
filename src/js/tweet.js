@@ -37,20 +37,37 @@ function OiginalUser(props) { // this is a retweet
 	)
 }
 
+function VideoMedia(props) {
+	// TODO load video's bitrate responsive to size of viewport
+	let index = 0;
+	const variants = props.obj.video_info.variants;
+	const bitrate_max = 832000;
+
+	for (var i = variants.length - 1; i >= 0; i--) {
+		if ((variants[i].content_type === "video/mp4") && (variants[i].bitrate < bitrate_max)) {
+			index = i;
+		}
+	}
+	return (
+		<video controls poster={props.obj.media_url_https + ":small"} src={variants[index].url} type={variants[index].content_type} >
+			{ /* {obj.video_info.variants.map(source => {
+				return (
+		    		<source src={source.url} type={source.content_type} />
+		    	);
+		    } */}
+		</video>
+	)
+}
+
 function Media(props) {
+	// TODO load image'ss size responsive to size of viewport
 	return (
 		<div className="media-contain">
 	        {props.media.map(obj => {
             	return (
             		<div className="media-box" key={obj.id_str}>
 						{(obj.type === "video") && (
-							<video controls src={obj.video_info.variants[0].url} type={obj.video_info.variants[0].content_type} >
-								{ /* {obj.video_info.variants.map(source => {
-									return (
-							    		<source src={source.url} type={source.content_type} />
-							    	);
-							    } */}
-							</video>
+							<VideoMedia obj={obj} />
 						)}
 						{(obj.type === "photo") && (
 							<img src={obj.media_url_https + ":small"} alt={obj.display_url} />	
