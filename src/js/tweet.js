@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import twttr from 'twitter-text';
 import { favoriteTweet } from './api'; 
 
 function Avatar(props) {
@@ -179,14 +179,39 @@ class TweetBody extends Component {
 		} else {
 			text = tweet.text;
 		}
-		text = this.parseURL(text);
-
-		for (let i = tweet.entities.hashtags.length - 1; i >= 0; i--) {
-			text = this.replaceAll(text,"#"+tweet.entities.hashtags[i].text,'<span class="hashtag">#'+tweet.entities.hashtags[i].text+'</span>');
+		// text = this.parseURL(text);
+		if ( ( tweet.extended_entities && tweet.extended_entities.media ) ||
+			 ( tweet.extended_tweet && tweet.extended_tweet.extended_entities && tweet.extended_tweet.extended_entities.media ) ) {
+			var lastIndex = text.lastIndexOf(" ");
+			text = text.substring(0, lastIndex); // remove the last word, that's a url to the image.
 		}
-		for (let i = tweet.entities.user_mentions.length - 1; i >= 0; i--) {
-			// console.log(tweet.entities.user_mentions[i].screen_name);
-			text = this.replaceAll(text,'@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(\''+tweet.user.screen_name+'\')}">@' + tweet.entities.user_mentions[i].screen_name+'</span>');
+
+		if (tweet.extended_tweet) {
+			// console.log(tweet.extended_entities);
+			for (let i = tweet.extended_tweet.entities.urls.length - 1; i >= 0; i--) {
+				// console.log(tweet.entities.urls[i].url,tweet.extended_tweet.entities.urls[i].display_url);
+				text = this.replaceAll(text,tweet.extended_tweet.entities.urls[i].url,'<a class="url" href="'+ tweet.entities.urls[i].expanded_url +'">'+tweet.entities.urls[i].display_url+'</a>');
+			}
+			for (let i = tweet.extended_tweet.entities.hashtags.length - 1; i >= 0; i--) {
+				// console.log(tweet.entities.urls[i].url,tweet.extended_tweet.entities.urls[i].display_url);
+				text = this.replaceAll(text,"#"+tweet.extended_tweet.entities.hashtags[i].text,'<span class="hashtag">#'+tweet.extended_tweet.entities.hashtags[i].text+'</span>');
+			}
+			for (let i = tweet.extended_tweet.entities.user_mentions.length - 1; i >= 0; i--) {
+				// console.log(tweet.entities.user_mentions[i].screen_name);
+				text = this.replaceAll(text,'@'+tweet.extended_tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(\''+tweet.user.screen_name+'\')}">@' + tweet.extended_tweet.entities.user_mentions[i].screen_name+'</span>');
+			}
+		} else {
+			for (let i = tweet.entities.urls.length - 1; i >= 0; i--) {
+				// console.log(tweet.entities.urls[i].url,tweet.entities.urls[i].display_url);
+				text = this.replaceAll(text,tweet.entities.urls[i].url,'<a class="url" href="'+ tweet.entities.urls[i].expanded_url +'">'+tweet.entities.urls[i].display_url+'</a>');
+			}
+			for (let i = tweet.entities.hashtags.length - 1; i >= 0; i--) {
+				text = this.replaceAll(text,"#"+tweet.entities.hashtags[i].text,'<span class="hashtag">#'+tweet.entities.hashtags[i].text+'</span>');
+			}
+			for (let i = tweet.entities.user_mentions.length - 1; i >= 0; i--) {
+				// console.log(tweet.entities.user_mentions[i].screen_name);
+				text = this.replaceAll(text,'@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(\''+tweet.user.screen_name+'\')}">@' + tweet.entities.user_mentions[i].screen_name+'</span>');
+			}
 		}
 
 	  	return (

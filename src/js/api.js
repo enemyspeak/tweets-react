@@ -36,18 +36,18 @@ function fetchMentions(cb) {
   	});
 }
 
-// returns your profile
-function fetchHomeUser(cb) {
-  	socket.emit('gethomeuser',{},function(data) {
-  		// console.log(data);
-  		if (!data) {
-			cb(null, []);
-  			return;
-  		}
-  		// return data;
-  		cb(null, data);
-  	});
-}
+// // returns your profile
+// function fetchHomeUser(cb) {
+//   	socket.emit('gethomeuser',{},function(data) {
+//   		// console.log(data);
+//   		if (!data) {
+// 			cb(null, []);
+//   			return;
+//   		}
+//   		// return data;
+//   		cb(null, data);
+//   	});
+// }
 // function fetchHomeUserTimeline(cb) {
 //   	socket.emit('gethomeusertimeline',{},function(data) {
 //   		// console.log(data);
@@ -60,18 +60,18 @@ function fetchHomeUser(cb) {
 //   	});
 // }
 
-// returns details & timeline of user in user_id
-function fetchuser(id,cb) {
-  	socket.emit('getuser',{user_id: id},function(data) {
-  		// console.log(data);
-  		if (!data) {
-			cb(null, []);
-  			return;
-  		}
-  		// return data;
-  		cb(null, data);
-  	});
-}
+// // returns details & timeline of user in user_id
+// function fetchuser(id,cb) {
+//   	socket.emit('getuser',{user_id: id},function(data) {
+//   		// console.log(data);
+//   		if (!data) {
+// 			cb(null, []);
+//   			return;
+//   		}
+//   		// return data;
+//   		cb(null, data);
+//   	});
+// }
 
 function fetchUserByName(screen_name,cb) {
 	console.log(screen_name);
@@ -108,4 +108,4 @@ function favoriteTweet(id,cb) {
 }
 
 
-export { fetchHomeTimeline, fetchMentions, fetchHomeUser,subscribeToHomeTimeline,fetchUserByName,favoriteTweet };
+export { fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet };

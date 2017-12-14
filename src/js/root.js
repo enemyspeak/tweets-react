@@ -7,7 +7,7 @@ import Profile from './profile'
 import DirectMessages from './directMessages'
 import Search from './search'
 
-import { fetchHomeTimeline, fetchMentions, fetchHomeUser,subscribeToHomeTimeline } from './api';
+import { fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline } from './api';
 
 class Root extends Component {
 	constructor(props) {
