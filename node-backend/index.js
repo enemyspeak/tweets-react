@@ -343,7 +343,7 @@ function start( port ){
                 if(cb) cb({error:'error'});
                 return;
             }
-            twit.get('statuses/show/:id',data.id,function(error, tweet) {
+            twit.get('statuses/show/'+data.id,{},function(error, tweet) {
                 if (error) {
                     if(cb) cb({error:error});
                     return;
@@ -398,6 +398,7 @@ function start( port ){
                 });
             });
         });
+
         socket.on('searchtwitter', function(data,cb) { // search tweets & users
             if (!data || !data.search) return;
             twit.search(data.search, {}, function(err, result) {
@@ -405,6 +406,65 @@ function start( port ){
                 if (cb) cb(result);
             });
         });
+
+        // POST
+
+        socket.on('retweettweet',function(data,cb){
+            if (!data || !data.id) {
+                if (cb) cb({error:'error'});
+                return;
+            } 
+            twit.post('statuses/retweet/'+data.id,{},function(error, tweets) {
+                if (error) {
+                    if(cb) cb({error:error});
+                    return;
+                }
+                if(cb) cb('ok');
+            });
+        });
+
+        socket.on('unretweettweet',function(data,cb){
+            if (!data || !data.id) {
+                if (cb) cb({error:'error'});
+                return;
+            } 
+            twit.post('statuses/unretweet/'+data.id,{},function(error, tweets) {
+                if (error) {
+                    if(cb) cb({error:error});
+                    return;
+                }
+                if(cb) cb('ok');
+            });
+        });
+
+        socket.on('favoritetweet',function(data,cb) {
+            if (!data || !data.id) {
+                if (cb) cb({error:'error'});
+                return;
+            } 
+            twit.post('favorites/create',{id: data.id},function(error, tweets) {
+                if (error) {
+                    if(cb) cb({error:error});
+                    return;
+                }
+                if(cb) cb('ok');
+            });
+        });
+        socket.on('unfavoritetweet',function(data,cb) {
+            if (!data || !data.id) {
+                if (cb) cb({error:'error'});
+                return;
+            } 
+            twit.post('favorites/destroy',{id: data.id},function(error, tweets) {
+                if (error) {
+                    if(cb) cb({error:error});
+                    return;
+                }
+                if(cb) cb('ok');
+            });
+        });
+
+
     });
 
     http.listen(port, function(){

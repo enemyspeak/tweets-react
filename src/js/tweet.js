@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import twttr from 'twitter-text';
+// import twttr from 'twitter-text'; // not useful.
 import { favoriteTweet } from './api'; 
 
 function Avatar(props) {
@@ -43,7 +43,18 @@ function Media(props) {
 	        {props.media.map(obj => {
             	return (
             		<div className="media-box" key={obj.id_str}>
-						<img src={obj.media_url_https + ":small"} alt={obj.display_url} />	
+						{(obj.type === "video") && (
+							<video controls src={obj.video_info.variants[0].url} type={obj.video_info.variants[0].content_type} >
+								{ /* {obj.video_info.variants.map(source => {
+									return (
+							    		<source src={source.url} type={source.content_type} />
+							    	);
+							    } */}
+							</video>
+						)}
+						{(obj.type === "photo") && (
+							<img src={obj.media_url_https + ":small"} alt={obj.display_url} />	
+						)}
 					</div>
 				);
 	        })}
@@ -153,11 +164,6 @@ class TweetControls extends Component {
 	}
 }
 class TweetBody extends Component {
-	parseURL(str) {
-		return str.replace(/[A-Za-z]+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&~\?\/.=]+/g, function(url) {
-			return url.link(url);
-		});
-	}
 	createMarkup(html) { 
 		return {__html: html}; 
 	}
@@ -179,38 +185,37 @@ class TweetBody extends Component {
 		} else {
 			text = tweet.text;
 		}
-		// text = this.parseURL(text);
+
 		if ( ( tweet.extended_entities && tweet.extended_entities.media ) ||
 			 ( tweet.extended_tweet && tweet.extended_tweet.extended_entities && tweet.extended_tweet.extended_entities.media ) ) {
 			var lastIndex = text.lastIndexOf(" ");
 			text = text.substring(0, lastIndex); // remove the last word, that's a url to the image.
 		}
 
-		if (tweet.extended_tweet) {
-			// console.log(tweet.extended_entities);
+		if (tweet.is_quote_status) { // remove the last url if this is a retweet because that's unneeded too.
+			var lastIndex = text.lastIndexOf(" ");
+			text = text.substring(0, lastIndex); 	
+		}
+
+		if (tweet.extended_tweet) { // this is kind of messy, but it's working.
 			for (let i = tweet.extended_tweet.entities.urls.length - 1; i >= 0; i--) {
-				// console.log(tweet.entities.urls[i].url,tweet.extended_tweet.entities.urls[i].display_url);
-				text = this.replaceAll(text,tweet.extended_tweet.entities.urls[i].url,'<a class="url" href="'+ tweet.entities.urls[i].expanded_url +'">'+tweet.entities.urls[i].display_url+'</a>');
+				text = this.replaceAll(text,tweet.extended_tweet.entities.urls[i].url,'<a class="url" href="'+ tweet.extended_tweet.entities.urls[i].expanded_url +'">'+tweet.extended_tweet.entities.urls[i].display_url+'</a>');
 			}
 			for (let i = tweet.extended_tweet.entities.hashtags.length - 1; i >= 0; i--) {
-				// console.log(tweet.entities.urls[i].url,tweet.extended_tweet.entities.urls[i].display_url);
 				text = this.replaceAll(text,"#"+tweet.extended_tweet.entities.hashtags[i].text,'<span class="hashtag">#'+tweet.extended_tweet.entities.hashtags[i].text+'</span>');
 			}
 			for (let i = tweet.extended_tweet.entities.user_mentions.length - 1; i >= 0; i--) {
-				// console.log(tweet.entities.user_mentions[i].screen_name);
-				text = this.replaceAll(text,'@'+tweet.extended_tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(\''+tweet.user.screen_name+'\')}">@' + tweet.extended_tweet.entities.user_mentions[i].screen_name+'</span>');
+				text = this.replaceAll(text,'@'+tweet.extended_tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(\''+tweet.extended_tweet.entities.user_mentions[i].screen_name+'\')}">@' + tweet.extended_tweet.entities.user_mentions[i].screen_name+'</span>');
 			}
 		} else {
 			for (let i = tweet.entities.urls.length - 1; i >= 0; i--) {
-				// console.log(tweet.entities.urls[i].url,tweet.entities.urls[i].display_url);
 				text = this.replaceAll(text,tweet.entities.urls[i].url,'<a class="url" href="'+ tweet.entities.urls[i].expanded_url +'">'+tweet.entities.urls[i].display_url+'</a>');
 			}
 			for (let i = tweet.entities.hashtags.length - 1; i >= 0; i--) {
 				text = this.replaceAll(text,"#"+tweet.entities.hashtags[i].text,'<span class="hashtag">#'+tweet.entities.hashtags[i].text+'</span>');
 			}
 			for (let i = tweet.entities.user_mentions.length - 1; i >= 0; i--) {
-				// console.log(tweet.entities.user_mentions[i].screen_name);
-				text = this.replaceAll(text,'@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(\''+tweet.user.screen_name+'\')}">@' + tweet.entities.user_mentions[i].screen_name+'</span>');
+				text = this.replaceAll(text,'@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(\''+tweet.entities.user_mentions[i].screen_name+'\')}">@' + tweet.entities.user_mentions[i].screen_name+'</span>');
 			}
 		}
 
@@ -228,8 +233,9 @@ class Tweet extends Component {
     		favorited: this.props.data.favorited
     	};
   	}
-	handleFavoriteTweet() { // this can just call to the api and update this icon.
-  		this.setState({favorited: !this.state.favorited});
+	handleFavoriteTweet(id) { // this can just call to the api and update this icon.
+		// console.log(id);
+		favoriteTweet(id).then(() => this.setState({favorited: !this.state.favorited})).catch((err)=> console.error(err));
   	}
   	handleRetweetTweet() { // this can just call to the api and update this icon.
   		this.setState({retweeted: !this.state.retweeted});
@@ -267,8 +273,8 @@ class Tweet extends Component {
 				<TweetControls 
 					retweeted={this.state.retweeted}
 					favorited={this.state.favorited}
-					handleFavoriteTweet={()=>this.handleFavoriteTweet()}
-					handleRetweetTweet={()=>this.handleRetweetTweet()}
+					handleFavoriteTweet={()=>this.handleFavoriteTweet(tweet.id_str)}
+					handleRetweetTweet={()=>this.handleRetweetTweet(tweet.id_str)}
 				/>
 			</div>
 		);

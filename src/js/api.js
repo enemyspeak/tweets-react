@@ -92,19 +92,18 @@ function fetchUserByName(screen_name,cb) {
 
 function favoriteTweet(id,cb) {
   console.log(id);
-  if (!id){ 
-    cb(null, undefined);
-    return
-  };
-  socket.emit('favoritetweet',{id:id},function(data) {
-      console.log(data);
+  return new Promise(function(resolve, reject) {
+    if (!id){ 
+      reject('no id!');
+    };
+    socket.emit('favoritetweet',{id:id},function(data) {
       if (!data) {
-      cb(null, undefined);
-        return;
+        reject('no data!')
+      } else {
+        resolve();
       }
-      // return data;
-      cb(null, data);
     });
+  })
 }
 
 

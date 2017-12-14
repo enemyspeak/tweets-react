@@ -9,8 +9,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.0.17",
-    "socket.io-client":"latest",
-    "twitter-text":"1.14.7"
+    "socket.io-client":"latest"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
