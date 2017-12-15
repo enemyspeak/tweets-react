@@ -1,0 +1,891 @@
+@keyframes transitionMenus {
+  0% {
+    display: none;
+    opacity: 0; }
+  1% {
+    display: block;
+    opacity: 0;
+    transform: scale(0); }
+  100% {
+    opacity: 1;
+    transform: scale(1); } }
+
+html {
+  background: rgba(0, 0, 0, 0.8); }
+
+#root {
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif; }
+
+.header-row {
+  text-align: center;
+  display: block;
+  padding: 7px 0 7px 7px;
+  border-bottom: 1px solid #424242;
+  color: #fff;
+  font-size: 22px;
+  height: 36px;
+  line-height: 36px; }
+  .header-row div {
+    display: inline;
+    color: #4FC3F7; }
+  .header-row .fi-social-twitter {
+    padding-right: 10px;
+    font-size: 24px; }
+
+.nagivation {
+  height: calc( 100% - 51px);
+  position: absolute;
+  /* top: 0px; */
+  left: 0px;
+  width: 60px;
+  border-right: 1px solid #424242;
+  z-index: 3; }
+  .nagivation .navigation-item {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    color: #aaa;
+    transition: color 0.3s ease; }
+    .nagivation .navigation-item.active {
+      color: #fff; }
+  .nagivation .icon-contain {
+    top: 11px;
+    position: relative;
+    font-size: 32px;
+    box-sizing: border-box; }
+
+.app-contain {
+  position: relative;
+  left: 60px;
+  width: calc( 100% - 60px);
+  height: 100%;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: calc( 100vh - 51px); }
+
+@-webkit-keyframes rotateLoader {
+  0% {
+    transform: rotate(-45deg); }
+  100% {
+    transform: rotate(315deg); } }
+
+@-moz-keyframes rotateLoader {
+  0% {
+    transform: rotate(-45deg); }
+  100% {
+    transform: rotate(315deg); } }
+
+@-o-keyframes rotateLoader {
+  0% {
+    transform: rotate(-45deg); }
+  100% {
+    transform: rotate(315deg); } }
+
+@keyframes rotateLoader {
+  0% {
+    transform: rotate(-45deg); }
+  100% {
+    transform: rotate(315deg); } }
+
+@-webkit-keyframes animateLoaderInner {
+  0% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  40% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  60% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%); }
+  80% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  100% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); } }
+
+@-moz-keyframes animateLoaderInner {
+  0% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  40% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  60% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%); }
+  80% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  100% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); } }
+
+@-o-keyframes animateLoaderInner {
+  0% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  40% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  60% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%); }
+  80% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  100% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); } }
+
+@keyframes animateLoaderInner {
+  0% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  40% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  60% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%); }
+  80% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  100% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); } }
+
+@-webkit-keyframes animateLoaderEdge {
+  0% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  40% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  60% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%); }
+  80% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  100% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); } }
+
+@-moz-keyframes animateLoaderEdge {
+  0% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  40% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  60% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%); }
+  80% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  100% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); } }
+
+@-o-keyframes animateLoaderEdge {
+  0% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  40% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  60% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%); }
+  80% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  100% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); } }
+
+@keyframes animateLoaderEdge {
+  0% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  40% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  60% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%); }
+  80% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); }
+  100% {
+    -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%); } }
+
+.dataLoader {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  -webkit-animation: rotateLoader linear infinite;
+  animation: rotateLoader linear infinite;
+  -webkit-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+  width: 60px;
+  height: 60px;
+  margin-left: -30px;
+  margin-right: -30px; }
+  .dataLoader::before, .dataLoader::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-animation: animateLoaderInner linear infinite;
+    animation: animateLoaderInner linear infinite;
+    -webkit-animation-duration: 4.8s;
+    animation-duration: 4.8s;
+    content: '';
+    border-radius: 50%;
+    -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%);
+    clip-path: polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%);
+    background: none; }
+  .dataLoader::after {
+    box-shadow: inset 0 0 1px 2px #fff; }
+  .dataLoader.inactive {
+    display: none;
+    -webkit-animation: none;
+    animation: none; }
+
+@supports (-ms-ime-align: auto) {
+  .dataLoader {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -webkit-animation: rotateLoader linear infinite;
+    animation: rotateLoader linear infinite;
+    -webkit-animation-duration: 0.6s;
+    animation-duration: 0.6s;
+    width: 60px;
+    height: 60px;
+    margin-left: -30px;
+    margin-right: -30px; }
+    .dataLoader::before, .dataLoader::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      width: 60px;
+      height: 60px;
+      border-right: 3px solid white;
+      border-top: 5px solid transparent;
+      border-left: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-radius: 50%; }
+    .dataLoader::after {
+      box-shadow: none; }
+    .dataLoader.inactive {
+      display: none;
+      -webkit-animation: none;
+      animation: none; } }
+
+.compose-tweet {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  display: block;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: #aaa;
+  transition: color 0.3s ease;
+  z-index: 2;
+  border-left: 1px solid #424242; }
+  .compose-tweet:hover {
+    color: #fff; }
+  .compose-tweet .fi-pencil {
+    width: 100%;
+    height: 100%;
+    font-size: 32px;
+    top: 8px;
+    position: relative;
+    font-size: 32px;
+    box-sizing: border-box; }
+
+.app-views-contain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+  .app-views-contain .app-view {
+    display: block;
+    height: calc( 100% - 30px);
+    left: -100%;
+    width: 100%;
+    position: absolute;
+    transition: left 0.3s ease; }
+    .app-views-contain .app-view.active {
+      left: 0; }
+
+.twitter-login {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  justify-content: center;
+  z-index: 12;
+  -ms-transform: scale(0.5, 0.5);
+  -webkit-transform: scale(0.5, 0.5);
+  transform: scale(0.5, 0.5); }
+  .twitter-login.active {
+    opacity: 1;
+    -ms-transform: scale(1, 1);
+    -webkit-transform: scale(1, 1);
+    transform: scale(1, 1); }
+  .twitter-login span {
+    font-family: abel_probold, arial, sans-serif;
+    color: #fff;
+    font-size: 24px; }
+  .twitter-login p {
+    margin-top: 5px; }
+  .twitter-login.active {
+    opacity: 1;
+    pointer-events: initial; }
+  .twitter-login div {
+    text-align: center; }
+  .twitter-login button {
+    margin: 20px auto; }
+  .twitter-login .popupMessage {
+    display: block;
+    opacity: 1;
+    transition: opacity 0.3s ease; }
+    .twitter-login .popupMessage.hidden {
+      opacity: 0; }
+
+.tweet-contain {
+  position: relative;
+  background: transparent;
+  transition: background 0.3s ease; }
+  .tweet-contain.borderFix {
+    border-bottom: 1px solid #424242; }
+    .tweet-contain.borderFix .tweet-body {
+      border-bottom: none; }
+  .tweet-contain.selected, .tweet-contain:hover {
+    background: #303030; }
+    .tweet-contain.selected .tweet-controls, .tweet-contain:hover .tweet-controls {
+      pointer-events: initial;
+      opacity: 1; }
+    .tweet-contain.selected .status-contain, .tweet-contain:hover .status-contain {
+      opacity: 0;
+      pointer-events: none; }
+
+.tweet-body {
+  position: relative;
+  left: 0px;
+  padding: 10px 10px 10px 0px;
+  border-bottom: 1px solid #424242; }
+
+.tweet-text {
+  margin-top: 2px;
+  display: block;
+  left: 60px;
+  position: relative;
+  width: calc( 100% - 60px);
+  line-height: 25px;
+  white-space: pre-wrap;
+  cursor: default; }
+  .tweet-text .url, .tweet-text a, .tweet-text .hashtag {
+    text-decoration: none;
+    color: #AFAFAF;
+    transition: color 0.3s ease;
+    cursor: pointer; }
+    .tweet-text .url:hover, .tweet-text a:hover, .tweet-text .hashtag:hover {
+      color: #eee; }
+  .tweet-text .user-mention {
+    color: #03A9F4;
+    transition: color 0.3s ease;
+    cursor: pointer; }
+    .tweet-text .user-mention:hover {
+      color: #4FC3F7; }
+
+.user-link, .link {
+  color: #4FC3F7;
+  cursor: pointer;
+  transition: color 0.3s ease; }
+  .user-link:hover, .link:hover {
+    color: #03A9F4; }
+
+.hash-link {
+  color: #eee;
+  cursor: pointer;
+  transition: color 0.3s ease; }
+  .hash-link:hover {
+    color: #b1b1b1; }
+
+.user-avatar {
+  position: absolute;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #000; }
+  .user-avatar img {
+    width: 100%;
+    height: 100%; }
+
+.tweet-user {
+  height: 16px;
+  position: relative;
+  cursor: pointer; }
+  .tweet-user span {
+    vertical-align: bottom;
+    display: inline-block;
+    height: 16px;
+    left: 60px;
+    position: relative; }
+  .tweet-user svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+    position: relative; }
+  .tweet-user .name {
+    padding-right: 6px;
+    font-weight: bold;
+    top: 1px; }
+  .tweet-user .screenName {
+    font-size: 12px;
+    color: #AFAFAF;
+    top: 4px;
+    position: relative; }
+
+.verified {
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  position: absolute;
+  background: #03A9F4;
+  z-index: 3;
+  top: -3px;
+  left: 43px;
+  border: 1px solid black;
+  text-align: center;
+  box-sizing: border-box; }
+
+.status-contain {
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  width: 120px;
+  text-align: right;
+  transition: opacity 0.3s ease; }
+  .status-contain div {
+    border: transparent;
+    background: transparent;
+    float: right;
+    width: calc( (100% / 2) - 30px);
+    text-align: center;
+    height: 100%;
+    line-height: 26px;
+    cursor: pointer;
+    position: relative;
+    color: #b1b1b1;
+    display: none;
+    font-size: 18px; }
+    .status-contain div.active {
+      display: block; }
+  .status-contain .fi-loop {
+    color: #8BC34A; }
+  .status-contain .fi-star {
+    color: #FFC107; }
+
+.tweet-date {
+  position: relative;
+  float: right;
+  top: 0px;
+  width: 30px;
+  text-align: right;
+  transition: opacity 0.3s ease;
+  font-size: 12px;
+  color: #AFAFAF;
+  height: 30px;
+  line-height: 30px; }
+
+.media-contain {
+  margin-top: 10px;
+  left: 60px;
+  position: relative;
+  width: calc( 100% - 60px); }
+  .media-contain .media-box {
+    border-radius: 6px;
+    overflow: hidden;
+    max-width: 700px; }
+    .media-contain .media-box img, .media-contain .media-box video {
+      width: 100%;
+      height: 100%; }
+  .media-contain .video-icon {
+    position: absolute;
+    top: calc( 50% - 25px);
+    left: calc( 50% - 25px);
+    font-size: 34px;
+    background: #03A9F4;
+    width: 50px;
+    height: 50px;
+    border-radius: 35px;
+    text-align: center;
+    box-sizing: border-box;
+    border: 3px solid white;
+    line-height: 46px;
+    transition: background 0.3s ease;
+    cursor: pointer; }
+    .media-contain .video-icon:hover {
+      background: #4FC3F7; }
+    .media-contain .video-icon .fi-play {
+      position: relative;
+      left: 2px; }
+
+.quoted-tweet {
+  width: calc( 100% - 70px);
+  margin: 10px 10px 0px 0px;
+  padding: 10px 10px 10px 0px;
+  min-height: 42px;
+  border: 1px solid #424242;
+  background: #212121;
+  border-radius: 10px;
+  position: relative;
+  left: 60px; }
+  .quoted-tweet .name {
+    font-size: 14px; }
+  .quoted-tweet .quoted-user-avatar {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #000; }
+    .quoted-tweet .quoted-user-avatar img {
+      width: 100%;
+      height: 100%; }
+  .quoted-tweet .quoted-tweet-body {
+    position: relative;
+    left: 50px;
+    padding: 10px 0px;
+    width: calc( 100% - 60px); }
+
+.retweeted-by-contain {
+  position: relative;
+  margin-top: 10px;
+  left: 60px;
+  width: calc( 100% - 60px);
+  cursor: pointer;
+  color: #AFAFAF;
+  transition: color 0.3s ease; }
+  .retweeted-by-contain:hover {
+    color: #fff; }
+  .retweeted-by-contain span {
+    vertical-align: bottom;
+    display: inline-block;
+    height: 20px;
+    font-size: 14px;
+    margin-right: 10px;
+    line-height: 20px; }
+  .retweeted-by-contain .fi-loop {
+    color: #AFAFAF;
+    font-size: 18px;
+    padding-top: 1px;
+    box-sizing: border-box; }
+
+.retweet-user-avatar {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #000;
+  display: inline-block;
+  vertical-align: bottom;
+  margin-right: 5px; }
+  .retweet-user-avatar img {
+    width: 100%;
+    height: 100%; }
+
+.tweet-statistics {
+  position: relative;
+  margin-top: 10px;
+  left: 60px;
+  width: calc( 100% - 60px); }
+  .tweet-statistics div {
+    display: inline;
+    padding-right: 10px;
+    color: #AFAFAF; }
+    .tweet-statistics div::before {
+      padding-right: 5px; }
+
+.tweet-controls {
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  pointer-events: none;
+  opacity: 0;
+  padding-top: 1px;
+  background: transparent;
+  width: 120px; }
+  .tweet-controls button {
+    border: transparent;
+    background: transparent;
+    float: left;
+    width: calc( 100% / 4);
+    text-align: center;
+    height: 100%;
+    font-size: 18px;
+    line-height: 30px;
+    cursor: pointer;
+    position: relative;
+    color: #b1b1b1;
+    transition: color 0.3s ease;
+    outline: none; }
+    .tweet-controls button:hover {
+      color: #fff; }
+    .tweet-controls button.active .fi-loop {
+      color: #8BC34A; }
+    .tweet-controls button.active .fi-star {
+      color: #FFC107; }
+
+@keyframes transitionMenus {
+  0% {
+    display: none;
+    opacity: 0; }
+  1% {
+    display: block;
+    opacity: 0;
+    transform: scale(0); }
+  100% {
+    opacity: 1;
+    transform: scale(1); } }
+
+.twitter-app {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  display: block;
+  width: 100%;
+  height: 100%; }
+  .twitter-app ::-webkit-scrollbar {
+    width: 10px; }
+  .twitter-app ::-webkit-scrollbar:horizontal {
+    height: 10px; }
+  .twitter-app ::-webkit-scrollbar-track {
+    background: #eaeaea;
+    border-left: 1px solid #ccc; }
+  .twitter-app ::-webkit-scrollbar-track:horizontal {
+    border-top: 1px solid #ccc; }
+  .twitter-app ::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 5px; }
+  .twitter-app ::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa; }
+  .twitter-app ::-webkit-scrollbar-corner {
+    background: #eaeaea; }
+  .twitter-app.inactive {
+    display: none; }
+  .twitter-app .dataLoader {
+    position: absolute;
+    top: 40%; }
+  .twitter-app .ui-resizable-se {
+    font-size: 0;
+    overflow: hidden;
+    width: 0;
+    height: 0;
+    border-bottom: 20px solid #03A9F4;
+    border-left: 20px solid transparent;
+    transition: border 0.3s ease;
+    right: -5px;
+    bottom: -5px; }
+    .twitter-app .ui-resizable-se:hover, .twitter-app .ui-resizable-se:active {
+      border-bottom: 20px solid #4FC3F7; }
+  .twitter-app .view-header-label {
+    text-align: center;
+    display: block;
+    padding: 7px 0 7px 7px;
+    border-bottom: 1px solid #424242;
+    color: #fff; }
+  .twitter-app .profile-contain {
+    width: 100%;
+    height: calc( 100% - 30px);
+    color: #fff;
+    position: relative; }
+    .twitter-app .profile-contain.inactive {
+      display: none; }
+  .twitter-app .timeline-contain {
+    width: 100%;
+    height: calc( 100% - 30px);
+    color: #fff;
+    position: relative; }
+    .twitter-app .timeline-contain.inactive {
+      display: none; }
+  .twitter-app .navigation-buttons {
+    height: 30px;
+    border-top: #03A9F4 1px solid;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0; }
+    .twitter-app .navigation-buttons div {
+      float: left;
+      width: calc( 100% / 4);
+      height: 30px;
+      padding: 6px 10px;
+      text-align: center;
+      background: none;
+      transition: background 0.3s ease,color 0.3s ease;
+      border-left: #424242 1px solid;
+      cursor: pointer; }
+
+.recent-timeline-contain {
+  width: 100%;
+  height: calc( 100% - 30px);
+  color: #fff;
+  border-top: 1px solid #424242;
+  background: #333;
+  position: relative; }
+  .recent-timeline-contain.inactive {
+    display: none; }
+
+.profile-contain {
+  position: relative;
+  height: calc( 100% - 30px);
+  width: 100%;
+  display: block; }
+  .profile-contain .back-button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 0px;
+    left: 0px;
+    z-index: 3;
+    text-align: center;
+    cursor: pointer; }
+  .profile-contain .fi-arrow-left {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    color: #fff;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-top: 5px;
+    box-sizing: border-box; }
+    .profile-contain .fi-arrow-left:hover {
+      color: #b1b1b1; }
+  .profile-contain .profile-verified {
+    width: 20px;
+    height: 20px;
+    border-radius: 12px;
+    position: absolute;
+    background: #03A9F4;
+    z-index: 3;
+    top: 22px;
+    left: calc( 50% + 20px);
+    border: 3px solid white;
+    text-align: center;
+    box-sizing: border-box; }
+  .profile-contain .profile-protected {
+    width: 20px;
+    height: 20px;
+    border-radius: 12px;
+    position: absolute;
+    z-index: 3;
+    top: 74px;
+    left: calc( 50% + 20px);
+    /* background: #000; */
+    border: 3px solid white;
+    text-align: center;
+    box-sizing: border-box; }
+    .profile-contain .profile-protected .fi-lock {
+      position: relative;
+      top: 1px;
+      font-size: 12px; }
+
+.user-banner {
+  width: 100%;
+  height: 303px;
+  top: 0;
+  overflow: hidden;
+  opacity: 0.5;
+  filter: blur(3px); }
+
+.profile-avatar {
+  left: calc( 50% - 25px);
+  top: 30px;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #fff;
+  background: #fff; }
+  .profile-avatar img {
+    border-radius: 4px; }
+
+.profile-details {
+  position: absolute;
+  top: 90px;
+  width: 100%;
+  height: 214px;
+  border-bottom: 1px solid #424242;
+  color: #fff; }
+  .profile-details .name, .profile-details .screen-name, .profile-details .description, .profile-details .location, .profile-details .url {
+    display: block;
+    text-align: center;
+    margin: 0px auto;
+    width: 80%;
+    max-width: 400px;
+    line-height: 25px; }
+  .profile-details .name {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px; }
+  .profile-details .screen-name {
+    font-size: 16px;
+    color: #03A9F4; }
+  .profile-details .location {
+    color: #b1b1b1; }
+
+.stat-contain {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 25px; }
+  .stat-contain span {
+    width: 50%;
+    display: inline-block;
+    text-align: center; }
+
+.follow-button {
+  position: absolute;
+  display: block;
+  top: 41px;
+  left: 67.5%;
+  padding: 6px 12px;
+  border: 1px solid #4FC3F7;
+  border-radius: 4px;
+  background: transparent;
+  color: #4FC3F7;
+  transition: color 0.3s ease, background 0.3s ease;
+  cursor: pointer; }
+  .follow-button.following, .follow-button:hover, .follow-button.inactive {
+    color: #fff;
+    background: #4FC3F7; }

@@ -1,0 +1,375 @@
+
+// @import "./mixins.scss";
+@import "./colors.scss";
+
+.tweet-contain {
+    position: relative;
+    background: transparent;
+    transition: background 0.3s ease;
+    &.borderFix {
+        border-bottom: 1px solid $gray28;
+        .tweet-body {
+            border-bottom: none;
+        }
+    }
+    &.selected,&:hover {
+        background: $gray20;
+        // border-left: 1px solid $gray28;
+
+        .tweet-controls {
+            pointer-events:initial;
+            opacity: 1;
+        }
+        .status-contain {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+}
+
+.tweet-body {
+    position: relative;
+    left: 0px;// 60px;
+    padding: 10px 10px 10px 0px;
+    // min-height: 43px;
+    // width: 100%;//calc( 100% - 60px );
+    border-bottom: 1px solid $gray28;
+}
+.tweet-text {
+    margin-top: 2px;
+    display: block;
+    left: 60px;
+    position: relative;
+    width: calc( 100% - 60px );
+    line-height: 25px;
+    white-space: pre-wrap;
+    cursor: default;
+
+    .url,a,.hashtag {
+        text-decoration: none;
+        color: $gray50;
+        transition: color 0.3s ease;
+        cursor: pointer;
+        &:hover {
+            color: $darkerWhite;
+        }
+    }
+    .user-mention {
+        color: $lightBlue;
+        transition: color 0.3s ease;
+        cursor: pointer;
+        &:hover {
+            color: $lightBlue300;
+        }
+    }
+}
+.user-link,.link {
+    color: $lightBlue300;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    &:hover{
+        color: $lightBlue;
+    }
+}
+.hash-link {
+    color: $darkerWhite;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    &:hover {
+        color: $darkestwhite;
+    }   
+}
+.user-avatar {
+    position: absolute;
+    left: 10px;
+    // top: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid $black;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+   
+}
+.tweet-user {
+    height: 16px;
+    position: relative;
+    cursor: pointer;
+    span {
+        vertical-align: bottom;
+        display: inline-block;
+        height: 16px;
+        left: 60px;
+        position: relative;
+    }
+    svg {
+        width: 14px;
+        height: 14px;
+        display: block;
+        position: relative;
+    }
+    .name {
+        padding-right: 6px;
+        font-weight: bold;
+        top: 1px;
+    }
+    .screenName {
+        font-size: 12px;
+        color: $gray50;
+        top: 4px;
+        position: relative;
+    }  
+}
+
+.verified {
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+    position: absolute;
+    background: $lightBlue;
+    z-index: 3;
+    top: -3px;
+    left: 43px;
+    border: 1px solid black;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.status-contain {
+    position: absolute;
+    right: 10px;
+    top: 4px;
+    width: 120px;
+    text-align: right;
+    transition: opacity 0.3s ease;
+    div {
+        border: transparent;
+        background: transparent;
+        float: right;
+        width: calc( (100% / 2) - 30px );
+        text-align: center;
+        height: 100%;
+        line-height: 26px;
+        cursor: pointer;
+        position: relative;
+        color: #b1b1b1;
+        display: none;
+        font-size: 18px;
+
+        &.active {
+            display: block;
+        }
+    }
+    .fi-loop {
+        color: $lightGreen;
+    }
+    .fi-star {
+        color: $yellow;
+    }
+}
+.tweet-date {
+    position: relative;
+    float: right;
+    // right: 5px;
+    top: 0px;
+    width: 30px;
+    text-align: right;
+    transition: opacity 0.3s ease;
+    // font-size: 14px;
+    font-size: 12px;
+    color: $gray50;    
+    height: 30px;
+    line-height: 30px;        
+}
+.media-contain {
+    margin-top: 10px;
+    left: 60px;
+    position: relative;
+    width: calc( 100% - 60px );
+
+    .media-box{
+        border-radius: 6px;
+        overflow: hidden;
+        max-width: 700px;
+
+        img,video {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .video-icon {
+        position: absolute;
+        top: calc( 50% - 25px );
+        left: calc( 50% - 25px );
+        font-size: 34px;
+        background: $lightBlue;
+        width: 50px;
+        height: 50px;
+        border-radius: 35px;
+        text-align: center;
+        box-sizing: border-box;
+        border: 3px solid white;
+        line-height: 46px;
+        transition: background 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+            background: $lightBlue300;
+        }
+        .fi-play {
+            position: relative;
+            left: 2px;
+        }
+    }
+}
+.quoted-tweet {
+    width: calc( 100% - 70px ); 
+    // margin-right: 10px;
+    // margin-top: 10px;
+    margin: 10px 10px 0px 0px;
+    padding: 10px 10px 10px 0px;
+    min-height: 42px;
+    border: 1px solid $gray28;
+    background: $gray13;
+    border-radius: 10px;
+    position: relative;
+    left: 60px;
+
+    .name {
+        font-size: 14px;
+    }
+    .quoted-user-avatar {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid $black;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .quoted-tweet-body {
+        position: relative;
+        left: 50px;
+        padding: 10px 0px;
+        width: calc( 100% - 60px );
+    }
+}
+
+.retweeted-by-contain {
+    position: relative;
+    margin-top: 10px;
+    left: 60px;
+    width: calc( 100% - 60px );
+    cursor: pointer;
+    color: $gray50;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: $white;
+    }
+    span {
+        vertical-align: bottom;
+        display: inline-block;
+        height: 20px;
+        // font-weight: bold;
+        font-size: 14px;
+        margin-right: 10px;
+        line-height: 20px;
+    }
+    .fi-loop {
+        // color: $lightGreen;
+        color: $gray50;
+        font-size: 18px;
+        padding-top: 1px;
+        box-sizing: border-box;
+    }
+}
+.retweet-user-avatar {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid $black;
+    display: inline-block;
+    vertical-align: bottom;
+    margin-right: 5px;
+        
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.tweet-statistics {
+    position: relative;
+    margin-top: 10px;
+    left: 60px;
+    width: calc( 100% - 60px);
+    div {
+        display: inline;
+        padding-right: 10px;
+        color: $gray50;
+        &::before {
+            padding-right: 5px;
+        }
+    }
+    // .fi-star {
+    //     color: $yellow;
+    // }
+    // .fi-loop {
+    //     color: $lightGreen;
+    // }
+}
+.tweet-controls{
+    // width: 100%;
+    // background: $gray28;
+    overflow: hidden;
+    // height: 0px;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    pointer-events:none;
+    opacity: 0;
+    padding-top: 1px;
+    background: transparent;
+    width: 120px;
+
+    button {
+        border: transparent;
+        background: transparent;
+        float: left;
+        width: calc( 100% / 4);
+        text-align: center;
+        height: 100%;
+        font-size: 18px;
+        line-height: 30px;            
+        cursor: pointer;
+        position: relative;
+        color: $darkestwhite;
+        transition:color 0.3s ease;
+        outline: none;
+
+        &:hover {
+            color: $white;
+        }
+        &.active {
+            .fi-loop {
+                color: $lightGreen;
+            }
+            .fi-star {
+                color: $yellow;
+            }
+        }
+    }
+}

@@ -91,20 +91,37 @@ function fetchUserByName(screen_name,cb) {
 }
 
 function favoriteTweet(id,cb) {
-  console.log(id);
+  // console.log(id);
   return new Promise(function(resolve, reject) {
     if (!id){ 
       reject('no id!');
     };
-    socket.emit('favoritetweet',{id:id},function(data) {
-      if (!data) {
-        reject('no data!')
+    socket.emit('favoritetweet',{id:id},function(err,data) {
+      if (err) {
+        reject(err)
       } else {
         resolve();
+        console.log(data);
+      }
+    });
+  });
+}
+
+function unfavoriteTweet(id,cb) {
+  return new Promise(function(resolve, reject) {
+    if (!id){ 
+      reject('no id!');
+    };
+    socket.emit('unfavoritetweet',{id:id},function(err,data) {
+      if (err) {
+        reject(err)
+      } else {
+        resolve();
+        console.log(data);
       }
     });
   })
 }
 
 
-export { fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet };
+export { fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };

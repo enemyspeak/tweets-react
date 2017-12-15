@@ -442,6 +442,9 @@ function start( port ){
                 if (cb) cb({error:'error'});
                 return;
             } 
+
+            // TODO update the cached tweet to set favorited = true;
+
             twit.post('favorites/create',{id: data.id},function(error, tweets) {
                 if (error) {
                     if(cb) cb({error:error});

@@ -1,0 +1,159 @@
+// @import "./mixins.scss";
+@import "./colors.scss";
+
+    .recent-timeline-contain {
+        width: 100%;
+        height: calc( 100% - 30px );
+        color: $white;
+        border-top: 1px solid $gray28;
+        background: #333;
+        position: relative;
+        // transition: left 0.3s ease;
+        &.inactive {
+            display: none;
+            // left: -100%;
+        }
+    }
+    
+    .profile-contain {
+        position: relative;
+        height: calc( 100% - 30px );
+        width: 100%;        
+        display: block;
+        .back-button {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: 0px;
+            left: 0px;
+            z-index: 3;
+            text-align: center;
+            // border-right: 1px solid $white;
+            // border-bottom: 1px solid $white;
+            cursor: pointer;
+        }
+        .fi-arrow-left {
+            width: 100%;
+            height: 100%;
+            font-size: 20px;
+            color: $white;
+            transition: color 0.3s ease;
+            // top: 5px;
+            position: relative;
+            padding-top: 5px;
+            box-sizing: border-box;
+            &:hover {
+                color: $darkestwhite;
+            }
+        }
+        .profile-verified {
+            width: 20px;
+            height: 20px;
+            border-radius: 12px;
+            position: absolute;
+            background: $lightBlue;
+            z-index: 3;
+            top: 22px;
+            left: calc( 50% + 20px);
+            border: 3px solid white;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .profile-protected {
+            width: 20px;
+            height: 20px;
+            border-radius: 12px;
+            position: absolute;
+            z-index: 3;
+            top: 74px;
+            left: calc( 50% + 20px);
+            /* background: #000; */
+            border: 3px solid white;
+            text-align: center;
+            box-sizing: border-box;
+            .fi-lock {
+                position: relative;
+                top: 1px;
+                font-size: 12px;
+            }
+        }
+    }
+    .user-banner {
+        width: 100%;
+        height: 303px;
+        top: 0;
+        overflow: hidden;
+        opacity: 0.5;
+        filter: blur(3px);
+    }
+    .profile-avatar {
+        left: calc( 50% - 25px );
+        top: 30px;
+        width: 50px;
+        height: 50px;
+        border: 3px solid $white;
+        background: $white;
+        img {
+            border-radius: 4px;  
+        }
+    }
+    .profile-details {
+        position: absolute;
+        top: 90px;
+        width: 100%;
+        height: 214px;
+        border-bottom: 1px solid $gray28;
+        color: $white;
+
+        .name,.screen-name,.description,.location,.url {
+            display: block;
+            text-align: center;
+            margin: 0px auto;
+            width: 80%;
+            max-width: 400px;   
+            line-height: 25px;      
+        }
+        .name {
+            font-weight: bold;
+            font-size: 18px;
+            // margin-bottom: 0px;
+            margin-top: 10px;
+        }
+        .screen-name {
+            // margin-top: 0px;
+            font-size: 16px;
+            color: $lightBlue;
+        }
+        .location {
+            color: $darkestwhite;
+        }
+    }
+    .stat-contain{
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        line-height: 25px;      
+        span {
+            width: 50%;
+            display: inline-block;
+            text-align: center;
+        }
+    }
+    .follow-button {
+        position: absolute;
+        display: block;
+        top: 41px;
+        left: 67.5%;
+        padding: 6px 12px;
+        border: 1px solid $lightBlue300;
+        border-radius: 4px;
+        background: transparent;
+        color: $lightBlue300;
+        transition: color 0.3s ease, background 0.3s ease;
+        cursor: pointer;
+
+        &.following,&:hover,&.inactive {
+            color: $white;
+            background: $lightBlue300;
+        }
+    }

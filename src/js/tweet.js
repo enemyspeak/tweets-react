@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import twttr from 'twitter-text'; // not useful.
-import { favoriteTweet } from './api'; 
+import { favoriteTweet,unfavoriteTweet } from './api'; 
 
 function Avatar(props) {
 	return (
@@ -257,6 +257,7 @@ class Tweet extends Component {
   	}
 	handleFavoriteTweet(id) { // this can just call to the api and update this icon.
 		// console.log(id);
+		
 		favoriteTweet(id).then(() => this.setState({favorited: !this.state.favorited})).catch((err)=> console.error(err));
   	}
   	handleRetweetTweet() { // this can just call to the api and update this icon.
