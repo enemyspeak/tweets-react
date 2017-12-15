@@ -88,8 +88,8 @@ function QuotedStatus(props) {
 
 		    <TweetBody tweet={props.quoted_status} onClick={props.onClick} />
 
-			{(props.quoted_status.entities.media) &&
-				<Media media={props.quoted_status.entities.media} />
+			{(props.quoted_status.extended_entities && props.quoted_status.extended_entities.media ) &&
+				<Media media={props.quoted_status.extended_entities.media} />
 			}
 			{/* <TweetStatistics favorite_count={props.quoted_status.favorite_count} retweet_count={props.quoted_status.retweet_count} /> */}
 		</div>
@@ -206,12 +206,17 @@ class TweetBody extends Component {
 		if ( ( tweet.extended_entities && tweet.extended_entities.media ) ||
 			 ( tweet.extended_tweet && tweet.extended_tweet.extended_entities && tweet.extended_tweet.extended_entities.media ) ) {
 			var lastIndex = text.lastIndexOf(" ");
+
 			text = text.substring(0, lastIndex); // remove the last word, that's a url to the image.
 		}
 
 		if (tweet.is_quote_status) { // remove the last url if this is a retweet because that's unneeded too.
-			var lastIndex = text.lastIndexOf(" ");
-			text = text.substring(0, lastIndex); 	
+			var lastIndex = text.lastIndexOf("\n");
+			if (lastIndex === -1) lastIndex = text.lastIndexOf(" ");
+			//console.log(lastIndex)
+			// console.log(text,'before')
+			text = text.substring(0, lastIndex); 
+			// console.log(text,'after')
 		}
 
 		if (tweet.extended_tweet) { // this is kind of messy, but it's working.
