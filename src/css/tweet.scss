@@ -1,11 +1,27 @@
 
-// @import "./mixins.scss";
+@import "./mixins.scss";
 @import "./colors.scss";
 
+@include keyframes(animateTweet) {
+    0% { opacity: 0; transform: scale(1,0); }
+    100% { opacity: 1; transform: scale(1,1);}
+}
+
 .tweet-contain {
+    -webkit-animation: animateTweet ease;
+    animation: animateTweet ease;
+    -webkit-animation-duration: 300ms;
+    animation-duration: 300ms;
+    transform: translateZ(0);
     position: relative;
     background: transparent;
     transition: background 0.3s ease;
+    // -webkit-transform-origin : 50% 0%;
+    // -moz-transform-origin : 50% 0%;
+    // -o-transform-origin : 50% 0%;
+    // -ms-transform-origin : 50% 0%;
+    // transform-origin : 50% 0%;
+
     &.borderFix {
         border-bottom: 1px solid $gray28;
         .tweet-body {

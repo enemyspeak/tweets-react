@@ -66,7 +66,7 @@ function Media(props) {
 	        {props.media.map(obj => {
             	return (
             		<div className="media-box" key={obj.id_str}>
-						{(obj.type === "video") && (
+						{(obj.type === "video" || obj.type === "animated_gif") && (
 							<VideoMedia obj={obj} />
 						)}
 						{(obj.type === "photo") && (

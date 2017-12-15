@@ -1,4 +1,53 @@
+@keyframes transitionMenus {
+  0% {
+    display: none;
+    opacity: 0; }
+  1% {
+    display: block;
+    opacity: 0;
+    transform: scale(0); }
+  100% {
+    opacity: 1;
+    transform: scale(1); } }
+
+@-webkit-keyframes animateTweet {
+  0% {
+    opacity: 0;
+    transform: scale(1, 0); }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1); } }
+
+@-moz-keyframes animateTweet {
+  0% {
+    opacity: 0;
+    transform: scale(1, 0); }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1); } }
+
+@-o-keyframes animateTweet {
+  0% {
+    opacity: 0;
+    transform: scale(1, 0); }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1); } }
+
+@keyframes animateTweet {
+  0% {
+    opacity: 0;
+    transform: scale(1, 0); }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1); } }
+
 .tweet-contain {
+  -webkit-animation: animateTweet ease;
+  animation: animateTweet ease;
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  transform: translateZ(0);
   position: relative;
   background: transparent;
   transition: background 0.3s ease; }
