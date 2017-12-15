@@ -263,6 +263,12 @@
         padding: 10px 0px;
         width: calc( 100% - 60px );
     }
+
+    .status-contain {
+        opacity: 1 !important; // yeah, yeah
+        cursor: default;
+        // pointer-events: initial;
+    }
 }
 
 .retweeted-by-contain {

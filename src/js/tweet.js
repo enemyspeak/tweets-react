@@ -88,6 +88,10 @@ function QuotedStatus(props) {
 
 		    <TweetBody tweet={props.quoted_status} onClick={props.onClick} />
 
+	    	<div className="status-contain">
+				<RelativeTime created_at={props.quoted_status.created_at} />
+			</div>
+
 			{(props.quoted_status.extended_entities && props.quoted_status.extended_entities.media ) &&
 				<Media media={props.quoted_status.extended_entities.media} />
 			}
@@ -257,7 +261,7 @@ class Tweet extends Component {
   	}
 	handleFavoriteTweet(id) { // this can just call to the api and update this icon.
 		// console.log(id);
-		
+
 		favoriteTweet(id).then(() => this.setState({favorited: !this.state.favorited})).catch((err)=> console.error(err));
   	}
   	handleRetweetTweet() { // this can just call to the api and update this icon.

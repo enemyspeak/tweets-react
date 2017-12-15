@@ -209,6 +209,9 @@
     left: 50px;
     padding: 10px 0px;
     width: calc( 100% - 60px); }
+  .quoted-tweet .status-contain {
+    opacity: 1 !important;
+    cursor: default; }
 
 .retweeted-by-contain {
   position: relative;
