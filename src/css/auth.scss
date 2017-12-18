@@ -1,0 +1,68 @@
+
+@import "./colors.scss";
+
+.authorize-background {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background: $black80;
+	z-index: 98;
+	-webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+}
+.authorize-modal {
+	position: absolute;
+    top:  calc( 50vh - 125px );
+    left: calc( 50vw - 200px );
+    z-index: 99;
+    // min-width: 320px;
+    width: 420px;
+    height: 250px;
+    background: $black80;
+    border-radius: 15px;
+    color: $darkestwhite;
+
+    .fi-social-twitter {
+    	color: $lightBlue;
+    	font-size: 50px;
+    	text-align: center;
+    	padding: 18px 20px 0px 20px;
+    }
+    h1 {
+    	font-size: 32px;
+    	text-align: center;
+	    padding: 8px 20px 0px 20px;
+	    color: $lightBlue;
+    }
+
+    p {
+    	padding: 20px;
+    	line-height: 20px;
+    	text-align: center;
+    }
+
+    button {
+        border: 1px solid $darkestwhite;
+        border-radius: 5px;
+        // margin-left: 20px;
+        background: transparent;
+        // float: left;
+        width: calc( 100% / 4);
+        text-align: center;
+        // height: 100%;
+        left: calc( 50%  - (25%/2) );
+        font-size: 18px;
+        line-height: 30px;            
+        cursor: pointer;
+        position: relative;
+        color: $darkestwhite;
+        transition:color 0.3s ease,background 0.3s ease;
+        outline: none;
+
+        &:hover {
+            // color: $white;
+            background: $white;
+            color: $black;
+        }
+    }
+}

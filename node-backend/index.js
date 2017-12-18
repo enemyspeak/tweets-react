@@ -73,16 +73,16 @@ function start( port ){
 
         if (req.query.error) {
             console.log('twitter error found!',req.query);
-
-            // display error in pop up window
-            res.status( 400 );
+            res.status( 400 ); // display error in pop up window
             res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');            
             return;
         }
 
         var data = req.query; //parseTwitterResponse(req.query);
+        
         console.log(data);
         // get the user token from the cookie.
+
         var token;
         if (req && req.headers && req.headers && req.headers.cookie) {
             var str = req.headers.cookie;
@@ -305,17 +305,11 @@ function start( port ){
 
         // sessiontoken
         socket.once('checkToken',function(data,cb) {
-            // console.log('--------------------------------------------------------');
-            // console.log(socket.handshake.address);
-            // console.log(data);
-            // console.log('--------------------------------------------------------');
-                  
-
             if (typeof data == "object" || data=="bad format") {
                 if (cb) return cb("bad format");
             }
 
-            console.log("check sessions",sessions);
+            // console.log("check sessions",sessions);
 
             var user = sessions.find(function (obj) { 
                 return (obj.ip === socket.handshake.address && obj.sessiontoken === data); 

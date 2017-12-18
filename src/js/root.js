@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
-import Navigation from './navigation'
-import Timeline from './timeline'
+import Navigation from './navigation';
+import Timeline from './timeline';
 // import Mentions from './mentions' // do we even need another class for this?
-import Profile from './profile'
-import DirectMessages from './directMessages'
-import Search from './search'
+import Profile from './profile';
+import DirectMessages from './directMessages';
+import Search from './search';
+import Authorize from './authorize';
 
 import { doSessionToken,fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline } from './api';
 
@@ -13,9 +14,7 @@ class Root extends Component {
 	constructor(props) {
     	super(props);
     	this.state = {selectedTab: 'timeline'};
-	    this.handleClick = this.handleClick.bind(this);
-
-	    
+	    this.handleClick = this.handleClick.bind(this);	    
     }
     componentWillMount() {
     	// this.setState({ user:  });
@@ -29,6 +28,7 @@ class Root extends Component {
 	render() {
 		return (
 			<div className="app-wrapper">
+				<Authorize visible={this.state.user} />
 				<div className="header-row">
 					<div className="fi-social-twitter"></div>
 					<div>Squawk Box</div>
