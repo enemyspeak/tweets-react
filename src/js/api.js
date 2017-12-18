@@ -1,5 +1,20 @@
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:4000');
+
+// prod
+// const socket = openSocket('http://138.197.170.47:4000');
+// dev
+const socket = openSocket('http://localhost:4000'); 
+
+// we dont have a token:
+function getToken(cb) {
+  socket.emit('getToken',{},function(data) {
+    console.log(data);
+  });
+}
+
+// TODO: we have a token:
+// socket.emit('checkToken',{},function(data) {
+// });
 
 function fetchHomeTimeline(cb) {
   	socket.emit('gethometimeline',{},function(data) {
@@ -124,4 +139,4 @@ function unfavoriteTweet(id,cb) {
 }
 
 
-export { fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };
+export { getToken, fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };
