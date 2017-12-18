@@ -7,7 +7,7 @@ import Profile from './profile'
 import DirectMessages from './directMessages'
 import Search from './search'
 
-import { getToken,fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline } from './api';
+import { doSessionToken,fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline } from './api';
 
 class Root extends Component {
 	constructor(props) {
@@ -15,7 +15,10 @@ class Root extends Component {
     	this.state = {selectedTab: 'timeline'};
 	    this.handleClick = this.handleClick.bind(this);
 
-	    this.setState({user: getToken()});
+	    
+    }
+    componentWillMount() {
+    	// this.setState({ user:  });
 	    console.log(this.state.user);
     }
 	handleClick(obj,e) {

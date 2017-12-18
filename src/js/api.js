@@ -1,20 +1,44 @@
 import openSocket from 'socket.io-client';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 // prod
-const socket = openSocket('http://138.197.170.47:4000');
+// const socket = openSocket('http://138.197.170.47:4000');
 // dev
-// const socket = openSocket('http://localhost:4000'); 
+const socket = openSocket('http://localhost:4000'); 
 
-// we dont have a token:
-function getToken(cb) {
-  socket.emit('getToken',{},function(data) {
-    console.log(data);
-  });
+// read cookie and check token
+function doSessionToken(cb) {
+  console.log('my token',cookies.get('user')); //
+  let cookiedata = cookies.get('user')
+
+
+  var getToken = function() {
+    socket.emit('getToken',{},function(data) {
+      console.log('get token',data);
+      cookies.set('user', data, { path: '/' });
+    });
+  }
+
+  if (cookiedata) {
+    socket.emit('checkToken',cookiedata.token,function(data) {
+      console.log(data);
+      if (data === 'bad format') { // if error:
+        console.log('token rejected');
+        getToken();
+        return;
+      } 
+
+      console.log('token accepted',data);
+      // ok we know who you are..
+
+    });
+  } else {
+    getToken();
+  }
 }
 
-// TODO: we have a token:
-// socket.emit('checkToken',{},function(data) {
-// });
+doSessionToken();
 
 function fetchHomeTimeline(cb) {
   	socket.emit('gethometimeline',{},function(data) {
@@ -139,4 +163,4 @@ function unfavoriteTweet(id,cb) {
 }
 
 
-export { getToken, fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };
+export { doSessionToken, fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };

@@ -289,7 +289,7 @@ function start( port ){
             var token = createToken();
 
             console.log('--------------------------------------------------------');
-            console.log(socket.conn.request.headers);
+            // console.log(socket.conn.request.headers);
             console.log( socket.handshake.address );
             console.log(token);
             console.log('--------------------------------------------------------');
@@ -297,7 +297,7 @@ function start( port ){
             sessions.push({ 
                 sessiontoken:token,
                 hasTwitter:false,
-                ip: socket.conn.request.headers['x-forwarded-for']
+                ip: socket.handshake.address // nginx isn't giving us x-real-ip..  // socket.conn.request.headers['x-forwarded-for']
             });
 
             cb({token:token});
@@ -306,21 +306,24 @@ function start( port ){
         // sessiontoken
         socket.once('checkToken',function(data,cb) {
             // console.log('--------------------------------------------------------');
-            // console.log(socket.conn.request.headers['x-forwarded-for']);
+            // console.log(socket.handshake.address);
             // console.log(data);
             // console.log('--------------------------------------------------------');
-            // console.log('current user', data);        
+                  
 
             if (typeof data == "object" || data=="bad format") {
-                reject(data);
                 if (cb) return cb("bad format");
             }
 
-            var user = sessions.find(function (obj) { 
-                return (obj.ip === socket.conn.request.headers['x-forwarded-for'] && obj.sessiontoken === data.token); 
-            });
+            console.log("check sessions",sessions);
 
-            if (user.hasTwitter) {
+            var user = sessions.find(function (obj) { 
+                return (obj.ip === socket.handshake.address && obj.sessiontoken === data); 
+            });
+            
+            // console.log('current user',user);
+
+            if (user && user.hasTwitter) {
                 userData = user;
                 console.log('current user', userData);
                 if (cb) return cb("ok");
