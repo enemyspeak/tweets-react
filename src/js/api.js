@@ -1,9 +1,9 @@
 import openSocket from 'socket.io-client';
 
 // prod
-// const socket = openSocket('http://138.197.170.47:4000');
+const socket = openSocket('http://138.197.170.47:4000');
 // dev
-const socket = openSocket('http://localhost:4000'); 
+// const socket = openSocket('http://localhost:4000'); 
 
 // we dont have a token:
 function getToken(cb) {

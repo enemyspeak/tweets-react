@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var Twitter = require('twitter');
 var credentials = require('./twittercredentials.json');
 var cacheMaker = require("./cacheMaker");
-var uuid=require('node-uuid');
+var uuid=require('uuid');
 
 var port = 4000;
 
@@ -290,6 +290,7 @@ function start( port ){
 
             console.log('--------------------------------------------------------');
             console.log(socket.conn.request.headers);
+            console.log( socket.handshake.address );
             console.log(token);
             console.log('--------------------------------------------------------');
 
