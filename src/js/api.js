@@ -8,7 +8,7 @@ const cookies = new Cookies();
 const socket = openSocket('http://localhost:4000'); 
 
 // read cookie and check token
-function doSessionToken(cb) {
+function doSessionToken(cb) { // this happens automatically now.
   console.log('my token',cookies.get('user')); //
   let cookiedata = cookies.get('user')
 
@@ -38,7 +38,12 @@ function doSessionToken(cb) {
   }
 }
 
-doSessionToken();
+socket.on('sessiontoken',function(data){
+    console.log('get token',data);
+    cookies.set('sessiontoken', data, { path: '/' });
+});
+
+// doSessionToken();
 
 function getRequestToken() {
   return new Promise(function(resolve,reject) {

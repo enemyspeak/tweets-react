@@ -278,7 +278,7 @@ function start( port ){
             userStream = stream;
         });
         userStream.on('error', function(error) {
-            throw error;
+            // throw error;
         });
         var usersCache;
 
@@ -289,16 +289,36 @@ function start( port ){
         var userData={};
 
         console.log('a user connected', usersConnected, 'This process is pid', process.pid );
+        // console.log(socket);
 
+        // sessiontoken //
+        function checkToken() {
+            var cookies = cookie.parse(socket.request.headers.cookie);
 
-        socket.on('getToken',function(data,cb) {
-            if (!cb) return; // ok
+            // check if cookie fields exist
+            var user;
+            if (cookies.sessiontoken) {
+                console.log(cookies.sessiontoken);
+                user = sessions.find(function (obj) { 
+                    return (obj.ip === socket.handshake.address && obj.sessiontoken === cookies.sessiontoken); 
+                });
+            }
+            if (user) {
+                userData = user;
+                console.log('current user', userData);
+            } else {
+                createSessionToken();
+            }
+        }
+        
+        checkToken();
+
+        function createSessionToken() {
             var token = createToken();
 
             console.log('--------------------------------------------------------');
-            // console.log(socket.conn.request.headers);
             console.log( socket.handshake.address );
-            console.log(token);
+            console.log( token );
             console.log('--------------------------------------------------------');
 
             sessions.push({ 
@@ -307,31 +327,28 @@ function start( port ){
                 ip: socket.handshake.address // nginx isn't giving us x-real-ip..  // socket.conn.request.headers['x-forwarded-for']
             });
 
-            cb({token:token});
-        });
+            socket.emit('sessiontoken',token);
+            // console.log('current user', userData);
+        }
 
-        // sessiontoken
-        socket.once('checkToken',function(data,cb) {
-            if (typeof data == "object" || data=="bad format") {
-                if (cb) return cb("bad format");
-            }
+        //         
+        // socket.on('getToken',function(data,cb) {
+        //     if (!cb) return; // ok
+        //     var token = createToken();
 
-            // console.log("check sessions",sessions);
+        //     console.log('--------------------------------------------------------');
+        //     console.log( socket.handshake.address );
+        //     console.log(token);
+        //     console.log('--------------------------------------------------------');
 
-            var user = sessions.find(function (obj) { 
-                return (obj.ip === socket.handshake.address && obj.sessiontoken === data); 
-            });
-            
-            // console.log('current user',user);
+        //     sessions.push({ 
+        //         sessiontoken:token,
+        //         hasTwitter:false,
+        //         ip: socket.handshake.address // nginx isn't giving us x-real-ip..  // socket.conn.request.headers['x-forwarded-for']
+        //     });
 
-            if (user && user.hasTwitter) {
-                userData = user;
-                console.log('current user', userData);
-                if (cb) return cb("ok");
-            } 
-
-            if (cb) return cb("bad format");
-        });
+        //     cb({token:token});
+        // });
 
         function streamfunction(event) {
             socket.emit('hometweet',event);
