@@ -57,6 +57,12 @@ function start( port ){
         return data;
     }
 
+    var serveFile = function(filename,contentType){
+        return function(req,res){
+            res.sendFile(__dirname+"/"+filename,{headers:{'Content-Type':contentType || 'text/html'}});
+        }
+    }
+
     app.all('*', function( req, res, next ){
         console.log(req.url);
         res.type( 'application/json' );
