@@ -9,11 +9,7 @@ class Authorize extends Component {
 	handleClick() {
 		getRequestToken().then((data) => {
 			console.log(data);
-			var pos = {
-				left: 400,
-				top: 200
-			}
-			this.oauthWindow = window.open( 'https://api.twitter.com/oauth/authorize?oauth_token=' + data,'_blank','menubar=no,height=600,width=768,left='+pos.left+',top='+pos.top );
+			this.oauthWindow = window.open( 'https://api.twitter.com/oauth/authorize?oauth_token=' + data,'_blank','menubar=no,height=600,width=768');
 		});
 	}
 	render() {

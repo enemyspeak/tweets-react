@@ -77,10 +77,6 @@ function start( port ){
     app.get('/css/auth.css',serveFile('auth.css','text/css'));
 
     app.get('/twitter',function(req,res){ // twitter oauth callback uri - used in getting an oauth_token
-        // console.log('twitter req',req);
-        // console.log('twitter res',res)
-        console.log('twitter cookie',req.headers.cookie);
-
         if (req.query.error) {
             console.log('twitter error found!',req.query);
             res.status( 400 ); // display error in pop up window
@@ -91,27 +87,15 @@ function start( port ){
         }
 
         var data = req.query; //parseTwitterResponse(req.query);
-        
         console.log(data);
 
-        // get the user token from the cookie.
-        var token;
-        if (req && req.headers && req.headers && req.headers.cookie) {
-            var str = req.headers.cookie;
-            str = cookie.parse(str); // parse cookie.
-            token = str.loginInfo
-            console.log('cookie token',token);
-        } else {
-            console.log('twitter err: no cookie found?');
-
-            // display error in pop up window
-            res.status( 400 );
-            res.sendFile(__dirname+"/"+'failed.html',{headers:{'Content-Type':'text/html'}});
-            // res.sendFile('failed.html',{ root:__dirname });
-            return;
-        }
-        if (!token) {
-            console.log('twitter err: no user token');
+        // get the user token from the verify token.
+        // data.oauth_verifier
+        var user = sessions.find(function (obj) { 
+            return (obj.requestToken === data.oauth_verifier); 
+        });
+        if (!user) {
+            console.log('twitter err: no user matching');
 
             // display error
             res.status( 400 );
@@ -120,11 +104,10 @@ function start( port ){
             return;
         }
 
-        console.log('header ip',req.headers['x-forwarded-for']);
-
+        // console.log('header ip',req.headers['x-forwarded-for']); //  x-real-ip?
         // look up the user -
-        console.log("twitter got user data",fetchedUserData.id);//,fetchedUserData);
-        var userData = fetchedUserData; // save user data per socket session
+        // console.log("twitter got user data",fetchedUserData.id);//,fetchedUserData);
+        // var userData = fetchedUserData; // save user data per socket session
 
         var oauth_token = data.oauth_token;
         var oauth_verifier = data.oauth_verifier;
@@ -174,17 +157,7 @@ function start( port ){
             },
             method: 'POST'
         },function(error, response, body){
-            // console.log(error,response,body);
-            // return;
             var data = body;
-            // try {
-            //     data = JSON.parse(body)
-            // } catch (e) {
-            //     // console.log('twitter parse error',e);
-            //     // if (cb) cb('error');
-            // }
-            // console.log(data);
-            // var data = JSON.parse(body);
             if(error || (data && data.errors)) { 
                 // console.log(parameters,signiture);
                 console.log('twitter access token err',data,error);//,response);
@@ -196,14 +169,14 @@ function start( port ){
                 // socket.emit('twitter token',data);
                 data = parseTwitterResponse(data);
 
-                userData.twitterToken = data.oauth_token;
-                userData.twitterTokenSecret = data.oauth_token_secret;
-                
                 res.status( 200 );
                 res.sendFile(__dirname+"/"+'success.html',{headers:{'Content-Type':'text/html'}});
 
-                // TODO: we dont have a user id so how are we going to tell the front end we got their token?
-                io.to(userData.id,'twitter token',{}); // tell the front end we got one.
+                // TODO: we dont have a user id so how are we going to tell the front end we got their token? // requestToken
+                io.to(user.id,'twitter token',{
+                    oauth_token:oauth_token,
+                    oauth_verifier:oauth_verifier
+                }); // tell the front end we got one.
             }
         });
     });
@@ -284,6 +257,7 @@ function start( port ){
 
     var sessions = []; // this is where we're going to keep our session tokens and stuff.
     var usersConnected = 0;
+    var id_seq = 0;
     io.on( 'connection', function( socket ){
         usersConnected++;
         var userData={};
@@ -320,10 +294,12 @@ function start( port ){
             console.log( socket.handshake.address );
             console.log( token );
             console.log('--------------------------------------------------------');
-
+            id_seq++;
+            
             sessions.push({ 
                 sessiontoken:token,
                 hasTwitter:false,
+                id: id_seq,
                 ip: socket.handshake.address // nginx isn't giving us x-real-ip..  // socket.conn.request.headers['x-forwarded-for']
             });
 
@@ -415,17 +391,8 @@ function start( port ){
                 },
                 method: 'POST'
             },function(error, response, body){
-                // console.log(error,response,body);
-                // return;
                 var data = body;
-                // try {
-                //     data = JSON.parse(body)
-                // } catch (e) {
-                //     // console.log('twitter parse error',e);
-                //     // if (cb) cb('error');
-                // }
-                // console.log(data);
-                // var data = JSON.parse(body);
+
                 if(error || (data && data.errors)) { 
                     // console.log(parameters,signiture);
                     console.log('twitter auth/token err',data,error);//,response);
@@ -435,12 +402,27 @@ function start( port ){
                     console.log('success! twitter token',data);
                     // socket.emit('twitter token',data);
                     data = parseTwitterResponse(data);
-                    userData.twitterToken = data.oauth_token;
-                    userData.twitterTokenSecret = data.oauth_token_secret;
+                    userData.requestToken = data.oauth_token;
+                    userData.requestTokenSecret = data.oauth_token_secret;
+
+                    // sessions
+                    var cookies = cookie.parse(socket.request.headers.cookie);
+
+                    if (cookies.sessiontoken) {
+                        console.log(cookies.sessiontoken);
+                        var user = sessions.find(function (obj) { 
+                            return (obj.ip === socket.handshake.address && obj.sessiontoken === cookies.sessiontoken); 
+                        });
+                        user.requestToken = data.oauth_token;
+                        if (cb) cb(userData.requestToken);
+                    }
+                     else {
+                        if (cb) cb('error');
+                     }
+                    // oauth_verifier
 
                     // delete data.oauth_token_secret;
                     
-                    if (cb) cb(userData.twitterToken);
                 }
             });
         });

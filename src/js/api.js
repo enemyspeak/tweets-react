@@ -16,7 +16,7 @@ function doSessionToken(cb) { // this happens automatically now.
   var getToken = function() {
     socket.emit('getToken',{},function(data) {
       console.log('get token',data);
-      cookies.set('user', data, { path: '/' });
+      cookies.set('user', data);
     });
   }
 

@@ -43,13 +43,15 @@ function VideoMedia(props) {
 	const variants = props.obj.video_info.variants;
 	const bitrate_max = 832000;
 
+	const loop = (props.obj.type === "animated_gif" ? true : false );
+
 	for (var i = variants.length - 1; i >= 0; i--) {
 		if ((variants[i].content_type === "video/mp4") && (variants[i].bitrate < bitrate_max)) {
 			index = i;
 		}
 	}
 	return (
-		<video controls poster={props.obj.media_url_https + ":small"} src={variants[index].url} type={variants[index].content_type} >
+		<video controls loop={loop} poster={props.obj.media_url_https + ":small"} src={variants[index].url} type={variants[index].content_type} >
 			{ /* {obj.video_info.variants.map(source => {
 				return (
 		    		<source src={source.url} type={source.content_type} />
