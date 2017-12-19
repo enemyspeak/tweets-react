@@ -7,6 +7,7 @@ var credentials = require('./twittercredentials.json');
 var cacheMaker = require("./cacheMaker");
 var uuid=require('uuid');
 var CryptoJS = require('crypto-js');
+var cookie = require('cookie');
 
 var port = 4000;
 
@@ -82,8 +83,8 @@ function start( port ){
         var data = req.query; //parseTwitterResponse(req.query);
         
         console.log(data);
-        // get the user token from the cookie.
 
+        // get the user token from the cookie.
         var token;
         if (req && req.headers && req.headers && req.headers.cookie) {
             var str = req.headers.cookie;
