@@ -267,7 +267,9 @@ function start( port ){
 
         // sessiontoken //
         function checkToken() {
-            var cookies = cookie.parse(socket.request.headers.cookie);
+            console.log( socket.handshake.headers.cookie );
+
+            var cookies = cookie.parse(socket.handshake.headers.cookie);
 
             // check if cookie fields exist
             var user;
@@ -290,12 +292,12 @@ function start( port ){
         function createSessionToken() {
             var token = createToken();
 
-            console.log('--------------------------------------------------------');
+            console.log(' create token ------------------------------------------');
             console.log( socket.handshake.address );
             console.log( token );
             console.log('--------------------------------------------------------');
             id_seq++;
-            
+
             sessions.push({ 
                 sessiontoken:token,
                 hasTwitter:false,
@@ -399,22 +401,27 @@ function start( port ){
                     if (cb) cb('error');
                     // res.status( 400 );
                 } else { 
-                    console.log('success! twitter token',data);
+                    // console.log('success! twitter token',data);
                     // socket.emit('twitter token',data);
                     data = parseTwitterResponse(data);
                     userData.requestToken = data.oauth_token;
                     userData.requestTokenSecret = data.oauth_token_secret;
 
                     // sessions
-                    var cookies = cookie.parse(socket.request.headers.cookie);
-
+                    var cookies = cookie.parse(socket.handshake.headers.cookie);
                     if (cookies.sessiontoken) {
-                        console.log(cookies.sessiontoken);
+                        console.log(cookies.sessiontoken,socket.handshake.address);
+
                         var user = sessions.find(function (obj) { 
                             return (obj.ip === socket.handshake.address && obj.sessiontoken === cookies.sessiontoken); 
                         });
-                        user.requestToken = data.oauth_token;
-                        if (cb) cb(userData.requestToken);
+                        if (user) {
+                            console.log('user found',user);
+                            user.requestToken = data.oauth_token;
+                            if (cb) cb(data.oauth_token);
+                        } else {
+                            if (cb) cb('error');    
+                        }
                     }
                      else {
                         if (cb) cb('error');

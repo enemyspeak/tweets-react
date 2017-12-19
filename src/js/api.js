@@ -49,7 +49,7 @@ function getRequestToken() {
   return new Promise(function(resolve,reject) {
     socket.emit('getrequesttoken',{},function(data) {
       console.log('got getRequestToken',data);
-      if (data === 'errror') {
+      if (data === 'error') {
         return reject();
       }
       resolve(data);
