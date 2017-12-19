@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"mar",
+				"margin-left"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"autho",
+				"authorize-modal"
+			],
+			[
+				"co",
+				"console"
+			],
+			[
+				"cook",
+				"cookiedata"
+			],
+			[
 				"last",
 				"lastIndex"
 			],
@@ -116,16 +140,8 @@
 				"className"
 			],
 			[
-				"text",
-				"text-decoration"
-			],
-			[
 				"lig",
 				"lightGreen"
-			],
-			[
-				"padd",
-				"padding-right"
 			],
 			[
 				"Twee",
@@ -208,10 +224,6 @@
 				"className"
 			],
 			[
-				"co",
-				"color"
-			],
-			[
 				"g",
 				"gray50"
 			],
@@ -257,10 +269,38 @@
 			}
 		},
 		{
-			"file": "src/css/app.scss",
+			"file": "src/js/api.js",
 			"settings":
 			{
-				"buffer_size": 8889,
+				"buffer_size": 3472,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "package.json",
+			"settings":
+			{
+				"buffer_size": 776,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/js/root.js",
+			"settings":
+			{
+				"buffer_size": 1959,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/js/authorize.js",
+			"settings":
+			{
+				"buffer_size": 1585,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
@@ -347,6 +387,8 @@
 	],
 	"file_history":
 	[
+		"/C/Users/user/Documents/tweets-react/src/css/auth.scss",
+		"/C/Users/user/Documents/tweets-react/src/css/root.scss",
 		"/C/Users/user/Documents/tweets-react/src/js/api.js",
 		"/C/Users/user/Documents/tweets-react/src/js/timeline.js",
 		"/C/Users/user/Documents/tweets-react/package.json",
@@ -354,7 +396,6 @@
 		"/C/Users/user/Documents/tweets-react/src/js/root.js",
 		"/C/Users/user/Documents/tweets-react/src/js/profile.js",
 		"/C/Users/user/Documents/tweets-react/src/css/tweet.scss",
-		"/C/Users/user/Documents/tweets-react/src/css/root.scss",
 		"/C/Users/user/Documents/tweets-react/src/css/app.scss",
 		"/C/Users/user/Documents/tweets-react/src/css/profile.scss",
 		"/C/Users/user/Documents/tweets-react/src/css/twitter.scss",
@@ -533,7 +574,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -562,8 +603,8 @@
 						"selection":
 						[
 							[
-								656,
-								470
+								7563,
+								8176
 							]
 						],
 						"settings":
@@ -573,40 +614,127 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 7.0,
+						"translation.y": 4554.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/css/app.scss",
-					"semi_transient": true,
+					"file": "src/js/api.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8889,
+						"buffer_size": 3472,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5086,
-								4921
+								678,
+								678
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/SCSS/SCSS.tmLanguage",
-							"tab_size": 4,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1428.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 776,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								339,
+								339
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/js/root.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1959,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								884,
+								884
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/js/authorize.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1585,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1128,
+								1128
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -616,7 +744,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 2,
+					"buffer": 5,
 					"file": "src/js/tweet.js",
 					"semi_transient": false,
 					"settings":
@@ -645,8 +773,8 @@
 						"selection":
 						[
 							[
-								1450,
-								1450
+								4667,
+								4678
 							]
 						],
 						"settings":
@@ -656,10 +784,10 @@
 							"word_wrap": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 382.0,
+						"translation.y": 1512.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -693,7 +821,7 @@
 		"cols":
 		[
 			0.0,
-			0.516767067359,
+			0.457879979298,
 			1.0
 		],
 		"rows":
