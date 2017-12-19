@@ -74,7 +74,7 @@ function start( port ){
         res.send('enemyspeak backend');
     });
 
-    app.get('/css/auth.css',serveFile('css/auth.css','text/css'));
+    app.get('/css/auth.css',serveFile('auth.css','text/css'));
 
     app.get('/twitter',function(req,res){ // twitter oauth callback uri - used in getting an oauth_token
         // console.log('twitter req',req);
