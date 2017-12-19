@@ -6,6 +6,7 @@ var Twitter = require('twitter');
 var credentials = require('./twittercredentials.json');
 var cacheMaker = require("./cacheMaker");
 var uuid=require('uuid');
+var CryptoJS = require('crypto-js');
 
 var port = 4000;
 
@@ -128,14 +129,14 @@ function start( port ){
         nonce = new Buffer( nonce ).toString('base64');
         var timestamp = Math.round((new Date()).getTime() / 1000.0);//new Date().getTime();
         var parameters =
-            'oauth_consumer_key='+percentEncode('PrJGzvLX1SDOxB9HNSvNQ4K76')+
+            'oauth_consumer_key='+percentEncode(credentials.twitter.consumer_key)+
             '&oauth_nonce='+percentEncode(nonce)+
             '&oauth_signature_method='+percentEncode('HMAC-SHA1')+
             '&oauth_timestamp='+percentEncode(timestamp)+
             '&oauth_token='+percentEncode(oauth_token)+
             '&oauth_version='+percentEncode('1.0');
         var base = 'POST'+'&'+percentEncode('https://api.twitter.com/oauth/access_token')+'&'+percentEncode(parameters);
-        var signingKey = percentEncode('OffSwViWCYVrbdanhSNmQgp2F3i9Mi2pVGpwzBFyyGBcWEkIxp')+'&';//+percentEncode(OAuth token secret);
+        var signingKey = percentEncode(credentials.twitter.consumer_secret)+'&';//+percentEncode(OAuth token secret);
         var signiture = CryptoJS.HmacSHA1(base, signingKey);
         signiture = CryptoJS.enc.Base64.stringify(signiture);
 
@@ -146,7 +147,7 @@ function start( port ){
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Authorization': 'OAuth ' + 
-                                            'oauth_consumer_key="'+percentEncode('PrJGzvLX1SDOxB9HNSvNQ4K76')+'", '+
+                                            'oauth_consumer_key="'+percentEncode(credentials.twitter.consumer_key)+'", '+
                                             'oauth_nonce="'+percentEncode(nonce)+'", '+
                                             'oauth_signature="'+percentEncode(signiture)+'", '+
                                             'oauth_signature_method="'+percentEncode('HMAC-SHA1')+'", '+
@@ -334,6 +335,7 @@ function start( port ){
             console.log(event && event.text);
             streamfunction = this;
         };
+        userStream.on('data', streamfunction);
 
         socket.on( 'disconnect', function(){
             usersConnected--;
@@ -347,8 +349,81 @@ function start( port ){
             userStream.removeAllListeners('data');
         });
 
-        userStream.on('data', streamfunction);
-     
+        socket.on('getrequesttoken',function(data,cb){
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+
+            var callback = 'http://138.197.170.47:4000/twitter';
+            var nonce = s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4();
+            nonce = new Buffer( nonce ).toString('base64');
+            var timestamp = Math.round((new Date()).getTime() / 1000.0);//new Date().getTime();
+            var parameters =
+                'oauth_callback='+percentEncode(callback)+
+                '&oauth_consumer_key='+percentEncode(credentials.twitter.consumer_key)+
+                '&oauth_nonce='+percentEncode(nonce)+
+                '&oauth_signature_method='+percentEncode('HMAC-SHA1')+
+                '&oauth_timestamp='+percentEncode(timestamp)+
+                '&oauth_version='+percentEncode('1.0');
+            var base = 'POST'+'&'+percentEncode('https://api.twitter.com/oauth/request_token')+'&'+percentEncode(parameters);
+            var signingKey = percentEncode(credentials.twitter.consumer_secret)+'&';//+percentEncode('E0h6CsWX0zgiPppitqI7Hk7XluGmjIfgs0zEUjLaQzWGW');
+            var signiture = CryptoJS.HmacSHA1(base, signingKey);
+            signiture = CryptoJS.enc.Base64.stringify(signiture);
+
+            // console.log('twitter header',base,signingKey,signiture);
+            // console.log('twitter signiture',percentEncode(signiture));
+
+            request.post({
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Authorization': 'OAuth ' + 'oauth_callback="'+percentEncode(callback)+'", '+
+                                                'oauth_consumer_key="'+percentEncode(credentials.twitter.consumer_key)+'", '+
+                                                'oauth_nonce="'+percentEncode(nonce)+'", '+
+                                                'oauth_signature="'+percentEncode(signiture)+'", '+
+                                                'oauth_signature_method="'+percentEncode('HMAC-SHA1')+'", '+
+                                                'oauth_timestamp="'+percentEncode(timestamp)+'", '+
+                                                'oauth_version="'+percentEncode('1.0')+'"'
+                },
+                url: 'https://api.twitter.com/oauth/request_token',
+                form:  {
+                    oauth_callback: callback
+                },
+                method: 'POST'
+            },function(error, response, body){
+                // console.log(error,response,body);
+                // return;
+                var data = body;
+                // try {
+                //     data = JSON.parse(body)
+                // } catch (e) {
+                //     // console.log('twitter parse error',e);
+                //     // if (cb) cb('error');
+                // }
+                // console.log(data);
+                // var data = JSON.parse(body);
+                if(error || (data && data.errors)) { 
+                    // console.log(parameters,signiture);
+                    console.log('twitter auth/token err',data,error);//,response);
+                    if (cb) cb('error');
+                    // res.status( 400 );
+                } else { 
+                    console.log('success! twitter token',data);
+                    // socket.emit('twitter token',data);
+                    data = parseTwitterResponse(data);
+                    userData.twitterToken = data.oauth_token;
+                    userData.twitterTokenSecret = data.oauth_token_secret;
+
+                    // delete data.oauth_token_secret;
+                    
+                    if (cb) cb(userData.twitterToken);
+                }
+            });
+        });
+
+        // ANYTHING BELOW HERE NEEDS AUTH
+
         socket.on('updatestatus',function(data,cb){
             twit.updateStatus('Test tweet from ntwitter/' + twitter.VERSION,
                 function (err, result) {

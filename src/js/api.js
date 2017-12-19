@@ -40,6 +40,19 @@ function doSessionToken(cb) {
 
 doSessionToken();
 
+function getRequestToken() {
+  return new Promise(function(resolve,reject) {
+    socket.emit('getrequesttoken',{},function(data) {
+      console.log('got getRequestToken',data);
+      if (data === 'errror') {
+        return reject();
+      }
+      resolve(data);
+    });
+  });
+}
+
+
 function fetchHomeTimeline(cb) {
   	socket.emit('gethometimeline',{},function(data) {
   		// console.log(data);
@@ -163,4 +176,4 @@ function unfavoriteTweet(id,cb) {
 }
 
 
-export { doSessionToken, fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };
+export { doSessionToken, getRequestToken, fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };
