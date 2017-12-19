@@ -84,7 +84,7 @@ function start( port ){
         if (req.query.error) {
             console.log('twitter error found!',req.query);
             res.status( 400 ); // display error in pop up window
-            res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');            
+            res.sendFile('failed.html');
             return;
         }
 
@@ -104,7 +104,7 @@ function start( port ){
 
             // display error in pop up window
             res.status( 400 );
-            res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
+            res.sendFile('failed.html');
             return;
         }
         if (!token) {
@@ -112,7 +112,7 @@ function start( port ){
 
             // display error
             res.status( 400 );
-            res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
+            res.sendFile('failed.html');
             return;
         }
 
