@@ -267,14 +267,14 @@ function start( port ){
 
         // sessiontoken //
         function checkToken() {
-            console.log( socket.handshake.headers.cookie );
+            // console.log( 'cookie', socket.handshake.headers.cookie );
 
             var cookies = cookie.parse(socket.handshake.headers.cookie);
 
             // check if cookie fields exist
             var user;
             if (cookies.sessiontoken) {
-                console.log(cookies.sessiontoken);
+                console.log('checkToken',cookies.sessiontoken,socket.handshake.address);
                 user = sessions.find(function (obj) { 
                     return (obj.ip === socket.handshake.address && obj.sessiontoken === cookies.sessiontoken); 
                 });
