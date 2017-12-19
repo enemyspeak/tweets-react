@@ -84,7 +84,7 @@ function start( port ){
         if (req.query.error) {
             console.log('twitter error found!',req.query);
             res.status( 400 ); // display error in pop up window
-            serveFile('failed.html')();
+            res.sendFile(__dirname+"/"+'failed.html',{headers:{'Content-Type':'text/html'}});
 
             // res.sendFile('failed.html',{ root:__dirname });
             return;
@@ -106,7 +106,7 @@ function start( port ){
 
             // display error in pop up window
             res.status( 400 );
-            serveFile('failed.html')();
+            res.sendFile(__dirname+"/"+'failed.html',{headers:{'Content-Type':'text/html'}});
             // res.sendFile('failed.html',{ root:__dirname });
             return;
         }
@@ -115,7 +115,7 @@ function start( port ){
 
             // display error
             res.status( 400 );
-            serveFile('failed.html')();
+            res.sendFile(__dirname+"/"+'failed.html',{headers:{'Content-Type':'text/html'}});
             // res.sendFile('failed.html',{ root:__dirname });
             return;
         }
@@ -188,11 +188,9 @@ function start( port ){
             if(error || (data && data.errors)) { 
                 // console.log(parameters,signiture);
                 console.log('twitter access token err',data,error);//,response);
-                // if (cb) cb('error',data);
+    
                 res.status( 400 );
-                // res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
-                // res.sendFile('failed.html',{ root:__dirname });
-                serveFile('failed.html')();
+                res.sendFile(__dirname+"/"+'failed.html',{headers:{'Content-Type':'text/html'}});
             } else { 
                 console.log('success! twitter access token',data);
                 // socket.emit('twitter token',data);
@@ -202,8 +200,7 @@ function start( port ){
                 userData.twitterTokenSecret = data.oauth_token_secret;
                 
                 res.status( 200 );
-                serveFile('success.html')();
-                // res.sendFile('success.html',{ root:__dirname });
+                res.sendFile(__dirname+"/"+'success.html',{headers:{'Content-Type':'text/html'}});
 
                 // TODO: we dont have a user id so how are we going to tell the front end we got their token?
                 io.to(userData.id,'twitter token',{}); // tell the front end we got one.
