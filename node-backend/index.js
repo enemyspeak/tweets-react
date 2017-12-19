@@ -68,6 +68,8 @@ function start( port ){
         res.send('enemyspeak backend');
     });
 
+    app.get('/css/auth.css',serveFile('css/auth.css','text/css'));
+
     app.get('/twitter',function(req,res){ // twitter oauth callback uri - used in getting an oauth_token
         // console.log('twitter req',req);
         // console.log('twitter res',res)
@@ -178,7 +180,8 @@ function start( port ){
                 console.log('twitter access token err',data,error);//,response);
                 // if (cb) cb('error',data);
                 res.status( 400 );
-                res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
+                // res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection failed.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
+                res.sendFile('failed.html');
             } else { 
                 console.log('success! twitter access token',data);
                 // socket.emit('twitter token',data);
@@ -186,19 +189,12 @@ function start( port ){
 
                 userData.twitterToken = data.oauth_token;
                 userData.twitterTokenSecret = data.oauth_token_secret;
+                
+                res.status( 200 );
+                res.sendFile('success.html');
 
-                postgres.saveTwitterCredentials(userData.id,data.oauth_token,data.oauth_token_secret).then(function() {
-                    res.status( 200 );
-                    res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection success.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
-                    io.to(userData.id,'twitter token',{}); // tell the front end we got one.
-                },function(err){
-                    console.log('saving twitter token failed',err); 
-                    // we can still send success this time- they'll have to authorize again later.
-                    
-                    res.status( 200 );
-                    res.send( '<html>\r\n\r\n<body bgcolor="white">\r\n<center><h1>Account connection success.</h1></center>\r\n<hr>\r\n</body>\r\n</html>\r\n');
-                    io.to(userData.id,'twitter token',{}); // tell the front end we got one.
-                });
+                // TODO: we dont have a user id so how are we going to tell the front end we got their token?
+                io.to(userData.id,'twitter token',{}); // tell the front end we got one.
             }
         });
     });

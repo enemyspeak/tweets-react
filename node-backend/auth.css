@@ -1,0 +1,50 @@
+.authorize-background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 98;
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px); }
+
+.authorize-modal {
+  position: absolute;
+  top: calc( 50vh - 125px);
+  left: calc( 50vw - 200px);
+  z-index: 99;
+  width: 420px;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  color: #b1b1b1; }
+  .authorize-modal .fi-social-twitter {
+    color: #03A9F4;
+    font-size: 50px;
+    text-align: center;
+    padding: 18px 20px 0px 20px; }
+  .authorize-modal h1 {
+    font-size: 32px;
+    text-align: center;
+    padding: 8px 20px 0px 20px;
+    color: #03A9F4; }
+  .authorize-modal p {
+    padding: 20px;
+    line-height: 20px;
+    text-align: center; }
+  .authorize-modal button {
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    background: transparent;
+    width: calc( 100% / 4);
+    text-align: center;
+    left: calc( 50%  - (25%/2));
+    font-size: 18px;
+    line-height: 30px;
+    cursor: pointer;
+    position: relative;
+    color: #b1b1b1;
+    transition: color 0.3s ease,background 0.3s ease;
+    outline: none; }
+    .authorize-modal button:hover {
+      background: #fff;
+      color: #000; }
