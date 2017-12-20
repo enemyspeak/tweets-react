@@ -303,7 +303,9 @@ function start( port ){
                 console.log('current user', userData);
 
                 if (userData.hasTwitter) {
-                    createTwitter();
+                    if (!twit) {
+                        createTwitter();
+                    }
                     socket.emit('twittertoken',{
                         hasTwitter: userData.hasTwitter,
                         user_id: userData.user_id,
@@ -458,12 +460,13 @@ function start( port ){
         function authorizeRequest() {
             return new Promise(function(resolve,reject) {
                 if (userData.hasTwitter) {
-                    // return true;
-                    if (!twit) createTwitter();
+                    if (!twit) {
+                        createTwitter();
+                    }
                     return resolve();
                 }
-                // return false;
-                reject();
+                console.log('unauthorized',userData);
+                return reject();
             })
         }
 
