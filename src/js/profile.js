@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 
 import Tweet from './tweet'
 import { gotTwitterLoginPromise, fetchUserByName } from './api';
@@ -10,9 +10,12 @@ class Profile extends Component {
     // console.log(props);
     gotTwitterLoginPromise().then((data) => {
       // if (this.props.activeTab) {
-        fetchUserByName(this.props.selectedUser).then((profile) => this.setState({ 
-          profile: profile
-        })).catch(function() {});
+        fetchUserByName(this.props.selectedUser).then((profile) => {
+          ReactDOM.findDOMNode(this).scrollIntoView(); // this should only run when the profile changes.
+          this.setState({ 
+            profile: profile
+          })
+        }).catch(function() {});
       // }
     });
   }
