@@ -365,7 +365,6 @@
     // background: $gray28;
     overflow: hidden;
     // height: 0px;
-    left: auto;
     transition: opacity 0.3s ease;
     position: absolute;
     top: 0px;
@@ -387,6 +386,7 @@
         line-height: 30px;            
         cursor: pointer;
         position: relative;
+        left: auto;
         color: $darkestwhite;
         transition:color 0.3s ease;
         outline: none;

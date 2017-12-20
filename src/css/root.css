@@ -882,7 +882,6 @@ input, textarea {
 
 .tweet-controls {
   overflow: hidden;
-  left: auto;
   transition: opacity 0.3s ease;
   position: absolute;
   top: 0px;
@@ -903,6 +902,7 @@ input, textarea {
     line-height: 30px;
     cursor: pointer;
     position: relative;
+    left: auto;
     color: #b1b1b1;
     transition: color 0.3s ease;
     outline: none; }
