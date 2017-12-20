@@ -27,9 +27,12 @@
     top:  calc( 50vh - 125px );
     left: calc( 50vw - 200px );
     z-index: 99;
-    // min-width: 320px;
-    width: 420px;
-    height: 250px;
+    min-width: 320px;
+    width: 50%;
+    max-width: 420px;
+    min-height: 250px;
+    height: auto;
+
     background: $black80;
     border-radius: 15px;
     color: $darkestwhite;
@@ -47,9 +50,31 @@
 	    color: $lightBlue;
     }
 
+    button {
+        margin-bottom: 30px;
+    }
+
     p {
     	padding: 20px;
     	line-height: 20px;
     	text-align: center;
+    }
+}
+.authorize-popupblocked{
+    text-align: center;
+    margin-top: 22px;
+    position: absolute;
+    width: 100%;
+    
+    a {
+        font-size: 14px;
+        border-bottom: 1px solid $white;
+        color: $white;
+        text-decoration: none;    
+        transition: color 0.3s ease,border 0.3s ease;
+        &:hover {
+            border-bottom: 1px solid $darkestwhite;
+            color: $darkestwhite;
+        }
     }
 }

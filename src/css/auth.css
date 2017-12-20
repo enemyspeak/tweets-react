@@ -20,8 +20,11 @@
   top: calc( 50vh - 125px);
   left: calc( 50vw - 200px);
   z-index: 99;
-  width: 420px;
-  height: 250px;
+  min-width: 320px;
+  width: 50%;
+  max-width: 420px;
+  min-height: 250px;
+  height: auto;
   background: rgba(0, 0, 0, 0.8);
   border-radius: 15px;
   color: #b1b1b1; }
@@ -35,7 +38,24 @@
     text-align: center;
     padding: 8px 20px 0px 20px;
     color: #03A9F4; }
+  .authorize-modal button {
+    margin-bottom: 30px; }
   .authorize-modal p {
     padding: 20px;
     line-height: 20px;
     text-align: center; }
+
+.authorize-popupblocked {
+  text-align: center;
+  margin-top: 22px;
+  position: absolute;
+  width: 100%; }
+  .authorize-popupblocked a {
+    font-size: 14px;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease,border 0.3s ease; }
+    .authorize-popupblocked a:hover {
+      border-bottom: 1px solid #b1b1b1;
+      color: #b1b1b1; }

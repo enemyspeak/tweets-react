@@ -4,7 +4,6 @@ import { getRequestToken,gotTwitterLoginPromise } from './api';
 class Authorize extends Component {
 	constructor(props) {
 		super(props)
-		// this.oauthWindow; // TODO use this to close the window.
 
 		gotTwitterLoginPromise().then((data) => {
 			this.setState({
@@ -19,12 +18,20 @@ class Authorize extends Component {
         }
 	}
 	state = {
-		modalVisible: true
+		modalVisible: true,
+		popupBlocked: false
 	}
 	handleClick() {
 		getRequestToken().then((data) => {
 			// console.log(data);
 			this.oauthWindow = window.open( 'https://api.twitter.com/oauth/authorize?oauth_token=' + data,'_blank','menubar=no,height=600,width=768');
+			if (this.oauthWindow === null) {
+				console.log('blocked probably');
+				this.setState({
+					requestToken: data,
+					popupBlocked: true
+				});
+			}
 		});
 	}
 	render() {
@@ -36,6 +43,11 @@ class Authorize extends Component {
 					<h1>Welcome to Squawk Box.</h1>
 					<p>Before you can begin using Squawk Box, you need to connect your twitter account.</p>
 					<button onClick={() => this.handleClick()}>Connect</button>
+					{ this.state.popupBlocked && (
+						<div className="authorize-popupblocked">
+							<a href={"https://api.twitter.com/oauth/authorize?oauth_token="+this.state.requestToken} target="_blank">Click here if the window didn't open.</a>
+						</div>
+					)}
 				</div>
 			</div>
 		);
