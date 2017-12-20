@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import Tweet from './tweet'
 import Profile from './profile'
+import { gotTwitterLoginPromise } from './api';
 
 class Timeline extends Component {
 	constructor(props) {
   	super(props);
-    this.props.dataSource((err, timeline) => this.setState({ 
-      timeline 
-    }));
+    
+    gotTwitterLoginPromise().then((data) => {
+      this.props.dataSource((err, timeline) => this.setState({ 
+        timeline 
+      }));
+    });
 
     if (this.props.stream) {
       this.props.stream((err, tweet) => {

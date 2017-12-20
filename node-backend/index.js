@@ -270,7 +270,7 @@ function start( port ){
         usersConnected++;
         var userData={};
 
-        var twit,timelinecache = [],mentionscache = [];
+        var twit,timelinecache = [],mentionscache = [],directmessagescache = [];
         var userStream;
 
         console.log('a user connected', usersConnected, 'This process is pid', process.pid );
@@ -486,13 +486,21 @@ function start( port ){
             })
         });
 
-        socket.on('stophometimelinestream',function(){ 
-
+        socket.on('stophometimelinestream',function(data,cb){ 
+            try {
+                if (userStream) {
+                    userStream.removeAllListeners('data');
+                    userStream.destroy();
+                }
+                if (cb) cb('ok');
+            } catch (error) {
+                console.log(error);
+                if (cb) cb('error');
+            }
         });
 
         socket.on('gethometimeline',function(data,cb){
             authorizeRequest().then(function() {
-                
                 if (timelinecache.length) {
                     console.log('return cache');
                     if (cb) cb(timelinecache);
@@ -516,10 +524,10 @@ function start( port ){
                         userStream = stream;
                         userStream.on('data', streamfunction);
                         userStream.on('error',function(err) {
-                            console.log('stream error',err);
+                            console.log('stream error',err); // 420 probably.
                         });
                         userStream.on('end', function (response) {
-                            console.log('closed stream',response);
+                            console.log('closed stream'); // ,response );
                         });
                     });
                 }
@@ -529,6 +537,7 @@ function start( port ){
         });
 
         socket.on('getmentions', function(data,cb) { // load profile by id
+            console.log('get mentions');
             authorizeRequest().then(function() {
                 if (mentionscache.length) {
                     if (cb) cb(mentionscache);
@@ -541,7 +550,6 @@ function start( port ){
                         return;
                     }
                     mentionscache = result;
-
                     if(cb) cb(mentionscache);
                 });
             }).catch(function() {
@@ -552,7 +560,21 @@ function start( port ){
 
         socket.on('getdirectmessages',function(data,cb) {
             authorizeRequest().then(function() {
-                if (cb) cb(directmessagescache);
+                if (directmessagescache.length) {
+                    if (cb) cb(directmessagescache);
+                    return;
+                }
+
+                twit.get('direct_messages', {}, function(error, result) {
+                    if (error) {
+                        console.log(error);
+                        if(cb) cb('error');
+                        return;
+                    }
+                    console.log('mentions result');
+                    directmessagescache = tweets;
+                    if(cb) cb(directmessagescache);
+                });
             }).catch(function() {
                 if (cb) cb('unauthorized');
             })

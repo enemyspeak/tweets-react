@@ -108,7 +108,7 @@ function subscribeToHomeTimeline(cb) {
 
 function fetchMentions(cb) {
   	socket.emit('getmentions',{},function(data) {
-  		// console.log(data);
+  		console.log(data);
   		if (!data || data==='unauthorized') {
 			cb(null, []);
   			return;
