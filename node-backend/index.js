@@ -343,8 +343,8 @@ function start( port ){
             };
             console.log('current user', userData);
 
+            socket.join( userData.id ); // join your own room with your user id
             socket.emit('sessiontoken',token);
-            // console.log('current user', userData);
         }
 
         function streamfunction(event) {
