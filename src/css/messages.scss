@@ -1,0 +1,52 @@
+@import "./mixins.scss";
+@import "./colors.scss";
+
+.messages-contain {
+    width: 100%;
+    height: calc( 100% - 30px );
+    color: $white;
+    position: absolute;
+    top: 0px;
+    transform: translate(0%, 0px);
+    transition: all,0.3s ease;
+    &.inactive {
+        transform: translate(100%, 0px);
+        // display: none;
+    }
+}
+.messages-list-contain {
+    width: 100%;
+    height: calc( 100% - 30px );
+    color: $white;
+    position: absolute;
+    top: 0px;
+    transform: translate(0%, 0px);
+    transition: all,0.3s ease;
+    &.inactive {
+        transform: translate(-100%, 0px);
+        // display: none;
+    }
+}
+.user-message {
+    -webkit-animation: animateTweet ease;
+    animation: animateTweet ease;
+    -webkit-animation-duration: 300ms;
+    animation-duration: 300ms;
+    transform: translateZ(0);
+    position: relative;
+    background: transparent;
+    transition: background 0.3s ease;
+
+    &.selected,&:hover {
+        background: $gray20;
+        // border-left: 1px solid $gray28;
+    }
+
+    .user-message-contain {
+        position: relative;
+        left: 0px;
+        padding: 10px 10px 10px 0px;
+        border-bottom: 1px solid #424242;
+        min-height: 42px;
+    }
+}
