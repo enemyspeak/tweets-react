@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+
 import Tweet from './tweet'
 import { gotTwitterLoginPromise, fetchUserByName } from './api';
 
@@ -18,9 +20,14 @@ class Profile extends Component {
     selectedTweet: false,
     // selectedUser: false,
   };
-  componentWillMount() {
-    // this.setState({selectedUser:this.props.selectedUser});
+  componentDidUpdate = () => { 
+    // NOTE: this will scroll everything to the top when you change tabs..
+    ReactDOM.findDOMNode(this).scrollIntoView(); 
   }
+
+  // componentWillMount() {
+  //   // this.setState({selectedUser:this.props.selectedUser});
+  // }
   setSelectedUser(id) {
     console.log(id);
   	this.setState({selectedUser:id}); // this is recursion.
@@ -34,7 +41,7 @@ class Profile extends Component {
   }
 	render() {
     var profile = this.state.profile;
-    
+
     if (!profile) {
       return (
         <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>

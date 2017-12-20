@@ -135,6 +135,7 @@ class RelativeTime extends Component {
 	    var r = (
 	        diff > 0 &&
 	        (
+	        	// eslint-disable-next-line
 	            day_diff === 0 &&
 	            (
 	                (
@@ -143,6 +144,7 @@ class RelativeTime extends Component {
 	                    (diff < 7200 && "1h") ||
 	                    (diff < 86400 && Math.floor(diff / 3600) + "h")
 	                )
+	            // eslint-disable-next-line
 	            ) ||
 	            (day_diff === 1 && "1d") ||
 	            (Math.ceil(day_diff) + "d")
@@ -192,6 +194,7 @@ class TweetBody extends Component {
 	}
 	replaceAll(str,strReplace, strWith) {
 	    // See http://stackoverflow.com/a/3561711/556609
+	    // eslint-disable-next-line
 	    var esc = strReplace.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 	    var reg = new RegExp(esc, 'ig');
 	    return str.replace(reg, strWith);
@@ -211,13 +214,13 @@ class TweetBody extends Component {
 
 		if ( ( tweet.extended_entities && tweet.extended_entities.media ) ||
 			 ( tweet.extended_tweet && tweet.extended_tweet.extended_entities && tweet.extended_tweet.extended_entities.media ) ) {
-			var lastIndex = text.lastIndexOf(" ");
+			let lastIndex = text.lastIndexOf(" ");
 
 			text = text.substring(0, lastIndex); // remove the last word, that's a url to the image.
 		}
 
 		if (tweet.is_quote_status) { // remove the last url if this is a retweet because that's unneeded too.
-			var lastIndex = text.lastIndexOf("\n");
+			let lastIndex = text.lastIndexOf("\n");
 			if (lastIndex === -1) lastIndex = text.lastIndexOf(" ");
 			//console.log(lastIndex)
 			// console.log(text,'before')
@@ -263,10 +266,14 @@ class Tweet extends Component {
   	}
 	handleFavoriteTweet(id) { // this can just call to the api and update this icon.
 		// console.log(id);
-
-		favoriteTweet(id).then(() => this.setState({favorited: !this.state.favorited})).catch((err)=> console.error(err));
+		if (this.state.favorited) { // check if this is favorited already.
+			unfavoriteTweet(id).then(() => this.setState({favorited: !this.state.favorited})).catch((err)=> console.error(err));
+		} else {
+			favoriteTweet(id).then(() => this.setState({favorited: !this.state.favorited})).catch((err)=> console.error(err));
+		}
   	}
   	handleRetweetTweet() { // this can just call to the api and update this icon.
+  		// TODO
   		this.setState({retweeted: !this.state.retweeted});
   	}
 	render() {
@@ -297,7 +304,9 @@ class Tweet extends Component {
 						<OiginalUser user={tweet.retweeteduser} onClick={this.props.mentionHandler} />
 					)}
 					
-					{/* <TweetStatistics favorite_count={tweet.favorite_count} retweet_count={tweet.retweet_count} /> */}
+					{ this.props.data.selected && (
+						<TweetStatistics favorite_count={tweet.favorite_count} retweet_count={tweet.retweet_count} /> 
+					)}
 				</div>
 				<TweetControls 
 					retweeted={this.state.retweeted}

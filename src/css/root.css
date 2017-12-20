@@ -756,7 +756,12 @@ html {
   position: relative;
   margin-top: 10px;
   left: 60px;
-  width: calc( 100% - 60px); }
+  width: calc( 100% - 60px);
+  -webkit-animation: animateTweet ease;
+  animation: animateTweet ease;
+  -webkit-animation-duration: 300ms;
+  animation-duration: 300ms;
+  transform: translateZ(0); }
   .tweet-statistics div {
     display: inline;
     padding-right: 10px;

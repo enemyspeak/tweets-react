@@ -337,6 +337,12 @@
     margin-top: 10px;
     left: 60px;
     width: calc( 100% - 60px);
+     -webkit-animation: animateTweet ease;
+    animation: animateTweet ease;
+    -webkit-animation-duration: 300ms;
+    animation-duration: 300ms;
+    transform: translateZ(0);
+
     div {
         display: inline;
         padding-right: 10px;
@@ -345,6 +351,7 @@
             padding-right: 5px;
         }
     }
+
     // .fi-star {
     //     color: $yellow;
     // }
