@@ -155,21 +155,36 @@ function fetchMentions(cb) {
 //   	});
 // }
 
-function fetchUserByName(screen_name,cb) {
-	console.log(screen_name);
-	if (!screen_name){ 
-		cb(null, undefined);
-		return
-	};
-	socket.emit('getuser',{screen_name:screen_name},function(data) {
-  		console.log(data);
+
+var usersCache = [];
+function fetchUserByName(screen_name) {
+  return new Promise( function(resolve,reject ) {
+  	console.log('fetch user',screen_name);
+  	if (!screen_name){ 
+      reject('missing data');
+  		// cb(null, undefined);
+  		return
+  	};
+
+    if (usersCache[screen_name]) {
+      console.log('return cache');
+      resolve(usersCache[screen_name]);
+      return;
+    }
+  	socket.emit('getuser',{screen_name:screen_name},function(data) {
+  		console.log('got user data',data);
   		if (!data || data==='unauthorized') {
-			cb(null, undefined);
-  			return;
+			// cb(null, undefined);
+  	// 		return;
+        reject('error');
+        return;
   		}
   		// return data;
-  		cb(null, data);
+  		// cb(null, data);
+      usersCache[screen_name] = data; // cache the result.
+      resolve(data);
   	});
+  })
 }
 
 function favoriteTweet(id,cb) {

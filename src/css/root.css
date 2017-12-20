@@ -896,11 +896,21 @@ html {
   .recent-timeline-contain.inactive {
     display: none; }
 
+.sub-profile-contain {
+  position: relative;
+  height: calc( 100% - 30px);
+  width: 100%;
+  display: none; }
+  .sub-profile-contain.visible {
+    display: block; }
+
 .profile-contain {
   position: relative;
   height: calc( 100% - 30px);
   width: 100%;
-  display: block; }
+  display: none; }
+  .profile-contain.visible {
+    display: block; }
   .profile-contain .back-button {
     position: absolute;
     width: 30px;

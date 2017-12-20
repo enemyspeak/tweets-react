@@ -1,33 +1,40 @@
 import React, { Component } from 'react';
 import Tweet from './tweet'
-import { fetchUserByName } from './api';
+import { gotTwitterLoginPromise, fetchUserByName } from './api';
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+    gotTwitterLoginPromise().then((data) => {
+      // if (this.props.activeTab) {
+        fetchUserByName(this.props.selectedUser).then((profile) => this.setState({ 
+          profile: profile
+        })).catch(function() {});
+      // }
+    });
+  }
   state = {
     selectedTweet: false,
-    selectedUser: false,
+    // selectedUser: false,
   };
-  componentWillReceiveProps() {
-    // console.log(this.props.selectedUser);
-    this.setState({selectedUser:this.props.selectedUser});
-    // console.log(this.state.selectedUser);
-    if (this.props.activeTab) {
-      fetchUserByName(this.props.selectedUser,(err, profile) => this.setState({ 
-        profile 
-      }));
-    }
+  componentWillMount() {
+    // this.setState({selectedUser:this.props.selectedUser});
   }
   setSelectedUser(id) {
-    // console.log(id);
-  	this.setState({selectedUser:id});
+    console.log(id);
+  	this.setState({selectedUser:id}); // this is recursion.
+  }
+  clearSelectedUser() {
+    this.setState({selectedUser:false}); // this is recursion. 
   }
   setSelectedTweet(id) {
     // console.log(id);
     this.setState({selectedTweet:id});
   }
 	render() {
-    const profile = this.state.profile;
-
+    var profile = this.state.profile;
+    // console.log(profile);
     if (!profile) {
       return (
         <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
@@ -45,7 +52,18 @@ class Profile extends Component {
 
     return (
       <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
-      	<div className="profile-contain">
+      	<div className={"sub-profile-contain " + (this.state.selectedUser ? "visible" : "")}>
+          {/* this is where we're recursively adding profile */}
+          {this.state.selectedUser && ( 
+            <Profile 
+              selectedUser={this.state.selectedUser}
+              clearSelectedUser={()=>this.clearSelectedUser()} 
+              showBackButton={true} 
+              activeTab={this.state.selectedUser} 
+            />
+          )}
+        </div>
+        <div className={"profile-contain " + (this.state.selectedUser ? "" : "visible")}>
           {this.props.showBackButton && ( <div className="back-button" onClick={()=>this.props.clearSelectedUser()}><div className="fi-arrow-left"></div></div>)}
           <div className="user-banner" style={bannerStyle}></div>
           <div className="user-avatar profile-avatar">
@@ -73,7 +91,7 @@ class Profile extends Component {
                   key={obj.id_str}
                   data={obj} 
                   onClick={()=>this.setSelectedTweet(obj.id_str)} 
-                  mentionHandler={()=>this.setSelectedUser(obj.user.screen_name)} 
+                  mentionHandler={(id)=>this.setSelectedUser(id)} 
                 />
               )
             }))}

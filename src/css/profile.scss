@@ -15,11 +15,28 @@
         }
     }
     
+    .sub-profile-contain {
+        position: relative;
+        height: calc( 100% - 30px );
+        width: 100%;        
+        display: none;
+
+        &.visible {
+            display: block;
+        }
+    }
+
     .profile-contain {
         position: relative;
         height: calc( 100% - 30px );
         width: 100%;        
-        display: block;
+        display: none;
+
+        &.visible {
+            display: block;
+        }
+
+
         .back-button {
             position: absolute;
             width: 30px;

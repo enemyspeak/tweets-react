@@ -27,7 +27,7 @@ class Timeline extends Component {
     timeline: []
   };
   setSelectedUser(id) {
-    console.log(id);
+    // console.log(id);
     this.setState({selectedUser:id});
   }
   clearSelectedUser() {
@@ -38,20 +38,20 @@ class Timeline extends Component {
   	this.setState({selectedTweet:id});
   }
   render() {
-    const selectedUser = this.state.selectedUser;
-    // console.log(selectedUser);
+    console.log('timeline',this.state.selectedUser);
     const timeline = this.state.timeline;
+
     return (
       <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
-        <div className={"profile-contain " + (selectedUser ? "" : "inactive")}>
+        <div className={"profile-contain " + (this.state.selectedUser ? "" : "inactive")}>
           <Profile 
-            selectedUser={selectedUser}
+            selectedUser={this.state.selectedUser}
             clearSelectedUser={()=>this.clearSelectedUser()} 
             showBackButton={true} 
-            activeTab={true} 
+            activeTab={this.state.selectedUser} 
           />
         </div>
-        <div className={"timeline-contain " + (selectedUser ? "inactive" : "")}>
+        <div className={"timeline-contain " + (this.state.selectedUser ? "inactive" : "")}>
           {timeline.map((obj) => {
             obj.selected = ( obj.id_str === this.state.selectedTweet ? 'selected' : '' );
             return (
