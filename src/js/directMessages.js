@@ -72,7 +72,7 @@ class MessageBody extends Component {
 
 class Message extends Component {
 	render() {
-		console.log(this.props);
+		// console.log(this.props);
 		return (
 			<div className="message">
 				<div className="user-avatar">
@@ -103,7 +103,7 @@ class DirectMessages extends Component {
 	    		let users = [] // not optimal.. 
 	    		// but lets just do this to get it working.
 	    		for (var i = userMap.length - 1; i >= 0; i--) {
-	    			if (keys.indexOf(userMap[i].screen_name) == -1) {
+	    			if (keys.indexOf(userMap[i].screen_name) === -1) {
 	    				users.push(userMap[i]);
 	    				keys.push(userMap[i].screen_name);
 	    			}

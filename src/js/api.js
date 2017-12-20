@@ -85,7 +85,7 @@ function getRequestToken() {
 
 function fetchHomeTimeline(cb) {
 	socket.emit('gethometimeline',{},function(data) {
-		console.log(data);
+		// console.log(data);
 		if (!data || data==='unauthorized' || data==='error') {
 		  cb(null, []);
 			return;
@@ -108,7 +108,7 @@ function subscribeToHomeTimeline(cb) {
 
 function fetchMentions(cb) {
 	socket.emit('getmentions',{},function(data) {
-		console.log(data);
+		// console.log(data);
 		if (!data || data==='unauthorized' || data==='error') {
 		  cb(null, []);
 			return;
@@ -120,7 +120,7 @@ function fetchMentions(cb) {
 
 function fetchDirectMessages(cb) {
   socket.emit('getdirectmessages',{},function(data) {
-    console.log(data);
+    // console.log(data);
     if (!data || data==='unauthorized' || data==='error') {
       cb(null, []);
       return;

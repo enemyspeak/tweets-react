@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 
 import Tweet from './tweet'
 import { gotTwitterLoginPromise, fetchUserByName } from './api';
@@ -20,16 +20,17 @@ class Profile extends Component {
     selectedTweet: false,
     // selectedUser: false,
   };
-  componentDidUpdate = () => { 
-    // NOTE: this will scroll everything to the top when you change tabs..
-    ReactDOM.findDOMNode(this).scrollIntoView(); 
-  }
+  // componentDidUpdate = () => { 
+  //   // NOTE: this will scroll everything to the top when you change tabs..
+  //   ReactDOM.findDOMNode(this).scrollIntoView(); 
+  // }
 
   // componentWillMount() {
   //   // this.setState({selectedUser:this.props.selectedUser});
   // }
   setSelectedUser(id) {
-    console.log(id);
+    // console.log(id);
+    if (id === this.props.selectedUser) return;
   	this.setState({selectedUser:id}); // this is recursion.
   }
   clearSelectedUser() {

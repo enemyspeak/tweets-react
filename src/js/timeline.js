@@ -42,7 +42,7 @@ class Timeline extends Component {
   	this.setState({selectedTweet:id});
   }
   render() {
-    console.log('timeline',this.state.selectedUser);
+    // console.log('timeline',this.state.selectedUser);
     const timeline = this.state.timeline;
 
     return (
