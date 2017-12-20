@@ -194,74 +194,74 @@ function start( port ){
     /********************************************************************************/
 
         // console.log('twitcreds',credentials);
-        var twit = new Twitter({
-            consumer_key: credentials.twitter.consumer_key,           
-            consumer_secret: credentials.twitter.consumer_secret,        
-            access_token_key: credentials.twitter.access_token_key,       
-            access_token_secret: credentials.twitter.access_token_secret     
-        });
+        // var twit = new Twitter({
+        //     consumer_key: credentials.twitter.consumer_key,           
+        //     consumer_secret: credentials.twitter.consumer_secret,        
+        //     access_token_key: credentials.twitter.access_token_key,       
+        //     access_token_secret: credentials.twitter.access_token_secret     
+        // });
 
-        var timelinecache;
-        twit.get('statuses/home_timeline',{tweet_mode:'extended'},function(err,result) {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            console.log('timeline result');
-            timelinecache = result;
-            // if (cb) cb(result);
-        });
+        // var timelinecache;
+        // twit.get('statuses/home_timeline',{tweet_mode:'extended'},function(err,result) {
+        //     if (err) {
+        //         console.log(err);
+        //         return;
+        //     }
+        //     console.log('timeline result');
+        //     timelinecache = result;
+        //     // if (cb) cb(result);
+        // });
 
-        var mentionscache;
-        twit.get('statuses/mentions_timeline', {}, function(error, tweets, response) {
-            // if (cb) cb(result);
-            if (error) {
-                console.log(error);
-                return;
-            }
-            console.log('mentions result');
-            mentionscache = tweets;
-        });
+        // var mentionscache;
+        // twit.get('statuses/mentions_timeline', {}, function(error, tweets, response) {
+        //     // if (cb) cb(result);
+        //     if (error) {
+        //         console.log(error);
+        //         return;
+        //     }
+        //     console.log('mentions result');
+        //     mentionscache = tweets;
+        // });
 
-        var directmessagescache;
-        // direct_messages
-        twit.get('direct_messages', {}, function(error, tweets, response) {
-            // if (cb) cb(result);
-            if (error) {
-                console.log(error);
-                return;
-            }
-            console.log('mentions result');
-            mentionscache = tweets;
-        });
+        // var directmessagescache;
+        // // direct_messages
+        // twit.get('direct_messages', {}, function(error, tweets, response) {
+        //     // if (cb) cb(result);
+        //     if (error) {
+        //         console.log(error);
+        //         return;
+        //     }
+        //     console.log('mentions result');
+        //     mentionscache = tweets;
+        // });
 
-        var profilecache;
-         twit.get('users/show', {screen_name: '@hannufluff'},function(error,  response) {
-            if (error) {
-                console.log(error);
-                return;
-            }
-            console.log('profile result');
-            profilecache = response;
-            twit.get('statuses/user_timeline', {screen_name: '@hannufluff'}, function(error, tweets) {
-                // if (cb) cb(result);
-                if (error) {
-                    console.log(error);
-                    return;
-                }
-                console.log('home user timeline result');
-                profilecache.timeline = tweets;
-            });
-        });
+        // var profilecache;
+        //  twit.get('users/show', {screen_name: '@'},function(error,  response) {
+        //     if (error) {
+        //         console.log(error);
+        //         return;
+        //     }
+        //     console.log('profile result');
+        //     profilecache = response;
+        //     twit.get('statuses/user_timeline', {screen_name: '@hannufluff'}, function(error, tweets) {
+        //         // if (cb) cb(result);
+        //         if (error) {
+        //             console.log(error);
+        //             return;
+        //         }
+        //         console.log('home user timeline result');
+        //         profilecache.timeline = tweets;
+        //     });
+        // });
 
-        var userStream;
-        twit.stream('user', {tweet_mode:'extended'}, function(stream) {
-            userStream = stream;
-        });
-        userStream.on('error', function(error) {
-            // throw error;
-        });
-        var usersCache;
+        // var userStream;
+        // twit.stream('user', {tweet_mode:'extended'}, function(stream) {
+        //     userStream = stream;
+        // });
+        // userStream.on('error', function(error) {
+        //     // throw error;
+        // });
+        // var usersCache;
 
     var sessions = []; // this is where we're going to keep our session tokens and stuff.
     var usersConnected = 0;
@@ -270,8 +270,20 @@ function start( port ){
         usersConnected++;
         var userData={};
 
+        var twit,timelinecache = [],mentionscache = [];
+        var userStream;
+
         console.log('a user connected', usersConnected, 'This process is pid', process.pid );
         // console.log(socket);
+
+        function createTwitter() {
+            twit = new Twitter({
+                consumer_key: credentials.twitter.consumer_key,           
+                consumer_secret: credentials.twitter.consumer_secret,        
+                access_token_key: userData.oauth_token,       
+                access_token_secret: userData.oauth_token_secret
+            });
+        }
 
         // sessiontoken //
         function checkToken() {
@@ -289,6 +301,16 @@ function start( port ){
             if (user) {
                 userData = user;
                 console.log('current user', userData);
+
+                if (userData.hasTwitter) {
+                    createTwitter();
+                    socket.emit('twittertoken',{
+                        hasTwitter: userData.hasTwitter,
+                        user_id: userData.user_id,
+                        screen_name: userData.screen_name
+                    });
+                }
+
                 socket.join( userData.id ); // join your own room with your user id
             } else {
                 createSessionToken();
@@ -325,32 +347,18 @@ function start( port ){
             console.log(event && event.text);
             streamfunction = this;
         };
-        userStream.on('data', streamfunction);
-
-        socket.on( 'disconnect', function(){
-            usersConnected--;
-            console.log('user disconnected', usersConnected);
-            if(userData.id){
-                userData = {}; // clear user data, might not be necessary, closure should take care of it
-            }
-            // if(streamfunction) {
-            //     userStream.removeListener('data',streamfunction);
-            // }
-            userStream.removeAllListeners('data');
-        });
+        // userStream.on('data', streamfunction); // FIXME
 
         socket.on( 'disconnect', function(){
             usersConnected--;
             console.log('user disconnected', usersConnected);
             if(userData.id){
                 socket.leave(userData.id);
-
                 userData = {}; // clear user data, might not be necessary, closure should take care of it
             }
-            // if(streamfunction) {
-            //     userStream.removeListener('data',streamfunction);
-            // }
-            userStream.removeAllListeners('data');
+            if (userStream) {
+                userStream.removeAllListeners('data');
+            }
         });
 
         socket.on('getrequesttoken',function(data,cb){
@@ -441,6 +449,7 @@ function start( port ){
             return new Promise(function(resolve,reject) {
                 if (userData.hasTwitter) {
                     // return true;
+                    if (!twit) createTwitter();
                     return resolve();
                 }
                 // return false;
