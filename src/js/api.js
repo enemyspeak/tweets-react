@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 // prod
-const socket = openSocket('http://138.197.170.47/node');
+const socket = openSocket('http://138.197.170.47:4000');
 // dev
 // const socket = openSocket('http://localhost:4000/node'); 
 
