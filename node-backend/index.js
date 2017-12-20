@@ -481,8 +481,9 @@ function start( port ){
 
         socket.on('gethometimeline',function(data,cb){
             authorizeRequest().then(function() {
-                // console.log('return cache');
+                
                 if (timelinecache) {
+                    console.log('return cache');
                     if (cb) cb(timelinecache);
                     return;
                 }
@@ -493,13 +494,14 @@ function start( port ){
                         if (cb) cb('err');
                         return;
                     }
-                    // console.log('timeline result');
+                    console.log('timeline result',result.length);
                     timelinecache = result;
                     // if (cb) cb(result);
                     if (cb) cb(timelinecache);
                 });
                 if (!userStream) {
                     twit.stream('user', {tweet_mode:'extended'}, function(stream) {
+                        console.log('create stream');
                         userStream = stream;
                         userStream.on('data', streamfunction);
                     });
