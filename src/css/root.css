@@ -23,15 +23,17 @@ html {
   text-align: center;
   display: block;
   padding: 7px 20px;
-  border-bottom: 1px solid #424242;
   color: #F44336;
   font-size: 22px;
   height: 36px;
   line-height: 36px;
   opacity: 0;
-  transition: opacity 0.3s ease; }
+  transition: opacity 0.3s ease;
+  z-index: 99;
+  pointer-events: none; }
   .potential-problem.visible {
-    opacity: 1; }
+    opacity: 1;
+    pointer-events: initial; }
 
 .header-row {
   text-align: center;

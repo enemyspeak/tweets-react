@@ -514,6 +514,9 @@ function start( port ){
                         console.log('create stream');
                         userStream = stream;
                         userStream.on('data', streamfunction);
+                        userStream.on('error',function(err) {
+                            console.log('stream error',err);
+                        })
                     });
                 }
             }).catch(function() {
