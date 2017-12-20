@@ -478,8 +478,20 @@ function start( port ){
 
         socket.on('gethometimeline',function(data,cb){
             authorizeRequest().then(function() {
-                console.log('return cache');
-                if (cb) cb(timelinecache);
+                // console.log('return cache');
+                // TODO return cache here, probably using makeCacheFunction..
+                twit.get('statuses/home_timeline',{tweet_mode:'extended'},function(err,result) {
+                    if (err) {
+                        console.log(err);
+                        if (cb) cb('err');
+                        return;
+                    }
+                    // console.log('timeline result');
+                    timelinecache = result;
+                    // if (cb) cb(result);
+                    if (cb) cb(timelinecache);
+
+                });
             }).catch(function() {
                 if (cb) cb('unauthorized');
             })
