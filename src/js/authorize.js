@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
-import { getRequestToken } from './api';
+import { getRequestToken,gotTwitterLoginPromise } from './api';
 
 class Authorize extends Component {
 	constructor(props) {
 		super(props)
 		this.oauthWindow;
+
+		gotTwitterLoginPromise().then((data) => {
+			this.setState({
+				modalVisible: false
+			});
+		})
+	}
+	state = {
+		modalVisible: true
 	}
 	handleClick() {
 		getRequestToken().then((data) => {

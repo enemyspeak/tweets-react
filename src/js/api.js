@@ -43,6 +43,16 @@ socket.on('sessiontoken',function(data){
     cookies.set('sessiontoken', data, { path: '/' });
 });
 
+function gotTwitterLoginPromise() {
+  return new Promise(function(resolve,reject) {
+    socket.on('twitter token',function(data){
+        console.log('get twitter details',data)
+        resolve(data);
+        // cookies.set('sessiontoken', data, { path: '/' });
+    });
+  });
+}
+
 // doSessionToken();
 
 function getRequestToken() {
@@ -181,4 +191,4 @@ function unfavoriteTweet(id,cb) {
 }
 
 
-export { doSessionToken, getRequestToken, fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };
+export { doSessionToken, getRequestToken,gotTwitterLoginPromise, fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };

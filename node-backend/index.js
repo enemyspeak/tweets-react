@@ -53,7 +53,7 @@ function start( port ){
             temp = raw[i].split('=');
             data[temp[0]]=temp[1];
         }
-        console.log(data);
+        // console.log(data);
         return data;
     }
 
@@ -172,10 +172,13 @@ function start( port ){
                 res.status( 200 );
                 res.sendFile(__dirname+"/"+'success.html',{headers:{'Content-Type':'text/html'}});
 
-                // TODO: we dont have a user id so how are we going to tell the front end we got their token? // requestToken
+                user.hasTwitter = true;
+
                 io.to(user.id,'twitter token',{
-                    oauth_token:oauth_token,
-                    oauth_verifier:oauth_verifier
+                    // oauth_token: data.oauth_token,
+                    hasTwitter: true,
+                    user_id: data.user_id,
+                    screen_name: data.screen_name
                 }); // tell the front end we got one.
             }
         });
@@ -268,7 +271,6 @@ function start( port ){
         // sessiontoken //
         function checkToken() {
             // console.log( 'cookie', socket.handshake.headers.cookie );
-
             var cookies = cookie.parse(socket.handshake.headers.cookie);
 
             // check if cookie fields exist
@@ -282,6 +284,7 @@ function start( port ){
             if (user) {
                 userData = user;
                 console.log('current user', userData);
+                socket.join( userData.id ); // join your own room with your user id
             } else {
                 createSessionToken();
             }
@@ -309,25 +312,6 @@ function start( port ){
             // console.log('current user', userData);
         }
 
-        //         
-        // socket.on('getToken',function(data,cb) {
-        //     if (!cb) return; // ok
-        //     var token = createToken();
-
-        //     console.log('--------------------------------------------------------');
-        //     console.log( socket.handshake.headers["x-forwarded-for"] );
-        //     console.log(token);
-        //     console.log('--------------------------------------------------------');
-
-        //     sessions.push({ 
-        //         sessiontoken:token,
-        //         hasTwitter:false,
-        //         ip: socket.handshake.headers["x-forwarded-for"] // nginx isn't giving us x-real-ip..  // socket.conn.request.headers['x-forwarded-for']
-        //     });
-
-        //     cb({token:token});
-        // });
-
         function streamfunction(event) {
             socket.emit('hometweet',event);
             // TODO add an id here so react can use this.
@@ -342,6 +326,20 @@ function start( port ){
             usersConnected--;
             console.log('user disconnected', usersConnected);
             if(userData.id){
+                userData = {}; // clear user data, might not be necessary, closure should take care of it
+            }
+            // if(streamfunction) {
+            //     userStream.removeListener('data',streamfunction);
+            // }
+            userStream.removeAllListeners('data');
+        });
+
+        socket.on( 'disconnect', function(){
+            usersConnected--;
+            console.log('user disconnected', usersConnected);
+            if(userData.id){
+                socket.leave(userData.id);
+
                 userData = {}; // clear user data, might not be necessary, closure should take care of it
             }
             // if(streamfunction) {
