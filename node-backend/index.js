@@ -465,7 +465,7 @@ function start( port ){
                     }
                     return resolve();
                 }
-                console.log('unauthorized',userData);
+                // console.log('unauthorized',userData);
                 return reject();
             })
         }
@@ -505,7 +505,7 @@ function start( port ){
         socket.on('gethometimeline',function(data,cb){
             authorizeRequest().then(function() {
                 if (timelinecache.length) {
-                    console.log('return cache');
+                    // console.log('return cache');
                     if (cb) cb(timelinecache);
                     return;
                 }
@@ -516,7 +516,7 @@ function start( port ){
                         if (cb) cb('err');
                         return;
                     }
-                    console.log('timeline result',result.length);
+                    // console.log('timeline result',result.length);
                     timelinecache = result;
                     // if (cb) cb(result);
                     if (cb) cb(timelinecache);
@@ -540,13 +540,13 @@ function start( port ){
         });
 
         socket.on('getmentions', function(data,cb) { // load profile by id
-            console.log('get mentions',data);
+            // console.log('get mentions',data);
             authorizeRequest().then(function() {
                 if (mentionscache.length) {
                     if (cb) cb(mentionscache);
                     return;
                 }
-                twitter.get('statuses/mentions_timeline',function(error,result) {
+                twit.get('statuses/mentions_timeline',function(error,result) {
                     if (error) {
                         console.log('mentions_timeline err',error);
                         if(cb) cb('error');
@@ -556,7 +556,7 @@ function start( port ){
                     if(cb) cb(mentionscache);
                 });
             }).catch(function(error) {
-                console.log('mentions unauthorized',userData,error);
+                // console.log('mentions unauthorized',userData,error);
                 if (cb) cb('unauthorized');
             })
            
