@@ -84,21 +84,21 @@ function getRequestToken() {
 
 
 function fetchHomeTimeline(cb) {
-  	socket.emit('gethometimeline',{},function(data) {
-  		// console.log(data);
-  		if (!data || data==='unauthorized') {
-			cb(null, []);
-  			return;
-  		}
-  		// return data;
-  		cb(null, data);
-  	});
+	socket.emit('gethometimeline',{},function(data) {
+		// console.log(data);
+		if (!data || data==='unauthorized') {
+		  cb(null, []);
+			return;
+		}
+		// return data;
+		cb(null, data);
+	});
 }
 
 function subscribeToHomeTimeline(cb) {
 	socket.on('hometweet',function(data){
 		if (!data || data==='unauthorized') {
-			cb(null, []);
+			  cb(null, []);
   			return;
   		}
   		// return data;
@@ -107,15 +107,15 @@ function subscribeToHomeTimeline(cb) {
 }
 
 function fetchMentions(cb) {
-  	socket.emit('getmentions',{},function(data) {
-  		console.log(data);
-  		if (!data || data==='unauthorized') {
-			cb(null, []);
-  			return;
-  		}
-  		// return data;
-  		cb(null, data);
-  	});
+	socket.emit('getmentions',{},function(data) {
+		console.log(data);
+		if (!data || data==='unauthorized') {
+		  cb(null, []);
+			return;
+		}
+		// return data;
+		cb(null, data);
+	});
 }
 
 // // returns your profile

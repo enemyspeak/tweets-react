@@ -540,7 +540,7 @@ function start( port ){
         });
 
         socket.on('getmentions', function(data,cb) { // load profile by id
-            console.log('get mentions');
+            console.log('get mentions',data);
             authorizeRequest().then(function() {
                 if (mentionscache.length) {
                     if (cb) cb(mentionscache);
@@ -555,7 +555,8 @@ function start( port ){
                     mentionscache = result;
                     if(cb) cb(mentionscache);
                 });
-            }).catch(function() {
+            }).catch(function(error) {
+                console.log('mentions unauthorized',userData,error);
                 if (cb) cb('unauthorized');
             })
            
