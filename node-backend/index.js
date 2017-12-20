@@ -180,8 +180,7 @@ function start( port ){
                 delete user.requestToken;
                 delete user.requestTokenSecret;
 
-                io.to(user.id,'twittertoken',{
-                    // oauth_token: data.oauth_token,
+                io.to(user.id).emit('twittertoken',{
                     hasTwitter: true,
                     user_id: data.user_id,
                     screen_name: data.screen_name
@@ -502,7 +501,6 @@ function start( port ){
 
         socket.on('getdetails', function(data,cb) { // loads replies and stuff to a tweet
             authorizeRequest().then(function() {
-
                 if (!data.id) {
                     if(cb) cb({error:'error'});
                     return;
@@ -518,11 +516,6 @@ function start( port ){
                 if (cb) cb('unauthorized');
             });
         });
-
-        // socket.on('get my twitter user', function(cb) { // for loading your profile
-        // });
-
-
 
         socket.on('gethomeuser', function(data,cb) { // load profile by id
             authorizeRequest().then(function() {

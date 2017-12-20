@@ -1,6 +1,14 @@
 
 @import "./colors.scss";
 
+.authorize-contain {
+    display: none;
+
+    &.visible {
+        display: block;
+    }
+}
+
 .authorize-background {
 	position: absolute;
 	width: 100vw;
@@ -21,7 +29,7 @@
     background: $black80;
     border-radius: 15px;
     color: $darkestwhite;
-
+    
     .fi-social-twitter {
     	color: $lightBlue;
     	font-size: 50px;

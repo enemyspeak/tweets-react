@@ -376,6 +376,11 @@ html {
     .twitter-login .popupMessage.hidden {
       opacity: 0; }
 
+.authorize-contain {
+  display: none; }
+  .authorize-contain.visible {
+    display: block; }
+
 .authorize-background {
   position: absolute;
   width: 100vw;

@@ -23,7 +23,7 @@ class Authorize extends Component {
 	}
 	render() {
 		return (
-			<div className={"authorize-contain " + (modalVisible ? "visible" : "" )}>
+			<div className={"authorize-contain " + (this.state.modalVisible ? "visible" : "" )}>
 				<div className="authorize-background"></div>
 				<div className="authorize-modal">
 					<div className="fi-social-twitter"></div>
