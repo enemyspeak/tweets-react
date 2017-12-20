@@ -26,6 +26,18 @@
         transform: translate(-100%, 0px);
         // display: none;
     }
+
+    .fi-arrow-right {
+        position: absolute;
+        right: 0px;
+        font-size: 20px;
+        top: calc( 50% / 2 );
+        text-align: center;
+        width: 30px;
+        padding-top: 4px;
+        box-sizing: border-box;
+        color: $gray28;
+    }
 }
 .user-message {
     -webkit-animation: animateTweet ease;
@@ -36,6 +48,7 @@
     position: relative;
     background: transparent;
     transition: background 0.3s ease;
+    cursor: pointer;
 
     &.selected,&:hover {
         background: $gray20;

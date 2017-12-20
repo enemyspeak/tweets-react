@@ -31,6 +31,16 @@
   transition: all,0.3s ease; }
   .messages-list-contain.inactive {
     transform: translate(-100%, 0px); }
+  .messages-list-contain .fi-arrow-right {
+    position: absolute;
+    right: 0px;
+    font-size: 20px;
+    top: calc( 50% / 2);
+    text-align: center;
+    width: 30px;
+    padding-top: 4px;
+    box-sizing: border-box;
+    color: #424242; }
 
 .user-message {
   -webkit-animation: animateTweet ease;
@@ -40,7 +50,8 @@
   transform: translateZ(0);
   position: relative;
   background: transparent;
-  transition: background 0.3s ease; }
+  transition: background 0.3s ease;
+  cursor: pointer; }
   .user-message.selected, .user-message:hover {
     background: #303030; }
   .user-message .user-message-contain {

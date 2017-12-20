@@ -12,7 +12,7 @@ function Avatar(props) {
  
 function UserInfo(props){
 	return(
-		<div className="tweet-user" onClick={() => props.onClick(props.user.screen_name)}>
+		<div className="tweet-user">
 			<div className="user-avatar">
 		        <Avatar user={props.user} />
 		    </div>
@@ -27,9 +27,11 @@ class Message extends Component {
 	render() {
 		// console.log(this.props);
 		return (
-			<div className="user-message">
+			<div className="user-message" onClick={() => this.props.onClick(this.props.data.screen_name)}>
 				<div className="user-message-contain">
-					<UserInfo user={this.props.data} onClick={this.props.onClick} />
+					<UserInfo user={this.props.data} />
+
+					{/* <div className="fi-arrow-right"></div> */}
 				</div>
 			</div>
 		)
@@ -47,6 +49,9 @@ class DirectMessages extends Component {
       			});
 	    		
 	    		let userMap = messages.map((obj) => (obj.sender));
+
+	    		// TODO: sort this by time, and add the most recent message text in
+
 	    		let keys = [];
 	    		let users = [] // not optimal.. 
 	    		// but lets just do this to get it working.
@@ -67,8 +72,17 @@ class DirectMessages extends Component {
   		selectedMessages: [],
   		users: []
   	}
+  	clearSelectedUser() {
+  		this.setState({selectedUser:false});
+  	}
 	setSelectedUser(id) {
+		console.log('selected user',id);
 		this.setState({selectedUser:id});
+
+		if (id) {
+			let selectedMessages = this.state.messages;
+			console.log(selectedMessages);
+		}
 	}
 	render() {
 		const messages = this.state.selectedMessages;
@@ -76,20 +90,21 @@ class DirectMessages extends Component {
 		return (
 			<div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
 				<div className={"messages-contain " + (this.state.selectedUser ? "" : "inactive")}>
+					<div className="back-button" onClick={()=>this.clearSelectedUser()}><div className="fi-arrow-left"></div></div>
 					{messages.map((obj) => {
 						return (
-							<div></div>
+							<div>{obj.id_str}</div>
 						)
 					})}
 				</div>
-				<div className={"messages-list-contain" + (this.state.selectedUser ? "inactive" : "")}>
+				<div className={"messages-list-contain " + (this.state.selectedUser ? "inactive" : "")}>
 					{users.map((obj) => {
 			            obj.selected = ( obj.id_str === this.state.selectedUser ? 'selected' : '' );
 			            return (
 			              	<Message 
 			                key={obj.id_str}
 			                data={obj} 
-			                onClick={()=>this.setSelectedMessage(obj.id_str)}
+			                onClick={(screen_name)=>this.setSelectedUser(screen_name)}
 			              	/>
 			            )
 			        })}

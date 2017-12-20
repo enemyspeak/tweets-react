@@ -31,6 +31,33 @@ html{
     }
 }
 
+.back-button {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 0px;
+    left: 0px;
+    z-index: 3;
+    text-align: center;
+    // border-right: 1px solid $white;
+    // border-bottom: 1px solid $white;
+    cursor: pointer;
+}
+.fi-arrow-left {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    color: $white;
+    transition: color 0.3s ease;
+    // top: 5px;
+    position: relative;
+    padding-top: 5px;
+    box-sizing: border-box;
+    &:hover {
+        color: $darkestwhite;
+    }
+}
+
 .header-row {
     text-align: center;
     display: block;

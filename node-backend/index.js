@@ -513,7 +513,7 @@ function start( port ){
                 twit.get('statuses/home_timeline',{tweet_mode:'extended'},function(err,result) {
                     if (err) {
                         console.log('home_timeline err',err);
-                        if (cb) cb('err');
+                        if (cb) cb('error');
                         return;
                     }
                     // console.log('timeline result',result.length);

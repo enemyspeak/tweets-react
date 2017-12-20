@@ -85,8 +85,8 @@ function getRequestToken() {
 
 function fetchHomeTimeline(cb) {
 	socket.emit('gethometimeline',{},function(data) {
-		// console.log(data);
-		if (!data || data==='unauthorized') {
+		console.log(data);
+		if (!data || data==='unauthorized' || data==='error') {
 		  cb(null, []);
 			return;
 		}
@@ -97,7 +97,7 @@ function fetchHomeTimeline(cb) {
 
 function subscribeToHomeTimeline(cb) {
 	socket.on('hometweet',function(data){
-		if (!data || data==='unauthorized') {
+		if (!data || data==='unauthorized' || data==='error') {
 			  cb(null, []);
   			return;
   		}
@@ -109,7 +109,7 @@ function subscribeToHomeTimeline(cb) {
 function fetchMentions(cb) {
 	socket.emit('getmentions',{},function(data) {
 		console.log(data);
-		if (!data || data==='unauthorized') {
+		if (!data || data==='unauthorized' || data==='error') {
 		  cb(null, []);
 			return;
 		}
@@ -121,7 +121,7 @@ function fetchMentions(cb) {
 function fetchDirectMessages(cb) {
   socket.emit('getdirectmessages',{},function(data) {
     console.log(data);
-    if (!data || data==='unauthorized') {
+    if (!data || data==='unauthorized' || data==='error') {
       cb(null, []);
       return;
     }
@@ -185,7 +185,7 @@ function fetchUserByName(screen_name) {
     }
   	socket.emit('getuser',{screen_name:screen_name},function(data) {
   		console.log('got user data',data);
-  		if (!data || data==='unauthorized') {
+      if (!data || data==='unauthorized' || data==='error') {
 			// cb(null, undefined);
   	// 		return;
         reject('error');
@@ -206,7 +206,7 @@ function favoriteTweet(id,cb) {
       reject('no id!');
     };
     socket.emit('favoritetweet',{id:id},function(err,data) {
-      if (err || data==='unauthorized') {
+      if (!data || data==='unauthorized' || data==='error') {
         reject(err)
       } else {
         resolve();
@@ -222,7 +222,7 @@ function unfavoriteTweet(id,cb) {
       reject('no id!');
     };
     socket.emit('unfavoritetweet',{id:id},function(err,data) {
-      if (err || data==='unauthorized') {
+      if (!data || data==='unauthorized' || data==='error') {
         reject(err)
       } else {
         resolve();
