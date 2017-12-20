@@ -341,6 +341,7 @@ function start( port ){
                 id: id_seq,
                 ip: socket.handshake.headers["x-forwarded-for"] // nginx isn't giving us x-real-ip..  // socket.conn.request.headers['x-forwarded-for'] 
             };
+            console.log('current user', userData);
 
             socket.emit('sessiontoken',token);
             // console.log('current user', userData);
@@ -425,24 +426,26 @@ function start( port ){
                     userData.requestTokenSecret = data.oauth_token_secret;
 
                     // sessions
-                    var cookies = cookie.parse(socket.handshake.headers.cookie);
-                    if (cookies.sessiontoken) {
-                        console.log(cookies.sessiontoken,socket.handshake.headers["x-forwarded-for"]);
+                    // var cookies = cookie.parse(socket.handshake.headers.cookie); // don't go back to the cookie here.
+                    var sessiontoken = userData.sessiontoken;
+                    if (sessiontoken) {
+                        console.log(sessiontoken,socket.handshake.headers["x-forwarded-for"]);
 
                         var user = sessions.find(function (obj) { 
-                            return (obj.ip === socket.handshake.headers["x-forwarded-for"] && obj.sessiontoken === cookies.sessiontoken); 
+                            return (obj.ip === socket.handshake.headers["x-forwarded-for"] && obj.sessiontoken === sessiontoken); 
                         });
                         if (user) {
                             console.log('user found',user);
                             user.requestToken = data.oauth_token;
                             if (cb) cb(data.oauth_token);
                         } else {
+                            console.log('user not found');
                             if (cb) cb('error');    
                         }
-                    }
-                     else {
+                    } else {
+                        console.log('no sessiontoken');
                         if (cb) cb('error');
-                     }
+                    }
                     // oauth_verifier
 
                     // delete data.oauth_token_secret;
