@@ -347,8 +347,7 @@ function start( port ){
             console.log(event && event.text);
             streamfunction = this;
         };
-        // userStream.on('data', streamfunction); // FIXME
-
+        
         socket.on( 'disconnect', function(){
             usersConnected--;
             console.log('user disconnected', usersConnected);
@@ -476,13 +475,21 @@ function start( port ){
             })
         });
 
+        socket.on('stophometimelinestream',function(){ 
+
+        });
+
         socket.on('gethometimeline',function(data,cb){
             authorizeRequest().then(function() {
                 // console.log('return cache');
-                // TODO return cache here, probably using makeCacheFunction..
+                if (timelinecache) {
+                    if (cb) cb(timelinecache);
+                    return;
+                }
+                // return cache here, probably using makeCacheFunction instead of timelinecache..
                 twit.get('statuses/home_timeline',{tweet_mode:'extended'},function(err,result) {
                     if (err) {
-                        console.log(err);
+                        console.log('home_timeline err',err);
                         if (cb) cb('err');
                         return;
                     }
@@ -490,8 +497,13 @@ function start( port ){
                     timelinecache = result;
                     // if (cb) cb(result);
                     if (cb) cb(timelinecache);
-
                 });
+                if (!userStream) {
+                    twit.stream('user', {tweet_mode:'extended'}, function(stream) {
+                        userStream = stream;
+                        userStream.on('data', streamfunction);
+                    });
+                }
             }).catch(function() {
                 if (cb) cb('unauthorized');
             })
@@ -499,17 +511,24 @@ function start( port ){
 
         socket.on('getmentions', function(data,cb) { // load profile by id
             authorizeRequest().then(function() {
-                if (cb) cb(mentionscache);
+                if (mentionscache) {
+                    if (cb) cb(mentionscache);
+                    return;
+                }
+                twitter.get('statuses/mentions_timeline',function(error,result) {
+                    if (error) {
+                        console.log('mentions_timeline err',error);
+                        if(cb) cb('error');
+                        return;
+                    }
+                    mentionscache = result;
+
+                    if(cb) cb(mentionscache);
+                });
             }).catch(function() {
                 if (cb) cb('unauthorized');
             })
-            // twitter.get('statuses/mentions_timeline',function(error, tweets, response) {
-            //     if (error) {
-            //         if(cb) cb({error:error});
-            //         return;
-            //     }
-            //     if(cb) cb(error,tweets);
-            // });
+           
         });   
 
         socket.on('getdirectmessages',function(data,cb) {
@@ -523,12 +542,13 @@ function start( port ){
         socket.on('getdetails', function(data,cb) { // loads replies and stuff to a tweet
             authorizeRequest().then(function() {
                 if (!data.id) {
-                    if(cb) cb({error:'error'});
+                    if(cb) cb('error');
                     return;
                 }
+                // TODO cache this
                 twit.get('statuses/show/'+data.id,{},function(error, tweet) {
                     if (error) {
-                        if(cb) cb({error:error});
+                        if(cb) cb('error');
                         return;
                     }
                     if(cb) cb(tweet);
@@ -538,41 +558,41 @@ function start( port ){
             });
         });
 
-        socket.on('gethomeuser', function(data,cb) { // load profile by id
-            authorizeRequest().then(function() {
-                if(cb) cb(profilecache)
-            }).catch(function() {
-                if (cb) cb('unauthorized');
-            });
-        });
+        // socket.on('gethomeuser', function(data,cb) { // load profile by id
+        //     authorizeRequest().then(function() {
+        //         if(cb) cb(profilecache)
+        //     }).catch(function() {
+        //         if (cb) cb('unauthorized');
+        //     });
+        // });
 
-        socket.on('gethomeusertimeline', function(data,cb) { // load profile by id
-            authorizeRequest().then(function() {
-                if(cb) cb(homeusertimelinecache)
-            }).catch(function() {
-                if (cb) cb('unauthorized');
-            }); 
-        });
-
+        // socket.on('gethomeusertimeline', function(data,cb) { // load profile by id
+        //     authorizeRequest().then(function() {
+        //         if(cb) cb(homeusertimelinecache)
+        //     }).catch(function() {
+        //         if (cb) cb('unauthorized');
+        //     }); 
+        // });
 
         socket.on('getuser', function(data,cb) { // load profile by screen_name
+            // TODO cache this
             authorizeRequest().then(function() {
                 console.log('getuser',data);
                 if (!data.screen_name) {
-                    if(cb) cb({error:'error'});
+                    if(cb) cb('error');
                     return;
                 }
 
                 let user;
                 twit.get('users/show', {screen_name: data.screen_name},function(error,  response) {
                     if (error) {
-                        if(cb) cb({error:error});
+                        if(cb) cb('error');
                         return;
                     }
                     user = response
                     twit.get('statuses/user_timeline',{screen_name: data.screen_name,tweet_mode:'extended'},function(error, tweets) {
                         if (error) {
-                            if(cb) cb({error:error});
+                            if(cb) cb('error');
                             return;
                         }
                         user.timeline = tweets;
