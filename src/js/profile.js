@@ -34,7 +34,7 @@ class Profile extends Component {
   }
 	render() {
     var profile = this.state.profile;
-    // console.log(profile);
+    console.log(profile);
     if (!profile) {
       return (
         <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>

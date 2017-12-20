@@ -43,15 +43,19 @@ class Timeline extends Component {
 
     return (
       <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
-        <div className={"profile-contain " + (this.state.selectedUser ? "" : "inactive")}>
-          <Profile 
-            selectedUser={this.state.selectedUser}
-            clearSelectedUser={()=>this.clearSelectedUser()} 
-            showBackButton={true} 
-            activeTab={this.state.selectedUser} 
-          />
+        <div className={"profile-contain " + (this.state.selectedUser ? "visible" : "inactive")}>
+          {this.state.selectedUser && (
+            <Profile 
+              selectedUser={this.state.selectedUser}
+              clearSelectedUser={()=>this.clearSelectedUser()} 
+              showBackButton={true} 
+              activeTab={this.state.selectedUser} 
+            />
+          )}
         </div>
         <div className={"timeline-contain " + (this.state.selectedUser ? "inactive" : "")}>
+          <div className={"dataLoader " + (timeline.length ? "inactive" : "")}></div>
+
           {timeline.map((obj) => {
             obj.selected = ( obj.id_str === this.state.selectedTweet ? 'selected' : '' );
             return (
