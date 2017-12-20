@@ -604,11 +604,11 @@ function start( port ){
                     return;
                 }
                 twit.get('search/tweets',{q:data.search}, function(err, result) {
-                    console.log(result);
+                    // console.log(result);
                     if (cb) cb(result);
                 });
             }).catch(function(error) {
-                console.log('search err',error);
+                // console.log('search err',error);
                 if (cb) cb('unauthorized');
             });
         });

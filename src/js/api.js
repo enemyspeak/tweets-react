@@ -55,7 +55,7 @@ socket.on('sessiontoken',function(data){
     cookies.set('sessiontoken', data, { path: '/' });
 });
 
-socket.on('twittertoken',function(data){
+socket.once('twittertoken',function(data){
     console.log('get twitter details',data)
     loginPromiseResolve(data);
 });
@@ -205,9 +205,9 @@ function favoriteTweet(id,cb) {
     if (!id){ 
       reject('no id!');
     };
-    socket.emit('favoritetweet',{id:id},function(err,data) {
+    socket.emit('favoritetweet',{id:id},function(data) {
       if (!data || data==='unauthorized' || data==='error') {
-        reject(err)
+        reject(data)
       } else {
         resolve();
         console.log(data);
@@ -221,9 +221,9 @@ function unfavoriteTweet(id,cb) {
     if (!id){ 
       reject('no id!');
     };
-    socket.emit('unfavoritetweet',{id:id},function(err,data) {
+    socket.emit('unfavoritetweet',{id:id},function(data) {
       if (!data || data==='unauthorized' || data==='error') {
-        reject(err)
+        reject(data)
       } else {
         resolve();
         console.log(data);
@@ -232,14 +232,14 @@ function unfavoriteTweet(id,cb) {
   });
 }
 
-function search(data,cb) {
+function searchTweets(term,cb) {
   return new Promise(function(resolve, reject) {
-    if (!data){ 
-      reject('no data!');
+    if (!term){ 
+      reject('no term!');
     };
-    socket.emit('searchtwitter',{search:data},function(err,data) {
+    socket.emit('searchtwitter',{search:term},function(data) {
       if (!data || data==='unauthorized' || data==='error') {
-        reject(err)
+        reject(data)
       } else {
         resolve(data);
         console.log(data);
@@ -249,4 +249,4 @@ function search(data,cb) {
 }
 
 
-export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchDirectMessages, subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet,search };
+export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchDirectMessages, subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet,searchTweets };

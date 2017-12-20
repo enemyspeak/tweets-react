@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Tweet from './tweet';
-import { search } from './api';
+import { searchTweets } from './api';
 
 class Search extends Component {
 	constructor(props) {
@@ -8,7 +8,9 @@ class Search extends Component {
     	this.state = {
     		selectedTweet: false, 
     		searchTerm: '',
-    		searchResults: []
+    		searchResults: {
+    			statuses: []
+    		}
     	};
     }
     setSelectedTweet(id) {
@@ -16,19 +18,22 @@ class Search extends Component {
   		this.setState({selectedTweet:id});
   	}
 	handleChange(event) {
-		this.setState({searchTerm: event.target.value});
-		this.setState({searchResults: []});
+		this.setState({
+			searchTerm: event.target.value,
+			searchResults: { statuses: [] } 
+		});
 		setTimeout(() => { // set timeout to throttle typing
-			console.log(this.state.searchTerm);
-			search(this.state.searchTerm).then((data) => {
+			// console.log(this.state.searchTerm);
+			searchTweets(this.state.searchTerm).then((data) => {
+				// console.log(data);
 				this.setState({searchResults: data});
 			}).catch((error) => {
-				console.log(error);
+				// console.log(error);
 			});
    		},600);
   	}
 	render() {
-		const results = this.state.searchResults;
+		const results = this.state.searchResults.statuses;
 		return (
 			<div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
 				<div className="search-contain">
@@ -48,7 +53,7 @@ class Search extends Component {
 			        })}
 				</div>
 				<div className="search-form-contain">
-					<span className="input-label">Search</span>
+					<span className={"input-label " + (this.state.searchTerm ? "" : "full" )}>Search</span>
           			<input type="text" value={this.state.searchTerm} onChange={(event) => this.handleChange(event)} />
 				</div>
 			</div>
