@@ -288,15 +288,15 @@ function start( port ){
         // sessiontoken //
         function checkToken() {
             // console.log( 'cookie', socket.handshake.headers.cookie );
-            var cookies = cookie.parse(socket.handshake.headers.cookie);
-
-            // check if cookie fields exist
             var user;
-            if (cookies.sessiontoken) {
-                console.log('checkToken',cookies.sessiontoken,socket.handshake.headers["x-forwarded-for"]);
-                user = sessions.find(function (obj) { 
-                    return (obj.ip === socket.handshake.headers["x-forwarded-for"] && obj.sessiontoken === cookies.sessiontoken); 
-                });
+            if (socket.handshake.header.cookie) { // check if cookie fields exist
+                var cookies = cookie.parse(socket.handshake.headers.cookie);
+                if (cookies.sessiontoken) {
+                    console.log('checkToken',cookies.sessiontoken,socket.handshake.headers["x-forwarded-for"]);
+                    user = sessions.find(function (obj) { 
+                        return (obj.ip === socket.handshake.headers["x-forwarded-for"] && obj.sessiontoken === cookies.sessiontoken); 
+                    });
+                }
             }
             if (user) {
                 userData = user;
