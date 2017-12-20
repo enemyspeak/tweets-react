@@ -281,7 +281,81 @@ html{
     }
 }
 
-.compose-tweet {
+button {
+    border: 1px solid $darkestwhite;
+    border-radius: 5px;
+    // margin-left: 20px;
+    background: transparent;
+    // float: left;
+    width: calc( 100% / 4);
+    text-align: center;
+    // height: 100%;
+    left: calc( 50%  - (25%/2) );
+    font-size: 18px;
+    line-height: 30px;            
+    cursor: pointer;
+    position: relative;
+    color: $darkestwhite;
+    transition:color 0.3s ease,background 0.3s ease;
+    outline: none;
+
+    &:hover {
+        // color: $white;
+        background: $white;
+        color: $black;
+    }
+}
+.input-label{
+    position: absolute;
+    color: $darkestwhite;
+    font-size: 10px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    top: 0px;
+    transform: translate(0px,0px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    &.full {
+        font-size: 14px;
+        transform: translate(0px, 11px);
+    }
+}
+input,textarea {
+    -moz-appearance: textfield !important;
+    display:block;
+    border: none;
+    // border:$gray28 1px solid;
+    // font-family: $font-abel;
+    height:42px;
+    box-sizing: border-box;
+    width:100%;
+    // margin:20px 0;
+    background:none;
+    padding-left: 5px;
+    color:$white;
+    transition: all 0.3s ease, border 0.3s ease;
+    font-size:1.2rem;
+    padding-left: 10px;
+    resize: none;
+
+    &:focus{
+        background:$gray28;
+        color:$white;
+        // border:$gray28 1px solid;
+        border: none;
+        outline-color: transparent;
+        outline-style: none;
+    }
+    &.error {
+        background: $red;
+        // border: 1px solid $red;
+    }
+    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+        -webkit-appearance: none !important;
+    }
+}
+
+.compose-tweet-icon {
     position: absolute;
     top: 0px;
     right: 0px;
@@ -307,6 +381,66 @@ html{
         // padding: 2px;
         font-size: 32px;
         box-sizing: border-box;
+    }
+}
+
+.compose-tweet-contain {
+    // display: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    &.visible {
+        // display: block;
+        pointer-events:initial;
+        opacity: 1;
+    }
+}
+
+.compose-tweet-background {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: $black20;
+    z-index: 98;
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+}
+
+.compose-tweet {
+    position: absolute;
+    top:  calc( 50vh - 125px );
+    left: calc( 50vw - 200px );
+    z-index: 99;
+    // min-width: 320px;
+    width: 420px;
+    height: 250px;
+    background: $black80;
+    border-radius: 15px;
+    color: $darkestwhite;
+
+    textarea {
+        height: 191px;
+        margin-top: 10px;
+        margin-bottom: 7px;
+        border-bottom: 1px solid $gray28;
+        padding: 14px 10px;
+    }
+
+    .input-label{
+        transform: translate(0px,10px);
+        &.full {
+            transform:translate(0px, 22px);
+        }
+    }
+    .cancel-button {
+        position: absolute;
+        left: 10px;
+    }
+    .submit-button {
+        position: absolute;
+        // right: 10px;
+        right: 10px;
+        left: auto;
     }
 }
 

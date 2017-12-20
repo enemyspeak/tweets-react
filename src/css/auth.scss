@@ -2,10 +2,14 @@
 @import "./colors.scss";
 
 .authorize-contain {
-    display: none;
-
+    // display: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
     &.visible {
-        display: block;
+        // display: block;
+        pointer-events:initial;
+        opacity: 1;
     }
 }
 
@@ -47,30 +51,5 @@
     	padding: 20px;
     	line-height: 20px;
     	text-align: center;
-    }
-
-    button {
-        border: 1px solid $darkestwhite;
-        border-radius: 5px;
-        // margin-left: 20px;
-        background: transparent;
-        // float: left;
-        width: calc( 100% / 4);
-        text-align: center;
-        // height: 100%;
-        left: calc( 50%  - (25%/2) );
-        font-size: 18px;
-        line-height: 30px;            
-        cursor: pointer;
-        position: relative;
-        color: $darkestwhite;
-        transition:color 0.3s ease,background 0.3s ease;
-        outline: none;
-
-        &:hover {
-            // color: $white;
-            background: $white;
-            color: $black;
-        }
     }
 }

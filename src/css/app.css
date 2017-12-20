@@ -334,7 +334,64 @@ html {
       -webkit-animation: none;
       animation: none; } }
 
-.compose-tweet {
+button {
+  border: 1px solid #b1b1b1;
+  border-radius: 5px;
+  background: transparent;
+  width: calc( 100% / 4);
+  text-align: center;
+  left: calc( 50%  - (25%/2));
+  font-size: 18px;
+  line-height: 30px;
+  cursor: pointer;
+  position: relative;
+  color: #b1b1b1;
+  transition: color 0.3s ease,background 0.3s ease;
+  outline: none; }
+  button:hover {
+    background: #fff;
+    color: #000; }
+
+.input-label {
+  position: absolute;
+  color: #b1b1b1;
+  font-size: 10px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  top: 0px;
+  transform: translate(0px, 0px);
+  transition: all 0.3s ease;
+  pointer-events: none; }
+  .input-label.full {
+    font-size: 14px;
+    transform: translate(0px, 11px); }
+
+input, textarea {
+  -moz-appearance: textfield !important;
+  display: block;
+  border: none;
+  height: 42px;
+  box-sizing: border-box;
+  width: 100%;
+  background: none;
+  padding-left: 5px;
+  color: #fff;
+  transition: all 0.3s ease, border 0.3s ease;
+  font-size: 1.2rem;
+  padding-left: 10px;
+  resize: none; }
+  input:focus, textarea:focus {
+    background: #424242;
+    color: #fff;
+    border: none;
+    outline-color: transparent;
+    outline-style: none; }
+  input.error, textarea.error {
+    background: #F44336; }
+  input::-webkit-inner-spin-button, input::-webkit-outer-spin-button, textarea::-webkit-inner-spin-button, textarea::-webkit-outer-spin-button {
+    -webkit-appearance: none !important; }
+
+.compose-tweet-icon {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -346,9 +403,9 @@ html {
   transition: color 0.3s ease;
   z-index: 2;
   border-left: 1px solid #424242; }
-  .compose-tweet:hover {
+  .compose-tweet-icon:hover {
     color: #fff; }
-  .compose-tweet .fi-pencil {
+  .compose-tweet-icon .fi-pencil {
     width: 100%;
     height: 100%;
     font-size: 32px;
@@ -356,6 +413,51 @@ html {
     position: relative;
     font-size: 32px;
     box-sizing: border-box; }
+
+.compose-tweet-contain {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease; }
+  .compose-tweet-contain.visible {
+    pointer-events: initial;
+    opacity: 1; }
+
+.compose-tweet-background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 98;
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px); }
+
+.compose-tweet {
+  position: absolute;
+  top: calc( 50vh - 125px);
+  left: calc( 50vw - 200px);
+  z-index: 99;
+  width: 420px;
+  height: 250px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  color: #b1b1b1; }
+  .compose-tweet textarea {
+    height: 191px;
+    margin-top: 10px;
+    margin-bottom: 7px;
+    border-bottom: 1px solid #424242;
+    padding: 14px 10px; }
+  .compose-tweet .input-label {
+    transform: translate(0px, 10px); }
+    .compose-tweet .input-label.full {
+      transform: translate(0px, 22px); }
+  .compose-tweet .cancel-button {
+    position: absolute;
+    left: 10px; }
+  .compose-tweet .submit-button {
+    position: absolute;
+    right: 10px;
+    left: auto; }
 
 .app-views-contain {
   position: absolute;
