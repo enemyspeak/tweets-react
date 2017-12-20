@@ -8,13 +8,26 @@ import DirectMessages from './directMessages';
 import Search from './search';
 import Authorize from './authorize';
 
-import { doSessionToken,fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline } from './api';
+import { doSessionToken,gotTwitterLoginPromise, fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline } from './api';
 
 class Root extends Component {
 	constructor(props) {
     	super(props);
     	this.state = {selectedTab: 'timeline'};
 	    this.handleClick = this.handleClick.bind(this);	    
+
+	    // this.profileInfo = [];
+	    
+	    gotTwitterLoginPromise().then((data) => {
+			this.setState({
+				userData: data
+			});
+	    });
+    }
+    state = {
+    	userData: {
+    		screen_name: ""
+    	}
     }
     componentWillMount() {
     	// this.setState({ user:  });
@@ -46,7 +59,7 @@ class Root extends Component {
 					<Timeline dataSource={fetchMentions} activeTab={this.state.selectedTab === 'mentions' ? true : false} />
 					<Search activeTab={this.state.selectedTab === 'search' ? true : false} />
 					<DirectMessages activeTab={this.state.selectedTab === 'direct-messages' ? true : false} />
-					<Profile selectedUser={"@enemyspeak"} activeTab={this.state.selectedTab === 'profile' ? true : false} />
+					<Profile selectedUser={this.state.userData.screen_name} activeTab={this.state.selectedTab === 'profile' ? true : false} />
 				</div>
 			</div>
         );

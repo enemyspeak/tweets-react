@@ -4,13 +4,19 @@ import { getRequestToken,gotTwitterLoginPromise } from './api';
 class Authorize extends Component {
 	constructor(props) {
 		super(props)
-		this.oauthWindow;
+		// this.oauthWindow; // TODO use this to close the window.
 
 		gotTwitterLoginPromise().then((data) => {
 			this.setState({
 				modalVisible: false
 			});
+			this.closeOAuthWindow();
 		})
+	}
+	closeOAuthWindow() {
+		if (this.oauthWindow) {
+            this.oauthWindow.close();
+        }
 	}
 	state = {
 		modalVisible: true
