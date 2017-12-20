@@ -92,7 +92,7 @@ function start( port ){
         // get the user token from the verify token.
         // data.oauth_verifier
         var user = sessions.find(function (obj) { 
-            return (obj.requestToken === data.oauth_verifier); 
+            return (obj.requestToken === data.oauth_token); 
         });
         if (!user) {
             console.log('twitter err: no user matching');
