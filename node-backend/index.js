@@ -482,7 +482,7 @@ function start( port ){
         socket.on('gethometimeline',function(data,cb){
             authorizeRequest().then(function() {
                 
-                if (timelinecache) {
+                if (timelinecache.length) {
                     console.log('return cache');
                     if (cb) cb(timelinecache);
                     return;
@@ -513,7 +513,7 @@ function start( port ){
 
         socket.on('getmentions', function(data,cb) { // load profile by id
             authorizeRequest().then(function() {
-                if (mentionscache) {
+                if (mentionscache.length) {
                     if (cb) cb(mentionscache);
                     return;
                 }
