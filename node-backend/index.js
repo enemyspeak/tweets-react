@@ -274,9 +274,9 @@ function start( port ){
             // check if cookie fields exist
             var user;
             if (cookies.sessiontoken) {
-                console.log('checkToken',cookies.sessiontoken,socket.handshake.address);
+                console.log('checkToken',cookies.sessiontoken,socket.handshake.headers["x-forwarded-for"]);
                 user = sessions.find(function (obj) { 
-                    return (obj.ip === socket.handshake.address && obj.sessiontoken === cookies.sessiontoken); 
+                    return (obj.ip === socket.handshake.headers["x-forwarded-for"] && obj.sessiontoken === cookies.sessiontoken); 
                 });
             }
             if (user) {
@@ -293,7 +293,7 @@ function start( port ){
             var token = createToken();
 
             console.log(' create token ------------------------------------------');
-            console.log( socket.handshake.address );
+            console.log( socket.handshake.headers["x-forwarded-for"] );
             console.log( token );
             console.log('--------------------------------------------------------');
             id_seq++;
@@ -302,7 +302,7 @@ function start( port ){
                 sessiontoken:token,
                 hasTwitter:false,
                 id: id_seq,
-                ip: socket.handshake.address // nginx isn't giving us x-real-ip..  // socket.conn.request.headers['x-forwarded-for']
+                ip: socket.handshake.headers["x-forwarded-for"] // nginx isn't giving us x-real-ip..  // socket.conn.request.headers['x-forwarded-for']
             });
 
             socket.emit('sessiontoken',token);
@@ -315,14 +315,14 @@ function start( port ){
         //     var token = createToken();
 
         //     console.log('--------------------------------------------------------');
-        //     console.log( socket.handshake.address );
+        //     console.log( socket.handshake.headers["x-forwarded-for"] );
         //     console.log(token);
         //     console.log('--------------------------------------------------------');
 
         //     sessions.push({ 
         //         sessiontoken:token,
         //         hasTwitter:false,
-        //         ip: socket.handshake.address // nginx isn't giving us x-real-ip..  // socket.conn.request.headers['x-forwarded-for']
+        //         ip: socket.handshake.headers["x-forwarded-for"] // nginx isn't giving us x-real-ip..  // socket.conn.request.headers['x-forwarded-for']
         //     });
 
         //     cb({token:token});
@@ -410,10 +410,10 @@ function start( port ){
                     // sessions
                     var cookies = cookie.parse(socket.handshake.headers.cookie);
                     if (cookies.sessiontoken) {
-                        console.log(cookies.sessiontoken,socket.handshake.address);
+                        console.log(cookies.sessiontoken,socket.handshake.headers["x-forwarded-for"]);
 
                         var user = sessions.find(function (obj) { 
-                            return (obj.ip === socket.handshake.address && obj.sessiontoken === cookies.sessiontoken); 
+                            return (obj.ip === socket.handshake.headers["x-forwarded-for"] && obj.sessiontoken === cookies.sessiontoken); 
                         });
                         if (user) {
                             console.log('user found',user);
