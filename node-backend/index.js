@@ -180,6 +180,8 @@ function start( port ){
                 delete user.requestToken;
                 delete user.requestTokenSecret;
 
+                // FIXME: this doesn't update userData in the socket.
+
                 io.to(user.id).emit('twittertoken',{
                     hasTwitter: true,
                     user_id: data.user_id,
@@ -192,76 +194,6 @@ function start( port ){
     /********************************************************************************/
     /*********************************** SOCKETIO ***********************************/
     /********************************************************************************/
-
-        // console.log('twitcreds',credentials);
-        // var twit = new Twitter({
-        //     consumer_key: credentials.twitter.consumer_key,           
-        //     consumer_secret: credentials.twitter.consumer_secret,        
-        //     access_token_key: credentials.twitter.access_token_key,       
-        //     access_token_secret: credentials.twitter.access_token_secret     
-        // });
-
-        // var timelinecache;
-        // twit.get('statuses/home_timeline',{tweet_mode:'extended'},function(err,result) {
-        //     if (err) {
-        //         console.log(err);
-        //         return;
-        //     }
-        //     console.log('timeline result');
-        //     timelinecache = result;
-        //     // if (cb) cb(result);
-        // });
-
-        // var mentionscache;
-        // twit.get('statuses/mentions_timeline', {}, function(error, tweets, response) {
-        //     // if (cb) cb(result);
-        //     if (error) {
-        //         console.log(error);
-        //         return;
-        //     }
-        //     console.log('mentions result');
-        //     mentionscache = tweets;
-        // });
-
-        // var directmessagescache;
-        // // direct_messages
-        // twit.get('direct_messages', {}, function(error, tweets, response) {
-        //     // if (cb) cb(result);
-        //     if (error) {
-        //         console.log(error);
-        //         return;
-        //     }
-        //     console.log('mentions result');
-        //     mentionscache = tweets;
-        // });
-
-        // var profilecache;
-        //  twit.get('users/show', {screen_name: '@'},function(error,  response) {
-        //     if (error) {
-        //         console.log(error);
-        //         return;
-        //     }
-        //     console.log('profile result');
-        //     profilecache = response;
-        //     twit.get('statuses/user_timeline', {screen_name: '@hannufluff'}, function(error, tweets) {
-        //         // if (cb) cb(result);
-        //         if (error) {
-        //             console.log(error);
-        //             return;
-        //         }
-        //         console.log('home user timeline result');
-        //         profilecache.timeline = tweets;
-        //     });
-        // });
-
-        // var userStream;
-        // twit.stream('user', {tweet_mode:'extended'}, function(stream) {
-        //     userStream = stream;
-        // });
-        // userStream.on('error', function(error) {
-        //     // throw error;
-        // });
-        // var usersCache;
 
     var sessions = []; // this is where we're going to keep our session tokens and stuff.
     var usersConnected = 0;
@@ -459,13 +391,27 @@ function start( port ){
 
         function authorizeRequest() {
             return new Promise(function(resolve,reject) {
+                if (!userData.hasTwitter) {
+                    // NOTE: this is just to get the socket to update its cache
+                    // after you authenticate..
+
+                    // see fixme on 183
+                    
+                    user = sessions.find(function (obj) { 
+                        return (obj.id === userData.id)
+                    });
+                    if (user && user.hasTwitter) {
+                        userData = user; 
+                      
+                    }
+                }
                 if (userData.hasTwitter) {
                     if (!twit) {
                         createTwitter();
                     }
                     return resolve();
                 }
-                // console.log('unauthorized',userData);
+
                 return reject();
             })
         }
