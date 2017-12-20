@@ -357,7 +357,7 @@ function start( port ){
                     .substring(1);
             }
 
-            var callback = 'http://138.197.170.47:4000/twitter';
+            var callback = 'http://138.197.170.47/node/twitter';
             var nonce = s4() + s4() + s4() + s4() + s4() + s4() + s4() + s4();
             nonce = new Buffer( nonce ).toString('base64');
             var timestamp = Math.round((new Date()).getTime() / 1000.0);//new Date().getTime();
