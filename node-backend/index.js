@@ -365,6 +365,7 @@ function start( port ){
             }
             if (userStream) {
                 userStream.removeAllListeners('data');
+                userStream.destroy();
             }
         });
 
@@ -516,7 +517,10 @@ function start( port ){
                         userStream.on('data', streamfunction);
                         userStream.on('error',function(err) {
                             console.log('stream error',err);
-                        })
+                        });
+                        userStream.on('end', function (response) {
+                            console.log('closed stream',response);
+                        });
                     });
                 }
             }).catch(function() {
