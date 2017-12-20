@@ -438,28 +438,51 @@ function start( port ){
             });
         });
 
+        function authorizeRequest() {
+            return new Promise(function(resolve,reject) {
+                if (userData.hasTwitter) {
+                    // return true;
+                    return resolve();
+                }
+                // return false;
+                reject();
+            })
+        }
+
         // ANYTHING BELOW HERE NEEDS AUTH
 
         socket.on('updatestatus',function(data,cb){
-            twit.updateStatus('Test tweet from ntwitter/' + twitter.VERSION,
-                function (err, result) {
-                    console.log(result);
-                    if (cb) cb(result);
+            authorizeRequest().then(function() {
+                if (!data) {
+                    if (cb) cb('bad request');
                 }
-            );
+                twit.updateStatus(data.status,
+                    function (err, result) {
+                        console.log(result);
+                        if (cb) cb(result);
+                    }
+                );
+            }).catch(function() {
+                if (cb) cb('unauthorized');
+                console.log('unauthorized updatestatus');
+            })
         });
 
         socket.on('gethometimeline',function(data,cb){
-            // console.log(timelinecache);
-            // if (timelinecache && timelinecache.length) {
+            authorizeRequest().then(function() {
                 console.log('return cache');
                 if (cb) cb(timelinecache);
-                // return;
-            // }
+            }).catch(function() {
+                if (cb) cb('unauthorized');
+            })
         });
 
         socket.on('getmentions', function(data,cb) { // load profile by id
-           if (cb) cb(mentionscache);
+            authorizeRequest().then(function() {
+                if (cb) cb(mentionscache);
+            }).catch(function() {
+                if (cb) cb('unauthorized');
+            })
             // twitter.get('statuses/mentions_timeline',function(error, tweets, response) {
             //     if (error) {
             //         if(cb) cb({error:error});
@@ -470,20 +493,29 @@ function start( port ){
         });   
 
         socket.on('getdirectmessages',function(data,cb) {
-            if (cb) cb(directmessagescache);
+            authorizeRequest().then(function() {
+                if (cb) cb(directmessagescache);
+            }).catch(function() {
+                if (cb) cb('unauthorized');
+            })
         })
 
         socket.on('getdetails', function(data,cb) { // loads replies and stuff to a tweet
-            if (!data.id) {
-                if(cb) cb({error:'error'});
-                return;
-            }
-            twit.get('statuses/show/'+data.id,{},function(error, tweet) {
-                if (error) {
-                    if(cb) cb({error:error});
+            authorizeRequest().then(function() {
+
+                if (!data.id) {
+                    if(cb) cb({error:'error'});
                     return;
                 }
-                if(cb) cb(tweet);
+                twit.get('statuses/show/'+data.id,{},function(error, tweet) {
+                    if (error) {
+                        if(cb) cb({error:error});
+                        return;
+                    }
+                    if(cb) cb(tweet);
+                });
+            }).catch(function() {
+                if (cb) cb('unauthorized');
             });
         });
 
@@ -493,116 +525,138 @@ function start( port ){
 
 
         socket.on('gethomeuser', function(data,cb) { // load profile by id
-            // if (!data.id) {
-            //     if(cb) cb({error:'error'});
-            //     return;
-            // }
-           if(cb) cb(profilecache)
+            authorizeRequest().then(function() {
+                if(cb) cb(profilecache)
+            }).catch(function() {
+                if (cb) cb('unauthorized');
+            });
         });
 
         socket.on('gethomeusertimeline', function(data,cb) { // load profile by id
-            // if (!data.id) {
-            //     if(cb) cb({error:'error'});
-            //     return;
-            // }
-           if(cb) cb(homeusertimelinecache)
+            authorizeRequest().then(function() {
+                if(cb) cb(homeusertimelinecache)
+            }).catch(function() {
+                if (cb) cb('unauthorized');
+            }); 
         });
 
 
         socket.on('getuser', function(data,cb) { // load profile by screen_name
-            console.log('getuser',data);
-            if (!data.screen_name) {
-                if(cb) cb({error:'error'});
-                return;
-            }
-
-            let user;
-            twit.get('users/show', {screen_name: data.screen_name},function(error,  response) {
-                if (error) {
-                    if(cb) cb({error:error});
+            authorizeRequest().then(function() {
+                console.log('getuser',data);
+                if (!data.screen_name) {
+                    if(cb) cb({error:'error'});
                     return;
                 }
-                user = response
-                twit.get('statuses/user_timeline',{screen_name: data.screen_name,tweet_mode:'extended'},function(error, tweets) {
+
+                let user;
+                twit.get('users/show', {screen_name: data.screen_name},function(error,  response) {
                     if (error) {
                         if(cb) cb({error:error});
                         return;
                     }
-                    user.timeline = tweets;
-                    if(cb) cb(user);
+                    user = response
+                    twit.get('statuses/user_timeline',{screen_name: data.screen_name,tweet_mode:'extended'},function(error, tweets) {
+                        if (error) {
+                            if(cb) cb({error:error});
+                            return;
+                        }
+                        user.timeline = tweets;
+                        if(cb) cb(user);
+                    });
                 });
+            }).catch(function() {
+                if (cb) cb('unauthorized');
             });
         });
 
         socket.on('searchtwitter', function(data,cb) { // search tweets & users
-            if (!data || !data.search) return;
-            twit.search(data.search, {}, function(err, result) {
-                console.log(result);
-                if (cb) cb(result);
+            authorizeRequest().then(function() {
+                if (!data || !data.search) return;
+                twit.search(data.search, {}, function(err, result) {
+                    console.log(result);
+                    if (cb) cb(result);
+                });
+            }).catch(function() {
+                if (cb) cb('unauthorized');
             });
         });
 
         // POST
 
         socket.on('retweettweet',function(data,cb){
-            if (!data || !data.id) {
-                if (cb) cb({error:'error'});
-                return;
-            } 
-            twit.post('statuses/retweet/'+data.id,{},function(error, tweets) {
-                if (error) {
-                    if(cb) cb({error:error});
+            authorizeRequest().then(function() {
+                if (!data || !data.id) {
+                    if (cb) cb({error:'error'});
                     return;
-                }
-                if(cb) cb('ok');
+                } 
+                twit.post('statuses/retweet/'+data.id,{},function(error, tweets) {
+                    if (error) {
+                        if(cb) cb({error:error});
+                        return;
+                    }
+                    if(cb) cb('ok');
+                });
+            }).catch(function() {
+                if (cb) cb('unauthorized');
             });
         });
 
         socket.on('unretweettweet',function(data,cb){
-            if (!data || !data.id) {
-                if (cb) cb({error:'error'});
-                return;
-            } 
-            twit.post('statuses/unretweet/'+data.id,{},function(error, tweets) {
-                if (error) {
-                    if(cb) cb({error:error});
+            authorizeRequest().then(function() {
+                if (!data || !data.id) {
+                    if (cb) cb({error:'error'});
                     return;
-                }
-                if(cb) cb('ok');
+                } 
+                twit.post('statuses/unretweet/'+data.id,{},function(error, tweets) {
+                    if (error) {
+                        if(cb) cb({error:error});
+                        return;
+                    }
+                    if(cb) cb('ok');
+                });
+            }).catch(function() {
+                if (cb) cb('unauthorized');
             });
         });
 
         socket.on('favoritetweet',function(data,cb) {
-            if (!data || !data.id) {
-                if (cb) cb({error:'error'});
-                return;
-            } 
-
-            // TODO update the cached tweet to set favorited = true;
-
-            twit.post('favorites/create',{id: data.id},function(error, tweets) {
-                if (error) {
-                    if(cb) cb({error:error});
+            authorizeRequest().then(function() {
+                if (!data || !data.id) {
+                    if (cb) cb({error:'error'});
                     return;
-                }
-                if(cb) cb('ok');
+                } 
+
+                // TODO update the cached tweet to set favorited = true;
+
+                twit.post('favorites/create',{id: data.id},function(error, tweets) {
+                    if (error) {
+                        if(cb) cb({error:error});
+                        return;
+                    }
+                    if(cb) cb('ok');
+                });
+            }).catch(function() {
+                if (cb) cb('unauthorized');
             });
         });
         socket.on('unfavoritetweet',function(data,cb) {
-            if (!data || !data.id) {
-                if (cb) cb({error:'error'});
-                return;
-            } 
-            twit.post('favorites/destroy',{id: data.id},function(error, tweets) {
-                if (error) {
-                    if(cb) cb({error:error});
+            authorizeRequest().then(function() {
+                if (!data || !data.id) {
+                    if (cb) cb({error:'error'});
                     return;
-                }
-                if(cb) cb('ok');
+                } 
+                twit.post('favorites/destroy',{id: data.id},function(error, tweets) {
+                    if (error) {
+                        if(cb) cb({error:error});
+                        return;
+                    }
+                    if(cb) cb('ok');
+                });
+            }).catch(function() {
+                if (cb) cb('unauthorized');
             });
         });
-
-
     });
 
     http.listen(port, function(){
