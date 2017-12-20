@@ -229,8 +229,24 @@ function unfavoriteTweet(id,cb) {
         console.log(data);
       }
     });
-  })
+  });
+}
+
+function search(data,cb) {
+  return new Promise(function(resolve, reject) {
+    if (!data){ 
+      reject('no data!');
+    };
+    socket.emit('searchtwitter',{search:data},function(err,data) {
+      if (!data || data==='unauthorized' || data==='error') {
+        reject(err)
+      } else {
+        resolve(data);
+        console.log(data);
+      }
+    });
+  });
 }
 
 
-export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchDirectMessages, subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };
+export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchDirectMessages, subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet,search };

@@ -599,12 +599,16 @@ function start( port ){
 
         socket.on('searchtwitter', function(data,cb) { // search tweets & users
             authorizeRequest().then(function() {
-                if (!data || !data.search) return;
+                if (!data || !data.search) {
+                    if(cb) cb('error');
+                    return;
+                }
                 twit.search(data.search, {}, function(err, result) {
                     console.log(result);
                     if (cb) cb(result);
                 });
-            }).catch(function() {
+            }).catch(function(error) {
+                console.log('search err',error);
                 if (cb) cb('unauthorized');
             });
         });
