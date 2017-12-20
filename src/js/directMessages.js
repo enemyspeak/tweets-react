@@ -23,7 +23,7 @@ function UserInfo(props){
 	);
 }
 
-class Message extends Component {
+class User extends Component {
 	render() {
 		// console.log(this.props);
 		return (
@@ -33,6 +33,53 @@ class Message extends Component {
 
 					{/* <div className="fi-arrow-right"></div> */}
 				</div>
+			</div>
+		)
+	}
+}
+
+class MessageBody extends Component {
+	createMarkup(html) { 
+		return {__html: html}; 
+	}
+	replaceAll(str,strReplace, strWith) {
+	    // See http://stackoverflow.com/a/3561711/556609
+	    // eslint-disable-next-line
+	    var esc = strReplace.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+	    var reg = new RegExp(esc, 'ig');
+	    return str.replace(reg, strWith);
+	}
+	render() {
+		const message = this.props.message;
+		// console.log(message);
+		var text = message.text;
+		
+		for (let i = message.entities.urls.length - 1; i >= 0; i--) {
+			text = this.replaceAll(text,message.entities.urls[i].url,'<a class="url" href="'+ message.entities.urls[i].expanded_url +'">'+message.entities.urls[i].display_url+'</a>');
+		}
+		for (let i = message.entities.hashtags.length - 1; i >= 0; i--) {
+			text = this.replaceAll(text,"#"+message.entities.hashtags[i].text,'<span class="hashtag">#'+message.entities.hashtags[i].text+'</span>');
+		}
+		for (let i = message.entities.user_mentions.length - 1; i >= 0; i--) {
+			text = this.replaceAll(text,'@'+message.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(\''+message.entities.user_mentions[i].screen_name+'\')}">@' + message.entities.user_mentions[i].screen_name+'</span>');
+		}
+		
+	  	return (
+			<p className="message-text" dangerouslySetInnerHTML={this.createMarkup(text)}></p>
+		);
+	}
+}
+
+class Message extends Component {
+	render() {
+		console.log(this.props);
+		return (
+			<div className="message">
+				<div className="user-avatar">
+			        <Avatar user={this.props.data.sender} />
+			    </div>
+
+		        <MessageBody message={this.props.data} />
 			</div>
 		)
 	}
@@ -77,12 +124,15 @@ class DirectMessages extends Component {
   	}
 	setSelectedUser(id) {
 		console.log('selected user',id);
-		this.setState({selectedUser:id});
-
+		
+		let selectedMessages = [];
 		if (id) {
-			let selectedMessages = this.state.messages;
+			selectedMessages = this.state.messages.filter((obj) => {
+				return (obj.sender.screen_name === id);
+			});
 			console.log(selectedMessages);
 		}
+		this.setState({selectedUser:id,selectedMessages: selectedMessages});
 	}
 	render() {
 		const messages = this.state.selectedMessages;
@@ -91,17 +141,23 @@ class DirectMessages extends Component {
 			<div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
 				<div className={"messages-contain " + (this.state.selectedUser ? "" : "inactive")}>
 					<div className="back-button" onClick={()=>this.clearSelectedUser()}><div className="fi-arrow-left"></div></div>
-					{messages.map((obj) => {
-						return (
-							<div>{obj.id_str}</div>
-						)
-					})}
+					<div className="messages-wrap">
+						{messages.map((obj) => {
+				            return (
+				              	<Message 
+				                key={obj.id_str}
+				                data={obj} 
+				                onClick={(screen_name)=>this.setSelectedUser(screen_name)}
+				              	/>
+				            )
+						})}
+					</div>
 				</div>
 				<div className={"messages-list-contain " + (this.state.selectedUser ? "inactive" : "")}>
 					{users.map((obj) => {
 			            obj.selected = ( obj.id_str === this.state.selectedUser ? 'selected' : '' );
 			            return (
-			              	<Message 
+			              	<User 
 			                key={obj.id_str}
 			                data={obj} 
 			                onClick={(screen_name)=>this.setSelectedUser(screen_name)}

@@ -507,20 +507,22 @@ function start( port ){
                 if (timelinecache.length) {
                     // console.log('return cache');
                     if (cb) cb(timelinecache);
-                    return;
+                    // return; // we dont want to return here because this will cancel making a stream   
+                } else {
+                    // return cache here, probably using makeCacheFunction instead of timelinecache..
+                    twit.get('statuses/home_timeline',{tweet_mode:'extended'},function(err,result) {
+                        if (err) {
+                            console.log('home_timeline err',err);
+                            if (cb) cb('error');
+                            // return; // we dont want to return here because this will cancel making a stream
+                        } else {
+                            // console.log('timeline result',result.length);
+                            timelinecache = result;
+                            // if (cb) cb(result);
+                            if (cb) cb(timelinecache);
+                        }
+                    });
                 }
-                // return cache here, probably using makeCacheFunction instead of timelinecache..
-                twit.get('statuses/home_timeline',{tweet_mode:'extended'},function(err,result) {
-                    if (err) {
-                        console.log('home_timeline err',err);
-                        if (cb) cb('error');
-                        return;
-                    }
-                    // console.log('timeline result',result.length);
-                    timelinecache = result;
-                    // if (cb) cb(result);
-                    if (cb) cb(timelinecache);
-                });
                 if (!userStream) {
                     twit.stream('user', {tweet_mode:'extended'}, function(stream) {
                         console.log('create stream');

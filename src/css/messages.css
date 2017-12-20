@@ -60,3 +60,39 @@
     padding: 10px 10px 10px 0px;
     border-bottom: 1px solid #424242;
     min-height: 42px; }
+
+.messages-wrap {
+  margin-top: 30px; }
+
+.message {
+  position: relative;
+  left: 0px;
+  padding: 10px 10px 10px 0px;
+  border: 1px solid #424242;
+  border-radius: 5px;
+  min-height: 42px;
+  margin: 10px;
+  width: 60%; }
+  .message .message-text {
+    margin-top: 4px;
+    display: block;
+    left: 60px;
+    position: relative;
+    width: calc( 100% - 60px);
+    line-height: 22px;
+    font-size: 14px;
+    white-space: pre-wrap;
+    cursor: default; }
+    .message .message-text .url, .message .message-text a, .message .message-text .hashtag {
+      text-decoration: none;
+      color: #AFAFAF;
+      transition: color 0.3s ease;
+      cursor: pointer; }
+      .message .message-text .url:hover, .message .message-text a:hover, .message .message-text .hashtag:hover {
+        color: #eee; }
+    .message .message-text .user-mention {
+      color: #03A9F4;
+      transition: color 0.3s ease;
+      cursor: pointer; }
+      .message .message-text .user-mention:hover {
+        color: #4FC3F7; }
