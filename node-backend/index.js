@@ -575,8 +575,8 @@ function start( port ){
                         if(cb) cb('error');
                         return;
                     }
-                    console.log('mentions result');
-                    directmessagescache = tweets;
+                    // console.log('mentions result');
+                    directmessagescache = result;
                     if(cb) cb(directmessagescache);
                 });
             }).catch(function() {

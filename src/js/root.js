@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import Navigation from './navigation';
 import Timeline from './timeline';
-// import Mentions from './mentions' // do we even need another class for this?
 import Profile from './profile';
 import DirectMessages from './directMessages';
 import Search from './search';

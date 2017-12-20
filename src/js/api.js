@@ -118,6 +118,18 @@ function fetchMentions(cb) {
 	});
 }
 
+function fetchDirectMessages(cb) {
+  socket.emit('getdirectmessages',{},function(data) {
+    console.log(data);
+    if (!data || data==='unauthorized') {
+      cb(null, []);
+      return;
+    }
+    // return data;
+    cb(null, data);
+  });   
+}
+
 // // returns your profile
 // function fetchHomeUser(cb) {
 //   	socket.emit('gethomeuser',{},function(data) {
@@ -221,4 +233,4 @@ function unfavoriteTweet(id,cb) {
 }
 
 
-export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };
+export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchDirectMessages, subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };

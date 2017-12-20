@@ -7,7 +7,7 @@ import { gotTwitterLoginPromise, fetchUserByName } from './api';
 class Profile extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    // console.log(props);
     gotTwitterLoginPromise().then((data) => {
       // if (this.props.activeTab) {
         fetchUserByName(this.props.selectedUser).then((profile) => this.setState({ 
