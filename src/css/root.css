@@ -18,21 +18,39 @@ html {
   height: 100%;
   font-family: sans-serif; }
 
+.potential-problem {
+  position: absolute;
+  text-align: center;
+  display: block;
+  padding: 7px 20px;
+  border-bottom: 1px solid #424242;
+  color: #F44336;
+  font-size: 22px;
+  height: 36px;
+  line-height: 36px;
+  opacity: 0;
+  transition: opacity 0.3s ease; }
+  .potential-problem.visible {
+    opacity: 1; }
+
 .header-row {
   text-align: center;
   display: block;
   padding: 7px 0 7px 7px;
   border-bottom: 1px solid #424242;
-  color: #fff;
+  color: #4FC3F7;
   font-size: 22px;
   height: 36px;
   line-height: 36px; }
   .header-row div {
-    display: inline;
-    color: #4FC3F7; }
+    display: inline; }
   .header-row .fi-social-twitter {
     padding-right: 10px;
     font-size: 24px; }
+  .header-row span {
+    font-size: 10px;
+    padding-left: 5px;
+    vertical-align: top; }
 
 .nagivation {
   height: calc( 100% - 51px);

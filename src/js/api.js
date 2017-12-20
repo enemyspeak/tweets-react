@@ -5,7 +5,7 @@ const cookies = new Cookies();
 // prod
 // const socket = openSocket('http://138.197.170.47');
 // dev
-const socket = openSocket('http://localhost:4000/'); 
+const socket = openSocket('http://localhost/'); 
 
 // read cookie and check token
 function doSessionToken(cb) { // this happens automatically now.
@@ -36,6 +36,18 @@ function doSessionToken(cb) { // this happens automatically now.
   } else {
     getToken();
   }
+}
+
+function gainedConnectionAlert(cb) {
+  socket.on('reconnect', () => cb(null,true));
+  socket.on('connect', () => cb(null,true));
+}
+function lostConnectionAlert(cb) {
+  socket.on('disconnect', () => cb(null,false));
+  socket.on('error', () => cb(null,false));
+  socket.on('connect_timeout', () => cb(null,false));
+  socket.on('connect_failed', () => cb(null,false));
+  socket.on('connect_error', () => cb(null,false));
 }
 
 socket.on('sessiontoken',function(data){
@@ -194,4 +206,4 @@ function unfavoriteTweet(id,cb) {
 }
 
 
-export { doSessionToken, getRequestToken,gotTwitterLoginPromise, fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };
+export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet };
