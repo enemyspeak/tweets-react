@@ -16,24 +16,32 @@
     }
     
     .sub-profile-contain {
-        position: relative;
+        position: absolute;
         height: calc( 100% - 30px );
-        width: 100%;        
-        display: none;
+        width: 100%;     
+        top: 0px;   
+        // display: none;
+        transform: translate(100%, 0px);
+        transition: all,0.3s ease;
 
         &.visible {
-            display: block;
+            // display: block;
+            transform: translate(0%, 0px);
         }
     }
 
     .profile-contain {
-        position: relative;
+        position: absolute;
         height: calc( 100% - 30px );
         width: 100%;        
-        display: none;
-
+        top: 0px;   
+        // display: none;
+        transform: translate(-100%, 0px);
+        transition: all,0.3s ease;
         &.visible {
-            display: block;
+            transform: translate(0%, 0px);
+
+            // display: block;
         }
 
 

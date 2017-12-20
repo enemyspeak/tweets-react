@@ -9,20 +9,24 @@
     display: none; }
 
 .sub-profile-contain {
-  position: relative;
+  position: absolute;
   height: calc( 100% - 30px);
   width: 100%;
-  display: none; }
+  top: 0px;
+  transform: translate(100%, 0px);
+  transition: all,0.3s ease; }
   .sub-profile-contain.visible {
-    display: block; }
+    transform: translate(0%, 0px); }
 
 .profile-contain {
-  position: relative;
+  position: absolute;
   height: calc( 100% - 30px);
   width: 100%;
-  display: none; }
+  top: 0px;
+  transform: translate(-100%, 0px);
+  transition: all,0.3s ease; }
   .profile-contain.visible {
-    display: block; }
+    transform: translate(0%, 0px); }
   .profile-contain .back-button {
     position: absolute;
     width: 30px;

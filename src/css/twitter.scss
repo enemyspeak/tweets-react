@@ -29,26 +29,32 @@
         color: $white;
     }
 
-    .profile-contain {
+    .profile-parent-contain {
         width: 100%;
         height: calc( 100% - 30px );
         color: $white;
-        position: relative;
+        position: absolute;
+        top: 0px;
+        transform: translate(0%, 0px);
+        transition: all,0.3s ease;
         &.inactive {
-            display: none;
-        }   
+            transform: translate(100%, 0px);
+            // display: none;
+        }
     }
 
     .timeline-contain {
         width: 100%;
         height: calc( 100% - 30px );
         color: $white;
-        // left: 0px;
-        position: relative;
-        // transition: left 0.3s ease;
+        // position: relative;
+        position: absolute;
+        top: 0px;
+        transform: translate(0%, 0px);
+        transition: all,0.3s ease;
         &.inactive {
-            display: none;
-            // left: -100%;
+            transform: translate(-100%, 0px);
+            // display: none;
         }
     }
 

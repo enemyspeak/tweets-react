@@ -43,7 +43,7 @@ class Timeline extends Component {
 
     return (
       <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
-        <div className={"profile-contain " + (this.state.selectedUser ? "visible" : "inactive")}>
+        <div className={"profile-parent-contain " + (this.state.selectedUser ? "visible" : "inactive")}>
           {this.state.selectedUser && (
             <Profile 
               selectedUser={this.state.selectedUser}

@@ -842,20 +842,26 @@ html {
     padding: 7px 0 7px 7px;
     border-bottom: 1px solid #424242;
     color: #fff; }
-  .twitter-app .profile-contain {
+  .twitter-app .profile-parent-contain {
     width: 100%;
     height: calc( 100% - 30px);
     color: #fff;
-    position: relative; }
-    .twitter-app .profile-contain.inactive {
-      display: none; }
+    position: absolute;
+    top: 0px;
+    transform: translate(0%, 0px);
+    transition: all,0.3s ease; }
+    .twitter-app .profile-parent-contain.inactive {
+      transform: translate(100%, 0px); }
   .twitter-app .timeline-contain {
     width: 100%;
     height: calc( 100% - 30px);
     color: #fff;
-    position: relative; }
+    position: absolute;
+    top: 0px;
+    transform: translate(0%, 0px);
+    transition: all,0.3s ease; }
     .twitter-app .timeline-contain.inactive {
-      display: none; }
+      transform: translate(-100%, 0px); }
   .twitter-app .navigation-buttons {
     height: 30px;
     border-top: #03A9F4 1px solid;
@@ -885,20 +891,24 @@ html {
     display: none; }
 
 .sub-profile-contain {
-  position: relative;
+  position: absolute;
   height: calc( 100% - 30px);
   width: 100%;
-  display: none; }
+  top: 0px;
+  transform: translate(100%, 0px);
+  transition: all,0.3s ease; }
   .sub-profile-contain.visible {
-    display: block; }
+    transform: translate(0%, 0px); }
 
 .profile-contain {
-  position: relative;
+  position: absolute;
   height: calc( 100% - 30px);
   width: 100%;
-  display: none; }
+  top: 0px;
+  transform: translate(-100%, 0px);
+  transition: all,0.3s ease; }
   .profile-contain.visible {
-    display: block; }
+    transform: translate(0%, 0px); }
   .profile-contain .back-button {
     position: absolute;
     width: 30px;
