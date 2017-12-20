@@ -603,7 +603,7 @@ function start( port ){
                     if(cb) cb('error');
                     return;
                 }
-                twit.search(data.search, {}, function(err, result) {
+                twit.post('search/tweets',{q:data.search}, function(err, result) {
                     console.log(result);
                     if (cb) cb(result);
                 });
