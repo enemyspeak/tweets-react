@@ -335,6 +335,13 @@ function start( port ){
                 ip: socket.handshake.headers["x-forwarded-for"] // nginx isn't giving us x-real-ip..  // socket.conn.request.headers['x-forwarded-for']
             });
 
+            userData = {
+                sessiontoken:token,
+                hasTwitter:false,
+                id: id_seq,
+                ip: socket.handshake.headers["x-forwarded-for"] // nginx isn't giving us x-real-ip..  // socket.conn.request.headers['x-forwarded-for'] 
+            };
+
             socket.emit('sessiontoken',token);
             // console.log('current user', userData);
         }
