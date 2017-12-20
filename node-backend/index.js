@@ -287,9 +287,9 @@ function start( port ){
 
         // sessiontoken //
         function checkToken() {
-            // console.log( 'cookie', socket.handshake.headers.cookie );
+            // console.log( 'header', socket.handshake.headers );
             var user;
-            if (socket.handshake.header.cookie) { // check if cookie fields exist
+            if (socket.handshake.headers && socket.handshake.headers.cookie) { // check if cookie fields exist
                 var cookies = cookie.parse(socket.handshake.headers.cookie);
                 if (cookies.sessiontoken) {
                     console.log('checkToken',cookies.sessiontoken,socket.handshake.headers["x-forwarded-for"]);
