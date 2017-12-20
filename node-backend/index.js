@@ -87,7 +87,7 @@ function start( port ){
         }
 
         var data = req.query; //parseTwitterResponse(req.query);
-        console.log(data);
+        // console.log(data);
 
         // get the user token from the verify token.
         // data.oauth_verifier
@@ -157,7 +157,7 @@ function start( port ){
             },
             method: 'POST'
         },function(error, response, body){
-            var data = body;
+            let data = body;
             if(error || (data && data.errors)) { 
                 // console.log(parameters,signiture);
                 console.log('twitter access token err',data,error);//,response);
@@ -165,16 +165,22 @@ function start( port ){
                 res.status( 400 );
                 res.sendFile(__dirname+"/"+'failed.html',{headers:{'Content-Type':'text/html'}});
             } else { 
-                console.log('success! twitter access token',data);
-                // socket.emit('twitter token',data);
                 data = parseTwitterResponse(data);
+                console.log('success! twitter access token',data);
 
                 res.status( 200 );
                 res.sendFile(__dirname+"/"+'success.html',{headers:{'Content-Type':'text/html'}});
 
                 user.hasTwitter = true;
+                user.oauth_token = data.oauth_token;
+                user.oauth_token_secret = data.oauth_token_secret;
+                user.screen_name = data.screen_name;
+                user.user_id = data.user_id;
 
-                io.to(user.id,'twitter token',{
+                delete user.requestToken;
+                delete user.requestTokenSecret;
+
+                io.to(user.id,'twittertoken',{
                     // oauth_token: data.oauth_token,
                     hasTwitter: true,
                     user_id: data.user_id,

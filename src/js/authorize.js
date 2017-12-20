@@ -17,13 +17,13 @@ class Authorize extends Component {
 	}
 	handleClick() {
 		getRequestToken().then((data) => {
-			console.log(data);
+			// console.log(data);
 			this.oauthWindow = window.open( 'https://api.twitter.com/oauth/authorize?oauth_token=' + data,'_blank','menubar=no,height=600,width=768');
 		});
 	}
 	render() {
 		return (
-			<div className="authorize-contain">
+			<div className={"authorize-contain " + (modalVisible ? "visible" : "" )}>
 				<div className="authorize-background"></div>
 				<div className="authorize-modal">
 					<div className="fi-social-twitter"></div>
