@@ -438,7 +438,7 @@ input, textarea {
   z-index: 99;
   width: 420px;
   height: 250px;
-  background: rgba(0, 0, 0, 0.8);
+  background: #000;
   border-radius: 15px;
   color: #b1b1b1; }
   .compose-tweet textarea {

@@ -56,7 +56,8 @@ class Root extends Component {
 		});
   	}
   	submitStatus(){
-  		this.state.tweetText;
+  		// TODO
+  		// this.state.tweetText;
   	}
 	render() {
 		return (
