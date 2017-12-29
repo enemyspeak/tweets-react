@@ -42,7 +42,7 @@ function VideoMedia(props) {
 	let index = 0;
 	const variants = props.obj.video_info.variants;
 	const bitrate_max = 832000;
-
+	const viewport = 300;
 	const loop = (props.obj.type === "animated_gif" ? true : false );
 
 	for (var i = variants.length - 1; i >= 0; i--) {
@@ -62,7 +62,9 @@ function VideoMedia(props) {
 }
 
 function Media(props) {
-	// TODO load image'ss size responsive to size of viewport
+	// TODO load image size responsive to size of viewport
+	const viewport = 300;
+	const length = props.media.length;
 	return (
 		<div className="media-contain">
 	        {props.media.map(obj => {
@@ -261,7 +263,8 @@ class Tweet extends Component {
     	super(props);
     	this.state = {
     		retweeted: this.props.data.retweeted,
-    		favorited: this.props.data.favorited
+    		favorited: this.props.data.favorited,
+		    // height: 9999
     	};
   	}
 	handleFavoriteTweet(id) { // this can just call to the api and update this icon.
@@ -276,6 +279,10 @@ class Tweet extends Component {
   		// TODO
   		this.setState({retweeted: !this.state.retweeted});
   	}
+	// componentDidMount() {
+	//     const height = this.divElement.clientHeight;
+	//     this.setState({ height });
+	// }
 	render() {
 		// console.log(this.props.data);
 		let tweet = this.props.data;
@@ -284,8 +291,11 @@ class Tweet extends Component {
 			tweet = this.props.data.retweeted_status;
 			tweet.retweeteduser = this.props.data.user;
 		}
+		let tweetStyle = {
+			// maxHeight: this.state.height
+    	};
 		return (
-			<div className={"tweet-contain " + this.props.data.selected} id={tweet.id_str} userid={tweet.user.id_str} onClick={() => this.props.onClick()}>
+			<div ref={ (divElement) => this.divElement = divElement} style={tweetStyle} className={"tweet-contain " + this.props.data.selected} id={tweet.id_str} userid={tweet.user.id_str} onClick={() => this.props.onClick()}>
 				<div className="tweet-body">
 				    <UserInfo user={tweet.user} onClick={this.props.mentionHandler} />
 
