@@ -517,7 +517,8 @@ function start( port ){
                     return;
                 }
 
-                twit.get('direct_messages', {}, function(error, result) {
+                // twit.get('direct_messages', {}, function(error, result) {
+                twit.get('direct_messages/events/list', {}, function(error, result) {
                     if (error) {
                         console.log(error);
                         if(cb) cb('error');
