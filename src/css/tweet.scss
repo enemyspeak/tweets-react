@@ -264,6 +264,11 @@
 }
 
 .status-contain {
+    -webkit-animation: animateTweetContentExtra ease;
+    animation: animateTweetContentExtra ease;
+    -webkit-animation-duration: 900ms;
+    animation-duration: 900ms;
+    
     position: absolute;
     right: 10px;
     top: 4px;
@@ -304,10 +309,10 @@
     }
 }
 .tweet-date {
-    -webkit-animation: animateTweetContentExtra ease;
-    animation: animateTweetContentExtra ease;
-    -webkit-animation-duration: 900ms;
-    animation-duration: 900ms;    
+    // -webkit-animation: animateTweetContentExtra ease;
+    // animation: animateTweetContentExtra ease;
+    // -webkit-animation-duration: 900ms;
+    // animation-duration: 900ms;    
     position: relative;
     float: right;
     // right: 5px;

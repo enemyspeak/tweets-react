@@ -201,6 +201,25 @@ class TweetBody extends Component {
 	    var reg = new RegExp(esc, 'ig');
 	    return str.replace(reg, strWith);
 	}
+	onClickHandler(event) {
+		// user mention:
+		// check if this is a click on an element with data-username.
+		console.log(event.target);
+		let mention = event.target.getAttribute('data-username');
+		if (mention) {
+			this.props.onClick(mention);
+		}
+		// hashtag:
+		// check if there's data-hashtag
+		let hashtag = event.target.getAttribute('data-hashtag');
+		if (hashtag) {
+			// this.props.onClick(hashtag);
+			// TODO search a hashtag..
+		}
+
+		// url? return;
+		// not either? return;
+	}
 	render() {
 		const tweet = this.props.tweet;
 		// console.log(tweet);
@@ -232,28 +251,40 @@ class TweetBody extends Component {
 
 		if (tweet.extended_tweet) { // this is kind of messy, but it's working.
 			for (let i = tweet.extended_tweet.entities.urls.length - 1; i >= 0; i--) {
-				text = this.replaceAll(text,tweet.extended_tweet.entities.urls[i].url,'<a class="url" href="'+ tweet.extended_tweet.entities.urls[i].expanded_url +'">'+tweet.extended_tweet.entities.urls[i].display_url+'</a>');
+				text = this.replaceAll(text,tweet.extended_tweet.entities.urls[i].url,
+					'<a class="url" target="_blank" href="'+ tweet.extended_tweet.entities.urls[i].expanded_url +'">'+tweet.extended_tweet.entities.urls[i].display_url+'</a>'
+				);
 			}
 			for (let i = tweet.extended_tweet.entities.hashtags.length - 1; i >= 0; i--) {
-				text = this.replaceAll(text,"#"+tweet.extended_tweet.entities.hashtags[i].text,'<span class="hashtag">#'+tweet.extended_tweet.entities.hashtags[i].text+'</span>');
+				text = this.replaceAll(text,"#"+tweet.extended_tweet.entities.hashtags[i].text,
+					'<span class="hashtag" data-hashtag="'+tweet.extended_tweet.entities.hashtags[i].text+'">#'+tweet.extended_tweet.entities.hashtags[i].text+'</span>'
+				);
 			}
 			for (let i = tweet.extended_tweet.entities.user_mentions.length - 1; i >= 0; i--) {
-				text = this.replaceAll(text,'@'+tweet.extended_tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(\''+tweet.extended_tweet.entities.user_mentions[i].screen_name+'\')}">@' + tweet.extended_tweet.entities.user_mentions[i].screen_name+'</span>');
+				text = this.replaceAll(text,'@'+tweet.extended_tweet.entities.user_mentions[i].screen_name,
+					'<span class="user-mention" data-username="'+tweet.extended_tweet.entities.user_mentions[i].screen_name+'")}">@' + tweet.extended_tweet.entities.user_mentions[i].screen_name+'</span>'
+				);
 			}
 		} else {
 			for (let i = tweet.entities.urls.length - 1; i >= 0; i--) {
-				text = this.replaceAll(text,tweet.entities.urls[i].url,'<a class="url" href="'+ tweet.entities.urls[i].expanded_url +'">'+tweet.entities.urls[i].display_url+'</a>');
+				text = this.replaceAll(text,tweet.entities.urls[i].url,
+					'<a class="url" target="_blank" href="'+ tweet.entities.urls[i].expanded_url +'">'+tweet.entities.urls[i].display_url+'</a>'
+				);
 			}
 			for (let i = tweet.entities.hashtags.length - 1; i >= 0; i--) {
-				text = this.replaceAll(text,"#"+tweet.entities.hashtags[i].text,'<span class="hashtag">#'+tweet.entities.hashtags[i].text+'</span>');
+				text = this.replaceAll(text,"#"+tweet.entities.hashtags[i].text,
+					'<span class="hashtag" data-hashtag="'+tweet.entities.hashtags[i].text+'">#'+tweet.entities.hashtags[i].text+'</span>'
+				);
 			}
 			for (let i = tweet.entities.user_mentions.length - 1; i >= 0; i--) {
-				text = this.replaceAll(text,'@'+tweet.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(\''+tweet.entities.user_mentions[i].screen_name+'\')}">@' + tweet.entities.user_mentions[i].screen_name+'</span>');
+				text = this.replaceAll(text,'@'+tweet.entities.user_mentions[i].screen_name,
+					'<span class="user-mention" data-username="'+tweet.entities.user_mentions[i].screen_name+'")}">@' + tweet.entities.user_mentions[i].screen_name+'</span>'
+				);
 			}
 		}
 
 	  	return (
-			<p className="tweet-text" dangerouslySetInnerHTML={this.createMarkup(text)}></p>
+			<p className="tweet-text" dangerouslySetInnerHTML={this.createMarkup(text)} onClick={(event) => this.onClickHandler(event)}></p>
 		);
 	}
 }

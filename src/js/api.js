@@ -199,6 +199,24 @@ function fetchUserByName(screen_name) {
   })
 }
 
+//searches
+function searchTweets(term,cb) {
+  return new Promise(function(resolve, reject) {
+    if (!term){ 
+      reject('no term!');
+    };
+    socket.emit('searchtwitter',{search:term},function(data) {
+      if (!data || data==='unauthorized' || data==='error') {
+        reject(data)
+      } else {
+        resolve(data);
+        console.log(data);
+      }
+    });
+  });
+}
+
+  // actions!
 function favoriteTweet(id,cb) {
   // console.log(id);
   return new Promise(function(resolve, reject) {
@@ -232,21 +250,35 @@ function unfavoriteTweet(id,cb) {
   });
 }
 
-function searchTweets(term,cb) {
+function followUser(id,cb) {
   return new Promise(function(resolve, reject) {
-    if (!term){ 
-      reject('no term!');
+    if (!id){ 
+      reject('no id!');
     };
-    socket.emit('searchtwitter',{search:term},function(data) {
+    socket.emit('followuser',{id:id},function(data) {
       if (!data || data==='unauthorized' || data==='error') {
         reject(data)
       } else {
-        resolve(data);
+        resolve();
         console.log(data);
       }
     });
-  });
+  }); 
+}
+function unfollowUser(id,cb) {
+  return new Promise(function(resolve, reject) {
+    if (!id){ 
+      reject('no id!');
+    };
+    socket.emit('unfollowuser',{id:id},function(data) {
+      if (!data || data==='unauthorized' || data==='error') {
+        reject(data)
+      } else {
+        resolve();
+        console.log(data);
+      }
+    });
+  }); 
 }
 
-
-export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchDirectMessages, subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet,searchTweets };
+export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchDirectMessages, subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet,searchTweets,followUser,unfollowUser };

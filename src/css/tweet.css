@@ -373,6 +373,10 @@
   box-sizing: border-box; }
 
 .status-contain {
+  -webkit-animation: animateTweetContentExtra ease;
+  animation: animateTweetContentExtra ease;
+  -webkit-animation-duration: 900ms;
+  animation-duration: 900ms;
   position: absolute;
   right: 10px;
   top: 4px;
@@ -408,10 +412,6 @@
     color: #FFC107; }
 
 .tweet-date {
-  -webkit-animation: animateTweetContentExtra ease;
-  animation: animateTweetContentExtra ease;
-  -webkit-animation-duration: 900ms;
-  animation-duration: 900ms;
   position: relative;
   float: right;
   top: 0px;

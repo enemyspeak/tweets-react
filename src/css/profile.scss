@@ -154,8 +154,16 @@
         transition: color 0.3s ease, background 0.3s ease;
         cursor: pointer;
 
-        &.following,&:hover,&.inactive {
+        &:hover,&.inactive {
             color: $white;
             background: $lightBlue300;
+        }
+        &.following {
+            color: $white;
+            background: $lightBlue300;   
+            &:hover {
+                background: transparent;
+                color: $lightBlue300;           
+            }
         }
     }

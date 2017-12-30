@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import Tweet from './tweet'
-import { gotTwitterLoginPromise, fetchUserByName } from './api';
+import { gotTwitterLoginPromise, fetchUserByName,followUser,unfollowUser } from './api';
 
 class Profile extends Component {
   constructor(props) {
@@ -13,7 +13,8 @@ class Profile extends Component {
         fetchUserByName(this.props.selectedUser).then((profile) => {
           ReactDOM.findDOMNode(this).scrollIntoView(); // this should only run when the profile changes.
           this.setState({ 
-            profile: profile
+            profile: profile,
+            following: profile.following
           })
         }).catch(function() {});
       // }
@@ -44,14 +45,14 @@ class Profile extends Component {
     this.setState({selectedTweet:id});
   }
   followUser(id) {
-
+    followUser(id).then(() => this.setState({following: true})).catch((err)=> console.error(err));
   }
   unfollowUser(id) {
-    
+    unfollowUser(id).then(() => this.setState({following: false})).catch((err)=> console.error(err)); 
   }
 	render() {
     var profile = this.state.profile;
-
+    let following = this.state.following;
     if (!profile) {
       return (
         <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
@@ -89,7 +90,7 @@ class Profile extends Component {
           {profile.verified && ( <div className="profile-verified"></div> )}
           {profile.protected && ( <div className="profile-protected"><div className="fi-lock"></div></div> )}
 
-          {profile.following ? (<span className="follow-button following">Following</span>) : (<span className="follow-button" onClick={()=>this.props.followUser(profile.id_str)}>Follow</span>)}
+          {following ? (<span className="follow-button following" onClick={()=>this.props.unfollowUser(profile.id_str)}>Following</span>) : (<span className="follow-button" onClick={()=>this.props.followUser(profile.id_str)}>Follow</span>)}
           <div className="profile-details">
             <span className="name">{profile.name}</span>
             <span className="screen-name">@{profile.screen_name}</span>

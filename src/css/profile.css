@@ -124,6 +124,12 @@
   color: #4FC3F7;
   transition: color 0.3s ease, background 0.3s ease;
   cursor: pointer; }
-  .follow-button.following, .follow-button:hover, .follow-button.inactive {
+  .follow-button:hover, .follow-button.inactive {
     color: #fff;
     background: #4FC3F7; }
+  .follow-button.following {
+    color: #fff;
+    background: #4FC3F7; }
+    .follow-button.following:hover {
+      background: transparent;
+      color: #4FC3F7; }
