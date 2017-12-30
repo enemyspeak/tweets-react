@@ -26,6 +26,7 @@
 
         input {
             width: calc( 100% - (100% / 4) - 20px);
+            border-right: 1px solid $gray28;
         }
 
         button {
@@ -102,8 +103,21 @@
     width: 60%;
 
     &.mine {
-        left: initial;
-        right: 0px;
+        left: calc( 40% - 30px );
+        .user-avatar {
+            left: initial;
+            right: 10px;
+        }
+        .message-text{
+            left: 10px;
+        }
+        .message-date {
+            left: initial;
+            right: calc( 100% + 0px );
+            text-align: right;
+            margin-left: 0px;
+            margin-right: 10px;
+        }
     }
 
     .message-text {
