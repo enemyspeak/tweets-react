@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { gotTwitterLoginPromise,fetchDirectMessages,fetchSentDirectMessages } from './api';
 
 function Avatar(props) {
@@ -185,7 +186,8 @@ class DirectMessages extends Component {
   	}
   	state = {
   		selectedMessages: [],
-  		users: []
+  		users: [],
+  		hasText: ""
   	}
   	clearSelectedUser() {
   		this.setState({selectedUser:false});
@@ -214,16 +216,25 @@ class DirectMessages extends Component {
 
 			selectedMessages = selectedMessages.sort((a,b) => {
 				if (a.created_at_time < b.created_at_time)
-			    	return 1;
-			  	if (a.created_at_time > b.created_at_time)
 			    	return -1;
+			  	if (a.created_at_time > b.created_at_time)
+			    	return 1;
 			  	return 0;
 			});
 		}
 		this.setState({selectedUser:id,selectedMessages: selectedMessages});
-
-		// TODO: scroll to the bottom of the selected chat.
+	    // ReactDOM.findDOMNode(this).scrollIntoView(); // this should only run when the profile changes.
 	}
+	// scrollToBottom = () => {
+ // 		this.messagesEnd.scrollIntoView({ behavior: "smooth" }); // FIXME: this breaks the translate
+	// }
+	// componentDidMount() {
+	//   	this.scrollToBottom();
+	// }
+	// componentDidUpdate() {
+	//   	this.scrollToBottom();
+	// }
+
 	render() {
 		const messages = this.state.selectedMessages;
 		const users = this.state.users;
@@ -241,6 +252,9 @@ class DirectMessages extends Component {
 				              	/>
 				            )
 						})}
+						<div style={{ float:"left", clear: "both" }}
+             				ref={(el) => { this.messagesEnd = el; }}>
+        				</div>
 					</div>
 					<div className="input-wrap">
 			        	<span className={"input-label " + (this.state.hasText ? "" : "full" )}>Message</span>

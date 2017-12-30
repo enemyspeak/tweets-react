@@ -11,7 +11,7 @@ class Profile extends Component {
     gotTwitterLoginPromise().then((data) => {
       // if (this.props.activeTab) {
         fetchUserByName(this.props.selectedUser).then((profile) => {
-          ReactDOM.findDOMNode(this).scrollIntoView(); // this should only run when the profile changes.
+          // ReactDOM.findDOMNode(this).scrollIntoView(); // this should only run when the profile changes. // FIXME: this breaks the overlay stuff!
           this.setState({ 
             profile: profile,
             following: profile.following
@@ -28,7 +28,6 @@ class Profile extends Component {
   //   // NOTE: this will scroll everything to the top when you change tabs..
   //   ReactDOM.findDOMNode(this).scrollIntoView(); 
   // }
-
   // componentWillMount() {
   //   // this.setState({selectedUser:this.props.selectedUser});
   // }

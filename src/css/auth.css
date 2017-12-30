@@ -10,7 +10,7 @@
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.8);
+  background: #333333;
   z-index: 98;
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px); }
@@ -25,7 +25,7 @@
   max-width: 420px;
   min-height: 250px;
   height: auto;
-  background: rgba(0, 0, 0, 0.8);
+  background: #333333;
   border-radius: 15px;
   color: #b1b1b1; }
   .authorize-modal .fi-social-twitter {

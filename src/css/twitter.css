@@ -22,17 +22,17 @@
   .twitter-app ::-webkit-scrollbar:horizontal {
     height: 10px; }
   .twitter-app ::-webkit-scrollbar-track {
-    background: #eaeaea;
-    border-left: 1px solid #ccc; }
+    background: #333333;
+    border-left: none; }
   .twitter-app ::-webkit-scrollbar-track:horizontal {
-    border-top: 1px solid #ccc; }
+    border-top: none; }
   .twitter-app ::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+    background-color: #424242;
     border-radius: 5px; }
   .twitter-app ::-webkit-scrollbar-thumb:hover {
-    background-color: #aaa; }
+    background-color: #AFAFAF; }
   .twitter-app ::-webkit-scrollbar-corner {
-    background: #eaeaea; }
+    background: #333333; }
   .twitter-app.inactive {
     display: none; }
   .twitter-app .dataLoader {
