@@ -146,7 +146,7 @@ function fetchFavorites(cb) {
 
 function fetchDirectMessages(cb) {
   socket.emit('getdirectmessages',{},function(data) {
-    // console.log(data);
+    console.log(data);
     if (!data || data==='unauthorized' || data==='error') {
       cb(null, []);
       return;

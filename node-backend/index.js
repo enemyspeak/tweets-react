@@ -517,8 +517,8 @@ function start( port ){
                     return;
                 }
 
-                // twit.get('direct_messages', {}, function(error, result) {
-                twit.get('direct_messages/events/list', {}, function(error, result) {
+                twit.get('direct_messages', {count:200}, function(error, result) {
+                // twit.get('direct_messages/events/list', {}, function(error, result) {
                     if (error) {
                         console.log(error);
                         if(cb) cb('error');
@@ -526,7 +526,18 @@ function start( port ){
                     }
                     // console.log('mentions result');
                     directmessagescache = result;
-                    if(cb) cb(directmessagescache);
+
+                    twit.get('direct_messages/sent', {count:200}, function(senterror, sentresult) {
+                    // twit.get('direct_messages/events/list', {}, function(error, result) {
+                        if (senterror) {
+                            console.log(senterror);
+                            if(cb) cb('error');
+                            return;
+                        }
+                        // console.log('mentions result');
+                        directmessagescache = directmessagescache.concat( sentresult );
+                        if(cb) cb(directmessagescache);
+                    });
                 });
             }).catch(function() {
                 if (cb) cb('unauthorized');
