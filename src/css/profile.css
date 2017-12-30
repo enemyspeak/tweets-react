@@ -28,6 +28,8 @@
   .profile-contain.visible {
     transform: translate(0%, 0px); }
   .profile-contain .profile-verified {
+    -webkit-animation: none;
+    animation: none;
     width: 20px;
     height: 20px;
     border-radius: 12px;
@@ -65,6 +67,8 @@
   filter: blur(3px); }
 
 .profile-avatar {
+  -webkit-animation: none;
+  animation: none;
   left: calc( 50% - 25px);
   top: 30px;
   width: 50px;

@@ -43,6 +43,12 @@ class Profile extends Component {
     // console.log(id);
     this.setState({selectedTweet:id});
   }
+  followUser(id) {
+
+  }
+  unfollowUser(id) {
+    
+  }
 	render() {
     var profile = this.state.profile;
 
@@ -83,7 +89,7 @@ class Profile extends Component {
           {profile.verified && ( <div className="profile-verified"></div> )}
           {profile.protected && ( <div className="profile-protected"><div className="fi-lock"></div></div> )}
 
-          {profile.following ? (<span className="follow-button following">Following</span>) : (<span className="follow-button">Follow</span>)}
+          {profile.following ? (<span className="follow-button following">Following</span>) : (<span className="follow-button" onClick={()=>this.props.followUser(profile.id_str)}>Follow</span>)}
           <div className="profile-details">
             <span className="name">{profile.name}</span>
             <span className="screen-name">@{profile.screen_name}</span>
