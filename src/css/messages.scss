@@ -103,6 +103,10 @@
     width: 60%;
 
     &.mine {
+        // -webkit-animation: animateTweetContentDelay ease;
+        // animation: animateTweetContentDelay ease;
+        // -webkit-animation-duration: 900ms;
+        // animation-duration: 900ms;
         left: calc( 40% - 30px );
         .user-avatar {
             left: initial;
@@ -172,6 +176,6 @@
         color: $darkestwhite;
         // right: -24px;
         margin-left: 10px;
-        left: 419px;
+        left: 100%;
     }
 }
