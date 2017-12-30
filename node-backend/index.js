@@ -540,7 +540,7 @@ function start( port ){
                     return;
                 }
 
-                twit.get('direct_messages/sent', {count:200}, function(senterror, sentresult) {
+                twit.get('direct_messages/sent', {count:200}, function(error, result) {
                 // twit.get('direct_messages/events/list', {}, function(error, result) {
                     if (error) {
                         console.log(error);
