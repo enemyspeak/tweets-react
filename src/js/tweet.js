@@ -204,7 +204,7 @@ class TweetBody extends Component {
 	onClickHandler(event) {
 		// user mention:
 		// check if this is a click on an element with data-username.
-		console.log(event.target);
+		// console.log(event.target);
 		let mention = event.target.getAttribute('data-username');
 		if (mention) {
 			this.props.onClick(mention);

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 const navItems = [  
 	{
 	"name": "timeline",
-	"icon":"fi-home"
+	"icon":"fi-comment"
 	},
 	{
 	"name": "mentions",
@@ -12,6 +12,10 @@ const navItems = [
 	{
 	"name": "direct-messages",
 	"icon":"fi-mail"
+	},
+	{
+	"name": "favorites",
+	"icon":"fi-star"
 	},
 	{
 	"name": "search",
