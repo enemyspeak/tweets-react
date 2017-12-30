@@ -11,7 +11,8 @@
     transform: scale(1); } }
 
 html {
-  background: rgba(0, 0, 0, 0.8); }
+  background: rgba(0, 0, 0, 0.8);
+  overflow: hidden; }
 
 #root {
   width: 100%;
@@ -104,8 +105,7 @@ html {
   width: calc( 100% - 60px);
   height: 100%;
   display: block;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: hidden;
   height: calc( 100vh - 51px); }
 
 @-webkit-keyframes rotateLoader {
@@ -581,6 +581,18 @@ input, textarea {
     .authorize-popupblocked a:hover {
       border-bottom: 1px solid #b1b1b1;
       color: #b1b1b1; }
+
+@keyframes transitionMenus {
+  0% {
+    display: none;
+    opacity: 0; }
+  1% {
+    display: block;
+    opacity: 0;
+    transform: scale(0); }
+  100% {
+    opacity: 1;
+    transform: scale(1); } }
 
 @keyframes transitionMenus {
   0% {
@@ -1259,7 +1271,7 @@ input, textarea {
     color: #fff; }
   .twitter-app .profile-parent-contain {
     width: 100%;
-    height: calc( 100% - 30px);
+    height: 100%;
     color: #fff;
     position: absolute;
     top: 0px;
@@ -1269,8 +1281,9 @@ input, textarea {
       transform: translate(100%, 0px); }
   .twitter-app .timeline-contain {
     width: 100%;
-    height: calc( 100% - 30px);
+    height: 100%;
     color: #fff;
+    overflow-y: scroll;
     position: absolute;
     top: 0px;
     transform: translate(0%, 0px);
@@ -1297,17 +1310,18 @@ input, textarea {
 
 .recent-timeline-contain {
   width: 100%;
-  height: calc( 100% - 30px);
+  overflow-y: scroll;
+  height: calc(100% - 305px);
   color: #fff;
-  border-top: 1px solid #424242;
   background: #333;
-  position: relative; }
+  position: absolute;
+  top: 305px; }
   .recent-timeline-contain.inactive {
     display: none; }
 
 .sub-profile-contain {
   position: absolute;
-  height: calc( 100% - 30px);
+  height: 100%;
   width: 100%;
   top: 0px;
   transform: translate(100%, 0px);
@@ -1317,7 +1331,7 @@ input, textarea {
 
 .profile-contain {
   position: absolute;
-  height: calc( 100% - 30px);
+  height: 100%;
   width: 100%;
   top: 0px;
   transform: translate(-100%, 0px);
@@ -1443,9 +1457,245 @@ input, textarea {
     opacity: 1;
     transform: scale(1); } }
 
+@keyframes transitionMenus {
+  0% {
+    display: none;
+    opacity: 0; }
+  1% {
+    display: block;
+    opacity: 0;
+    transform: scale(0); }
+  100% {
+    opacity: 1;
+    transform: scale(1); } }
+
+@-webkit-keyframes animateTweet {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-moz-keyframes animateTweet {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-o-keyframes animateTweet {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes animateTweet {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-webkit-keyframes animateTweetContent {
+  0% {
+    opacity: 0;
+    transform: translatex(40px); }
+  100% {
+    opacity: 1;
+    transform: translatex(0px); } }
+
+@-moz-keyframes animateTweetContent {
+  0% {
+    opacity: 0;
+    transform: translatex(40px); }
+  100% {
+    opacity: 1;
+    transform: translatex(0px); } }
+
+@-o-keyframes animateTweetContent {
+  0% {
+    opacity: 0;
+    transform: translatex(40px); }
+  100% {
+    opacity: 1;
+    transform: translatex(0px); } }
+
+@keyframes animateTweetContent {
+  0% {
+    opacity: 0;
+    transform: translatex(40px); }
+  100% {
+    opacity: 1;
+    transform: translatex(0px); } }
+
+@-webkit-keyframes animateTweetContentDelay {
+  0% {
+    opacity: 0;
+    transform: translatex(40px); }
+  33% {
+    opacity: 0;
+    transform: translatex(40px); }
+  100% {
+    opacity: 1;
+    transform: translatex(0px); } }
+
+@-moz-keyframes animateTweetContentDelay {
+  0% {
+    opacity: 0;
+    transform: translatex(40px); }
+  33% {
+    opacity: 0;
+    transform: translatex(40px); }
+  100% {
+    opacity: 1;
+    transform: translatex(0px); } }
+
+@-o-keyframes animateTweetContentDelay {
+  0% {
+    opacity: 0;
+    transform: translatex(40px); }
+  33% {
+    opacity: 0;
+    transform: translatex(40px); }
+  100% {
+    opacity: 1;
+    transform: translatex(0px); } }
+
+@keyframes animateTweetContentDelay {
+  0% {
+    opacity: 0;
+    transform: translatex(40px); }
+  33% {
+    opacity: 0;
+    transform: translatex(40px); }
+  100% {
+    opacity: 1;
+    transform: translatex(0px); } }
+
+@-webkit-keyframes animateTweetContentExtra {
+  0% {
+    opacity: 0;
+    transform: translatex(40px); }
+  66% {
+    opacity: 0;
+    transform: translatex(40px); }
+  100% {
+    opacity: 1;
+    transform: translatex(0px); } }
+
+@-moz-keyframes animateTweetContentExtra {
+  0% {
+    opacity: 0;
+    transform: translatex(40px); }
+  66% {
+    opacity: 0;
+    transform: translatex(40px); }
+  100% {
+    opacity: 1;
+    transform: translatex(0px); } }
+
+@-o-keyframes animateTweetContentExtra {
+  0% {
+    opacity: 0;
+    transform: translatex(40px); }
+  66% {
+    opacity: 0;
+    transform: translatex(40px); }
+  100% {
+    opacity: 1;
+    transform: translatex(0px); } }
+
+@keyframes animateTweetContentExtra {
+  0% {
+    opacity: 0;
+    transform: translatex(40px); }
+  66% {
+    opacity: 0;
+    transform: translatex(40px); }
+  100% {
+    opacity: 1;
+    transform: translatex(0px); } }
+
+@-webkit-keyframes animateAction {
+  0% {
+    -webkit-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    -ms-transform: scale(0, 0);
+    transform: scale(0, 0);
+    text-shadow: 0px 0px 0px; }
+  75% {
+    -webkit-transform: scale(1.25, 1.25);
+    -o-transform: scale(1.25, 1.25);
+    -ms-transform: scale(1.25, 1.25);
+    transform: scale(1.25, 1.25);
+    text-shadow: 0px 0px 12px; }
+  100% {
+    -webkit-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    transform: scale(1, 1);
+    text-shadow: 0px 0px 0px; } }
+
+@-moz-keyframes animateAction {
+  0% {
+    -webkit-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    -ms-transform: scale(0, 0);
+    transform: scale(0, 0);
+    text-shadow: 0px 0px 0px; }
+  75% {
+    -webkit-transform: scale(1.25, 1.25);
+    -o-transform: scale(1.25, 1.25);
+    -ms-transform: scale(1.25, 1.25);
+    transform: scale(1.25, 1.25);
+    text-shadow: 0px 0px 12px; }
+  100% {
+    -webkit-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    transform: scale(1, 1);
+    text-shadow: 0px 0px 0px; } }
+
+@-o-keyframes animateAction {
+  0% {
+    -webkit-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    -ms-transform: scale(0, 0);
+    transform: scale(0, 0);
+    text-shadow: 0px 0px 0px; }
+  75% {
+    -webkit-transform: scale(1.25, 1.25);
+    -o-transform: scale(1.25, 1.25);
+    -ms-transform: scale(1.25, 1.25);
+    transform: scale(1.25, 1.25);
+    text-shadow: 0px 0px 12px; }
+  100% {
+    -webkit-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    transform: scale(1, 1);
+    text-shadow: 0px 0px 0px; } }
+
+@keyframes animateAction {
+  0% {
+    -webkit-transform: scale(0, 0);
+    -o-transform: scale(0, 0);
+    -ms-transform: scale(0, 0);
+    transform: scale(0, 0);
+    text-shadow: 0px 0px 0px; }
+  75% {
+    -webkit-transform: scale(1.25, 1.25);
+    -o-transform: scale(1.25, 1.25);
+    -ms-transform: scale(1.25, 1.25);
+    transform: scale(1.25, 1.25);
+    text-shadow: 0px 0px 12px; }
+  100% {
+    -webkit-transform: scale(1, 1);
+    -o-transform: scale(1, 1);
+    -ms-transform: scale(1, 1);
+    transform: scale(1, 1);
+    text-shadow: 0px 0px 0px; } }
+
 .messages-contain {
   width: 100%;
-  height: calc( 100% - 30px);
+  height: 100%;
   color: #fff;
   position: absolute;
   top: 0px;
@@ -1453,10 +1703,23 @@ input, textarea {
   transition: all,0.3s ease; }
   .messages-contain.inactive {
     transform: translate(100%, 0px); }
+  .messages-contain .input-wrap {
+    position: relative;
+    bottom: 0px;
+    border-top: 1px solid #424242;
+    height: 42px;
+    overflow: hidden; }
+    .messages-contain .input-wrap input {
+      width: calc( 100% - (100% / 4) - 20px); }
+    .messages-contain .input-wrap button {
+      position: absolute;
+      top: 4px;
+      left: calc( 100% - (100% / 4) - 10px); }
 
 .messages-list-contain {
   width: 100%;
-  height: calc( 100% - 30px);
+  height: 100%;
+  overflow-y: scroll;
   color: #fff;
   position: absolute;
   top: 0px;
@@ -1476,10 +1739,6 @@ input, textarea {
     color: #424242; }
 
 .user-message {
-  -webkit-animation: animateTweet ease;
-  animation: animateTweet ease;
-  -webkit-animation-duration: 300ms;
-  animation-duration: 300ms;
   transform: translateZ(0);
   position: relative;
   background: transparent;
@@ -1495,9 +1754,16 @@ input, textarea {
     min-height: 42px; }
 
 .messages-wrap {
-  margin-top: 30px; }
+  margin-top: 30px;
+  overflow-y: scroll;
+  height: calc( 100% - 73px);
+  border-top: 1px solid #424242; }
 
 .message {
+  -webkit-animation: animateTweetContent ease;
+  animation: animateTweetContent ease;
+  -webkit-animation-duration: 900ms;
+  animation-duration: 900ms;
   position: relative;
   left: 0px;
   padding: 10px 10px 10px 0px;
@@ -1506,8 +1772,15 @@ input, textarea {
   min-height: 42px;
   margin: 10px;
   width: 60%; }
+  .message.mine {
+    left: initial;
+    right: 0px; }
   .message .message-text {
-    margin-top: 4px;
+    -webkit-animation: animateTweetContentDelay ease;
+    animation: animateTweetContentDelay ease;
+    -webkit-animation-duration: 900ms;
+    animation-duration: 900ms;
+    margin-top: -4px;
     display: block;
     left: 60px;
     position: relative;
@@ -1529,6 +1802,25 @@ input, textarea {
       cursor: pointer; }
       .message .message-text .user-mention:hover {
         color: #4FC3F7; }
+  .message .message-date {
+    -webkit-animation: animateTweetContentExtra ease;
+    animation: animateTweetContentExtra ease;
+    -webkit-animation-duration: 900ms;
+    animation-duration: 900ms;
+    /* overflow: hidden; */
+    -webkit-transition: opacity 0.3s ease;
+    -o-transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease;
+    position: absolute;
+    top: 10px;
+    padding-top: 1px;
+    background: transparent;
+    /* width: 120px; */
+    /* text-align: right; */
+    font-size: 12px;
+    color: #b1b1b1;
+    margin-left: 10px;
+    left: 521px; }
 
 @keyframes transitionMenus {
   0% {
@@ -1546,7 +1838,9 @@ input, textarea {
   color: #fff; }
 
 .search-contain {
-  margin-top: 43px; }
+  margin-top: 43px;
+  height: calc( 100% - 43px);
+  overflow-y: scroll; }
 
 .search-form-contain {
   position: absolute;

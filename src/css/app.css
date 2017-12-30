@@ -11,7 +11,8 @@
     transform: scale(1); } }
 
 html {
-  background: rgba(0, 0, 0, 0.8); }
+  background: rgba(0, 0, 0, 0.8);
+  overflow: hidden; }
 
 #root {
   width: 100%;
@@ -104,8 +105,7 @@ html {
   width: calc( 100% - 60px);
   height: 100%;
   display: block;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: hidden;
   height: calc( 100vh - 51px); }
 
 @-webkit-keyframes rotateLoader {

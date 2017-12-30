@@ -31,7 +31,7 @@
 
     .profile-parent-contain {
         width: 100%;
-        height: calc( 100% - 30px );
+        height: 100%; //calc( 100% - 30px );
         color: $white;
         position: absolute;
         top: 0px;
@@ -45,8 +45,9 @@
 
     .timeline-contain {
         width: 100%;
-        height: calc( 100% - 30px );
+        height: 100%; //calc( 100% - 30px );
         color: $white;
+        overflow-y: scroll;
         // position: relative;
         position: absolute;
         top: 0px;

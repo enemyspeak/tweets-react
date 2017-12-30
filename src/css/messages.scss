@@ -1,22 +1,44 @@
 @import "./mixins.scss";
 @import "./colors.scss";
+@import "./animations.scss";
 
 .messages-contain {
     width: 100%;
-    height: calc( 100% - 30px );
+    height:100%;//calc( 100% - 30px );
     color: $white;
     position: absolute;
     top: 0px;
     transform: translate(0%, 0px);
     transition: all,0.3s ease;
+    // overflow-y: scroll;
+
     &.inactive {
         transform: translate(100%, 0px);
         // display: none;
     }
+
+    .input-wrap {
+        position: relative;
+        bottom: 0px;
+        border-top: 1px solid $gray28;
+        height: 42px;
+        overflow: hidden;
+
+        input {
+            width: calc( 100% - (100% / 4) - 20px);
+        }
+
+        button {
+            position: absolute;
+            top: 4px;
+            left: calc( 100% - (100% / 4) - 10px);
+        }
+    }
 }
 .messages-list-contain {
     width: 100%;
-    height: calc( 100% - 30px );
+    height: 100%; //calc( 100% - 30px );
+    overflow-y: scroll;
     color: $white;
     position: absolute;
     top: 0px;
@@ -40,10 +62,6 @@
     }
 }
 .user-message {
-    -webkit-animation: animateTweet ease;
-    animation: animateTweet ease;
-    -webkit-animation-duration: 300ms;
-    animation-duration: 300ms;
     transform: translateZ(0);
     position: relative;
     background: transparent;
@@ -65,8 +83,15 @@
 }
 .messages-wrap {
     margin-top: 30px;
+    overflow-y: scroll;
+    height: calc( 100% - 73px );
+    border-top: 1px solid #424242;
 }
 .message {
+    -webkit-animation: animateTweetContent ease;
+    animation: animateTweetContent ease;
+    -webkit-animation-duration: 900ms;
+    animation-duration: 900ms;
     position: relative;
     left: 0px;
     padding: 10px 10px 10px 0px;
@@ -75,8 +100,18 @@
     min-height: 42px;
     margin: 10px;
     width: 60%;
+
+    &.mine {
+        left: initial;
+        right: 0px;
+    }
+
     .message-text {
-        margin-top: 4px;
+        -webkit-animation: animateTweetContentDelay ease;
+        animation: animateTweetContentDelay ease;
+        -webkit-animation-duration: 900ms;
+        animation-duration: 900ms;
+        margin-top: -4px;
         display: block;
         left: 60px;
         position: relative;
@@ -103,5 +138,26 @@
                 color: $lightBlue300;
             }
         }
+    }
+    .message-date {
+        -webkit-animation: animateTweetContentExtra ease;
+        animation: animateTweetContentExtra ease;
+        -webkit-animation-duration: 900ms;
+        animation-duration: 900ms;
+        /* overflow: hidden; */
+        -webkit-transition: opacity 0.3s ease;
+        -o-transition: opacity 0.3s ease;
+        transition: opacity 0.3s ease;
+        position: absolute;
+        top: 10px;
+        padding-top: 1px;
+        background: transparent;
+        /* width: 120px; */
+        /* text-align: right; */
+        font-size: 12px;
+        color: $darkestwhite;
+        // right: -24px;
+        margin-left: 10px;
+        left: 521px;
     }
 }

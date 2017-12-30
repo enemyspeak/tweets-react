@@ -38,6 +38,56 @@ class User extends Component {
 	}
 }
 
+class RelativeTime extends Component {
+	relativeTime() {
+		// console.log(this.props);
+		let time = this.props.created_at;
+
+	 	if (!time) return;
+
+	    // let day,month,year;
+	    let date = new Date(time),
+	        diff = ( (( new Date().getTime() ) - date.getTime()) / 1000),
+	        // day_diff = ( new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()).getTime() - new Date(date.getFullYear(),date.getMonth(),date.getDate()).getTime() ) / 1000 / 86400, //
+	        day_diff = Math.floor(diff / 86400);
+	    
+	    if (isNaN(day_diff) || diff <= 0)
+	        return (
+	        	"now"
+	            // year.toString()+'-'+
+	            // ((month<10) ? '0'+month.toString() : month.toString())+'-'+
+	            // ((day<10) ? '0'+day.toString() : day.toString())
+	        );
+	    
+	    var r = (
+	        diff > 0 &&
+	        (
+	        	// eslint-disable-next-line
+	            day_diff === 0 &&
+	            (
+	                (
+	                    (diff < 60 && Math.ceil(diff) + "s") ||
+	                    (diff < 3600 && Math.ceil(diff / 60)  + "m") ||
+	                    (diff < 7200 && "1h") ||
+	                    (diff < 86400 && Math.floor(diff / 3600) + "h")
+	                )
+	            // eslint-disable-next-line
+	            ) ||
+	            (day_diff === 1 && "1d") ||
+	            (Math.ceil(day_diff) + "d")
+	        )
+	    );
+	    // console.log(r);
+	    return r;
+	}
+   	render() {
+   		// console.log(this);
+		return (
+			<span className="message-date">{this.relativeTime()}</span>
+		) // 
+   	}
+}
+
 class MessageBody extends Component {
 	createMarkup(html) { 
 		return {__html: html}; 
@@ -74,12 +124,14 @@ class Message extends Component {
 	render() {
 		// console.log(this.props);
 		return (
-			<div className="message">
+			<div className={"message " + (this.props.data.mine ? "mine" : "" )}>
 				<div className="user-avatar">
 			        <Avatar user={this.props.data.sender} />
 			    </div>
 
 		        <MessageBody message={this.props.data} />
+		        
+		        <RelativeTime created_at={this.props.data.created_at} />
 			</div>
 		)
 	}
@@ -92,6 +144,10 @@ class DirectMessages extends Component {
 	    gotTwitterLoginPromise().then((data) => {
 
 	    	fetchDirectMessages((err, messages) => {
+				for (var i = messages.length - 1; i >= 0; i--) {
+      				messages[i].created_at_time = new Date(messages[i].created_at).getTime();
+      			}
+
 	    		this.setState({ 
         			messages
       			});
@@ -117,6 +173,10 @@ class DirectMessages extends Component {
       		});
 
       		fetchSentDirectMessages((err, sentmessages) => {
+      			for (var i = sentmessages.length - 1; i >= 0; i--) {
+      				sentmessages[i].mine = true;
+      				sentmessages[i].created_at_time = new Date(sentmessages[i].created_at).getTime();
+      			}
 	    		this.setState({ 
         			sentmessages
       			});
@@ -130,14 +190,19 @@ class DirectMessages extends Component {
   	clearSelectedUser() {
   		this.setState({selectedUser:false});
   	}
+  	handleChange(event) {
+		this.setState({
+			hasText: event.target.value,
+		});
+  	}
 	setSelectedUser(id) {
 		console.log('selected user',id);
 		
 		let selectedMessages = [];
 		if (id) {
-    		// TODO mix the sent messages into messages.
+    		// mix the sent messages into messages.
     		let selectedSentMessages = this.state.sentmessages.filter((obj) => {
-    			console.log(obj);
+    			// console.log(obj);
     			return (obj.recipient_screen_name === id);
     		});
 
@@ -145,9 +210,19 @@ class DirectMessages extends Component {
 				return (obj.sender_screen_name === id);
 			});
 			selectedMessages = selectedMessages.concat(selectedSentMessages);
-			console.log(selectedMessages);
+			// console.log(selectedMessages);
+
+			selectedMessages = selectedMessages.sort((a,b) => {
+				if (a.created_at_time < b.created_at_time)
+			    	return 1;
+			  	if (a.created_at_time > b.created_at_time)
+			    	return -1;
+			  	return 0;
+			});
 		}
 		this.setState({selectedUser:id,selectedMessages: selectedMessages});
+
+		// TODO: scroll to the bottom of the selected chat.
 	}
 	render() {
 		const messages = this.state.selectedMessages;
@@ -167,6 +242,11 @@ class DirectMessages extends Component {
 				            )
 						})}
 					</div>
+					<div className="input-wrap">
+			        	<span className={"input-label " + (this.state.hasText ? "" : "full" )}>Message</span>
+          				<input type="text" onChange={(event) => this.handleChange(event)} />
+          				<button className="button send-button">Send</button>
+			        </div>
 				</div>
 				<div className={"messages-list-contain " + (this.state.selectedUser ? "inactive" : "")}>
 					{users.map((obj) => {

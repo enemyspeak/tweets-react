@@ -7,6 +7,8 @@
 
 .search-contain {
     margin-top: 43px;
+    height: calc( 100% - 43px );
+    overflow-y: scroll;
 }
 
 .search-form-contain {

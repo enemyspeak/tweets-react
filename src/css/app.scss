@@ -3,6 +3,7 @@
 
 html{
     background: $black80;
+    overflow: hidden; // TODO: check this hasn't broken anything.
 }
 
 #root {
@@ -123,8 +124,9 @@ html{
     width: calc( 100% - 60px);
     height: 100%;
     display: block;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow: hidden;
+    // overflow-x: hidden;
+    // overflow-y: scroll;
     height: calc( 100vh - 51px );
 }
 
