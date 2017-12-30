@@ -106,6 +106,7 @@ function subscribeToHomeTimeline(cb) {
 	})
 }
 
+// TODO we should cache this data so we can combine it with retweets
 function fetchMentions(cb) {
 	socket.emit('getmentions',{},function(data) {
 		// console.log(data);
@@ -116,6 +117,19 @@ function fetchMentions(cb) {
 		// return data;
 		cb(null, data);
 	});
+}
+
+// getretweets
+function fetchRetweets(cb) {
+  socket.emit('getretweets',{},function(data) {
+    // console.log(data);
+    if (!data || data==='unauthorized' || data==='error') {
+      cb(null, []);
+      return;
+    }
+    // return data;
+    cb(null, data);
+  });
 }
 
 function fetchFavorites(cb) {
@@ -293,4 +307,4 @@ function unfollowUser(id,cb) {
   }); 
 }
 
-export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchFavorites,fetchDirectMessages, subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet,searchTweets,followUser,unfollowUser };
+export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchRetweets,fetchFavorites,fetchDirectMessages, subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet,searchTweets,followUser,unfollowUser };

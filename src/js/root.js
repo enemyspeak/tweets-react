@@ -7,7 +7,7 @@ import DirectMessages from './directMessages';
 import Search from './search';
 import Authorize from './authorize';
 
-import { gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchFavorites,subscribeToHomeTimeline } from './api';
+import { gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchFavorites,fetchRetweets,subscribeToHomeTimeline } from './api';
 
 class Root extends Component {
 	constructor(props) {
@@ -98,6 +98,7 @@ class Root extends Component {
 					<Timeline dataSource={fetchHomeTimeline} stream={subscribeToHomeTimeline} activeTab={this.state.selectedTab === 'timeline' ? true : false} /> 
 					<Timeline dataSource={fetchMentions} activeTab={this.state.selectedTab === 'mentions' ? true : false} />
 					<Timeline dataSource={fetchFavorites} activeTab={this.state.selectedTab === 'favorites' ? true : false} />
+					<Timeline dataSource={fetchRetweets} activeTab={this.state.selectedTab === 'retweets' ? true : false} />
 					<Search activeTab={this.state.selectedTab === 'search' ? true : false} />
 					<DirectMessages activeTab={this.state.selectedTab === 'direct-messages' ? true : false} />
 					<Profile selectedUser={this.state.userData.screen_name} activeTab={this.state.selectedTab === 'profile' ? true : false} />

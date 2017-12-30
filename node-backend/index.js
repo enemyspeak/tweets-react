@@ -628,6 +628,21 @@ function start( port ){
             });
         });
 
+        socket.on('getretweets',function(data,cb) {
+            authorizeRequest().then(function() {
+                // if (!data || !data.id) {
+                //     if (cb) cb({error:'error'});
+                //     return;
+                // } 
+
+                twit.get('statuses/retweets_of_me',{},function(error, result) {
+                    if (cb) cb(result);
+                });
+            }).catch(function() {
+                if (cb) cb('unauthorized');
+            });
+        });
+
         // POST
 
         socket.on('retweettweet',function(data,cb){

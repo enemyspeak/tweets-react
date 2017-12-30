@@ -18,6 +18,10 @@ const navItems = [
 	"icon":"fi-star"
 	},
 	{
+	"name": "retweets",
+	"icon":"fi-loop"
+	},
+	{
 	"name": "search",
 	"icon":"fi-magnifying-glass"
 	},
