@@ -103,19 +103,31 @@
     width: 60%;
 
     &.mine {
-        // -webkit-animation: animateTweetContentDelay ease;
-        // animation: animateTweetContentDelay ease;
-        // -webkit-animation-duration: 900ms;
-        // animation-duration: 900ms;
+        -webkit-animation: animateTweetContentDelay ease;
+        animation: animateTweetContentDelay ease;
+        -webkit-animation-duration: 900ms;
+        animation-duration: 900ms;
         left: calc( 40% - 30px );
         .user-avatar {
+            -webkit-animation: animateTweetContentDelay ease;
+            animation: animateTweetContentDelay ease;
+            -webkit-animation-duration: 900ms;
+            animation-duration: 900ms;
             left: initial;
             right: 10px;
         }
         .message-text{
+            -webkit-animation: animateTweetContentExtra ease;
+            animation: animateTweetContentExtra ease;
+            -webkit-animation-duration: 900ms;
+            animation-duration: 900ms;
             left: 10px;
         }
         .message-date {
+            -webkit-animation: animateTweetContentExtra ease;
+            animation: animateTweetContentExtra ease;
+            -webkit-animation-duration: 900ms;
+            animation-duration: 900ms;
             left: initial;
             right: calc( 100% + 0px );
             text-align: right;
@@ -158,8 +170,8 @@
         }
     }
     .message-date {
-        -webkit-animation: animateTweetContentExtra ease;
-        animation: animateTweetContentExtra ease;
+        -webkit-animation: animateTweetContentDelay ease;
+        animation: animateTweetContentDelay ease;
         -webkit-animation-duration: 900ms;
         animation-duration: 900ms;
         /* overflow: hidden; */

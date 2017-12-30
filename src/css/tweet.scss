@@ -147,6 +147,11 @@
         padding-right: 6px;
         font-weight: bold;
         top: 1px;
+        // for users with LONG NAMES
+        max-width: 60%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
     .screenName {
         -webkit-animation: animateTweetContentDelay ease;
