@@ -1130,6 +1130,11 @@ input, textarea {
     font-size: 18px;
     padding-top: 1px;
     box-sizing: border-box; }
+  .retweeted-by-contain .retweet-user {
+    -webkit-animation: animateTweetContentExtra ease;
+    animation: animateTweetContentExtra ease;
+    -webkit-animation-duration: 900ms;
+    animation-duration: 900ms; }
 
 .retweet-user-avatar {
   -webkit-animation: animateTweetContentExtra ease;
