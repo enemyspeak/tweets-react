@@ -156,6 +156,19 @@ function fetchDirectMessages(cb) {
   });   
 }
 
+function fetchSentDirectMessages(cb) {
+  socket.emit('getsentdirectmessages',{},function(data) {
+    console.log(data);
+    if (!data || data==='unauthorized' || data==='error') {
+      cb(null, []);
+      return;
+    }
+    // return data;
+    cb(null, data);
+  });   
+}
+
+
 // // returns your profile
 // function fetchHomeUser(cb) {
 //   	socket.emit('gethomeuser',{},function(data) {
@@ -307,4 +320,4 @@ function unfollowUser(id,cb) {
   }); 
 }
 
-export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchRetweets,fetchFavorites,fetchDirectMessages, subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet,searchTweets,followUser,unfollowUser };
+export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchRetweets,fetchFavorites,fetchDirectMessages, fetchSentDirectMessages,subscribeToHomeTimeline,fetchUserByName,favoriteTweet,unfavoriteTweet,searchTweets,followUser,unfollowUser };

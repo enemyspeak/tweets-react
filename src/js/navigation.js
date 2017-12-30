@@ -18,10 +18,6 @@ const navItems = [
 	"icon":"fi-star"
 	},
 	{
-	"name": "retweets",
-	"icon":"fi-loop"
-	},
-	{
 	"name": "search",
 	"icon":"fi-magnifying-glass"
 	},
@@ -30,6 +26,11 @@ const navItems = [
 	"icon":"fi-torso"
 	}
 ]; 
+
+	// {
+	// "name": "retweets",
+	// "icon":"fi-loop"
+	// },
 
 class Navigation extends Component {
 	handleClick(obj,e) {

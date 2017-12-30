@@ -202,7 +202,7 @@ function start( port ){
         usersConnected++;
         var userData={};
 
-        var twit,timelinecache = [],mentionscache = [],directmessagescache = [];
+        var twit,timelinecache = [],mentionscache = [],directmessagescache = [],sentdirectmessagescache = [];
         var userStream;
 
         console.log('a user connected', usersConnected, 'This process is pid', process.pid );
@@ -526,23 +526,35 @@ function start( port ){
                     }
                     // console.log('mentions result');
                     directmessagescache = result;
-
-                    twit.get('direct_messages/sent', {count:200}, function(senterror, sentresult) {
-                    // twit.get('direct_messages/events/list', {}, function(error, result) {
-                        if (senterror) {
-                            console.log(senterror);
-                            if(cb) cb('error');
-                            return;
-                        }
-                        // console.log('mentions result');
-                        directmessagescache = directmessagescache.concat( sentresult );
-                        if(cb) cb(directmessagescache);
-                    });
+                    if(cb) cb(directmessagescache);
                 });
             }).catch(function() {
                 if (cb) cb('unauthorized');
             })
-        })
+        });
+
+        socket.on('getsentdirectmessages',function(data,cb) {
+            authorizeRequest().then(function() {
+                if (sentdirectmessagescache.length) {
+                    if (cb) cb(sentdirectmessagescache);
+                    return;
+                }
+
+                twit.get('direct_messages/sent', {count:200}, function(senterror, sentresult) {
+                // twit.get('direct_messages/events/list', {}, function(error, result) {
+                    if (error) {
+                        console.log(error);
+                        if(cb) cb('error');
+                        return;
+                    }
+                    // console.log('mentions result');
+                    sentdirectmessagescache = result;
+                    if(cb) cb(sentdirectmessagescache);
+                });
+            }).catch(function() {
+                if (cb) cb('unauthorized');
+            })
+        });
 
         socket.on('getdetails', function(data,cb) { // loads replies and stuff to a tweet
             authorizeRequest().then(function() {
