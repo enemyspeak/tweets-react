@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Message from './message';
 
 import { gotTwitterLoginPromise,fetchDirectMessages,fetchSentDirectMessages } from './api';
 
@@ -10,7 +11,7 @@ function Avatar(props) {
 		/>
 	);
 }
- 
+
 function UserInfo(props){
 	return(
 		<div className="tweet-user">
@@ -34,105 +35,6 @@ class User extends Component {
 
 					{/* <div className="fi-arrow-right"></div> */}
 				</div>
-			</div>
-		)
-	}
-}
-
-class RelativeTime extends Component {
-	relativeTime() {
-		// console.log(this.props);
-		let time = this.props.created_at;
-
-	 	if (!time) return;
-
-	    // let day,month,year;
-	    let date = new Date(time),
-	        diff = ( (( new Date().getTime() ) - date.getTime()) / 1000),
-	        // day_diff = ( new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()).getTime() - new Date(date.getFullYear(),date.getMonth(),date.getDate()).getTime() ) / 1000 / 86400, //
-	        day_diff = Math.floor(diff / 86400);
-	    
-	    if (isNaN(day_diff) || diff <= 0)
-	        return (
-	        	"now"
-	            // year.toString()+'-'+
-	            // ((month<10) ? '0'+month.toString() : month.toString())+'-'+
-	            // ((day<10) ? '0'+day.toString() : day.toString())
-	        );
-	    
-	    var r = (
-	        diff > 0 &&
-	        (
-	        	// eslint-disable-next-line
-	            day_diff === 0 &&
-	            (
-	                (
-	                    (diff < 60 && Math.ceil(diff) + "s") ||
-	                    (diff < 3600 && Math.ceil(diff / 60)  + "m") ||
-	                    (diff < 7200 && "1h") ||
-	                    (diff < 86400 && Math.floor(diff / 3600) + "h")
-	                )
-	            // eslint-disable-next-line
-	            ) ||
-	            (day_diff === 1 && "1d") ||
-	            (Math.ceil(day_diff) + "d")
-	        )
-	    );
-	    // console.log(r);
-	    return r;
-	}
-   	render() {
-   		// console.log(this);
-		return (
-			<span className="message-date">{this.relativeTime()}</span>
-		) // 
-   	}
-}
-
-class MessageBody extends Component {
-	createMarkup(html) { 
-		return {__html: html}; 
-	}
-	replaceAll(str,strReplace, strWith) {
-	    // See http://stackoverflow.com/a/3561711/556609
-	    // eslint-disable-next-line
-	    var esc = strReplace.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-	    var reg = new RegExp(esc, 'ig');
-	    return str.replace(reg, strWith);
-	}
-	render() {
-		const message = this.props.message;
-		// console.log(message);
-		var text = message.text;
-		
-		for (let i = message.entities.urls.length - 1; i >= 0; i--) {
-			text = this.replaceAll(text,message.entities.urls[i].url,'<a class="url" href="'+ message.entities.urls[i].expanded_url +'">'+message.entities.urls[i].display_url+'</a>');
-		}
-		for (let i = message.entities.hashtags.length - 1; i >= 0; i--) {
-			text = this.replaceAll(text,"#"+message.entities.hashtags[i].text,'<span class="hashtag">#'+message.entities.hashtags[i].text+'</span>');
-		}
-		for (let i = message.entities.user_mentions.length - 1; i >= 0; i--) {
-			text = this.replaceAll(text,'@'+message.entities.user_mentions[i].screen_name,'<span class="user-mention" onClick="{() => this.props.onClick(\''+message.entities.user_mentions[i].screen_name+'\')}">@' + message.entities.user_mentions[i].screen_name+'</span>');
-		}
-		
-	  	return (
-			<p className="message-text" dangerouslySetInnerHTML={this.createMarkup(text)}></p>
-		);
-	}
-}
-
-class Message extends Component {
-	render() {
-		// console.log(this.props);
-		return (
-			<div className={"message " + (this.props.data.mine ? "mine" : "" )}>
-				<div className="user-avatar">
-			        <Avatar user={this.props.data.sender} />
-			    </div>
-
-		        <MessageBody message={this.props.data} />
-		        
-		        <RelativeTime created_at={this.props.data.created_at} />
 			</div>
 		)
 	}
@@ -223,18 +125,12 @@ class DirectMessages extends Component {
 			});
 		}
 		this.setState({selectedUser:id,selectedMessages: selectedMessages});
-	    // ReactDOM.findDOMNode(this).scrollIntoView(); // this should only run when the profile changes.
 	}
-	// scrollToBottom = () => {
- // 		this.messagesEnd.scrollIntoView({ behavior: "smooth" }); // FIXME: this breaks the translate
-	// }
-	// componentDidMount() {
-	//   	this.scrollToBottom();
-	// }
-	// componentDidUpdate() {
-	//   	this.scrollToBottom();
-	// }
-
+	setSelectedProfile(id) {
+		this.setState({
+			selectedProfile: id
+		});
+	}
 	render() {
 		const messages = this.state.selectedMessages;
 		const users = this.state.users;
@@ -248,13 +144,10 @@ class DirectMessages extends Component {
 				              	<Message 
 				                key={obj.id_str}
 				                data={obj} 
-				                onClick={(screen_name)=>this.setSelectedUser(screen_name)}
+				                onClick={(screen_name)=>this.setSelectedProfile(screen_name)}
 				              	/>
 				            )
 						})}
-						<div style={{ float:"left", clear: "both" }}
-             				ref={(el) => { this.messagesEnd = el; }}>
-        				</div>
 					</div>
 					<div className="input-wrap">
 			        	<span className={"input-label " + (this.state.hasText ? "" : "full" )}>Message</span>
