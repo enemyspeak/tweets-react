@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { gotTwitterLoginPromise,fetchDirectMessages } from './api';
+import { gotTwitterLoginPromise,fetchDirectMessages,fetchSentDirectMessages } from './api';
 
 function Avatar(props) {
 	return (
@@ -90,6 +90,7 @@ class DirectMessages extends Component {
     	super(props);
     
 	    gotTwitterLoginPromise().then((data) => {
+
 	    	fetchDirectMessages((err, messages) => {
 	    		this.setState({ 
         			messages
@@ -108,10 +109,17 @@ class DirectMessages extends Component {
 	    				keys.push(userMap[i].screen_name);
 	    			}
 	    		}
+
 	    		// console.log(keys,users);
 	    		this.setState({
 	    			users
 	    		});
+      		});
+
+      		fetchSentDirectMessages((err, sentmessages) => {
+	    		this.setState({ 
+        			sentmessages
+      			});
       		});
     	});
   	}
@@ -127,9 +135,16 @@ class DirectMessages extends Component {
 		
 		let selectedMessages = [];
 		if (id) {
+    		// TODO mix the sent messages into messages.
+    		let selectedSentMessages = this.state.sentmessages.filter((obj) => {
+    			console.log(obj);
+    			return (obj.recipient_screen_name === id);
+    		});
+
 			selectedMessages = this.state.messages.filter((obj) => {
-				return (obj.sender.screen_name === id);
+				return (obj.sender_screen_name === id);
 			});
+			selectedMessages = selectedMessages.concat(selectedSentMessages);
 			console.log(selectedMessages);
 		}
 		this.setState({selectedUser:id,selectedMessages: selectedMessages});
