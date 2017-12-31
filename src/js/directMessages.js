@@ -2,28 +2,7 @@ import React, { Component } from 'react';
 import Message from './message';
 
 import { gotTwitterLoginPromise,fetchDirectMessages,fetchSentDirectMessages } from './api';
-
-function Avatar(props) {
-	return (
-		<img className="Avatar"
-  			src={props.user.profile_image_url_https}
-  			alt={props.user.screen_name}
-		/>
-	);
-}
-
-function UserInfo(props){
-	return(
-		<div className="tweet-user">
-			<div className="user-avatar">
-		        <Avatar user={props.user} />
-		    </div>
-		    {props.user.verified && ( <div className="verified"></div> )}
-			<span className="name">{props.user.name}</span>
-			<span className="screenName">@{props.user.screen_name}</span>
-		</div>
-	);
-}
+import {Avatar, UserInfo} from './common';
 
 class User extends Component {
 	render() {
