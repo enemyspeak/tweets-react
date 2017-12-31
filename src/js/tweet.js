@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { favoriteTweet,unfavoriteTweet } from './api'; 
+import { favoriteTweet,unfavoriteTweet,retweetTweet,unretweetTweet } from './api'; 
 import {Avatar,UserInfo,Media,RelativeTime} from './common'
 
 function OiginalUser(props) { // this is a retweet
@@ -178,25 +178,22 @@ class Tweet extends Component {
     	this.state = {
     		retweeted: this.props.data.retweeted,
     		favorited: this.props.data.favorited,
-		    // height: 9999
     	};
   	}
 	handleFavoriteTweet(id) { // this can just call to the api and update this icon.
-		// console.log(id);
 		if (this.state.favorited) { // check if this is favorited already.
 			unfavoriteTweet(id).then(() => this.setState({favorited: !this.state.favorited})).catch((err)=> console.error(err));
 		} else {
 			favoriteTweet(id).then(() => this.setState({favorited: !this.state.favorited})).catch((err)=> console.error(err));
 		}
   	}
-  	handleRetweetTweet() { // this can just call to the api and update this icon.
-  		// TODO
-  		this.setState({retweeted: !this.state.retweeted});
+  	handleRetweetTweet(id) { // this can just call to the api and update this icon.
+  		if (this.state.retweeted) { // check if this is favorited already.
+			unretweetTweet(id).then(() => this.setState({retweeted: !this.state.retweeted})).catch((err)=> console.error(err));
+		} else {
+			retweetTweet(id).then(() => this.setState({retweeted: !this.state.retweeted})).catch((err)=> console.error(err));
+		}
   	}
-	// componentDidMount() {
-	//     const height = this.divElement.clientHeight;
-	//     this.setState({ height });
-	// }
 	render() {
 		// console.log(this.props.data);
 		let tweet = this.props.data;
