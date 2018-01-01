@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 
 import Tweet from './tweet'
 import { gotTwitterLoginPromise, fetchUserByName,followUser,unfollowUser } from './api';
@@ -7,9 +7,12 @@ import { gotTwitterLoginPromise, fetchUserByName,followUser,unfollowUser } from 
 class Profile extends Component {
   constructor(props) {
     super(props);
-    // console.log(props);
+    this.state = {
+      selectedTweet: false,
+      // selectedUser: false,
+    };
+    
     gotTwitterLoginPromise().then((data) => {
-      // if (this.props.activeTab) {
         fetchUserByName(this.props.selectedUser).then((profile) => {
           // ReactDOM.findDOMNode(this).scrollIntoView(); // this should only run when the profile changes. // FIXME: this breaks the overlay stuff!
           this.setState({ 
@@ -20,16 +23,10 @@ class Profile extends Component {
       // }
     });
   }
-  state = {
-    selectedTweet: false,
-    // selectedUser: false,
-  };
+  
   // componentDidUpdate = () => { 
   //   // NOTE: this will scroll everything to the top when you change tabs..
   //   ReactDOM.findDOMNode(this).scrollIntoView(); 
-  // }
-  // componentWillMount() {
-  //   // this.setState({selectedUser:this.props.selectedUser});
   // }
   setSelectedUser(id) {
     // console.log(id);

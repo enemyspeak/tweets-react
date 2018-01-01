@@ -10,16 +10,18 @@ function Avatar(props) {
 }
 
 function UserInfo(props){
-	return(
-		<div className="tweet-user">
-			<div className="user-avatar">
-		        <Avatar user={props.user} />
-		    </div>
-		    {props.user.verified && ( <div className="verified"></div> )}
-			<span className="name">{props.user.name}</span>
-			<span className="screenName">@{props.user.screen_name}</span>
-		</div>
-	);
+    return(
+        <div className="tweet-user" onClick={() =>{ 
+        	if (props.onClick) props.onClick(props.user.screen_name)
+        }}>
+            <div className="user-avatar">
+                <Avatar user={props.user} />
+            </div>
+            {props.user.verified && ( <div className="verified"></div> )}
+            <span className="name">{props.user.name}</span>
+            <span className="screenName">@{props.user.screen_name}</span>
+        </div>
+    );
 }
 
 function VideoMedia(props) {
@@ -27,7 +29,7 @@ function VideoMedia(props) {
 	let index = 0;
 	const variants = props.obj.video_info.variants;
 	const bitrate_max = 832000;
-	const viewport = 300;
+	// const viewport = 300;
 	const loop = (props.obj.type === "animated_gif" ? true : false );
 
 	for (var i = variants.length - 1; i >= 0; i--) {
@@ -48,8 +50,8 @@ function VideoMedia(props) {
 
 function Media(props) {
 	// TODO load image size responsive to size of viewport
-	const viewport = 300;
-	const length = props.media.length;
+	// const viewport = 300;
+	// const length = props.media.length;
 	return (
 		<div className="media-contain">
 	        {props.media.map(obj => {

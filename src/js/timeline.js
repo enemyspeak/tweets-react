@@ -6,7 +6,12 @@ import { gotTwitterLoginPromise } from './api';
 class Timeline extends Component {
 	constructor(props) {
   	super(props);
-    
+    this.state = {
+      selectedTweet: false,
+      selectedUser: false,
+      timeline: []
+    };
+
     gotTwitterLoginPromise().then((data) => {
       this.props.dataSource((err, timeline) => this.setState({ 
         timeline 
@@ -25,11 +30,7 @@ class Timeline extends Component {
       }
     });
   }
-  state = {
-    selectedTweet: false,
-    selectedUser: false,
-    timeline: []
-  };
+
   setSelectedUser(id) {
     console.log(id);
     this.setState({selectedUser:id});

@@ -50,7 +50,7 @@
     z-index: 3;
     top: 74px;
     left: calc( 50% + 20px);
-    /* background: #000; */
+    background: #000;
     border: 3px solid white;
     text-align: center;
     box-sizing: border-box; }

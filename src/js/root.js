@@ -7,11 +7,21 @@ import DirectMessages from './directMessages';
 import Search from './search';
 import Authorize from './authorize';
 
-import { gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchFavorites,fetchRetweets,subscribeToHomeTimeline } from './api';
+import { gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchFavorites,subscribeToHomeTimeline } from './api';
 
 class Root extends Component {
 	constructor(props) {
     	super(props);
+    	this.state = {
+	    	selectedTab: 'timeline',
+	    	userData: {
+	    		screen_name: ""
+	    	},
+	    	connected: true,
+	    	tweetText: "",
+	    	showCompose: false
+	    };
+	    
 	    this.handleClick = this.handleClick.bind(this);	    
 	    
 	    gotTwitterLoginPromise().then((data) => {
@@ -26,15 +36,7 @@ class Root extends Component {
 	    });
 	    gainedConnectionAlert((err,connected) => this.setState({connected: true}));
     }
-    state = {
-    	selectedTab: 'timeline',
-    	userData: {
-    		screen_name: ""
-    	},
-    	connected: true,
-    	tweetText: "",
-    	showCompose: false
-    }
+    
     componentWillMount() {
     	// this.setState({ user:  });
 	    // console.log(this.state.user);

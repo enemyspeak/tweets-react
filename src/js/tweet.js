@@ -14,9 +14,7 @@ function OiginalUser(props) { // this is a retweet
 	)
 }
 
-
 function QuotedStatus(props) {
-	// console.log(props.mentionHandler);
 	return(
 		<div className="quoted-tweet" data-id="{props.id}" data-userid="{props.user.id}">
 			<UserInfo user={props.quoted_status.user} onClick={props.onClick} />

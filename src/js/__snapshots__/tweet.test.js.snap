@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tweet render matches snapshot 1`] = `
+<div
+  className="tweet-contain undefined"
+  id="947842380098662402"
+  onClick={[Function]}
+  style={Object {}}
+  userid="129175727"
+>
+  <div
+    className="tweet-body"
+  >
+    <div
+      className="tweet-user"
+      onClick={[Function]}
+    >
+      <div
+        className="user-avatar"
+      >
+        <img
+          alt="ShedworksGreg"
+          className="Avatar"
+          src="https://pbs.twimg.com/profile_images/907574665543143425/8Ti_CjIB_normal.jpg"
+        />
+      </div>
+      <span
+        className="name"
+      >
+        Gregorios Kythreotis
+      </span>
+      <span
+        className="screenName"
+      >
+        @
+        ShedworksGreg
+      </span>
+    </div>
+    <p
+      className="tweet-text"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "Spirit of the Mountain by Thomas Chamberlain",
+        }
+      }
+      onClick={[Function]}
+    />
+    <div
+      className="status-contain"
+    >
+      <span
+        className="tweet-date"
+      >
+        8h
+      </span>
+      <div
+        className="fi-star "
+      />
+      <div
+        className="fi-loop "
+      />
+    </div>
+    <div
+      className="media-contain"
+    >
+      <div
+        className="media-box"
+      >
+        <img
+          alt="pic.twitter.com/GyqXj0uTy2"
+          src="https://pbs.twimg.com/media/DSdpnpyWsAEcCBt.jpg:small"
+        />
+      </div>
+    </div>
+    <div
+      className="retweeted-by-contain"
+      onClick={[Function]}
+    >
+      <span
+        className="fi-loop"
+      />
+      <div
+        className="retweet-user-avatar"
+      >
+        <img
+          alt="exoditedragon"
+          className="Avatar"
+          src="https://pbs.twimg.com/profile_images/804117069851541504/BIvGr2I0_normal.jpg"
+        />
+      </div>
+      <span
+        className="retweet-user"
+      >
+        blazing yule log
+      </span>
+    </div>
+  </div>
+  <div
+    className="tweet-controls"
+  >
+    <button
+      className="reply"
+      onClick={[Function]}
+    >
+      <div
+        className="fi-comment-quotes"
+      />
+    </button>
+    <button
+      className="retweet "
+      onClick={[Function]}
+    >
+      <div
+        className="fi-loop"
+      />
+    </button>
+    <button
+      className="favorite "
+      onClick={[Function]}
+    >
+      <div
+        className="fi-star"
+      />
+    </button>
+    <button
+      className="details"
+      onClick={[Function]}
+    >
+      <div
+        className="fi-magnifying-glass"
+      />
+    </button>
+  </div>
+</div>
+`;

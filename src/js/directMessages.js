@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Message from './message';
 
 import { gotTwitterLoginPromise,fetchDirectMessages,fetchSentDirectMessages } from './api';
-import {Avatar, UserInfo} from './common';
+import { UserInfo } from './common';
 
 class User extends Component {
 	render() {
@@ -22,11 +22,15 @@ class User extends Component {
 class DirectMessages extends Component {
 	constructor(props) {
     	super(props);
-    
+    	this.state = {
+	  		selectedMessages: [],
+	  		users: [],
+	  		hasText: ""
+	  	};
 	    gotTwitterLoginPromise().then((data) => {
 
 	    	fetchDirectMessages((err, messages) => {
-				for (var i = messages.length - 1; i >= 0; i--) {
+				for (let i = messages.length - 1; i >= 0; i--) {
       				messages[i].created_at_time = new Date(messages[i].created_at).getTime();
       			}
 
@@ -41,7 +45,7 @@ class DirectMessages extends Component {
 	    		let keys = [];
 	    		let users = [] // not optimal.. 
 	    		// but lets just do this to get it working.
-	    		for (var i = userMap.length - 1; i >= 0; i--) {
+	    		for (let i = userMap.length - 1; i >= 0; i--) {
 	    			if (keys.indexOf(userMap[i].screen_name) === -1) {
 	    				users.push(userMap[i]);
 	    				keys.push(userMap[i].screen_name);
@@ -65,11 +69,7 @@ class DirectMessages extends Component {
       		});
     	});
   	}
-  	state = {
-  		selectedMessages: [],
-  		users: [],
-  		hasText: ""
-  	}
+  	
   	clearSelectedUser() {
   		this.setState({selectedUser:false});
   	}

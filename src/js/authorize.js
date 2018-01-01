@@ -4,7 +4,10 @@ import { getRequestToken,gotTwitterLoginPromise } from './api';
 class Authorize extends Component {
 	constructor(props) {
 		super(props)
-
+		this.state = {
+			modalVisible: true,
+			popupBlocked: false
+		}
 		gotTwitterLoginPromise().then((data) => {
 			this.setState({
 				modalVisible: false
@@ -17,10 +20,7 @@ class Authorize extends Component {
             this.oauthWindow.close();
         }
 	}
-	state = {
-		modalVisible: true,
-		popupBlocked: false
-	}
+	
 	handleClick() {
 		getRequestToken().then((data) => {
 			// console.log(data);
