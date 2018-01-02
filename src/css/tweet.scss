@@ -11,7 +11,7 @@
     transform: translateZ(0);
     position: relative;
     background: transparent;
-    overflow: hidden;
+    // overflow: hidden; // this needs to be hidden for context menus
     // height: 0px;
     transition: background 0.3s ease;// height 0.3s ease;;
     border-bottom: 1px solid $gray28;
@@ -467,10 +467,12 @@
     // }
 }
 .tweet-controls{
-    // width: 100%;
-    // background: $gray28;
+    -webkit-animation: animateTweetContentExtra ease;
+    animation: animateTweetContentExtra ease;
+    -webkit-animation-duration: 900ms;
+    animation-duration: 900ms;
+    
     overflow: hidden;
-    // height: 0px;
     transition: opacity 0.3s ease;
     position: absolute;
     top: 0px;
@@ -515,6 +517,44 @@
                 animation-duration: 500ms;
                 color: $yellow;
             }
+        }
+    }
+}
+.tweet-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: $black80;
+    border: 1px solid $gray28;
+    border-bottom: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    &.visible {
+        opacity: 1;
+        pointer-events: initial;
+    }
+
+    .list-icon  {
+        display: inline-block;
+        padding-right: 4px;
+    }
+    a {
+        color: $white;
+        text-decoration: none;
+        display: block;
+    }
+    .list-item {
+        // width: 100%;
+        // padding: 5px 0px;
+        font-size: 14px;
+        padding: 5px;
+        border-bottom: 1px solid $gray28;
+        transition: background 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+            background: $gray13;
         }
     }
 }

@@ -10,6 +10,7 @@ exports[`tweet render matches snapshot 1`] = `
 >
   <div
     className="tweet-body"
+    onClick={[Function]}
   >
     <div
       className="tweet-user"
@@ -120,13 +121,53 @@ exports[`tweet render matches snapshot 1`] = `
       />
     </button>
     <button
-      className="details"
+      className="menu"
       onClick={[Function]}
     >
       <div
-        className="fi-magnifying-glass"
+        className="fi-widget"
       />
     </button>
+  </div>
+  <div
+    className="tweet-menu "
+  >
+    <div
+      className="list-item"
+    >
+      <div
+        className="list-icon fi-magnifying-glass"
+      />
+       Show Details
+    </div>
+    <div
+      className="list-item"
+      onClick={[Function]}
+    >
+      <div
+        className="list-icon fi-quote"
+      />
+       Copy Link to Tweet
+    </div>
+    <div
+      className="list-item"
+      onClick={[Function]}
+    >
+      <div
+        className="list-icon fi-page-copy"
+      />
+       Copy Tweet Text
+    </div>
+    <a
+      className="list-item"
+      href="https://twitter.com/ShedworksGreg/status/947842380098662402"
+      target="_blank"
+    >
+      <div
+        className="list-icon fi-link"
+      />
+       View on Twitter.com
+    </a>
   </div>
 </div>
 `;

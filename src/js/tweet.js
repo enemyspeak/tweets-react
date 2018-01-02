@@ -43,18 +43,66 @@ function TweetStatistics(props) {
 	)
 }
 
+class TweetMenu extends Component {
+	copyTextToClipboard(text) {
+		var textArea = document.createElement("textarea");
+		textArea.style.position = 'fixed';
+		textArea.style.top = 0;
+		textArea.style.left = 0;
+		textArea.style.width = '2em';
+		textArea.style.height = '2em';
+		textArea.style.padding = 0;
+		textArea.style.border = 'none';
+		textArea.style.outline = 'none';
+		textArea.style.boxShadow = 'none';
+		textArea.style.background = 'transparent';
+		textArea.value = text;
+
+		document.body.appendChild(textArea);
+		textArea.select();
+
+		try {
+			var successful = document.execCommand('copy');
+			var msg = successful ? 'successful' : 'unsuccessful';
+			console.log('Copying text command was ' + msg);
+		} catch (err) {
+			console.log('Oops, unable to copy');
+		}
+
+		document.body.removeChild(textArea);
+
+		this.props.hideMenu();
+	}
+	render() {
+		var text;
+		if (this.props.tweet.extended_tweet) {
+			text = this.props.tweet.extended_tweet.full_text;
+		} else if (this.props.tweet.full_text) {
+			text = this.props.tweet.full_text;
+		} else {
+			text = this.props.tweet.text;
+		}
+		return  (
+			<div className={"tweet-menu " + (this.props.visible ? "visible" : "")}>
+				<div className="list-item"><div className="list-icon fi-magnifying-glass"></div> Show Details</div>
+				<div className="list-item" onClick={() => this.copyTextToClipboard("https://twitter.com/" + this.props.tweet.user.screen_name + "/status/" + this.props.tweet.id_str)}><div className="list-icon fi-quote"></div> Copy Link to Tweet</div>
+				<div className="list-item" onClick={() => this.copyTextToClipboard(text)}><div className="list-icon fi-page-copy"></div> Copy Tweet Text</div>
+				<a href={"https://twitter.com/" + this.props.tweet.user.screen_name + "/status/" + this.props.tweet.id_str} target="_blank" className="list-item"><div className="list-icon fi-link"></div> View on Twitter.com</a>
+				{ this.props.mine && ( <div className="list-item"><div className="list-icon fi-delete"></div>Delete Tweet</div> )}
+			</div>
+		)
+	}
+}
+
 class TweetControls extends Component {
   	createReply() {
-		// TODO
-  	}
-  	showDetails() {
 		// TODO
   	}
 	render() {
 		// console.log(this.props);
 		return (
 			<div className="tweet-controls">
-				<button className="reply" onClick={this.createReply}>
+				<button className="reply" onClick={() => this.createReply()}>
 					<div className="fi-comment-quotes"></div>
 				</button>
 				<button className={"retweet " + (this.props.retweeted ? "active" : "")} onClick={() => this.props.handleRetweetTweet()}>
@@ -63,8 +111,8 @@ class TweetControls extends Component {
 				<button className={"favorite " + (this.props.favorited ? "active" : "")} onClick={() => this.props.handleFavoriteTweet()}>
 					<div className="fi-star"></div>
 				</button>
-				<button className="details" onClick={this.showDetails}>
-					<div className="fi-magnifying-glass"></div>
+				<button className="menu" onClick={() => this.props.handleMenuToggle()}>
+					<div className="fi-widget"></div>
 				</button>
 			</div>
 		)
@@ -105,6 +153,8 @@ class TweetBody extends Component {
 		const tweet = this.props.tweet;
 		// console.log(tweet);
 
+		// var text = this.props.text;
+		// console.log(text);
 		var text;
 		if (tweet.extended_tweet) {
 			text = tweet.extended_tweet.full_text;
@@ -176,6 +226,7 @@ class Tweet extends Component {
     	this.state = {
     		retweeted: this.props.data.retweeted,
     		favorited: this.props.data.favorited,
+    		showMenu: false
     	};
   	}
 	handleFavoriteTweet(id) { // this can just call to the api and update this icon.
@@ -192,6 +243,12 @@ class Tweet extends Component {
 			retweetTweet(id).then(() => this.setState({retweeted: !this.state.retweeted})).catch((err)=> console.error(err));
 		}
   	}
+  	handleMenuToggle() {
+  		this.setState({showMenu: true});
+  	}
+  	hideMenu() {
+  		this.setState({showMenu: false});	
+  	}
 	render() {
 		// console.log(this.props.data);
 		let tweet = this.props.data;
@@ -205,7 +262,7 @@ class Tweet extends Component {
     	};
 		return (
 			<div ref={ (divElement) => this.divElement = divElement} style={tweetStyle} className={"tweet-contain " + this.props.data.selected} id={tweet.id_str} userid={tweet.user.id_str} onClick={() => this.props.onClick()}>
-				<div className="tweet-body">
+				<div className="tweet-body" onClick={() => this.hideMenu()}>
 				    <UserInfo user={tweet.user} onClick={this.props.mentionHandler} />
 
 				    <TweetBody tweet={tweet} onClick={this.props.mentionHandler} />
@@ -234,6 +291,12 @@ class Tweet extends Component {
 					favorited={this.state.favorited}
 					handleFavoriteTweet={()=>this.handleFavoriteTweet(tweet.id_str)}
 					handleRetweetTweet={()=>this.handleRetweetTweet(tweet.id_str)}
+					handleMenuToggle={() =>this.handleMenuToggle()}
+				/>
+				<TweetMenu 
+					visible={this.state.showMenu}
+					tweet={tweet} 
+					hideMenu={() => this.hideMenu()}
 				/>
 			</div>
 		);

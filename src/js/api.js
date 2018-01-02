@@ -148,7 +148,7 @@ function fetchFavorites(cb) {
 
 function fetchDirectMessages(cb) {
   socket.emit('getdirectmessages',{},function(data) {
-    console.log(data);
+    // console.log(data);
     if (!data || data==='unauthorized' || data==='error') {
       cb(null, []);
       return;
@@ -160,7 +160,7 @@ function fetchDirectMessages(cb) {
 
 function fetchSentDirectMessages(cb) {
   socket.emit('getsentdirectmessages',{},function(data) {
-    console.log(data);
+    // console.log(data);
     if (!data || data==='unauthorized' || data==='error') {
       cb(null, []);
       return;
