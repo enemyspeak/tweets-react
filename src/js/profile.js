@@ -3,31 +3,51 @@ import React, { Component } from 'react';
 
 import Tweet from './tweet'
 import { gotTwitterLoginPromise, fetchUserByName,followUser,unfollowUser } from './api';
+import { DropdownMenu } from './common'
+
+class ProfileDetails extends Component {
+  render() {
+    const profile = this.props.profile;
+
+    return (
+      <div className="profile-details">
+        <span className="name">{profile.name}</span>
+        <span className="screen-name">@{profile.screen_name}</span>
+        <span className="description">{profile.description}</span>
+        <span className="location">{profile.location}</span>
+        <div className="stat-contain">
+          <span className="profile-stat followers">{profile.followers_count} Followers</span>
+          <span className="profile-stat following">{profile.friends_count} Following</span>
+        </div>
+      </div>
+    );
+  }
+}
 
 class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedTweet: false,
+      bannerVisible: false,
+      showMenu: false,
       // selectedUser: false,
     };
-    
-    gotTwitterLoginPromise().then((data) => {
-        if (this.props.testdata) { // NOTE: injection point for profile.test
-          this.setState({
-            profile: this.props.testdata
-          });
-        } else {
-          fetchUserByName(this.props.selectedUser).then((profile) => {
-            // ReactDOM.findDOMNode(this).scrollIntoView(); // this should only run when the profile changes. // FIXME: this breaks the overlay stuff!
-            this.setState({ 
-              profile: profile,
-              following: profile.following
-            })
-          }).catch(function() {});
-        }
-      // }
-    });
+    if (this.props.testdata) { // FIXME: injection point for profile.test
+      this.setState({
+        profile: this.props.testdata
+      });
+    } else {
+      gotTwitterLoginPromise().then((data) => {
+        fetchUserByName(this.props.selectedUser).then((profile) => {
+          // ReactDOM.findDOMNode(this).scrollIntoView(); // this should only run when the profile changes. // FIXME: this breaks the overlay stuff!
+          this.setState({ 
+            profile: profile,
+            following: profile.following
+          })
+        }).catch(function() {});
+      });
+    }
   }
   
   // componentDidUpdate = () => { 
@@ -51,6 +71,27 @@ class Profile extends Component {
   }
   unfollowUser(id) {
     unfollowUser(id).then(() => this.setState({following: false})).catch((err)=> console.error(err)); 
+  }
+  createReply() {
+    // TODO
+  }
+  createDirectMessage() {
+    // TODO
+  }
+  handleMenuToggle() {
+    this.setState({showMenu: !this.state.showMenu});
+  }
+  hideMenu() {
+    this.setState({showMenu: false}); 
+  }
+  toggleBanner() {
+    this.setState({bannerVisible: !this.state.bannerVisible});
+  }
+  showBanner() {
+    this.setState({bannerVisible: true});
+  }
+  hideBanner() {
+    this.setState({bannerVisible: false}); 
   }
 	render() {
     var profile = this.state.profile;
@@ -84,8 +125,35 @@ class Profile extends Component {
           )}
         </div>
         <div className={"profile-contain " + (this.state.selectedUser ? "" : "visible")}>
+          <div className={"user-banner " + (this.state.bannerVisible ? "visible" : "") } style={bannerStyle}></div>
+
           {this.props.showBackButton && ( <div className="back-button" onClick={()=>this.props.clearSelectedUser()}><div className="fi-arrow-left"></div></div>)}
-          <div className="user-banner" style={bannerStyle}></div>
+          
+          <div className="profile-controls">
+            <button className="show-banner" 
+              onClick={() => this.toggleBanner()}
+              onMouseEnter={() => this.showBanner()}
+              onMouseLeave={() => this.hideBanner()}
+            >
+              <div className="fi-magnifying-glass"></div>
+            </button>
+            <button className="reply" onClick={() => this.createReply()}>
+              <div className="fi-comment-quotes"></div>
+            </button>
+            <button className="direct-message" onClick={() => this.createDirectMessage()}>
+              <div className="fi-mail"></div>
+            </button>
+            <button className={"menu " + (this.props.showMenu ? "active" : "")} onClick={() => this.handleMenuToggle()}>
+              <div className="fi-widget"></div>
+            </button>
+          </div>
+
+          <DropdownMenu 
+            visible={!this.state.selectedUser && this.state.showMenu}
+            profile={profile} 
+            hideMenu={() => this.hideMenu()}
+          />
+     
           <div className="user-avatar profile-avatar">
             <img src={profile.profile_image_url_https} alt={profile.screen_name} />
           </div>
@@ -93,16 +161,11 @@ class Profile extends Component {
           {profile.protected && ( <div className="profile-protected"><div className="fi-lock"></div></div> )}
 
           {following ? (<span className="follow-button following" onClick={()=>this.props.unfollowUser(profile.id_str)}>Following</span>) : (<span className="follow-button" onClick={()=>this.props.followUser(profile.id_str)}>Follow</span>)}
-          <div className="profile-details">
-            <span className="name">{profile.name}</span>
-            <span className="screen-name">@{profile.screen_name}</span>
-            <span className="description">{profile.description}</span>
-            <span className="location">{profile.location}</span>
-            <div className="stat-contain">
-              <span className="profile-stat followers">{profile.followers_count} Followers</span>
-              <span className="profile-stat following">{profile.friends_count} Following</span>
-            </div>
-          </div>
+
+          <ProfileDetails 
+            profile={profile}
+          />
+
           <div className="recent-timeline-contain">
             {profile.timeline && (profile.timeline.map((obj) => {
               obj.selected = ( obj.id_str === this.state.selectedTweet ? 'selected' : '' );

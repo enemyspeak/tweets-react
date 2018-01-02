@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { favoriteTweet,unfavoriteTweet,retweetTweet,unretweetTweet } from './api'; 
-import {Avatar,UserInfo,Media,RelativeTime} from './common'
+import {Avatar,UserInfo,Media,RelativeTime,DropdownMenu} from './common'
 
 function OiginalUser(props) { // this is a retweet
 	return (
@@ -41,57 +41,6 @@ function TweetStatistics(props) {
 			<div className="fi-loop">{props.retweet_count}</div>	
 		</div>
 	)
-}
-
-class TweetMenu extends Component {
-	copyTextToClipboard(text) {
-		var textArea = document.createElement("textarea");
-		textArea.style.position = 'fixed';
-		textArea.style.top = 0;
-		textArea.style.left = 0;
-		textArea.style.width = '2em';
-		textArea.style.height = '2em';
-		textArea.style.padding = 0;
-		textArea.style.border = 'none';
-		textArea.style.outline = 'none';
-		textArea.style.boxShadow = 'none';
-		textArea.style.background = 'transparent';
-		textArea.value = text;
-
-		document.body.appendChild(textArea);
-		textArea.select();
-
-		try {
-			var successful = document.execCommand('copy');
-			var msg = successful ? 'successful' : 'unsuccessful';
-			// console.log('Copying text command was ' + msg);
-		} catch (err) {
-			console.log('Oops, unable to copy');
-		}
-
-		document.body.removeChild(textArea);
-
-		this.props.hideMenu();
-	}
-	render() {
-		var text;
-		if (this.props.tweet.extended_tweet) {
-			text = this.props.tweet.extended_tweet.full_text;
-		} else if (this.props.tweet.full_text) {
-			text = this.props.tweet.full_text;
-		} else {
-			text = this.props.tweet.text;
-		}
-		return  (
-			<div className={"tweet-menu " + (this.props.visible ? "visible" : "")}>
-				<div className="list-item"><div className="list-icon fi-magnifying-glass"></div> Show Details</div>
-				<div className="list-item" onClick={() => this.copyTextToClipboard("https://twitter.com/" + this.props.tweet.user.screen_name + "/status/" + this.props.tweet.id_str)}><div className="list-icon fi-quote"></div> Copy Link to Tweet</div>
-				<div className="list-item" onClick={() => this.copyTextToClipboard(text)}><div className="list-icon fi-page-copy"></div> Copy Tweet Text</div>
-				<a href={"https://twitter.com/" + this.props.tweet.user.screen_name + "/status/" + this.props.tweet.id_str} target="_blank" className="list-item"><div className="list-icon fi-link"></div> View on Twitter.com</a>
-				{ this.props.mine && ( <div className="list-item"><div className="list-icon fi-delete"></div>Delete Tweet</div> )}
-			</div>
-		)
-	}
 }
 
 class TweetControls extends Component {
@@ -290,7 +239,7 @@ class Tweet extends Component {
 					handleRetweetTweet={()=>this.handleRetweetTweet(tweet.id_str)}
 					handleMenuToggle={() =>this.handleMenuToggle()}
 				/>
-				<TweetMenu 
+				<DropdownMenu 
 					visible={this.props.data.selected && this.state.showMenu}
 					tweet={tweet} 
 					hideMenu={() => this.hideMenu()}
