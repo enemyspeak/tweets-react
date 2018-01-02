@@ -1,5 +1,6 @@
 @import "./mixins.scss";
 @import "./colors.scss";
+@import "./animations.scss";
 
 html{
     background: $black80;
@@ -131,73 +132,6 @@ html{
 }
 
 
-@include keyframes(rotateLoader) {
-    0% { transform: rotate(-45deg); }
-    100% { transform: rotate(315deg); }
-}
-@include keyframes(animateLoaderInner) {
-    0% {
-    //     -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
-    //             clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
-            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-    }
-    40% {
-        // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
-        //         clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
-            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-    }
-    // 40% { 
-    //     // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 25%, 50% 50%);
-    //     //         clip-path: polygon(50% 0%, 100% 0%, 100% 25%, 50% 50%);
-    //         -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
-    //             clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
-    // }
-    60% { 
-        // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 25%, 50% 50%);
-        //         clip-path: polygon(50% 0%, 100% 0%, 100% 25%, 50% 50%);
-            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
-                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
-    }
-    80% {
-        // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
-        //         clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
-            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-    }
-    100% {
-        // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
-        //         clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
-            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-    }
-}
-@include keyframes(animateLoaderEdge) {
-    0% {
-            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-    }
-    40% {
-            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-    }
-    // 40% { 
-
-    // }
-    60% { 
-            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
-                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
-    }
-    80% {
-            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-    }
-    100% {
-            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
-    }
-}
 
 .dataLoader {
     position: relative;
@@ -389,12 +323,17 @@ input,textarea {
 .compose-tweet-contain {
     // display: none;
     opacity: 0;
+    transform: translatex(-100vw);
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    position: absolute;
+    top: 0px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 99;
     &.visible {
         // display: block;
         pointer-events:initial;
         opacity: 1;
+        transform: translatex(0px);        
     }
 }
 
@@ -404,8 +343,9 @@ input,textarea {
     height: 100vh;
     background: $black20;
     z-index: 98;
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
+    // TODO: replace this with blurred classes
+    // -webkit-backdrop-filter: saturate(180%) blur(20px);
+    // backdrop-filter: saturate(180%) blur(20px);
 }
 
 .compose-tweet {

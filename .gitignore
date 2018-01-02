@@ -21,3 +21,4 @@ yarn-debug.log*
 yarn-error.log*
 node-backend/twittercredentials.json
 node-backend/node_modules/
+*.css

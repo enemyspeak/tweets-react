@@ -1,5 +1,73 @@
 @import "./mixins.scss";
 
+@include keyframes(rotateLoader) {
+    0% { transform: rotate(-45deg); }
+    100% { transform: rotate(315deg); }
+}
+@include keyframes(animateLoaderInner) {
+    0% {
+    //     -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+    //             clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+    40% {
+        // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+        //         clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+    // 40% { 
+    //     // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 25%, 50% 50%);
+    //     //         clip-path: polygon(50% 0%, 100% 0%, 100% 25%, 50% 50%);
+    //         -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    //             clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    // }
+    60% { 
+        // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 25%, 50% 50%);
+        //         clip-path: polygon(50% 0%, 100% 0%, 100% 25%, 50% 50%);
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    }
+    80% {
+        // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+        //         clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+    100% {
+        // -webkit-clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+        //         clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 50%);
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+}
+@include keyframes(animateLoaderEdge) {
+    0% {
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+    40% {
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+    // 40% { 
+
+    // }
+    60% { 
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 50% 50%, 0% 0%);
+    }
+    80% {
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+    100% {
+            -webkit-clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+                clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 100% 100%, 75% 50%, 100% 0%);
+    }
+}
+
 @include keyframes(animateTweet) { 
 // this doesn't adjust the height.
     0% { 
@@ -19,6 +87,18 @@
         // transform: scaleY(1);
     }
 }
+
+@include keyframes(animateTweetCompose) {
+    0% {
+        opacity: 0; 
+        transform: translatex(-100%);
+    }
+    100% {
+        opacity: 1; 
+        transform: translatex(0px);
+    }
+}
+
 @include keyframes(animateTweetContent) {
     0% { 
         opacity: 0; 
