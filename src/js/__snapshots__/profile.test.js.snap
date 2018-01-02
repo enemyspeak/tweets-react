@@ -15,7 +15,7 @@ exports[`tweet render matches snapshot 1`] = `
       className="user-banner "
       style={
         Object {
-          "background": "url(https://pbs.twimg.com/profile_background_images/635813797/4lh12no40xd4vuv5equ4.png) no-repeat 50% 50% / cover",
+          "background": "url(https://pbs.twimg.com/profile_banners/24623145/1493763265) no-repeat 50% 50% / cover",
         }
       }
     />
