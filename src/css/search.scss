@@ -20,3 +20,18 @@
     border-bottom: 1px solid $gray28;
     height: 42px;
 }
+
+.search-wrap {
+    position: absolute;
+    height: 100%;// calc( 100% - 30px );
+    width: 100%;        
+    top: 0px;   
+    // display: none;
+    transform: translate(-100%, 0px);
+    transition: all,0.3s ease;
+    &.visible {
+        transform: translate(0%, 0px);
+
+        // display: block;
+    }
+}

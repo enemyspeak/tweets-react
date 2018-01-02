@@ -209,23 +209,30 @@ exports[`root render matches snapshot 1`] = `
       className="twitter-app inactive"
     >
       <div
-        className="search-contain"
-      >
-        
-      </div>
+        className="sub-profile-contain "
+      />
       <div
-        className="search-form-contain"
+        className="search-wrap visible"
       >
-        <span
-          className="input-label full"
+        <div
+          className="search-contain"
         >
-          Search
-        </span>
-        <input
-          onChange={[Function]}
-          type="text"
-          value=""
-        />
+          
+        </div>
+        <div
+          className="search-form-contain"
+        >
+          <span
+            className="input-label full"
+          >
+            Search
+          </span>
+          <input
+            onChange={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
       </div>
     </div>
     <div
