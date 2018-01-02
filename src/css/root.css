@@ -920,8 +920,7 @@ input, textarea {
 
 .tweet-user {
   height: 16px;
-  position: relative;
-  cursor: pointer; }
+  position: relative; }
   .tweet-user span {
     vertical-align: bottom;
     display: inline-block;
@@ -933,6 +932,8 @@ input, textarea {
     height: 14px;
     display: block;
     position: relative; }
+  .tweet-user .user-avatar {
+    cursor: pointer; }
   .tweet-user .name {
     -webkit-animation: animateTweetContentDelay ease;
     animation: animateTweetContentDelay ease;
@@ -944,7 +945,8 @@ input, textarea {
     max-width: 60%;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis; }
+    text-overflow: ellipsis;
+    cursor: pointer; }
   .tweet-user .screenName {
     -webkit-animation: animateTweetContentDelay ease;
     animation: animateTweetContentDelay ease;
@@ -953,7 +955,8 @@ input, textarea {
     font-size: 12px;
     color: #AFAFAF;
     top: 4px;
-    position: relative; }
+    position: relative;
+    cursor: pointer; }
 
 .verified {
   -webkit-animation: animateTweetContent ease;
@@ -1128,7 +1131,7 @@ input, textarea {
   position: relative;
   margin-top: 10px;
   left: 60px;
-  width: calc( 100% - 60px);
+  display: inline-block;
   cursor: pointer;
   color: #AFAFAF;
   transition: color 0.3s ease; }

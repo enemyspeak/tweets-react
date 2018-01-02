@@ -124,7 +124,6 @@
 .tweet-user {
     height: 16px;
     position: relative;
-    cursor: pointer;
     span {
         vertical-align: bottom;
         display: inline-block;
@@ -137,6 +136,9 @@
         height: 14px;
         display: block;
         position: relative;
+    }
+    .user-avatar {
+        cursor: pointer;
     }
     .name {
         -webkit-animation: animateTweetContentDelay ease;
@@ -152,6 +154,7 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        cursor: pointer;
     }
     .screenName {
         -webkit-animation: animateTweetContentDelay ease;
@@ -163,6 +166,7 @@
         color: $gray50;
         top: 4px;
         position: relative;
+        cursor: pointer;
     }  
 }
 
@@ -382,7 +386,8 @@
     position: relative;
     margin-top: 10px;
     left: 60px;
-    width: calc( 100% - 60px );
+    // width: calc( 100% - 60px );
+    display: inline-block;
     cursor: pointer;
     color: $gray50;
     transition: color 0.3s ease;

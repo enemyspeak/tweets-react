@@ -211,7 +211,9 @@ class Tweet extends Component {
 				    <TweetBody tweet={tweet} onClick={this.props.mentionHandler} />
 
 					<div className="status-contain">
-						<RelativeTime created_at={tweet.created_at} />
+						{ !this.props.skipRelativeTime && (
+							<RelativeTime created_at={tweet.created_at} />
+						)}
 						<div className={"fi-star " + (this.state.favorited ? "active" : "")}></div>
 						<div className={"fi-loop " + (this.state.retweeted ? "active" : "")}></div>						
 					</div>

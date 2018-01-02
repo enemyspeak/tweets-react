@@ -1,3 +1,5 @@
+jest.mock('./api');
+
 import React from 'react';
 import Root from './root';
 import renderer from 'react-test-renderer';

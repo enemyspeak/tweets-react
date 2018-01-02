@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tweet render matches snapshot 1`] = `
+<div
+  className="twitter-app "
+>
+  <div
+    className="profile-contain"
+  >
+    <div
+      className="back-button"
+      onClick={[Function]}
+    >
+      <div
+        className="fi-arrow-left"
+      />
+    </div>
+    <div
+      className="dataLoader"
+    />
+  </div>
+</div>
+`;

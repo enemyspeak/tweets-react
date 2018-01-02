@@ -13,10 +13,10 @@ exports[`tweet render matches snapshot 1`] = `
   >
     <div
       className="tweet-user"
-      onClick={[Function]}
     >
       <div
         className="user-avatar"
+        onClick={[Function]}
       >
         <img
           alt="ShedworksGreg"
@@ -26,11 +26,13 @@ exports[`tweet render matches snapshot 1`] = `
       </div>
       <span
         className="name"
+        onClick={[Function]}
       >
         Gregorios Kythreotis
       </span>
       <span
         className="screenName"
+        onClick={[Function]}
       >
         @
         ShedworksGreg
@@ -48,11 +50,6 @@ exports[`tweet render matches snapshot 1`] = `
     <div
       className="status-contain"
     >
-      <span
-        className="tweet-date"
-      >
-        8h
-      </span>
       <div
         className="fi-star "
       />

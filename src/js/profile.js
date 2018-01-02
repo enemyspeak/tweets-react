@@ -13,13 +13,19 @@ class Profile extends Component {
     };
     
     gotTwitterLoginPromise().then((data) => {
-        fetchUserByName(this.props.selectedUser).then((profile) => {
-          // ReactDOM.findDOMNode(this).scrollIntoView(); // this should only run when the profile changes. // FIXME: this breaks the overlay stuff!
-          this.setState({ 
-            profile: profile,
-            following: profile.following
-          })
-        }).catch(function() {});
+        if (this.props.testdata) { // NOTE: injection point for profile.test
+          this.setState({
+            profile: this.props.testdata
+          });
+        } else {
+          fetchUserByName(this.props.selectedUser).then((profile) => {
+            // ReactDOM.findDOMNode(this).scrollIntoView(); // this should only run when the profile changes. // FIXME: this breaks the overlay stuff!
+            this.setState({ 
+              profile: profile,
+              following: profile.following
+            })
+          }).catch(function() {});
+        }
       // }
     });
   }

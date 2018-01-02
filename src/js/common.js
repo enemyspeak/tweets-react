@@ -11,15 +11,13 @@ function Avatar(props) {
 
 function UserInfo(props){
     return(
-        <div className="tweet-user" onClick={() =>{ 
-        	if (props.onClick) props.onClick(props.user.screen_name)
-        }}>
-            <div className="user-avatar">
+        <div className="tweet-user">
+            <div className="user-avatar" onClick={() =>{if (props.onClick) props.onClick(props.user.screen_name)}}>
                 <Avatar user={props.user} />
             </div>
             {props.user.verified && ( <div className="verified"></div> )}
-            <span className="name">{props.user.name}</span>
-            <span className="screenName">@{props.user.screen_name}</span>
+            <span className="name" onClick={() =>{if (props.onClick) props.onClick(props.user.screen_name)}}>{props.user.name}</span>
+            <span className="screenName" onClick={() =>{if (props.onClick) props.onClick(props.user.screen_name)}}>@{props.user.screen_name}</span>
         </div>
     );
 }

@@ -1,3 +1,5 @@
+jest.mock('./api');
+
 import React from 'react';
 import Tweet from './tweet';
 import renderer from 'react-test-renderer';
@@ -363,6 +365,7 @@ test('tweet render matches snapshot', () => {
 		data={data}
 		onClick={()=> console.log}
 		mentionHandler={()=> console.log}
+		skipRelativeTime={true}
 	/>,
 	);
 	let tree = component.toJSON();
