@@ -5,7 +5,6 @@ exports[`tweet render matches snapshot 1`] = `
   className="tweet-contain undefined"
   id="947842380098662402"
   onClick={[Function]}
-  style={Object {}}
   userid="129175727"
 >
   <div
@@ -121,7 +120,7 @@ exports[`tweet render matches snapshot 1`] = `
       />
     </button>
     <button
-      className="menu"
+      className="menu "
       onClick={[Function]}
     >
       <div

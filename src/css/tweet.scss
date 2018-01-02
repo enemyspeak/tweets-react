@@ -27,6 +27,9 @@
             border-bottom: none;
         }
     }
+    &.selected {
+        z-index: 97; // to push menu on top of other tweets
+    }
     &.selected,&:hover {
         background: $gray20;
         // border-left: 1px solid $gray28;
@@ -517,12 +520,15 @@
                 animation-duration: 500ms;
                 color: $yellow;
             }
+            .fi-widget {
+                color: $white;   
+            }
         }
     }
 }
 .tweet-menu {
     position: absolute;
-    top: 10px;
+    top: 32px;
     right: 10px;
     background: $black80;
     border: 1px solid $gray28;
@@ -530,7 +536,18 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
+    -webkit-transform-origin : 50% 0%;
+    -moz-transform-origin : 50% 0%;
+    -o-transform-origin : 50% 0%;
+    -ms-transform-origin : 50% 0%;
+    transform-origin : 50% 0%;
+
     &.visible {
+        // opacity: 1;
+        -webkit-animation: animateMenu ease;
+        animation: animateMenu ease;
+        -webkit-animation-duration: 300ms;
+        animation-duration: 300ms;
         opacity: 1;
         pointer-events: initial;
     }
@@ -548,7 +565,7 @@
         // width: 100%;
         // padding: 5px 0px;
         font-size: 14px;
-        padding: 5px;
+        padding: 12px;
         border-bottom: 1px solid $gray28;
         transition: background 0.3s ease;
         cursor: pointer;

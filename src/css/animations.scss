@@ -163,3 +163,19 @@
     }
 }
 
+@include keyframes(animateMenu) {  // this doesn't adjust the height.
+    0% { 
+        opacity: 0; 
+        -webkit-transform: scaleY(0);
+        -o-transform: scaleY(0);
+        -ms-transform: scaleY(0);
+        transform: scaleY(0);
+    }
+    100% { 
+        opacity: 1; 
+        -webkit-transform: scaleY(1);
+        -o-transform: scaleY(1);
+        -ms-transform: scaleY(1);
+        transform: scaleY(1);
+    }
+}

@@ -64,7 +64,7 @@ class TweetMenu extends Component {
 		try {
 			var successful = document.execCommand('copy');
 			var msg = successful ? 'successful' : 'unsuccessful';
-			console.log('Copying text command was ' + msg);
+			// console.log('Copying text command was ' + msg);
 		} catch (err) {
 			console.log('Oops, unable to copy');
 		}
@@ -111,7 +111,7 @@ class TweetControls extends Component {
 				<button className={"favorite " + (this.props.favorited ? "active" : "")} onClick={() => this.props.handleFavoriteTweet()}>
 					<div className="fi-star"></div>
 				</button>
-				<button className="menu" onClick={() => this.props.handleMenuToggle()}>
+				<button className={"menu " + (this.props.showMenu ? "active" : "")} onClick={() => this.props.handleMenuToggle()}>
 					<div className="fi-widget"></div>
 				</button>
 			</div>
@@ -244,7 +244,7 @@ class Tweet extends Component {
 		}
   	}
   	handleMenuToggle() {
-  		this.setState({showMenu: true});
+  		this.setState({showMenu: !this.state.showMenu});
   	}
   	hideMenu() {
   		this.setState({showMenu: false});	
@@ -252,16 +252,12 @@ class Tweet extends Component {
 	render() {
 		// console.log(this.props.data);
 		let tweet = this.props.data;
-
 		if (this.props.data.retweeted_status) {
 			tweet = this.props.data.retweeted_status;
 			tweet.retweeteduser = this.props.data.user;
 		}
-		let tweetStyle = {
-			// maxHeight: this.state.height
-    	};
 		return (
-			<div ref={ (divElement) => this.divElement = divElement} style={tweetStyle} className={"tweet-contain " + this.props.data.selected} id={tweet.id_str} userid={tweet.user.id_str} onClick={() => this.props.onClick()}>
+			<div ref={ (divElement) => this.divElement = divElement} className={"tweet-contain " + this.props.data.selected} id={tweet.id_str} userid={tweet.user.id_str} onClick={() => this.props.onClick()}>
 				<div className="tweet-body" onClick={() => this.hideMenu()}>
 				    <UserInfo user={tweet.user} onClick={this.props.mentionHandler} />
 
@@ -289,12 +285,13 @@ class Tweet extends Component {
 				<TweetControls 
 					retweeted={this.state.retweeted}
 					favorited={this.state.favorited}
+					showMenu={this.props.data.selected && this.state.showMenu}
 					handleFavoriteTweet={()=>this.handleFavoriteTweet(tweet.id_str)}
 					handleRetweetTweet={()=>this.handleRetweetTweet(tweet.id_str)}
 					handleMenuToggle={() =>this.handleMenuToggle()}
 				/>
 				<TweetMenu 
-					visible={this.state.showMenu}
+					visible={this.props.data.selected && this.state.showMenu}
 					tweet={tweet} 
 					hideMenu={() => this.hideMenu()}
 				/>
