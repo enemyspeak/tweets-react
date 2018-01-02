@@ -7,7 +7,7 @@ import DirectMessages from './directMessages';
 import Search from './search';
 import Authorize from './authorize';
 
-import { gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchFavorites,subscribeToHomeTimeline } from './api';
+import { createStatus, gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchFavorites,subscribeToHomeTimeline } from './api';
 
 class Root extends Component {
 	constructor(props) {
@@ -53,13 +53,20 @@ class Root extends Component {
 		})
 	}
 	handleChange(event) {
+		// TODO remove error
 		this.setState({
 			tweetText: event.target.value,
 		});
   	}
   	submitStatus(){
-  		// TODO
-  		// this.state.tweetText;
+  		if (this.state.tweetText) {
+  			createStatus({status:this.state.tweetText}).then(() => this.setState({
+  				tweetText: "",
+  				showCompose: false
+  			})).catch((err)=> console.error(err));
+  		} else {
+  			// TODO: add error
+  		}
   	}
 	render() {
 		return (

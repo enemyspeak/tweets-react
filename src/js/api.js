@@ -38,6 +38,7 @@ function doSessionToken(cb) { // this happens automatically now.
   }
 }
 
+// connection status bar
 function gainedConnectionAlert(cb) {
   socket.on('reconnect', () => cb(null,true));
   socket.on('connect', () => cb(null,true));
@@ -50,6 +51,8 @@ function lostConnectionAlert(cb) {
   socket.on('connect_error', () => cb(null,false));
 }
 
+
+// auth
 socket.on('sessiontoken',function(data){
     console.log('get token',data);
     cookies.set('sessiontoken', data, { path: '/' });
@@ -59,6 +62,7 @@ socket.once('twittertoken',function(data){
     console.log('get twitter details',data)
     loginPromiseResolve(data);
 });
+
 var loginPromiseResolve;
 var loginPromise = new Promise(function(resolve,reject) {
   loginPromiseResolve = resolve;
@@ -67,8 +71,6 @@ var loginPromise = new Promise(function(resolve,reject) {
 function gotTwitterLoginPromise() {
   return loginPromise;
 }
-
-// doSessionToken();
 
 function getRequestToken() {
   return new Promise(function(resolve,reject) {
@@ -82,7 +84,7 @@ function getRequestToken() {
   });
 }
 
-
+// one way data
 function fetchHomeTimeline(cb) {
 	socket.emit('gethometimeline',{},function(data) {
 		// console.log(data);
@@ -239,7 +241,7 @@ function fetchUserByName(screen_name) {
 }
 
 //searches
-function searchTweets(term,cb) {
+function searchTweets(term) {
   return new Promise(function(resolve, reject) {
     if (!term){ 
       reject('no term!');
@@ -256,7 +258,7 @@ function searchTweets(term,cb) {
 }
 
   // actions!
-function favoriteTweet(id,cb) {
+function favoriteTweet(id) {
   // console.log(id);
   return new Promise(function(resolve, reject) {
     if (!id){ 
@@ -273,7 +275,7 @@ function favoriteTweet(id,cb) {
   });
 }
 
-function unfavoriteTweet(id,cb) {
+function unfavoriteTweet(id) {
   return new Promise(function(resolve, reject) {
     if (!id){ 
       reject('no id!');
@@ -289,7 +291,7 @@ function unfavoriteTweet(id,cb) {
   });
 }
 
-function retweetTweet(id,cb) {
+function retweetTweet(id) {
   // console.log(id);
   return new Promise(function(resolve, reject) {
     if (!id){ 
@@ -306,7 +308,7 @@ function retweetTweet(id,cb) {
   });
 }
 
-function unretweetTweet(id,cb) {
+function unretweetTweet(id) {
   return new Promise(function(resolve, reject) {
     if (!id){ 
       reject('no id!');
@@ -322,7 +324,7 @@ function unretweetTweet(id,cb) {
   });
 }
 
-function followUser(id,cb) {
+function followUser(id) {
   return new Promise(function(resolve, reject) {
     if (!id){ 
       reject('no id!');
@@ -337,7 +339,7 @@ function followUser(id,cb) {
     });
   }); 
 }
-function unfollowUser(id,cb) {
+function unfollowUser(id) {
   return new Promise(function(resolve, reject) {
     if (!id){ 
       reject('no id!');
@@ -353,4 +355,20 @@ function unfollowUser(id,cb) {
   }); 
 }
 
-export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchRetweets,fetchFavorites,fetchDirectMessages, fetchSentDirectMessages,subscribeToHomeTimeline,fetchUserByName,searchTweets,favoriteTweet,unfavoriteTweet,retweetTweet,unretweetTweet,followUser,unfollowUser };
+function createStatus(data) {
+  return new Promise(function(resolve, reject) {
+    if (!data || !data.status){ 
+      reject('no data!');
+    };
+    socket.emit('createstatus',{data:data},function(result) {
+      if (!result || result==='unauthorized' || result==='error') {
+        reject(result)
+      } else {
+        resolve();
+        console.log(result);
+      }
+    });
+  }); 
+}
+
+export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchRetweets,fetchFavorites,fetchDirectMessages, fetchSentDirectMessages,subscribeToHomeTimeline,fetchUserByName,searchTweets,favoriteTweet,unfavoriteTweet,retweetTweet,unretweetTweet,followUser,unfollowUser,createStatus };

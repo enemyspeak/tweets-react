@@ -742,6 +742,24 @@ function start( port ){
                 if (cb) cb('unauthorized');
             });
         });
+
+        socket.on('createstatus',function(data,cb) {
+            authorizeRequest().then(function() {
+                if (!data || !data.status) {
+                    if (cb) cb({error:'error'});
+                    return;
+                } 
+                twit.post('favorites/destroy',{status: data.status,in_reply_to_status_id:data.in_reply_to_status_id},function(error, tweets) {
+                    if (error) {
+                        if(cb) cb({error:error});
+                        return;
+                    }
+                    if(cb) cb('ok');
+                });
+            }).catch(function() {
+                if (cb) cb('unauthorized');
+            });
+        });
     });
 
     http.listen(port, function(){

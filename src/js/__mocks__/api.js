@@ -346,4 +346,20 @@ function unfollowUser(id,cb) {
   }); 
 }
 
-export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchRetweets,fetchFavorites,fetchDirectMessages, fetchSentDirectMessages,subscribeToHomeTimeline,fetchUserByName,searchTweets,favoriteTweet,unfavoriteTweet,retweetTweet,unretweetTweet,followUser,unfollowUser };
+function createStatus(data,cb) {
+  return new Promise(function(resolve, reject) {
+    if (!data){ 
+      reject('no data!');
+    };
+    // socket.emit('createstatus',{data:data},function(result) {
+    //   if (!result || result==='unauthorized' || result==='error') {
+    //     reject(result)
+    //   } else {
+    //     resolve();
+    //     console.log(result);
+    //   }
+    // });
+  }); 
+}
+
+export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchRetweets,fetchFavorites,fetchDirectMessages, fetchSentDirectMessages,subscribeToHomeTimeline,fetchUserByName,searchTweets,favoriteTweet,unfavoriteTweet,retweetTweet,unretweetTweet,followUser,unfollowUser,createStatus };
