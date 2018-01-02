@@ -171,7 +171,7 @@ class DropdownMenu extends Component {
 		if (this.props.profile) {
 			return  (
 				<div className={"tweet-menu " + (this.props.visible ? "visible" : "")}>
-					<div className="list-item"><div className="list-icon fi-prohibited"></div>Block User</div>
+					<div className="list-item" onClick={() => this.props.blockUser()}><div className="list-icon fi-prohibited"></div>Block User</div>
 					<a href={"https://twitter.com/" + this.props.profile.screen_name } target="_blank" className="list-item"><div className="list-icon fi-link"></div>View on Twitter.com</a>
 				</div>
 			)

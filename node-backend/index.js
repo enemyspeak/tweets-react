@@ -743,6 +743,43 @@ function start( port ){
             });
         });
 
+        socket.on('blockuser',function(data,cb) {
+            authorizeRequest().then(function() {
+                if (!data || !data.id) {
+                    if (cb) cb({error:'error'});
+                    return;
+                } 
+
+                twit.post('blocks/create',{user_id: data.id},function(error, tweets) {
+                    if (error) {
+                        if(cb) cb({error:error});
+                        return;
+                    }
+                    if(cb) cb('ok');
+                });
+            }).catch(function() {
+                if (cb) cb('unauthorized');
+            });
+        });
+        socket.on('unblockuser',function(data,cb) {
+            authorizeRequest().then(function() {
+                if (!data || !data.id) {
+                    if (cb) cb({error:'error'});
+                    return;
+                } 
+                twit.post('blocks/destroy',{user_id: data.id},function(error, tweets) {
+                    if (error) {
+                        if(cb) cb({error:error});
+                        return;
+                    }
+                    if(cb) cb('ok');
+                });
+            }).catch(function() {
+                if (cb) cb('unauthorized');
+            });
+        });
+        
+
         socket.on('createstatus',function(data,cb) {
             authorizeRequest().then(function() {
                 if (!data || !data.status) {

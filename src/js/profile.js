@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 
 import Tweet from './tweet'
-import { gotTwitterLoginPromise, fetchUserByName,followUser,unfollowUser } from './api';
+import { gotTwitterLoginPromise, fetchUserByName,followUser,unfollowUser,blockUser,unblockUser } from './api';
 import { DropdownMenu } from './common'
 
 class ProfileDetails extends Component {
@@ -31,13 +31,15 @@ class Profile extends Component {
       selectedTweet: false,
       bannerVisible: false,
       showMenu: false,
+      blocked: false,
       // selectedUser: false,
     };
-    if (this.props.testdata) { // FIXME: injection point for profile.test
+    if (this.props.testdata) { // injection point for profile.test
       this.state ={
         selectedTweet: false,
         bannerVisible: false,
         showMenu: false,
+        blocked: false, // TODO
         profile: this.props.testdata
       };
     } else {
@@ -97,9 +99,24 @@ class Profile extends Component {
   hideBanner() {
     this.setState({bannerVisible: false}); 
   }
+  toggleBlockUser(id) {
+    if (this.state.blocked) {
+      this.unblockUser(id);  
+    } else {
+      this.blockUser(id);
+    }
+  }
+  blockUser(id) {
+    blockUser(id).then(() => this.setState({blocked: true})).catch((err)=> console.error(err));
+  }
+  unblockUser(id){
+    unblockUser(id).then(() => this.setState({blocked: false})).catch((err)=> console.error(err));
+  }
 	render() {
     var profile = this.state.profile;
     let following = this.state.following;
+    let blocked = this.state.blocked;
+
     if (!profile) {
       return (
         <div className={"twitter-app " + (this.props.activeTab ? "" : "inactive")}>
@@ -156,6 +173,7 @@ class Profile extends Component {
             visible={!this.state.selectedUser && this.state.showMenu}
             profile={profile} 
             hideMenu={() => this.hideMenu()}
+            blockUser={() => this.toggleBlockUser(profile.id_str)}
           />
      
           <div className="user-avatar profile-avatar">
@@ -163,6 +181,7 @@ class Profile extends Component {
           </div>
           {profile.verified && ( <div className="profile-verified"></div> )}
           {profile.protected && ( <div className="profile-protected"><div className="fi-lock"></div></div> )}
+          {blocked && ( <div className="profile-blocked"><div className="fi-forbidden"></div></div> )}
 
           {following ? (<span className="follow-button following" onClick={()=>this.props.unfollowUser(profile.id_str)}>Following</span>) : (<span className="follow-button" onClick={()=>this.props.followUser(profile.id_str)}>Follow</span>)}
 

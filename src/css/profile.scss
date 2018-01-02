@@ -45,7 +45,9 @@
 
         // display: block;
     }
-
+    .tweet-menu {
+        z-index: 97; // to push dropdown on top of .profile-details
+    }
     .profile-verified {
         -webkit-animation: none;
         animation: none;

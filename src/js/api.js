@@ -355,6 +355,39 @@ function unfollowUser(id) {
   }); 
 }
 
+function blockUser(id) {
+  return new Promise(function(resolve, reject) {
+    if (!id){ 
+      reject('no id!');
+    };
+    socket.emit('blockuser',{id:id},function(data) {
+      if (!data || data==='unauthorized' || data==='error') {
+        reject(data)
+      } else {
+        resolve();
+        console.log(data);
+      }
+    });
+  }); 
+}
+
+function unblockUser(id) {
+  return new Promise(function(resolve, reject) {
+    if (!id){ 
+      reject('no id!');
+    };
+    socket.emit('unblockuser',{id:id},function(data) {
+      if (!data || data==='unauthorized' || data==='error') {
+        reject(data)
+      } else {
+        resolve();
+        console.log(data);
+      }
+    });
+  }); 
+}
+
+
 function createStatus(data) {
   return new Promise(function(resolve, reject) {
     if (!data || !data.status){ 
@@ -371,4 +404,4 @@ function createStatus(data) {
   }); 
 }
 
-export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchRetweets,fetchFavorites,fetchDirectMessages, fetchSentDirectMessages,subscribeToHomeTimeline,fetchUserByName,searchTweets,favoriteTweet,unfavoriteTweet,retweetTweet,unretweetTweet,followUser,unfollowUser,createStatus };
+export { doSessionToken, getRequestToken,gotTwitterLoginPromise,gainedConnectionAlert,lostConnectionAlert, fetchHomeTimeline, fetchMentions,fetchRetweets,fetchFavorites,fetchDirectMessages, fetchSentDirectMessages,subscribeToHomeTimeline,fetchUserByName,searchTweets,favoriteTweet,unfavoriteTweet,retweetTweet,unretweetTweet,followUser,unfollowUser,blockUser,unblockUser, createStatus };
