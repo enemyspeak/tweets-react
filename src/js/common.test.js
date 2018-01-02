@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar,UserInfo,DropdownMenu} from './common';
+import {Avatar,UserInfo,DropdownMenu,Media,VideoMedia} from './common';
 import renderer from 'react-test-renderer';
 
 const userData = {
@@ -83,52 +83,68 @@ test('UserInfo render matches snapshot', () => {
 	expect(tree).toMatchSnapshot();
 });
 
+const videomediadata = {
+	// TODO
+}
 
-// function VideoMedia(props) {
-// 	// TODO load video's bitrate responsive to size of viewport
-// 	let index = 0;
-// 	const variants = props.obj.video_info.variants;
-// 	const bitrate_max = 832000;
-// 	// const viewport = 300;
-// 	const loop = (props.obj.type === "animated_gif" ? true : false );
-
-// 	for (var i = variants.length - 1; i >= 0; i--) {
-// 		if ((variants[i].content_type === "video/mp4") && (variants[i].bitrate < bitrate_max)) {
-// 			index = i;
-// 		}
-// 	}
-// 	return (
-// 		<video controls loop={loop} poster={props.obj.media_url_https + ":small"} src={variants[index].url} type={variants[index].content_type} >
-// 			{ /* {obj.video_info.variants.map(source => {
-// 				return (
-// 		    		<source src={source.url} type={source.content_type} />
-// 		    	);
-// 		    } */}
-// 		</video>
-// 	)
-// }
-
-// function Media(props) {
-// 	// TODO load image size responsive to size of viewport
-// 	// const viewport = 300;
-// 	// const length = props.media.length;
-// 	return (
-// 		<div className="media-contain">
-// 	        {props.media.map(obj => {
-//             	return (
-//             		<div className="media-box" key={obj.id_str}>
-// 						{(obj.type === "video" || obj.type === "animated_gif") && (
-// 							<VideoMedia obj={obj} />
-// 						)}
-// 						{(obj.type === "photo") && (
-// 							<img src={obj.media_url_https + ":small"} alt={obj.display_url} />	
-// 						)}
-// 					</div>
-// 				);
-// 	        })}
-// 		</div>
+// test('Video Media render matches snapshot', () => {
+// 	const component = renderer.create(
+//  		<VideoMedia obj={videomediadata} />
 // 	);
-// }
+// 	let tree = component.toJSON();
+// 	expect(tree).toMatchSnapshot();
+// });
+
+const mediadata = [
+      {
+        "id": 947842376537649200,
+        "id_str": "947842376537649153",
+        "indices": [
+          64,
+          87
+        ],
+        "media_url": "http://pbs.twimg.com/media/DSdpnpyWsAEcCBt.jpg",
+        "media_url_https": "https://pbs.twimg.com/media/DSdpnpyWsAEcCBt.jpg",
+        "url": "https://t.co/GyqXj0uTy2",
+        "display_url": "pic.twitter.com/GyqXj0uTy2",
+        "expanded_url": "https://twitter.com/ShedworksGreg/status/947842380098662402/photo/1",
+        "type": "photo",
+        "sizes": {
+          "thumb": {
+            "w": 150,
+            "h": 150,
+            "resize": "crop"
+          },
+          "large": {
+            "w": 1353,
+            "h": 2048,
+            "resize": "fit"
+          },
+          "small": {
+            "w": 449,
+            "h": 680,
+            "resize": "fit"
+          },
+          "medium": {
+            "w": 793,
+            "h": 1200,
+            "resize": "fit"
+          }
+        },
+        "source_status_id": 947842380098662400,
+        "source_status_id_str": "947842380098662402",
+        "source_user_id": 129175727,
+        "source_user_id_str": "129175727"
+      }
+    ]
+
+test('Media render matches snapshot', () => {
+	const component = renderer.create(
+ 		<Media media={mediadata} />
+	);
+	let tree = component.toJSON();
+	expect(tree).toMatchSnapshot();
+});
 
 const tweetData = 	{
 	"id_str": "947972151574958081",

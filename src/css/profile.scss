@@ -88,8 +88,9 @@
     opacity: 0.5;
     transform: translatez(0px);
     filter: saturate(112%) blur(3px);
-    transition: filter 0.3s ease;
+    transition: filter 0.9s ease,opacity 0.9s ease;
     &.visible {
+        opacity: 1;
         filter: none;
     }
 }

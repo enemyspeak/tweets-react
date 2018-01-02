@@ -144,6 +144,21 @@ exports[`DropdownMenu tweet render matches snapshot 1`] = `
 </div>
 `;
 
+exports[`Media render matches snapshot 1`] = `
+<div
+  className="media-contain"
+>
+  <div
+    className="media-box"
+  >
+    <img
+      alt="pic.twitter.com/GyqXj0uTy2"
+      src="https://pbs.twimg.com/media/DSdpnpyWsAEcCBt.jpg:small"
+    />
+  </div>
+</div>
+`;
+
 exports[`UserInfo render matches snapshot 1`] = `
 <div
   className="tweet-user"
