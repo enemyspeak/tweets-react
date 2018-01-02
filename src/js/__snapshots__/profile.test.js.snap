@@ -5,8 +5,20 @@ exports[`tweet render matches snapshot 1`] = `
   className="twitter-app "
 >
   <div
-    className="profile-contain"
+    className="sub-profile-contain "
+  />
+  <div
+    className="profile-contain visible"
+    onClick={[Function]}
   >
+    <div
+      className="user-banner "
+      style={
+        Object {
+          "background": "url(https://pbs.twimg.com/profile_background_images/635813797/4lh12no40xd4vuv5equ4.png) no-repeat 50% 50% / cover",
+        }
+      }
+    />
     <div
       className="back-button"
       onClick={[Function]}
@@ -16,8 +28,3361 @@ exports[`tweet render matches snapshot 1`] = `
       />
     </div>
     <div
-      className="dataLoader"
+      className="profile-controls"
+    >
+      <button
+        className="show-banner"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <div
+          className="fi-magnifying-glass"
+        />
+      </button>
+      <button
+        className="reply"
+        onClick={[Function]}
+      >
+        <div
+          className="fi-comment-quotes"
+        />
+      </button>
+      <button
+        className="direct-message"
+        onClick={[Function]}
+      >
+        <div
+          className="fi-mail"
+        />
+      </button>
+      <button
+        className="menu "
+        onClick={[Function]}
+      >
+        <div
+          className="fi-widget"
+        />
+      </button>
+    </div>
+    <div
+      className="tweet-menu "
+    >
+      <div
+        className="list-item"
+      >
+        <div
+          className="list-icon fi-prohibited"
+        />
+        Block User
+      </div>
+      <a
+        className="list-item"
+        href="https://twitter.com/Steve_Dangle"
+        target="_blank"
+      >
+        <div
+          className="list-icon fi-link"
+        />
+        View on Twitter.com
+      </a>
+    </div>
+    <div
+      className="user-avatar profile-avatar"
+    >
+      <img
+        alt="Steve_Dangle"
+        src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+      />
+    </div>
+    <div
+      className="profile-verified"
     />
+    <span
+      className="follow-button"
+      onClick={[Function]}
+    >
+      Follow
+    </span>
+    <div
+      className="profile-details"
+    >
+      <span
+        className="name"
+      >
+        Steve Dangle Glynn
+      </span>
+      <span
+        className="screen-name"
+      >
+        @
+        Steve_Dangle
+      </span>
+      <span
+        className="description"
+      >
+        Hockey YouTuber. Blogger at Sportsnet. Steve Dangle Podcast on iTunes. Find me on https://t.co/qJeHmofJLB. Weird career paths are fun. Laugh a little.
+      </span>
+      <span
+        className="location"
+      >
+        Toronto
+      </span>
+      <div
+        className="stat-contain"
+      >
+        <span
+          className="profile-stat followers"
+        >
+          102987
+           Followers
+        </span>
+        <span
+          className="profile-stat following"
+        >
+          2680
+           Following
+        </span>
+      </div>
+    </div>
+    <div
+      className="recent-timeline-contain"
+    >
+      <div
+        className="tweet-contain "
+        id="947973812758253568"
+        onClick={[Function]}
+        userid="28053117"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="incisively"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/923388833814560768/soGLnH3O_normal.jpg"
+              />
+            </div>
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Tom
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              incisively
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<span class=\\"user-mention\\" data-username=\\"Steve_Dangle\\")}\\">@Steve_Dangle</span> I'm sure you've gotten this a lot today but as someone who now lives in Vegas. ITS UNREAL the city is crazier about the team than I thought was possible.",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              22h
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          <div
+            className="retweeted-by-contain"
+            onClick={[Function]}
+          >
+            <span
+              className="fi-loop"
+            />
+            <div
+              className="retweet-user-avatar"
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <span
+              className="retweet-user"
+            >
+              Steve Dangle Glynn
+            </span>
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/incisively/status/947973812758253568"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947552487170457600"
+        onClick={[Function]}
+        userid="2439286387"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="RoyPurdy"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/940083730198048769/29FDsr2G_normal.jpg"
+              />
+            </div>
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              ROY PURDY
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              RoyPurdy
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Walking into 2018 like...",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              2d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          <div
+            className="media-contain"
+          >
+            <div
+              className="media-box"
+            >
+              <video
+                controls={true}
+                loop={false}
+                poster="https://pbs.twimg.com/ext_tw_video_thumb/947552351698632704/pu/img/ubAEqzpvWkc-d0pD.jpg:small"
+                src="https://video.twimg.com/ext_tw_video/947552351698632704/pu/vid/240x240/NxzPP--hpFICy2B0.mp4"
+                type="video/mp4"
+              />
+            </div>
+          </div>
+          <div
+            className="retweeted-by-contain"
+            onClick={[Function]}
+          >
+            <span
+              className="fi-loop"
+            />
+            <div
+              className="retweet-user-avatar"
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <span
+              className="retweet-user"
+            >
+              Steve Dangle Glynn
+            </span>
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/RoyPurdy/status/947552487170457600"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947902768286715904"
+        onClick={[Function]}
+        userid="20568854"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="EricEngels"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/919744273117057025/5xe4GxhW_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Eric Engels
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              EricEngels
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Asked Max Pacioretty how he can block out reports and trade rumours when the reality the Canadiens are facing, being so far out of the playoff picture, ensures they will not subside. His response:",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          <div
+            className="media-contain"
+          >
+            <div
+              className="media-box"
+            >
+              <img
+                alt="pic.twitter.com/H0h3X0OL1c"
+                src="https://pbs.twimg.com/media/DSegiYoVQAAfRFV.jpg:small"
+              />
+            </div>
+          </div>
+          <div
+            className="retweeted-by-contain"
+            onClick={[Function]}
+          >
+            <span
+              className="fi-loop"
+            />
+            <div
+              className="retweet-user-avatar"
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <span
+              className="retweet-user"
+            >
+              Steve Dangle Glynn
+            </span>
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/EricEngels/status/947902768286715904"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947891220558184449"
+        onClick={[Function]}
+        userid="743155992997691392"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="GoldenKnights"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/936650865267458049/bMofwRsw_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Vegas Golden Knights
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              GoldenKnights
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "if you ever wanted to take a look from the other side about what it's like to play in vegas, this is a GREAT watch😂",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          <div
+            className="quoted-tweet"
+            data-id="{props.id}"
+            data-userid="{props.user.id}"
+          >
+            <div
+              className="tweet-user"
+            >
+              <div
+                className="user-avatar"
+                onClick={[Function]}
+              >
+                <img
+                  alt="Steve_Dangle"
+                  className="Avatar"
+                  src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+                />
+              </div>
+              <div
+                className="verified"
+              />
+              <span
+                className="name"
+                onClick={[Function]}
+              >
+                Steve Dangle Glynn
+              </span>
+              <span
+                className="screenName"
+                onClick={[Function]}
+              >
+                @
+                Steve_Dangle
+              </span>
+            </div>
+            <span
+              className="tweet-date"
+            />
+            <p
+              className="tweet-text"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "The new LFR video is up! For the Leafs, it was a bad game but a great year. <a class=\\"url\\" target=\\"_blank\\" href=\\"http://www.sportsnet.ca/hockey/nhl/lfr11-game-40-craps/\\">sportsnet.ca/hockey/nhl/lfr…</a>",
+                }
+              }
+              onClick={[Function]}
+            />
+            <div
+              className="status-contain"
+            >
+              <span
+                className="tweet-date"
+              >
+                1d
+              </span>
+            </div>
+          </div>
+          <div
+            className="retweeted-by-contain"
+            onClick={[Function]}
+          >
+            <span
+              className="fi-loop"
+            />
+            <div
+              className="retweet-user-avatar"
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <span
+              className="retweet-user"
+            >
+              Steve Dangle Glynn
+            </span>
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/GoldenKnights/status/947891220558184449"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947875673695236097"
+        onClick={[Function]}
+        userid="24623145"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Steve Dangle Glynn
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              Steve_Dangle
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<span class=\\"user-mention\\" data-username=\\"jpat96\\")}\\">@jpat96</span> <span class=\\"user-mention\\" data-username=\\"MrsDangle\\")}\\">@MrsDangle</span> I used <span class=\\"user-mention\\" data-username=\\"StaplesCanada\\")}\\">@StaplesCanada</span>",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/Steve_Dangle/status/947875673695236097"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947864921836007427"
+        onClick={[Function]}
+        userid="24623145"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Steve Dangle Glynn
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              Steve_Dangle
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<span class=\\"user-mention\\" data-username=\\"BlakeyWheels\\")}\\">@BlakeyWheels</span> <span class=\\"user-mention\\" data-username=\\"MrsDangle\\")}\\">@MrsDangle</span> He’s in her poooool",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/Steve_Dangle/status/947864921836007427"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947864556683927552"
+        onClick={[Function]}
+        userid="24623145"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Steve Dangle Glynn
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              Steve_Dangle
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "I got it done at <span class=\\"user-mention\\" data-username=\\"StaplesCanada\\")}\\">@StaplesCanada</span> and I think I still have the file so in theory... yes, I think?",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          <div
+            className="quoted-tweet"
+            data-id="{props.id}"
+            data-userid="{props.user.id}"
+          >
+            <div
+              className="tweet-user"
+            >
+              <div
+                className="user-avatar"
+                onClick={[Function]}
+              >
+                <img
+                  alt="queeeen_DEE"
+                  className="Avatar"
+                  src="https://pbs.twimg.com/profile_images/943214326848081920/O38smNDU_normal.jpg"
+                />
+              </div>
+              <span
+                className="name"
+                onClick={[Function]}
+              >
+                Danielle
+              </span>
+              <span
+                className="screenName"
+                onClick={[Function]}
+              >
+                @
+                queeeen_DEE
+              </span>
+            </div>
+            <span
+              className="tweet-date"
+            />
+            <p
+              className="tweet-text"
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "<span class=\\"user-mention\\" data-username=\\"Steve_Dangle\\")}\\">@Steve_Dangle</span> <span class=\\"user-mention\\" data-username=\\"MrsDangle\\")}\\">@MrsDangle</span> For purchase or... is this just a you guys thing 😭😅",
+                }
+              }
+              onClick={[Function]}
+            />
+            <div
+              className="status-contain"
+            >
+              <span
+                className="tweet-date"
+              >
+                1d
+              </span>
+            </div>
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/Steve_Dangle/status/947864556683927552"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947863413744717825"
+        onClick={[Function]}
+        userid="24623145"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Steve Dangle Glynn
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              Steve_Dangle
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "I made <span class=\\"user-mention\\" data-username=\\"MrsDangle\\")}\\">@MrsDangle</span> an Iggy &amp; Charlie calendar.",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          <div
+            className="media-contain"
+          >
+            <div
+              className="media-box"
+            >
+              <img
+                alt="pic.twitter.com/CzaZSCx2av"
+                src="https://pbs.twimg.com/media/DSd8vasVwAAQWph.jpg:small"
+              />
+            </div>
+            <div
+              className="media-box"
+            >
+              <img
+                alt="pic.twitter.com/CzaZSCx2av"
+                src="https://pbs.twimg.com/media/DSd8vapUEAANfrU.jpg:small"
+              />
+            </div>
+            <div
+              className="media-box"
+            >
+              <img
+                alt="pic.twitter.com/CzaZSCx2av"
+                src="https://pbs.twimg.com/media/DSd8vaqU8AE82Pd.jpg:small"
+              />
+            </div>
+            <div
+              className="media-box"
+            >
+              <img
+                alt="pic.twitter.com/CzaZSCx2av"
+                src="https://pbs.twimg.com/media/DSd8vaqUIAAaVm-.jpg:small"
+              />
+            </div>
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/Steve_Dangle/status/947863413744717825"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947858466781134848"
+        onClick={[Function]}
+        userid="24623145"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Steve Dangle Glynn
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              Steve_Dangle
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<span class=\\"user-mention\\" data-username=\\"BenWilsonVT\\")}\\">@BenWilsonVT</span> Sorry what’s OG6?",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/Steve_Dangle/status/947858466781134848"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947674979239313409"
+        onClick={[Function]}
+        userid="24623145"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Steve Dangle Glynn
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              Steve_Dangle
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "The new LFR video is up! For the Leafs, it was a bad game but a great year. <a class=\\"url\\" target=\\"_blank\\" href=\\"http://www.sportsnet.ca/hockey/nhl/lfr11-game-40-craps/\\">sportsnet.ca/hockey/nhl/lfr…</a>",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          <div
+            className="retweeted-by-contain"
+            onClick={[Function]}
+          >
+            <span
+              className="fi-loop"
+            />
+            <div
+              className="retweet-user-avatar"
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <span
+              className="retweet-user"
+            >
+              Steve Dangle Glynn
+            </span>
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/Steve_Dangle/status/947674979239313409"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947514458032701440"
+        onClick={[Function]}
+        userid="2377703834"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="RetroNewsNow"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/944287436074561537/a3Fr58qu_normal.jpg"
+              />
+            </div>
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              RetroNewsNow
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              RetroNewsNow
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "🗞On December 31, 1995, Bill Watterson published the final 'Calvin &amp; Hobbes' comic strip",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              2d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          <div
+            className="media-contain"
+          >
+            <div
+              className="media-box"
+            >
+              <img
+                alt="pic.twitter.com/OWeZCOQaFu"
+                src="https://pbs.twimg.com/media/DSY_XrvW4AAYKNv.jpg:small"
+              />
+            </div>
+          </div>
+          <div
+            className="retweeted-by-contain"
+            onClick={[Function]}
+          >
+            <span
+              className="fi-loop"
+            />
+            <div
+              className="retweet-user-avatar"
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <span
+              className="retweet-user"
+            >
+              Steve Dangle Glynn
+            </span>
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/RetroNewsNow/status/947514458032701440"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947705111354130432"
+        onClick={[Function]}
+        userid="389762968"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="CutlerKlein"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/939173314827837440/ZRb_kLfc_normal.jpg"
+              />
+            </div>
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Cutler Klein
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              CutlerKlein
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "In the words of those guys that tried to fight <span class=\\"user-mention\\" data-username=\\"Steve_Dangle\\")}\\">@Steve_Dangle</span> once, GET LIT UP. Happy new year from Utah!",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          <div
+            className="media-contain"
+          >
+            <div
+              className="media-box"
+            >
+              <video
+                controls={true}
+                loop={false}
+                poster="https://pbs.twimg.com/ext_tw_video_thumb/947703455979773954/pu/img/b0YFu8bGgX1Taw1Y.jpg:small"
+                src="https://video.twimg.com/ext_tw_video/947703455979773954/pu/vid/180x320/to2z_y-sOKyinEUv.mp4"
+                type="video/mp4"
+              />
+            </div>
+          </div>
+          <div
+            className="retweeted-by-contain"
+            onClick={[Function]}
+          >
+            <span
+              className="fi-loop"
+            />
+            <div
+              className="retweet-user-avatar"
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <span
+              className="retweet-user"
+            >
+              Steve Dangle Glynn
+            </span>
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/CutlerKlein/status/947705111354130432"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947692847985074182"
+        onClick={[Function]}
+        userid="24623145"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Steve Dangle Glynn
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              Steve_Dangle
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<span class=\\"user-mention\\" data-username=\\"fiddlestick89\\")}\\">@fiddlestick89</span> Lol that was a weird request eh?",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/Steve_Dangle/status/947692847985074182"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947677142204084224"
+        onClick={[Function]}
+        userid="24623145"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Steve Dangle Glynn
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              Steve_Dangle
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<span class=\\"user-mention\\" data-username=\\"bri_glynn\\")}\\">@bri_glynn</span> Doubtful haha what’s the story",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/Steve_Dangle/status/947677142204084224"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947677071035080704"
+        onClick={[Function]}
+        userid="24623145"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Steve Dangle Glynn
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              Steve_Dangle
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<span class=\\"user-mention\\" data-username=\\"fiddlestick89\\")}\\">@fiddlestick89</span> You and I just see it different, man. Also, I nag and praise both because they’re both good and bad.",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/Steve_Dangle/status/947677071035080704"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947676862632755200"
+        onClick={[Function]}
+        userid="24623145"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Steve Dangle Glynn
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              Steve_Dangle
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<span class=\\"user-mention\\" data-username=\\"lionandt1\\")}\\">@lionandt1</span> Watch my latest video.",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/Steve_Dangle/status/947676862632755200"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947674979239313409"
+        onClick={[Function]}
+        userid="24623145"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Steve Dangle Glynn
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              Steve_Dangle
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "The new LFR video is up! For the Leafs, it was a bad game but a great year. <a class=\\"url\\" target=\\"_blank\\" href=\\"http://www.sportsnet.ca/hockey/nhl/lfr11-game-40-craps/\\">sportsnet.ca/hockey/nhl/lfr…</a>",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/Steve_Dangle/status/947674979239313409"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947658746125275136"
+        onClick={[Function]}
+        userid="24623145"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Steve Dangle Glynn
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              Steve_Dangle
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<span class=\\"user-mention\\" data-username=\\"JesseBlake\\")}\\">@JesseBlake</span> Leafs jersey?",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/Steve_Dangle/status/947658746125275136"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947657979096064001"
+        onClick={[Function]}
+        userid="2355237404"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="JesseBlake"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/894274763983642629/rLWyjUmw_normal.jpg"
+              />
+            </div>
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Jesse Blake
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              JesseBlake
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "Thanks Oilers . . .",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          <div
+            className="media-contain"
+          >
+            <div
+              className="media-box"
+            >
+              <img
+                alt="pic.twitter.com/KwhO5TEsuv"
+                src="https://pbs.twimg.com/media/DSbB502UEAAnoQb.jpg:small"
+              />
+            </div>
+          </div>
+          <div
+            className="retweeted-by-contain"
+            onClick={[Function]}
+          >
+            <span
+              className="fi-loop"
+            />
+            <div
+              className="retweet-user-avatar"
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <span
+              className="retweet-user"
+            >
+              Steve Dangle Glynn
+            </span>
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/JesseBlake/status/947657979096064001"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+      <div
+        className="tweet-contain "
+        id="947654589075116032"
+        onClick={[Function]}
+        userid="24623145"
+      >
+        <div
+          className="tweet-body"
+          onClick={[Function]}
+        >
+          <div
+            className="tweet-user"
+          >
+            <div
+              className="user-avatar"
+              onClick={[Function]}
+            >
+              <img
+                alt="Steve_Dangle"
+                className="Avatar"
+                src="https://pbs.twimg.com/profile_images/859531314323746817/j_UyCCC5_normal.jpg"
+              />
+            </div>
+            <div
+              className="verified"
+            />
+            <span
+              className="name"
+              onClick={[Function]}
+            >
+              Steve Dangle Glynn
+            </span>
+            <span
+              className="screenName"
+              onClick={[Function]}
+            >
+              @
+              Steve_Dangle
+            </span>
+          </div>
+          <p
+            className="tweet-text"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<span class=\\"user-mention\\" data-username=\\"StevenEllisNHL\\")}\\">@StevenEllisNHL</span> I didn't answer this directly but I sort of did with the goal thing. You'll like it, I think.",
+              }
+            }
+            onClick={[Function]}
+          />
+          <div
+            className="status-contain"
+          >
+            <span
+              className="tweet-date"
+            >
+              1d
+            </span>
+            <div
+              className="fi-star "
+            />
+            <div
+              className="fi-loop "
+            />
+          </div>
+          
+        </div>
+        <div
+          className="tweet-controls"
+        >
+          <button
+            className="reply"
+            onClick={[Function]}
+          >
+            <div
+              className="fi-comment-quotes"
+            />
+          </button>
+          <button
+            className="retweet "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-loop"
+            />
+          </button>
+          <button
+            className="favorite "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-star"
+            />
+          </button>
+          <button
+            className="menu "
+            onClick={[Function]}
+          >
+            <div
+              className="fi-widget"
+            />
+          </button>
+        </div>
+        <div
+          className="tweet-menu "
+        >
+          <div
+            className="list-item"
+          >
+            <div
+              className="list-icon fi-magnifying-glass"
+            />
+            Show Details
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-quote"
+            />
+            Copy Link to Tweet
+          </div>
+          <div
+            className="list-item"
+            onClick={[Function]}
+          >
+            <div
+              className="list-icon fi-page-copy"
+            />
+            Copy Tweet Text
+          </div>
+          <a
+            className="list-item"
+            href="https://twitter.com/Steve_Dangle/status/947654589075116032"
+            target="_blank"
+          >
+            <div
+              className="list-icon fi-link"
+            />
+            View on Twitter.com
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;

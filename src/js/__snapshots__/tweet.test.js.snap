@@ -137,7 +137,7 @@ exports[`tweet render matches snapshot 1`] = `
       <div
         className="list-icon fi-magnifying-glass"
       />
-       Show Details
+      Show Details
     </div>
     <div
       className="list-item"
@@ -146,7 +146,7 @@ exports[`tweet render matches snapshot 1`] = `
       <div
         className="list-icon fi-quote"
       />
-       Copy Link to Tweet
+      Copy Link to Tweet
     </div>
     <div
       className="list-item"
@@ -155,7 +155,7 @@ exports[`tweet render matches snapshot 1`] = `
       <div
         className="list-icon fi-page-copy"
       />
-       Copy Tweet Text
+      Copy Tweet Text
     </div>
     <a
       className="list-item"
@@ -165,7 +165,7 @@ exports[`tweet render matches snapshot 1`] = `
       <div
         className="list-icon fi-link"
       />
-       View on Twitter.com
+      View on Twitter.com
     </a>
   </div>
 </div>

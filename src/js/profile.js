@@ -34,9 +34,12 @@ class Profile extends Component {
       // selectedUser: false,
     };
     if (this.props.testdata) { // FIXME: injection point for profile.test
-      this.setState({
+      this.state ={
+        selectedTweet: false,
+        bannerVisible: false,
+        showMenu: false,
         profile: this.props.testdata
-      });
+      };
     } else {
       gotTwitterLoginPromise().then((data) => {
         fetchUserByName(this.props.selectedUser).then((profile) => {
@@ -78,7 +81,8 @@ class Profile extends Component {
   createDirectMessage() {
     // TODO
   }
-  handleMenuToggle() {
+  handleMenuToggle(event) {
+    event.stopPropagation();
     this.setState({showMenu: !this.state.showMenu});
   }
   hideMenu() {
@@ -124,7 +128,7 @@ class Profile extends Component {
             />
           )}
         </div>
-        <div className={"profile-contain " + (this.state.selectedUser ? "" : "visible")}>
+        <div className={"profile-contain " + (this.state.selectedUser ? "" : "visible")} onClick={() => this.hideMenu()}>
           <div className={"user-banner " + (this.state.bannerVisible ? "visible" : "") } style={bannerStyle}></div>
 
           {this.props.showBackButton && ( <div className="back-button" onClick={()=>this.props.clearSelectedUser()}><div className="fi-arrow-left"></div></div>)}
@@ -143,7 +147,7 @@ class Profile extends Component {
             <button className="direct-message" onClick={() => this.createDirectMessage()}>
               <div className="fi-mail"></div>
             </button>
-            <button className={"menu " + (this.props.showMenu ? "active" : "")} onClick={() => this.handleMenuToggle()}>
+            <button className={"menu " + (this.props.showMenu ? "active" : "")} onClick={(event) => this.handleMenuToggle(event)}>
               <div className="fi-widget"></div>
             </button>
           </div>

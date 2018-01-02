@@ -463,3 +463,52 @@ input,textarea {
         }
     }
 }
+.tweet-menu {
+    position: absolute;
+    top: 32px;
+    right: 10px;
+    background: $black80;
+    border: 1px solid $gray28;
+    border-bottom: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    -webkit-transform-origin : 50% 0%;
+    -moz-transform-origin : 50% 0%;
+    -o-transform-origin : 50% 0%;
+    -ms-transform-origin : 50% 0%;
+    transform-origin : 50% 0%;
+
+    &.visible {
+        // opacity: 1;
+        -webkit-animation: animateMenu ease;
+        animation: animateMenu ease;
+        -webkit-animation-duration: 300ms;
+        animation-duration: 300ms;
+        opacity: 1;
+        pointer-events: initial;
+    }
+
+    .list-icon  {
+        display: inline-block;
+        padding-right: 8px;
+    }
+    a {
+        color: $white;
+        text-decoration: none;
+        display: block;
+    }
+    .list-item {
+        // width: 100%;
+        // padding: 5px 0px;
+        font-size: 14px;
+        padding: 12px;
+        border-bottom: 1px solid $gray28;
+        transition: background 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+            background: $gray13;
+        }
+    }
+}
