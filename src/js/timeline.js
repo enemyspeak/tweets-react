@@ -33,6 +33,10 @@ class Timeline extends Component {
 
   setSelectedUser(id) {
     console.log(id);
+    if (this.props.mentionHandler) {
+      this.props.mentionHandler(id);
+      return;
+    }
     this.setState({selectedUser:id});
   }
   clearSelectedUser() {
@@ -57,6 +61,9 @@ class Timeline extends Component {
               activeTab={this.state.selectedUser} 
             />
           )}
+        </div>
+        <div className={"tweet-details-contain "+(this.state.selectedUser ? "inactive" : "")}>
+          
         </div>
         <div className={"timeline-contain " + (this.state.selectedUser ? "inactive" : "")}>
           <div className={"dataLoader " + (timeline.length ? "inactive" : "")}></div>

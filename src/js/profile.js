@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
-
+import Timeline from './timeline'
 import Tweet from './tweet'
 import { gotTwitterLoginPromise, fetchUserByName,followUser,unfollowUser,blockUser,unblockUser } from './api';
 import { DropdownMenu } from './common'
@@ -189,17 +189,24 @@ class Profile extends Component {
           />
 
           <div className="recent-timeline-contain">
-            {profile.timeline && (profile.timeline.map((obj) => {
-              obj.selected = ( obj.id_str === this.state.selectedTweet ? 'selected' : '' );
-              return (
-                <Tweet 
-                  key={obj.id_str}
-                  data={obj} 
-                  onClick={()=>this.setSelectedTweet(obj.id_str)} 
-                  mentionHandler={(id)=>this.setSelectedUser(id)} 
-                />
-              )
-            }))}
+            {profile.timeline && (
+              // profile.timeline.map((obj) => {
+              // obj.selected = ( obj.id_str === this.state.selectedTweet ? 'selected' : '' );
+              //   return (
+              //     <Tweet 
+              //       key={obj.id_str}
+              //       data={obj} 
+              //       onClick={()=>this.setSelectedTweet(obj.id_str)} 
+              //       mentionHandler={(id)=>this.setSelectedUser(id)} 
+              //     />
+              //   )
+              // })
+              <Timeline 
+                dataSource={(cb) => cb(null,profile.timeline)} 
+                activeTab={true} 
+                mentionHandler={(id)=>this.setSelectedUser(id)} 
+              /> 
+            )}
           </div>
       	</div>
       </div>

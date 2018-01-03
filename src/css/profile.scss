@@ -10,6 +10,7 @@
     background: #333;
     position: absolute;
     top: 305px;
+    overflow: hidden;
     // transition: left 0.3s ease;
     &.inactive {
         display: none;

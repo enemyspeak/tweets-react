@@ -170,18 +170,7 @@ exports[`root render matches snapshot 1`] = `
         className="profile-parent-contain inactive"
       />
       <div
-        className="timeline-contain "
-      >
-        <div
-          className="dataLoader "
-        />
-      </div>
-    </div>
-    <div
-      className="twitter-app inactive"
-    >
-      <div
-        className="profile-parent-contain inactive"
+        className="tweet-details-contain "
       />
       <div
         className="timeline-contain "
@@ -196,6 +185,26 @@ exports[`root render matches snapshot 1`] = `
     >
       <div
         className="profile-parent-contain inactive"
+      />
+      <div
+        className="tweet-details-contain "
+      />
+      <div
+        className="timeline-contain "
+      >
+        <div
+          className="dataLoader "
+        />
+      </div>
+    </div>
+    <div
+      className="twitter-app inactive"
+    >
+      <div
+        className="profile-parent-contain inactive"
+      />
+      <div
+        className="tweet-details-contain "
       />
       <div
         className="timeline-contain "
