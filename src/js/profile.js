@@ -152,7 +152,6 @@ class Profile extends Component {
           
           <div className="profile-controls">
             <button className="show-banner" 
-              onClick={() => this.toggleBanner()}
               onMouseEnter={() => this.showBanner()}
               onMouseLeave={() => this.hideBanner()}
             >

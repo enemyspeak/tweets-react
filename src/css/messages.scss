@@ -123,7 +123,7 @@
             animation-duration: 900ms;
             left: 10px;
         }
-        .message-date {
+        .tweet-date {
             -webkit-animation: animateTweetContentExtra ease;
             animation: animateTweetContentExtra ease;
             -webkit-animation-duration: 900ms;
@@ -146,8 +146,9 @@
         left: 60px;
         position: relative;
         width: calc( 100% - 60px);
-        line-height: 22px;
-        font-size: 14px;
+        font-weight: 300;
+        line-height: 24px;
+        font-size: 16px;
         white-space: pre-wrap;
         cursor: default;
 
@@ -169,7 +170,7 @@
             }
         }
     }
-    .message-date {
+    .tweet-date {
         -webkit-animation: animateTweetContentDelay ease;
         animation: animateTweetContentDelay ease;
         -webkit-animation-duration: 900ms;
@@ -189,5 +190,6 @@
         // right: -24px;
         margin-left: 10px;
         left: 100%;
+        top: 0px;
     }
 }

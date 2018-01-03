@@ -63,8 +63,9 @@
     left: 60px;
     position: relative;
     width: calc( 100% - 60px);
-    line-height: 22px;
-    font-size: 14px;
+    line-height: 24px;
+    font-size: 16px;
+    font-weight: 300;
     white-space: pre-wrap;
     cursor: default;
 
@@ -150,9 +151,10 @@
         animation-duration: 900ms;
         // animation-delay: 100ms;
         padding-right: 6px;
-        font-weight: bold;
+        // font-weight: bold;
         top: 1px;
         // for users with LONG NAMES
+        font-weight: 600;
         max-width: 60%;
         overflow: hidden;
         white-space: nowrap;
@@ -165,9 +167,9 @@
         -webkit-animation-duration: 900ms;
         animation-duration: 900ms;
         // animation-delay: 100ms;
-        font-size: 12px;
+        font-size: 14px;
         color: $gray50;
-        top: 4px;
+        top: 2px;
         position: relative;
         cursor: pointer;
     }  

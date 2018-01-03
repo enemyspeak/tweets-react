@@ -2,6 +2,39 @@
 @import "./colors.scss";
 @import "./animations.scss";
 
+@viewport{
+    zoom: 1.0;
+    width: device-width;
+}
+@-ms-viewport{
+    width: extend-to-zoom;
+    zoom: 1.0;
+}
+@font-face { 
+    font-family: 'Verlag'; 
+    font-style: normal; 
+    font-weight: 400; 
+    src: local('Verlag Bold'), local('Verlag-Bold'), url(/fonts/verlagbold.woff) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; 
+}
+@font-face { 
+    font-family: 'Verlag'; 
+    font-style: normal; 
+    font-weight: 400; 
+    src: local('Verlag Book'), local('Verlag-Book'), url(/fonts/verlagbook.woff) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; 
+}
+@font-face { 
+    font-family: 'Verlag'; 
+    font-style: normal; 
+    font-weight: 300; 
+    src: local('Verlag Light'), local('Verlag-Light'), url(/fonts/verlaglight.woff) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; 
+}
+@font-face { 
+    font-family: 'Verlag'; 
+    font-style: normal; 
+    font-weight: 200; 
+    src: local('Verlag XLight'), local('Verlag-XLight'), url(/fonts/verlagxlight.woff) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000; 
+}
+
 html{
     background: $black80;
     overflow: hidden; // TODO: check this hasn't broken anything.
@@ -10,7 +43,8 @@ html{
 #root {
     width: 100%;
     height: 100%;
-    font-family: sans-serif;
+    // font-family: sans-serif;
+    font-family: 'Verlag', sans-serif;
 }
 
 .potential-problem {
@@ -324,17 +358,19 @@ input,textarea {
 .compose-tweet-contain {
     // display: none;
     opacity: 0;
-    transform: translatex(-100vw);
     pointer-events: none;
     position: absolute;
     top: 0px;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease;
     z-index: 99;
+
     &.visible {
         // display: block;
         pointer-events:initial;
         opacity: 1;
-        transform: translatex(0px);        
+        .compose-tweet {
+            transform: translatex(0px);        
+        }
     }
 }
 
@@ -360,6 +396,12 @@ input,textarea {
     background: $black;
     border-radius: 15px;
     color: $darkestwhite;
+    transform: translatex(-100vw);
+    transition: transform 0.3s ease;
+
+    &.sent {
+        transform: translatex(100vw);        
+    }
 
     textarea {
         height: 191px;
