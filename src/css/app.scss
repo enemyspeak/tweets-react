@@ -548,7 +548,7 @@ input,textarea {
         border-bottom: 1px solid $gray28;
         transition: background 0.3s ease;
         cursor: pointer;
-
+        color: $white;
         &:hover {
             background: $gray13;
         }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
+
 import Timeline from './timeline'
-import Tweet from './tweet'
 import { gotTwitterLoginPromise, fetchUserByName,followUser,unfollowUser,blockUser,unblockUser } from './api';
 import { DropdownMenu } from './common'
 
@@ -39,7 +38,7 @@ class Profile extends Component {
         selectedTweet: false,
         bannerVisible: false,
         showMenu: false,
-        blocked: false, // TODO
+        blocked: false, // TODO: we need to fetch blocked users at login and then check ids to find this value
         profile: this.props.testdata
       };
     } else {
@@ -180,7 +179,7 @@ class Profile extends Component {
           </div>
           {profile.verified && ( <div className="profile-verified"></div> )}
           {profile.protected && ( <div className="profile-protected"><div className="fi-lock"></div></div> )}
-          {blocked && ( <div className="profile-blocked"><div className="fi-forbidden"></div></div> )}
+          {blocked && ( <div className="profile-blocked"><div className="fi-prohibited"></div></div> )}
 
           {following ? (<span className="follow-button following" onClick={()=>this.props.unfollowUser(profile.id_str)}>Following</span>) : (<span className="follow-button" onClick={()=>this.props.followUser(profile.id_str)}>Follow</span>)}
 

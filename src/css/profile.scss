@@ -82,6 +82,30 @@
             font-size: 12px;
         }
     }
+    .profile-blocked {
+        width: 26px;
+        height: 26px;
+        border-radius: 26px;
+        position: absolute;
+        z-index: 3;
+        top: 42px;
+        left: calc( 50% + -11px);
+        // background: #000;
+        // border: 3px solid white;
+        text-align: center;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        .fi-prohibited {
+            position: relative;
+            font-size: 32px;
+            color: $red;
+             text-shadow:
+                -1px -1px 0 #FFF,  
+                1px -1px 0  #FFF,
+                -1px 1px 0  #FFF,
+                 1px 1px 0  #FFF;
+        }
+    }
 }
 .user-banner {
     width: 100%;
