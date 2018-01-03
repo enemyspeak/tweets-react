@@ -117,7 +117,7 @@
     height: 40px;
     border-radius: 6px;
     overflow: hidden;
-    border: 1px solid $black;
+    border: 1px solid transparent;//$black;
 
     img {
         width: 100%;
