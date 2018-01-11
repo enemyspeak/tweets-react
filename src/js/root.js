@@ -89,7 +89,7 @@ class Root extends Component {
 
 				<div className="header-row">
 					<div className="fi-social-twitter"></div>
-					<div>Squawk Box</div>
+					<div>Tweet Box</div>
 					<span>BETA</span>
 				</div>
 

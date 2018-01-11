@@ -456,7 +456,7 @@ function start( port ){
                     // return; // we dont want to return here because this will cancel making a stream   
                 } else {
                     // return cache here, probably using makeCacheFunction instead of timelinecache..
-                    twit.get('statuses/home_timeline',{tweet_mode:'extended'},function(err,result) {
+                    twit.get('statuses/home_timeline',{tweet_mode:'extended',count:200},function(err,result) {
                         if (err) {
                             console.log('home_timeline err',err);
                             if (cb) cb('error');
@@ -494,7 +494,7 @@ function start( port ){
                     if (cb) cb(mentionscache);
                     return;
                 }
-                twit.get('statuses/mentions_timeline',function(error,result) {
+                twit.get('statuses/mentions_timeline',{tweet_mode:'extended',count:200},function(error,result) {
                     if (error) {
                         console.log('mentions_timeline err',error);
                         if(cb) cb('error');
@@ -607,7 +607,7 @@ function start( port ){
                         return;
                     }
                     user = response
-                    twit.get('statuses/user_timeline',{screen_name: data.screen_name,tweet_mode:'extended'},function(error, tweets) {
+                    twit.get('statuses/user_timeline',{screen_name: data.screen_name,tweet_mode:'extended',count:200},function(error, tweets) {
                         if (error) {
                             if(cb) cb('error');
                             return;
@@ -627,7 +627,7 @@ function start( port ){
                     if(cb) cb('error');
                     return;
                 }
-                twit.get('search/tweets',{q:data.search}, function(err, result) {
+                twit.get('search/tweets',{q:data.search,count:100,result_type:'popular'}, function(err, result) {
                     // console.log(result);
                     if (cb) cb(result);
                 });
@@ -644,7 +644,7 @@ function start( port ){
                 //     return;
                 // } 
 
-                twit.get('favorites/list',{},function(error, result) {
+                twit.get('favorites/list',{count:200},function(error, result) {
                     if (cb) cb(result);
                 });
             }).catch(function() {

@@ -40,8 +40,8 @@ class Authorize extends Component {
 				<div className="authorize-background"></div>
 				<div className="authorize-modal">
 					<div className="fi-social-twitter"></div>
-					<h1>Welcome to Squawk Box.</h1>
-					<p>Before you can begin using Squawk Box, you need to connect your twitter account.</p>
+					<h1>Welcome to Tweet Box.</h1>
+					<p>Before you can begin using Tweet Box, you need to connect your twitter account.</p>
 					<button onClick={() => this.handleClick()}>Connect</button>
 					{ this.state.popupBlocked && (
 						<div className="authorize-popupblocked">
