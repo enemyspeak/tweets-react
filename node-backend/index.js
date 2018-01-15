@@ -563,7 +563,7 @@ function start( port ){
                     return;
                 }
                 // TODO cache this
-                twit.get('statuses/show/'+data.id,{},function(error, tweet) {
+                twit.get('statuses/show/',{id:data.id,tweet_mode:'extended'},function(error, tweet) {
                     if (error) {
                         if(cb) cb('error');
                         return;
@@ -627,7 +627,7 @@ function start( port ){
                     if(cb) cb('error');
                     return;
                 }
-                twit.get('search/tweets',{q:data.search,count:100,result_type:'popular'}, function(err, result) {
+                twit.get('search/tweets',{q:data.search,count:100,tweet_mode:'extended',result_type:'popular'}, function(err, result) {
                     // console.log(result);
                     if (cb) cb(result);
                 });
@@ -644,7 +644,7 @@ function start( port ){
                 //     return;
                 // } 
 
-                twit.get('favorites/list',{count:200},function(error, result) {
+                twit.get('favorites/list',{count:200,tweet_mode:'extended'},function(error, result) {
                     if (cb) cb(result);
                 });
             }).catch(function() {
@@ -675,7 +675,7 @@ function start( port ){
                     if (cb) cb({error:'error'});
                     return;
                 } 
-                twit.post('statuses/retweet/'+data.id,{},function(error, tweets) {
+                twit.post('statuses/retweet/',{id:data.id},function(error, tweets) {
                     if (error) {
                         if(cb) cb({error:error});
                         return;
@@ -693,7 +693,7 @@ function start( port ){
                     if (cb) cb({error:'error'});
                     return;
                 } 
-                twit.post('statuses/unretweet/'+data.id,{},function(error, tweets) {
+                twit.post('statuses/unretweet/',{id:data.id},function(error, tweets) {
                     if (error) {
                         if(cb) cb({error:error});
                         return;
@@ -786,7 +786,7 @@ function start( port ){
                     if (cb) cb({error:'error'});
                     return;
                 } 
-                twit.post('favorites/destroy',{status: data.status,in_reply_to_status_id:data.in_reply_to_status_id},function(error, tweets) {
+                twit.post('favorites/destroy',{status: data.status},function(error, tweets) {
                     if (error) {
                         if(cb) cb({error:error});
                         return;
